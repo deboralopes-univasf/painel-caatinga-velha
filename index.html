@@ -590,6 +590,18 @@ function status(m,k){$('#saveState').textContent=m;const d=$('#syncDot');d.class
 let saveT; function saveLocal(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},300)}
 async function copy(text,ok){try{await navigator.clipboard.writeText(text);toast(ok)}catch(e){$('#dump').value=text;$('#dMsg').textContent='Não foi possível copiar automaticamente. Selecione o texto acima e copie.';$('#dlg').showModal();$('#dump').select()}}
 
+
+/* copia como tabela de verdade (HTML) para o Word e o Google Docs, com texto tabulado como reserva */
+async function copyTable(rows,ok){
+ const td='border:1px solid #666;padding:4px 6px;vertical-align:top;font-family:Arial,sans-serif;font-size:10pt';
+ const html='<table style="border-collapse:collapse" border="1" cellspacing="0" cellpadding="4"><thead><tr>'+rows[0].map(c=>`<th style="${td};background:#D9E2F3;text-align:left">${esc(c)}</th>`).join('')+'</tr></thead><tbody>'+
+  rows.slice(1).map(r=>'<tr>'+r.map(c=>`<td style="${td}">${esc(c)}</td>`).join('')+'</tr>').join('')+'</tbody></table>';
+ const text=rows.map(r=>r.join('\t')).join('\n');
+ try{ await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([text],{type:'text/plain'})})]); toast(ok); return }catch(e){}
+ try{ const box=document.createElement('div'); box.style.cssText='position:fixed;left:-9999px;top:0;background:#fff;color:#000'; box.innerHTML=html; document.body.appendChild(box);
+  const sel=getSelection(), rg=document.createRange(); rg.selectNode(box); sel.removeAllRanges(); sel.addRange(rg); const done=document.execCommand('copy'); sel.removeAllRanges(); box.remove(); if(done){toast(ok);return} }catch(e){}
+ copy(text,ok) }
+
 /* ---------- sincronização com a web (Firebase Realtime Database, via REST) ---------- */
 const WEB=!!CONFIG.dbUrl;
 const base=WEB?CONFIG.dbUrl.replace(/\/+$/,'')+'/painel/'+encodeURIComponent(CONFIG.sala):'';
@@ -685,7 +697,7 @@ function drawForms(){const box=$('#mapForms');box.innerHTML='';const nv=[['','a 
 $('#mapForms').addEventListener('input',e=>{const t=e.target;if(!t.dataset.a)return;m(t.dataset.a)[t.dataset.f]=t.value;put('mapa/'+t.dataset.a+'/'+t.dataset.f,t.value);drawMatrix();progress()});
 $('#copyMapa').addEventListener('click',()=>{const P={fav:'favorável',amb:'ambivalente',con:'contrária'};const f=s=>String(s||'').replace(/\s+/g,' ');
  const rows=[['Ator','Tipo','Interesses','Posições','Poder','Interesse','Postura','Alianças','Oposições','Estratégia de mediação']].concat(MA.map(a=>{const x=m(a.id);return [a.nome,a.tipo,f(x.int),f(x.pos),x.poder||'',x.interesse||'',P[x.postura]||'',f(x.ali),f(x.opo),f(x.est)]}));
- copy(rows.map(r=>r.join('\t')).join('\n'),'Mapa copiado. Cole no Word ou no Excel.')});
+ copyTable(rows,'Mapa copiado como tabela. Cole no Word.')});
 
 /* ---------- linha do tempo e dados ---------- */
 $('#tl').innerHTML='<i class="tlfill" aria-hidden="true"></i>'+TL.map(e=>`<div class="tlrow ${e[2]}"><div class="when">${e[2]==='now'?'<small>Estamos aqui</small>':e[2]==='fut'?'<small>Previsto</small>':''}${e[0]}</div><p>${esc(e[1])}</p></div>`).join('');
@@ -738,7 +750,7 @@ $('#addConc').addEventListener('click',()=>{const id='x'+Date.now().toString(36)
 let clrT;$('#clearConc').addEventListener('click',e=>{const b=e.currentTarget;if(!b.dataset.arm){b.dataset.arm=1;b.textContent='Confirmar: apagar todos os campos';clrT=setTimeout(()=>{delete b.dataset.arm;b.textContent='Limpar todos os campos'},4000);return}
  clearTimeout(clrT);delete b.dataset.arm;b.textContent='Limpar todos os campos';allConc().forEach(k=>CF.forEach(f=>{if(c(k.id)[f]){c(k.id)[f]='';put('conc/'+k.id+'/'+f,'')}}));saveLocal();drawConc();progress();toast('Campos de conceitos apagados')});
 $('#copyConc').addEventListener('click',()=>{const f=s=>String(s||'').replace(/\s+/g,' ');
- copy([['Conceito','Por que é importante?','Fontes iniciais']].concat(allConc().map(k=>[k.nome,f(c(k.id).pq),f(c(k.id).fontes)])).map(r=>r.join('\t')).join('\n'),'Conceitos copiados. Cole no Relatório Parcial.')});
+ copyTable([['Conceito','Por que é importante?','Fontes iniciais']].concat(allConc().map(k=>[k.nome,f(c(k.id).pq),f(c(k.id).fontes)])),'Conceitos copiados como tabela. Cole no Relatório Parcial.')});
 
 /* ---------- progresso na página inicial ---------- */
 function progress(){ $('#pMapa').textContent=MA.filter(placed).length+' de '+MA.length+' atores na matriz';
