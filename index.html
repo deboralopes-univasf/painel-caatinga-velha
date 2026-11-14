@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
 <title>Painel do Caso Caatinga Velha</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,27 +12,14 @@
 /* Layout: faixa utilitária, hero dividido (problema + entregas), cartões de entrada sobre a borda do hero,
    faixas escuras de números e de afirmação, seções em composição assimétrica 1/3 + 2/3. */
 :root{
-  --bg:#F3F5F1; --surface:#FFFFFF; --surface-2:#E9EDE6; --ink:#1B2620; --ink-2:#4C5A52; --line:#CDD5CC;
+  --bg:#FFFFFF; --surface:#FFFFFF; --surface-2:#E9EDE6; --ink:#1B2620; --ink-2:#4C5A52; --line:#CDD5CC;
   --accent:#2B6A4E; --accent-ink:#FFFFFF; --mark:#B7791F; --mark-soft:#F3E3C3;
   --band:#17362A; --band-ink:#F1F5F0; --band-2:#C9D6CC; --band-mark:#F0C063; --band-line:#2F5444;
   --fav:#2563A8; --amb:#6B7280; --con:#C2571A;
   --font-display:"Bricolage Grotesque","Trebuchet MS",sans-serif;
   --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#111814; --surface:#1A2420; --surface-2:#243029; --ink:#E7EDE8; --ink-2:#A5B3AA; --line:#35443B;
-    --accent:#6FBF98; --accent-ink:#0E1512; --mark:#E0A84A; --mark-soft:#4A3A1C;
-    --band:#0C1F18; --band-ink:#F1F5F0; --band-2:#B5C4BA; --band-mark:#F0C063; --band-line:#254236;
-    --fav:#7DB3F0; --amb:#A3ABB5; --con:#F0955C; color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#111814; --surface:#1A2420; --surface-2:#243029; --ink:#E7EDE8; --ink-2:#A5B3AA; --line:#35443B;
-  --accent:#6FBF98; --accent-ink:#0E1512; --mark:#E0A84A; --mark-soft:#4A3A1C;
-  --band:#0C1F18; --band-ink:#F1F5F0; --band-2:#B5C4BA; --band-mark:#F0C063; --band-line:#254236;
-  --fav:#7DB3F0; --amb:#A3ABB5; --con:#F0955C; color-scheme:dark;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light only; /* tema único: fundo claro também em navegador escuro */
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -56,13 +44,15 @@ button,select,input,textarea{font:inherit;color:inherit}
 .util button:hover{border-color:var(--band-mark)}
 
 /* barra de navegação */
-.bar{background:var(--surface);border-bottom:1px solid var(--line)}
+.bar{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;transition:box-shadow .3s}
+.bar.scrolled{box-shadow:0 6px 18px -12px rgba(23,54,42,.45)}
 .bar .inner{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;padding-top:12px;padding-bottom:12px}
 .brand{font-family:var(--font-display);font-weight:700;font-size:18px;text-decoration:none}
-nav.pill{display:flex;flex-wrap:wrap;gap:2px;background:var(--surface-2);border-radius:999px;padding:4px}
-nav.pill a{padding:6px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px;color:var(--ink-2)}
+nav.pill{position:relative;display:flex;flex-wrap:wrap;gap:2px;background:var(--surface-2);border-radius:999px;padding:4px}
+nav.pill a{position:relative;z-index:1;transition:color .25s;padding:6px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px;color:var(--ink-2)}
 nav.pill a:hover{color:var(--ink)}
-nav.pill a[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
+nav.pill a[aria-current="page"]{color:var(--accent-ink)}
+nav.pill .ind{position:absolute;left:0;top:0;border-radius:999px;background:var(--accent);transition:transform .45s var(--ease),width .45s var(--ease),height .2s}
 
 section.view{display:none}
 section.view.on{display:block}
@@ -192,7 +182,54 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 #toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13.5px;opacity:0;pointer-events:none}
 #toast.on{opacity:1}
 
+
+/* ---------- movimento ---------- */
+.sync{display:inline-flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--band-2);flex:none}
+.dot.live{background:#4ADE80;box-shadow:0 0 0 3px rgba(74,222,128,.22);animation:pulse 2s ease-in-out infinite}
+.dot.off{background:var(--band-mark)}
+.btn,.util button,.groups button,.entry a,.pair>a,.card{transition:border-color .2s,background-color .2s,transform .35s var(--ease),box-shadow .35s var(--ease)}
+.entry a:hover,.pair>a:hover{transform:translateY(-4px);box-shadow:0 14px 26px -18px rgba(23,54,42,.55)}
+.btn:active{transform:scale(.97)}
+.w{display:inline-block}
+.hero h1 .w{animation:word .8s var(--ease) both;animation-delay:calc(var(--i)*38ms + 80ms)}
+.hero .side{animation:rise .8s var(--ease) .35s both}
+.hero p,.hero .kicker{animation:fade .7s .15s both}
+.words .w{opacity:.28;transition:opacity .5s;transition-delay:calc(var(--i)*55ms)}
+.in .words .w,.words.in .w{opacity:1}
+.rv{opacity:.35;transform:translateY(18px)}
+.rv.in{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .7s var(--ease)}
+.barx .fill{width:var(--w)}
+.rv:not(.in) .barx .fill{width:0}
+.rv.in .barx .fill{transition:width 1s var(--ease) .15s}
+.chip.pop{animation:pop .5s var(--ease) both}
+.stagewrap .q,.stagewrap .kicker{animation:rollin .5s var(--ease) both}
+details.card[open]>summary~*{animation:rise .35s var(--ease) both}
+.tbar{height:4px;background:var(--surface-2);border-radius:4px;overflow:hidden}
+.tbar i{display:block;height:100%;background:var(--mark);transform-origin:0 50%;transform:scaleX(0)}
+.tbar.run i{animation:bar 300s linear both}
+#tl{position:relative}
+.tlfill{position:absolute;left:0;top:0;width:4px;background:var(--accent);transform-origin:50% 0;transform:scaleY(0);border-radius:2px;pointer-events:none}
+.tlfill.go{transform:none;transition:transform 1.4s var(--ease) .2s}
+.shake{animation:shake .4s}
+#toast{transition:opacity .25s,transform .25s var(--ease)}
+#toast.on{transform:translateX(-50%) translateY(-6px)}
+.foot{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:28px}
+.foot .col{display:flex;flex-direction:column;gap:6px}
+.foot .col a{text-decoration:none;transition:color .2s}.foot .col a:hover{color:var(--accent)}
+.foot .brand{color:var(--ink)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes rise{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes word{from{transform:translateY(.4em);opacity:0}to{transform:none;opacity:1}}
+@keyframes pop{from{transform:translateY(8px) scale(.9);opacity:0}to{transform:none;opacity:1}}
+@keyframes rollin{from{transform:translateY(50%);opacity:0}to{transform:none;opacity:1}}
+@keyframes bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.words .w{opacity:1}.tlfill{transform:none}}
+
 @media (max-width:900px){
+  .foot{grid-template-columns:1fr 1fr}
   .hero .inner,.state,.sechead,.split,.split.rev,.stagewrap,.two,.pair{grid-template-columns:1fr}
   .hero .inner{padding-top:36px;gap:24px}.hero h1{font-size:30px}
   .entry{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr}
@@ -207,12 +244,12 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 <body>
 <div class="util"><div class="inner">
   <span>ADMT0346 · Gestão de Conflitos · PBL · <b>Próxima entrega: Relatório Parcial até 15/11</b></span>
-  <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span id="saveState">Salvo neste navegador</span><button id="btnBackup" type="button">Salvar e compartilhar</button></span>
+  <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="sync"><i class="dot" id="syncDot" aria-hidden="true"></i><span id="saveState">Salvo neste navegador</span></span><button id="btnBackup" type="button">Salvar e compartilhar</button></span>
 </div></div>
 <div class="bar"><div class="inner">
   <a class="brand" href="#inicio">Painel do Caso Caatinga Velha</a>
   <nav class="pill" aria-label="Seções do painel">
-    <a href="#inicio">Início</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a>
+    <i class="ind" aria-hidden="true"></i><a href="#inicio">Início</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a>
   </nav>
 </div></div>
 
@@ -245,7 +282,7 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
     </div>
   </div>
   <div class="block"><div class="inner state">
-    <div><div class="kicker">Onde estamos</div><h2 style="margin-top:8px">Dia +5. O prazo da notificação vence em <mark>cinco dias</mark>.</h2></div>
+    <div><div class="kicker">Onde estamos</div><h2 class="words" style="margin-top:8px">Dia +5. O prazo da notificação vence em <mark>cinco dias</mark>.</h2></div>
     <div class="three">
       <div class="card"><div class="kicker">Próximo sábado</div><h3 style="margin:6px 0">Caminhada em Defesa das Benzedeiras</h3><p class="muted">Articulada pelo Pe. José.</p></div>
       <div class="card"><div class="kicker">Cerca do Dia +8</div><h3 style="margin:6px 0">Plenária do Conselho Local</h3><p class="muted">Com Dona Margarida, Pe. José e Ministério Público.</p></div>
@@ -255,10 +292,10 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
   <div class="bandsec block"><div class="inner">
     <div class="kicker" style="margin-bottom:18px">O caso em quatro números</div>
     <div class="figs">
-      <div class="fig"><div class="big num">73%</div><p>da população do distrito usa alguma prática integrativa.</p></div>
-      <div class="fig"><div class="big num">82% <small>e 18%</small></div><p>dos profissionais da UBS usam chás em casa; só 18% recomendariam benzimento a um paciente.</p></div>
-      <div class="fig"><div class="big num">R$ 0,00</div><p>de verba municipal anual para PICs, com adesão à PNPIC desde 2019.</p></div>
-      <div class="fig"><div class="big num">7</div><p>denúncias contra raizeiros em dois anos; duas multas, ambas suspensas pelo MP.</p></div>
+      <div class="fig"><div class="big num"><span data-to="73" data-suf="%">73%</span></div><p>da população do distrito usa alguma prática integrativa.</p></div>
+      <div class="fig"><div class="big num"><span data-to="82" data-suf="%">82%</span> <small>e <span data-to="18" data-suf="%">18%</span></small></div><p>dos profissionais da UBS usam chás em casa; só 18% recomendariam benzimento a um paciente.</p></div>
+      <div class="fig"><div class="big num"><span data-to="0" data-from="50000" data-dec="2" data-pre="R$ ">R$ 0,00</span></div><p>de verba municipal anual para PICs. A proposta arquivada pedia R$ 50 mil.</p></div>
+      <div class="fig"><div class="big num"><span data-to="7">7</span></div><p>denúncias contra raizeiros em dois anos; duas multas, ambas suspensas pelo MP.</p></div>
     </div>
   </div></div>
   <div class="block tight" style="padding-top:44px"><div class="inner pair">
@@ -320,6 +357,7 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
       <button class="btn" id="bTimer" type="button">Iniciar 5 minutos</button>
       <span class="timer num" id="bClock">5:00</span>
     </div>
+    <div class="tbar" id="tbar"><i></i></div>
     <div class="stagewrap" id="stage"></div>
     <div class="card"><div class="toolbar" style="justify-content:space-between;margin-bottom:6px"><h3>Todas as perguntas</h3><span class="muted" id="bCount"></span></div><div class="scroll"><table id="bTable"></table></div></div>
   </div>
@@ -338,7 +376,12 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 </div></section>
 </main>
 
-<footer><div class="inner">Material de apoio do grupo para a disciplina ADMT0346, PPGDiDeS/UNIVASF. Os dados do caso são fictícios e vêm do material da disciplina.</div></footer>
+<footer><div class="inner foot">
+  <div><div class="brand">Painel do Caso Caatinga Velha</div><p style="margin-top:8px;max-width:44ch">Material de apoio do grupo para a disciplina ADMT0346, PPGDiDeS/UNIVASF. Os dados do caso são fictícios e vêm do material da disciplina.</p></div>
+  <div class="col"><span class="kicker">Consultar</span><a href="#fichas">Fichas dos atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados do caso</a></div>
+  <div class="col"><span class="kicker">Preencher</span><a href="#mapa">Mapa de atores</a><a href="#banca">Treino de banca</a><a href="#conceitos">Conceitos</a></div>
+  <div class="col"><span class="kicker">Entregas</span><span>Relatório Parcial · 15/11</span><span>Roteiro · 02/12</span><span>Relatório Final · 07 a 11/12</span></div>
+</div></footer>
 
 <dialog id="dlg">
   <h3 style="font-size:20px">Salvar e compartilhar</h3>
@@ -362,7 +405,7 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
    Com o campo vazio, o painel salva só no navegador de cada pessoa.
    "sala" separa os dados deste grupo; use um nome difícil de adivinhar.
    ============================================================ */
-const CONFIG = { dbUrl: 'https://caratinga-velha-default-rtdb.firebaseio.com', sala: 'grupo-caatinga-velha' };
+const CONFIG = { dbUrl: '', sala: 'grupo-caatinga-velha' };
 
 const GRUPOS = ['Praticantes e comunidade','UBS e rede de saúde','Gestão municipal','Controle social e justiça','Lideranças religiosas'];
 const ATORES = [
@@ -475,7 +518,7 @@ if(Array.isArray(S.extra)){const o={};S.extra.forEach(x=>o[x.id]={nome:x.nome});
 const $=s=>document.querySelector(s), el=(t,a={},h='')=>{const e=document.createElement(t);for(const k in a){if(k==='class')e.className=a[k];else e.setAttribute(k,a[k])}e.innerHTML=h;return e};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200)}
-function status(m){$('#saveState').textContent=m}
+function status(m,k){$('#saveState').textContent=m;const d=$('#syncDot');d.className='dot'+(k?' '+k:'')}
 let saveT; function saveLocal(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},300)}
 async function copy(text,ok){try{await navigator.clipboard.writeText(text);toast(ok)}catch(e){$('#dump').value=text;$('#dMsg').textContent='Não foi possível copiar automaticamente. Selecione o texto acima e copie.';$('#dlg').showModal();$('#dump').select()}}
 
@@ -488,8 +531,8 @@ const hhmm=()=>new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-d
 function put(path,value){saveLocal(); if(!WEB)return; queue.set(path,value); clearTimeout(flushT); flushT=setTimeout(flush,700)}
 async function flush(){ if(!queue.size)return; const items=[...queue.entries()];
   try{ for(const [p,v] of items){ const r=await fetch(base+'/'+p+'.json',{method:'PUT',body:JSON.stringify(v)}); if(!r.ok)throw new Error(r.status); if(queue.get(p)===v)queue.delete(p)}
-    online=true; status('Salvo na web às '+hhmm()) }
-  catch(e){ online=false; status('Sem conexão com o banco. Alterações guardadas neste navegador') } }
+    online=true; status('Salvo na web às '+hhmm(),'live') }
+  catch(e){ online=false; status('Sem conexão com o banco. Alterações guardadas neste navegador','off') } }
 function pending(p){return queue.has(p)}
 function mergeObj(kind,remote){ // kind: mapa | conc (dois níveis)
   for(const id in remote||{}){ const tgt=kind==='mapa'?m(id):c(id); for(const f in remote[id]){ if(!pending(kind+'/'+id+'/'+f)) tgt[f]=remote[id][f] } } }
@@ -508,8 +551,8 @@ async function pull(){ if(!WEB||document.hidden)return;
     for(const id in S.extra) if(pending('extra/'+id)&&queue.get('extra/'+id)!==null) ex[id]=S.extra[id];
     const extraChanged=before!==Object.keys(ex).sort().join()||JSON.stringify(S.extra)!==JSON.stringify(ex); S.extra=ex;
     firstPull=false; online=true; saveLocal(); refresh(extraChanged);
-    if(queue.size)flush(); else status('Sincronizado com a web às '+hhmm());
-  }catch(e){ online=false; status('Sem conexão com o banco. Alterações guardadas neste navegador') } }
+    if(queue.size)flush(); else status('Sincronizado com a web às '+hhmm(),'live');
+  }catch(e){ online=false; status('Sem conexão com o banco. Alterações guardadas neste navegador','off') } }
 /* atualiza a tela com o que veio da web, sem mexer no campo que a pessoa está digitando */
 function refresh(extraChanged){ const act=document.activeElement;
   document.querySelectorAll('[data-a]').forEach(e=>{if(e!==act){const v=m(e.dataset.a)[e.dataset.f]||'';if(e.value!==v)e.value=v}});
@@ -523,7 +566,7 @@ const VIEWS=['inicio','fichas','mapa','linha-do-tempo','dados','banca','conceito
 function route(){const h=location.hash.replace('#','');const v=VIEWS.includes(h)?h:'inicio';
  VIEWS.forEach(x=>$('#v-'+x).classList.toggle('on',x===v));
  document.querySelectorAll('nav.pill a').forEach(a=>{if(a.getAttribute('href')==='#'+v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
- window.scrollTo(0,0);}
+ window.scrollTo(0,0);moveInd();observeView(v);}
 window.addEventListener('hashchange',route);
 
 /* ---------- fichas ---------- */
@@ -548,15 +591,17 @@ $('#q').addEventListener('input',drawActors);
 const MA=ATORES.filter(a=>a.t);
 const MF=['int','pos','poder','interesse','postura','ali','opo','est'];
 function m(id){return S.mapa[id]||(S.mapa[id]={})}
-function chip(a){const p=m(a.id).postura;const k=p==='fav'?'fav':p==='con'?'con':p==='amb'?'':'nd';const g=p==='fav'?'▲ ':p==='con'?'▼ ':p==='amb'?'● ':'';return `<span class="chip ${k}">${g}${esc(a.curto)}</span>`}
+const lastCell={};
+function chip(a,cell){const moved=cell&&lastCell[a.id]!==undefined&&lastCell[a.id]!==cell;if(cell!==undefined)lastCell[a.id]=cell;return chip0(a,moved)}
+function chip0(a,moved){const p=m(a.id).postura;const k=p==='fav'?'fav':p==='con'?'con':p==='amb'?'':'nd';const g=p==='fav'?'▲ ':p==='con'?'▼ ':p==='amb'?'● ':'';return `<span class="chip ${k}${moved?' pop':''}">${g}${esc(a.curto)}</span>`}
 const QUAD={'alto-alto':'gerenciar de perto','alto-baixo':'manter satisfeito','baixo-alto':'manter informado','baixo-baixo':'monitorar'};
 function placed(a){return m(a.id).poder&&m(a.id).interesse}
 function drawMatrix(){let h='<div class="ax"></div>'+['baixo','médio','alto'].map(i=>`<div class="ax">Interesse ${i}</div>`).join('');
  ['alto','médio','baixo'].forEach(p=>{h+=`<div class="ax">Poder ${p}</div>`;['baixo','médio','alto'].forEach(i=>{
-  h+=`<div class="cell">${MA.filter(a=>m(a.id).poder===p&&m(a.id).interesse===i).map(chip).join('')}${QUAD[p+'-'+i]?`<small>${QUAD[p+'-'+i]}</small>`:''}</div>`})});
+  h+=`<div class="cell">${MA.filter(a=>m(a.id).poder===p&&m(a.id).interesse===i).map(a=>chip(a,p+'-'+i)).join('')}${QUAD[p+'-'+i]?`<small>${QUAD[p+'-'+i]}</small>`:''}</div>`})});
  $('#matrix').innerHTML=h;
  const out=MA.filter(a=>!placed(a));
- $('#tray').innerHTML=out.length?out.map(chip).join(''):'<span class="muted">Todos os atores estão na matriz.</span>';
+ $('#tray').innerHTML=out.length?out.map(a=>chip(a,'')).join(''):'<span class="muted">Todos os atores estão na matriz.</span>';
  MA.forEach(a=>{const d=document.getElementById('st-'+a.id);if(d){const k=MF.filter(f=>m(a.id)[f]).length;d.textContent=k===8?'completo':k+' de 8 campos'}})}
 function sel(id,f,opts,lab){const v=m(id)[f]||'';return `<label class="f">${lab}<select id="m-${id}-${f}" data-a="${id}" data-f="${f}">${opts.map(o=>`<option value="${o[0]}" ${v===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></label>`}
 function ta(id,f,lab,cls){return `<label class="f ${cls}">${lab}<textarea id="m-${id}-${f}" data-a="${id}" data-f="${f}">${esc(m(id)[f]||'')}</textarea></label>`}
@@ -573,9 +618,10 @@ $('#copyMapa').addEventListener('click',()=>{const P={fav:'favorável',amb:'ambi
  copy(rows.map(r=>r.join('\t')).join('\n'),'Mapa copiado. Cole no Word ou no Excel.')});
 
 /* ---------- linha do tempo e dados ---------- */
-$('#tl').innerHTML=TL.map(e=>`<div class="tlrow ${e[2]}"><div class="when">${e[2]==='now'?'<small>Estamos aqui</small>':e[2]==='fut'?'<small>Previsto</small>':''}${e[0]}</div><p>${esc(e[1])}</p></div>`).join('');
-$('#tiles').innerHTML=TILES.map(t=>`<div class="fig"><div class="big num">${t[0]}</div><p>${t[1]}</p></div>`).join('');
-function bars(id,data,max,fmt){$(id).innerHTML=data.map(d=>`<div class="barx" title="${esc(d[0])}: ${fmt(d[1])}"><span>${esc(d[0])}</span><div class="track"><div class="fill" style="width:${d[1]/max*100}%"></div></div><span class="v num">${fmt(d[1])}</span></div>`).join('')}
+$('#tl').innerHTML='<i class="tlfill" aria-hidden="true"></i>'+TL.map(e=>`<div class="tlrow ${e[2]}"><div class="when">${e[2]==='now'?'<small>Estamos aqui</small>':e[2]==='fut'?'<small>Previsto</small>':''}${e[0]}</div><p>${esc(e[1])}</p></div>`).join('');
+const TC=['data-to="12150"','data-to="7"','data-to="2"','data-to="0" data-from="50000" data-dec="2" data-pre="R$ "','data-to="2"',''];
+$('#tiles').innerHTML=TILES.map((t,i)=>`<div class="fig"><div class="big num"><span ${TC[i]}>${t[0]}</span></div><p>${t[1]}</p></div>`).join('');
+function bars(id,data,max,fmt){$(id).innerHTML=data.map(d=>`<div class="barx" title="${esc(d[0])}: ${fmt(d[1])}"><span>${esc(d[0])}</span><div class="track"><div class="fill" style="--w:${d[1]/max*100}%"></div></div><span class="v num">${fmt(d[1])}</span></div>`).join('')}
 bars('#barsPct',PCT,100,v=>v+'%');bars('#barsPop',POP,5000,v=>v.toLocaleString('pt-BR'));
 $('#incons').innerHTML=INCONS.map(i=>`<li>${esc(i)}</li>`).join('');
 
@@ -592,8 +638,8 @@ function drawBTable(){$('#bCount').textContent=ALLQ.filter(answered).length+' de
 $('#bTable').addEventListener('click',e=>{const i=e.target.dataset.i;if(i===undefined)return;e.preventDefault();cur=ALLQ[i];showQ();$('#stage').scrollIntoView({block:'nearest'})});
 $('#bDraw').addEventListener('click',()=>{const r=$('#bRole').value;let pool=ALLQ.filter(x=>!r||x.b.id===r);const open=pool.filter(x=>!answered(x)&&x!==cur);if(open.length)pool=open;cur=pool[Math.floor(Math.random()*pool.length)];showQ()});
 let tm,left=300;function clock(){$('#bClock').textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0')}
-$('#bTimer').addEventListener('click',()=>{if(tm){clearInterval(tm);tm=null;left=300;clock();$('#bTimer').textContent='Iniciar 5 minutos';return}
- $('#bTimer').textContent='Parar e zerar';tm=setInterval(()=>{left--;clock();if(left<=0){clearInterval(tm);tm=null;left=300;$('#bTimer').textContent='Iniciar 5 minutos';toast('Tempo encerrado');clock()}},1000)});
+$('#bTimer').addEventListener('click',()=>{const tb=$('#tbar');if(tm){clearInterval(tm);tm=null;left=300;clock();tb.classList.remove('run');$('#bTimer').textContent='Iniciar 5 minutos';return}
+ tb.classList.remove('run');void tb.offsetWidth;tb.classList.add('run');$('#bTimer').textContent='Parar e zerar';tm=setInterval(()=>{left--;clock();if(left<=0){clearInterval(tm);tm=null;left=300;$('#tbar').classList.remove('run');$('#bTimer').textContent='Iniciar 5 minutos';toast('Tempo encerrado');clock()}},1000)});
 
 /* ---------- conceitos ---------- */
 const CF=['pq','def','fontes'];
@@ -639,13 +685,37 @@ $('#dLoad').addEventListener('click',()=>{try{const d=JSON.parse($('#dump').valu
   S=Object.assign({mapa:{},banca:{},conc:{},extra:{}},d);saveLocal();
   if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);flush()}
   drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();$('#dMsg').textContent='Dados carregados.'}
- catch(e){$('#dMsg').textContent='O texto colado não é um arquivo válido deste painel. Copie novamente o conteúdo completo.'}});
+ catch(e){$('#dMsg').textContent='O texto colado não é um arquivo válido deste painel. Copie novamente o conteúdo completo.';const t=$('#dump');t.classList.remove('shake');void t.offsetWidth;t.classList.add('shake')}});
 if(window.top===window.self){const b=$('#dFile');b.hidden=false;b.addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('#dump').value],{type:'application/json'}));a.download='painel-caatinga-velha.json';a.click()})}
+
+
+/* ---------- movimento ---------- */
+const REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function moveInd(){const a=document.querySelector('nav.pill a[aria-current="page"]'),i=document.querySelector('nav.pill .ind');if(!a||!i)return;
+ i.style.width=a.offsetWidth+'px';i.style.height=a.offsetHeight+'px';i.style.transform='translate('+a.offsetLeft+'px,'+a.offsetTop+'px)'}
+window.addEventListener('resize',moveInd);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(moveInd);
+window.addEventListener('scroll',()=>document.querySelector('.bar').classList.toggle('scrolled',window.scrollY>8),{passive:true});
+/* divide um título em palavras para a entrada escalonada, preservando os destaques */
+function splitWords(node){let i=0;const walk=n=>{[...n.childNodes].forEach(ch=>{if(ch.nodeType===3){const f=document.createDocumentFragment();ch.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.appendChild(document.createTextNode(' '));return}const s=document.createElement('span');s.className='w';s.style.setProperty('--i',i++);s.textContent=t;f.appendChild(s)});n.replaceChild(f,ch)}else if(ch.nodeType===1)walk(ch)})};walk(node)}
+const fmt=(v,dec)=>v.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+function countUp(e){if(e.dataset.done)return;e.dataset.done=1;const to=+e.dataset.to,from=+(e.dataset.from||0),dec=+(e.dataset.dec||0),pre=e.dataset.pre||'',suf=e.dataset.suf||'',t0=performance.now(),dur=from>to?1600:1000;
+ const tick=t=>{const k=Math.min(1,(t-t0)/dur),q=1-Math.pow(1-k,3);e.textContent=pre+fmt(from+(to-from)*q,dec)+suf;if(k<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)}
+let io=null;
+if(!REDUCED&&'IntersectionObserver' in window){io=new IntersectionObserver(es=>{let n=0;es.forEach(e=>{if(!e.isIntersecting)return;const t=e.target;io.unobserve(t);
+  setTimeout(()=>{t.classList.add('in');t.querySelectorAll('[data-to]').forEach(countUp);if(t.matches('[data-to]'))countUp(t)},Math.min(n++,8)*55)})},{threshold:.12,rootMargin:'0px 0px -6% 0px'})}
+function observeView(v){const root=document.getElementById('v-'+v);if(!root)return;
+ if(!io){root.querySelectorAll('.tlfill').forEach(sizeFill);return}
+ root.querySelectorAll('.sechead,.entry a,.card,.fig,.pair>a,.tlrow,.state>div:first-child,.matrix,.stagewrap').forEach(e=>{if(e.dataset.rv)return;e.dataset.rv=1;e.classList.add('rv');io.observe(e)});
+ root.querySelectorAll('.tlfill').forEach(f=>{sizeFill(f);f.classList.remove('go');requestAnimationFrame(()=>requestAnimationFrame(()=>f.classList.add('go')))})}
+function sizeFill(f){const now=document.querySelector('#tl .tlrow.now');if(now)f.style.height=now.offsetTop+'px'}
+if(!REDUCED){document.querySelectorAll('.hero h1,.words').forEach(splitWords)}
 
 /* ---------- início ---------- */
 drawGroups();drawActors();drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();route();
 if(WEB){status('Conectando ao banco do grupo');pull();setInterval(pull,6000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});window.addEventListener('beforeunload',()=>{if(queue.size)flush()})}
 else status(canStore?'Salvo só neste navegador':'Este navegador não permite salvar');
+moveInd();
 </script>
 </body>
 </html>
