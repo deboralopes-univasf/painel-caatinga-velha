@@ -70,7 +70,8 @@ section.view.on{display:block}
 .rows .r{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);align-items:baseline}
 .rows .r:last-child{border:0;padding-bottom:0}
 .rows .r b{font-weight:600}
-.rows .r small{display:block;color:var(--ink-2);font-size:12.5px}
+.rows .r small{display:block;color:var(--ink-2);font-size:12.5px;font-weight:400}
+.rows .r>b{text-align:right}
 .rows .r.next{border-left:4px solid var(--mark);padding-left:10px;margin-left:-14px}
 
 /* cartões de entrada */
@@ -259,7 +260,7 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
     <div>
       <div class="kicker">Problema direcionador sugerido pela disciplina</div>
       <h1>Como <mark>mediar e transformar</mark> o conflito em torno das PICs em Caatinga Velha, garantindo <mark>direitos sanitários, culturais e epistêmicos</mark>?</h1>
-      <p>Conflito entre Vigilância Sanitária, UBS e comunidade quilombola. Produto final: Plano de Mediação e Governança Colaborativa das PICs em Caatinga Velha.</p>
+      <p>Caatinga Velha é um distrito sanitário de Coração do Sertão, município de 80 mil habitantes no Semiárido nordestino. O conflito envolve Vigilância Sanitária, UBS e comunidade quilombola. Produto final: Plano de Mediação e Governança Colaborativa das PICs.</p>
     </div>
     <div class="side">
       <div class="kicker" style="margin-bottom:4px">Entregas</div>
@@ -275,7 +276,7 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
     <div class="entry">
       <a href="#fichas"><span class="kicker">Consultar</span><h3>Fichas dos atores</h3><p>Quem é quem, com fatos e falas do caso.</p><span class="prog"><span>17 fichas</span><span>abrir</span></span></a>
       <a href="#linha-do-tempo"><span class="kicker">Consultar</span><h3>Linha do tempo</h3><p>Do Mês -12 ao fim do prazo da notificação.</p><span class="prog"><span>11 eventos</span><span>abrir</span></span></a>
-      <a href="#dados"><span class="kicker">Consultar</span><h3>Dados do caso</h3><p>Indicadores, população e pontos a esclarecer.</p><span class="prog"><span>11 indicadores</span><span>abrir</span></span></a>
+      <a href="#dados"><span class="kicker">Consultar</span><h3>Dados do caso</h3><p>Coração do Sertão, o distrito, a rede de saúde e os indicadores.</p><span class="prog"><span>município, distrito e indicadores</span><span>abrir</span></span></a>
       <a class="work" href="#mapa"><span class="kicker">Preencher</span><h3>Mapa de atores</h3><p>Interesses, posições, poder e alianças. Gera a matriz.</p><span class="prog"><span id="pMapa"></span><span>abrir</span></span></a>
       <a class="work" href="#banca"><span class="kicker">Preencher</span><h3>Treino de banca</h3><p>As perguntas de cada papel e a resposta do grupo.</p><span class="prog"><span id="pBanca"></span><span>abrir</span></span></a>
       <a class="work" href="#conceitos"><span class="kicker">Preencher</span><h3>Conceitos</h3><p>O que pesquisar, por quê e com quais fontes.</p><span class="prog"><span id="pConc"></span><span>abrir</span></span></a>
@@ -300,7 +301,7 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
   </div></div>
   <div class="block tight" style="padding-top:44px"><div class="inner pair">
     <a class="p1" href="#conceitos"><span class="kicker">Próxima entrega</span><h3>Relatório Parcial, até 15/11</h3><p>A aba Conceitos tem as mesmas colunas da tabela do relatório. Preencham e copiem.</p></a>
-    <a class="p2" href="#dados"><span class="kicker">Para o tutor</span><h3>Cinco pontos do caso a esclarecer</h3><p>Trechos do material que se contradizem ou pedem confirmação antes de entrar no plano.</p></a>
+    <a class="p2" href="#dados"><span class="kicker">Para o tutor</span><h3>Seis pontos do caso a esclarecer</h3><p>Trechos do material que se contradizem ou pedem confirmação antes de entrar no plano.</p></a>
   </div></div>
 </section>
 
@@ -337,12 +338,57 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
 </div></section>
 
 <section class="view" id="v-dados">
-  <div class="inner"><div class="sechead"><div><div class="kicker">Consultar</div><h2>Dados do caso</h2></div><p>Indicadores do item 5 do caso, fictícios mas verossímeis, e a distribuição da população pelo território.</p></div></div>
+  <div class="inner"><div class="sechead"><div><div class="kicker">Consultar</div><h2>Dados do caso</h2></div><p>O município de Coração do Sertão, o distrito de Caatinga Velha e os indicadores do item 5 do caso. Dados fictícios, mas verossímeis.</p></div></div>
   <div class="bandsec block" style="padding:30px 0"><div class="inner"><div class="figs six" id="tiles"></div></div></div>
   <div class="inner stack" style="margin-top:24px">
     <div class="two">
+      <div class="card"><div class="kicker">Município</div><h3 style="margin:4px 0 8px">Coração do Sertão</h3>
+        <div class="rows">
+          <div class="r"><span>População</span><b class="num">80 mil habitantes</b></div>
+          <div class="r"><span>IDH</span><b class="num">0,62 (médio)</b></div>
+          <div class="r"><span>Localização</span><b>Semiárido do Nordeste</b></div>
+          <div class="r"><span>Distância da capital mais próxima</span><b class="num">450 km</b></div>
+          <div class="r"><span>Adesão à PNPIC</span><b>2019 (Portaria Municipal nº 047/2019)</b></div>
+          <div class="r"><span>Vigilância Sanitária municipal</span><b>3 fiscais</b></div>
+        </div></div>
+      <div class="card"><div class="kicker">Distrito sanitário</div><h3 style="margin:4px 0 8px">Caatinga Velha</h3>
+        <div class="rows">
+          <div class="r"><span>População</span><b class="num">cerca de 12 mil (12.150 na tabela)</b></div>
+          <div class="r"><span>Peso no município</span><b class="num">cerca de 15% da população<small>cálculo do grupo: 12 mil de 80 mil</small></b></div>
+          <div class="r"><span>Zona rural</span><b class="num">3 comunidades tradicionais, cerca de 800 pessoas</b></div>
+          <div class="r"><span>Zona urbana periférica</span><b class="num">3 bairros, cerca de 11.200 pessoas</b></div>
+          <div class="r"><span>Acesso da zona rural à UBS</span><b>1h30 de transporte coletivo ou 3h a pé</b></div>
+          <div class="r"><span>Economia rural</span><b>Subsistência, pequenos animais, Bolsa Família e BPC</b></div>
+        </div></div>
+    </div>
+    <div class="two">
       <div class="card"><h3>Uso e percepção das práticas</h3><p class="muted" style="margin:3px 0 14px">Percentual. População: inquérito domiciliar da UBS, 2023, não publicado. Profissionais: levantamento interno da Enf. Carla, 2024.</p><div class="bars" id="barsPct"></div></div>
       <div class="card"><h3>População por localidade</h3><p class="muted" style="margin:3px 0 14px">Habitantes, valores aproximados do caso. As três primeiras são comunidades rurais.</p><div class="bars" id="barsPop"></div></div>
+    </div>
+    <div class="card"><h3>As seis localidades do distrito</h3><div class="scroll" style="margin-top:8px"><table>
+      <tr><th>Localidade</th><th>Zona</th><th>População</th><th>O que o caso diz</th></tr>
+      <tr><td><b>Quilombo do Baixio das Mulheres</b></td><td>Rural</td><td class="num">400</td><td style="white-space:normal">Onde vivem Dona Margarida e a maioria das raizeiras e benzedeiras. Liderança feminina e matrilinear. Pressão de fazendeiros por limites de terra. Cuidado coletivo com plantas nativas (aroeira, juazeiro, umburana, angico). Casa de Rezas aberta ao distrito três vezes por semana.</td></tr>
+      <tr><td><b>Comunidade do Riacho do Meio</b></td><td>Rural</td><td class="num">250</td><td style="white-space:normal">Pequenos agricultores familiares, muitos deles raizeiros. Farmácia Viva comunitária desativada há dois anos por falta de apoio técnico e financeiro da prefeitura.</td></tr>
+      <tr><td><b>Povoado do Barro Vermelho</b></td><td>Rural</td><td class="num">150</td><td style="white-space:normal">Pescadores artesanais do açude municipal. Benzeduras para “mal de água” e “quebranto de mãe d’água”.</td></tr>
+      <tr><td><b>Bairro Novo Horizonte</b></td><td>Urbana</td><td class="num">5.000</td><td style="white-space:normal">Surgiu de migrações rurais nos anos 1980 e 1990. Os mais velhos mantêm hortas medicinais nos lotes; os jovens associam os saberes dos avós ao “atraso”.</td></tr>
+      <tr><td><b>Bairro Cohab II</b></td><td>Urbana</td><td class="num">4.000</td><td style="white-space:normal">Conjunto habitacional dos anos 2000, com desemprego em torno de 25%. Sede da UBS Dr. Ângelo e do CAPS. Tráfico e violência armada dificultam o acesso noturno e as visitas dos ACS.</td></tr>
+      <tr><td><b>Bairro Lagoa Seca</b></td><td>Urbana</td><td class="num">2.200</td><td style="white-space:normal">Ocupação mais recente, sem saneamento básico. Moradores recorrem ao posto e às benzedeiras e dizem que “no posto só dão remédio tarja preta e não resolvem nada”.</td></tr>
+    </table></div></div>
+    <div class="two">
+      <div class="card"><h3>Rede de saúde no território</h3><ul class="plain" style="margin-top:10px">
+        <li><b>UBS Dr. Ângelo</b> (Cohab II): funciona das 7h às 17h. Auriculoterapia e ventosaterapia só com a Enf. Carla; fila de 6 meses.</li>
+        <li><b>NASF-AB:</b> uma nutricionista, uma fisioterapeuta e um psicólogo.</li>
+        <li><b>12 agentes comunitários de saúde</b>, todos moradores do território; dois são raizeiros reconhecidos.</li>
+        <li><b>CAPS tipo I</b> (Cohab II): horta medicinal proposta e vetada pela Vigilância Sanitária.</li>
+        <li><b>Fitoterapia:</b> sem Farmácia Viva municipal; prescrição esporádica de fitoterápicos industrializados por dois médicos.</li>
+      </ul></div>
+      <div class="card"><h3>Espaços de encontro e disputa</h3><ul class="plain" style="margin-top:10px">
+        <li><b>Feira livre aos sábados:</b> raizeiros vendem ervas, cascas e raízes; profissionais de saúde também compram, às escondidas.</li>
+        <li><b>Casa de Rezas</b> do Baixio das Mulheres, três vezes por semana.</li>
+        <li><b>Igreja católica rural</b> Nossa Senhora da Saúde, do Pe. José.</li>
+        <li><b>Três igrejas evangélicas neopentecostais</b> na zona urbana; alguns pastores tratam o benzimento como “coisa do diabo”.</li>
+        <li><b>Açude municipal</b>, base dos pescadores do Barro Vermelho.</li>
+      </ul></div>
     </div>
     <div class="card"><h3>Pontos do caso a esclarecer com o tutor</h3><ul class="plain" style="margin-top:10px" id="incons"></ul></div>
   </div>
@@ -364,11 +410,12 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
 </div></section>
 
 <section class="view" id="v-conceitos"><div class="inner">
-  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Conceitos</h2></div><p>Mesmas colunas da tabela do Relatório Parcial. As pistas de fonte indicam onde começar; a definição é do grupo e toda referência deve ser conferida antes de citar.</p></div>
+  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Conceitos</h2></div><p>Mesmas colunas da tabela do Relatório Parcial. Os campos “por que é importante” e “fontes” vêm com sugestões iniciais: editem ou apaguem à vontade. A definição é do grupo e toda referência deve ser conferida antes de citar.</p></div>
   <div class="split">
     <div class="aside">
       <button class="btn primary" id="copyConc" type="button">Copiar conceitos como tabela</button>
       <button class="btn" id="addConc" type="button">Adicionar conceito</button>
+      <button class="btn" id="clearConc" type="button">Limpar todos os campos</button>
       <p class="muted" id="concSum"></p>
     </div>
     <div class="stack" id="concepts" style="gap:8px"></div>
@@ -405,7 +452,7 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
    Com o campo vazio, o painel salva só no navegador de cada pessoa.
    "sala" separa os dados deste grupo; use um nome difícil de adivinhar.
    ============================================================ */
-const CONFIG = { dbUrl: '', sala: 'grupo-caatinga-velha' };
+const CONFIG = { dbUrl: 'https://caratinga-velha-default-rtdb.firebaseio.com', sala: 'grupo-caatinga-velha' };
 
 const GRUPOS = ['Praticantes e comunidade','UBS e rede de saúde','Gestão municipal','Controle social e justiça','Lideranças religiosas'];
 const ATORES = [
@@ -492,7 +539,7 @@ const TL = [
 const PCT = [['População que usa alguma PIC',73],['População que já buscou benzedeira ou raizeiro',58],['População que acredita que “benzimento cura”',64],['Profissionais da UBS que usam chás em casa',82],['Profissionais que recomendariam benzimento a um paciente',18]];
 const POP = [['Quilombo do Baixio das Mulheres',400],['Riacho do Meio',250],['Barro Vermelho',150],['Novo Horizonte',5000],['Cohab II',4000],['Lagoa Seca',2200]];
 const TILES = [['12.150','População do distrito (IBGE 2022, estimativa)'],['7','Denúncias contra raizeiros em 2 anos'],['2','Multas aplicadas, ambas suspensas pelo MP'],['R$ 0,00','Verba municipal anual para PICs (LOA 2024)'],['2','Profissionais com capacitação em PICs acima de 40h'],['Não','Programa Farmácia Viva ativo']];
-const INCONS = ['Capacitação da Enf. Carla: o texto fala em curso de 20 horas online; a tabela de dados a lista entre os profissionais com mais de 40h.','Seu Benedito é descrito como “capitão do mato” do quilombo, termo que historicamente designa o oposto de uma liderança quilombola.','A oposição do secretário a um programa municipal aparece em reunião da CIB, que é instância estadual de pactuação.','Dona Margarida “nunca foi à escola, mas é analfabeta funcional”: a frase parece ter um conectivo trocado.','As orientações de temas sensíveis dizem que o caso envolve abortos, malformações e intoxicações, que não aparecem no texto do caso.'];
+const INCONS = ['População do distrito: o texto diz “cerca de 12 mil” e as seis localidades somam 12.000; a tabela de indicadores traz 12.150.','Capacitação da Enf. Carla: o texto fala em curso de 20 horas online; a tabela de dados a lista entre os profissionais com mais de 40h.','Seu Benedito é descrito como “capitão do mato” do quilombo, termo que historicamente designa o oposto de uma liderança quilombola.','A oposição do secretário a um programa municipal aparece em reunião da CIB, que é instância estadual de pactuação.','Dona Margarida “nunca foi à escola, mas é analfabeta funcional”: a frase parece ter um conectivo trocado.','As orientações de temas sensíveis dizem que o caso envolve abortos, malformações e intoxicações, que não aparecem no texto do caso.'];
 const CONCEITOS = [
  ['mediacao','Mediação de conflitos','Bacellar, Mediação e arbitragem, caps. 7, 8 e 11; slides da aula dialogada; Lei 13.140/2015; Manual de Mediação Judicial do CNJ.'],
  ['atores','Análise de atores','Template do mapa de atores do material; buscar literatura sobre matriz poder x interesse e análise de stakeholders.'],
@@ -506,14 +553,35 @@ const CONCEITOS = [
  ['eps','Educação permanente em saúde','Política Nacional de Educação Permanente em Saúde (Portaria GM/MS nº 198/2004).'],
  ['lide','Lide processual e lide sociológica','Bacellar, seção “Lide processual e lide sociológica”. Sugestão do grupo, fora da lista do professor.'],
  ['origem','Conflito de origem e conflito processual','Teixeira (2026), Revista Brasileira de Educação Médica. Sugestão do grupo, fora da lista do professor.'],
+ ['inovacao','Inovação no setor público','Isidro (2018), Gestão pública inovadora: caps. 2 e 4 (tipologias, antecedentes e resultados) e caps. 21 e 22 (ecossistema de inovação). Sugestão do grupo, fora da lista do professor.'],
  ['legal','Dispositivos legais de proteção do saber tradicional','Convenção 169 da OIT e Estatuto da Igualdade Racial (Lei 12.288/2010), citados nas perguntas do caso.'],
 ];
+
+/* Sugestões iniciais dos conceitos. Entram uma única vez; depois o grupo edita ou apaga à vontade. */
+const SEED_V=1;
+const SEED={
+ mediacao:{pq:'Define o método do plano: princípios, etapas e a diferença entre mediar e conciliar.',fontes:'Bacellar (2012), Mediação e arbitragem; CNJ, Manual de Mediação Judicial (2016); Lei 13.140/2015.'},
+ atores:{pq:'Base do mapa de alianças e oposições e da matriz poder x interesse.',fontes:'Template da disciplina; literatura de análise de stakeholders (a localizar).'},
+ racismo:{pq:'Explica por que o saber de Dona Margarida é tratado como infração e não como conhecimento.',fontes:'Grosfoguel (2016); Santos e Meneses (2009). A conferir.'},
+ pnpic:{pq:'Marco legal a que o município aderiu em 2019 e não financia.',fontes:'Portaria GM/MS nº 971/2006.'},
+ medicalizacao:{pq:'Explica a redução do cuidado à consulta e ao fármaco, e a queixa dos moradores de Lagoa Seca.',fontes:'Tesser (2006). A conferir.'},
+ epistemologias:{pq:'Fundamenta o diálogo entre saber técnico e saber tradicional como horizonte do plano.',fontes:'Santos e Meneses (2009), a conferir; Funasa (2021), Territórios Sustentáveis e Saudáveis, cap. 5.'},
+ justica:{pq:'Dá nome ao terceiro direito do problema e critério para a reflexão “reformista ou transformador”.',fontes:'Fricker (2007). A conferir.'},
+ visa:{pq:'Responde à pergunta da banca: é possível fiscalizar sem criminalizar?',fontes:'Lei 6.437/77; literatura a localizar.'},
+ governanca:{pq:'Estrutura os mecanismos do plano: mesa de mediação, Conselho, MP, VISA e comunidade.',fontes:'Ansell e Gash (2008), a conferir; Funasa (2021), cap. 5.'},
+ eps:{pq:'Sustenta a formação da equipe e a resposta ao que fazer com a resistência profissional.',fontes:'Portaria GM/MS nº 198/2004; Ceccim (2005), a conferir.'},
+ lide:{pq:'Separa a autuação (processo nº 045/2024-VISA) do conflito real; orienta a delimitação do problema.',fontes:'Bacellar (2012), seção “Lide processual e lide sociológica”.'},
+ origem:{pq:'Justifica a intervenção de um terceiro: conflitos de valor e de poder não se resolvem sozinhos.',fontes:'Teixeira (2026), Revista Brasileira de Educação Médica.'},
+ inovacao:{pq:'Enquadra o plano como inovação de gestão e explica as barreiras que mantiveram a PNPIC apenas no papel.',fontes:'Isidro (2018), Gestão pública inovadora, caps. 2, 4, 21 e 22.'},
+ legal:{pq:'Responde ao MP na banca e ampara o salvo-conduto do protocolo de convivência.',fontes:'Convenção 169 da OIT; Lei 12.288/2010 (Estatuto da Igualdade Racial).'},
+};
 
 /* ---------- estado ---------- */
 const KEY='painel-caatinga-velha-v1';
 let S={mapa:{},banca:{},conc:{},extra:{}};
 let canStore=true;
 try{const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r));}catch(e){canStore=false}
+if(!CONFIG.dbUrl&&S.seedV!==SEED_V){for(const id in SEED)for(const f in SEED[id]){const t=S.conc[id]||(S.conc[id]={});if(!t[f])t[f]=SEED[id][f]}S.seedV=SEED_V;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 if(Array.isArray(S.extra)){const o={};S.extra.forEach(x=>o[x.id]={nome:x.nome});S.extra=o}
 const $=s=>document.querySelector(s), el=(t,a={},h='')=>{const e=document.createElement(t);for(const k in a){if(k==='class')e.className=a[k];else e.setAttribute(k,a[k])}e.innerHTML=h;return e};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -545,6 +613,8 @@ async function pull(){ if(!WEB||document.hidden)return;
       for(const id in S.extra) if(R.extra?.[id]===undefined) queue.set('extra/'+id,S.extra[id]);
     }
     mergeObj('mapa',R.mapa); mergeObj('conc',R.conc);
+    if(firstPull&&(R.meta&&R.meta.seed)!==SEED_V){ for(const id in SEED)for(const f in SEED[id]) if(R.conc?.[id]?.[f]===undefined&&!c(id)[f]){c(id)[f]=SEED[id][f];queue.set('conc/'+id+'/'+f,SEED[id][f])}
+      queue.set('meta/seed',SEED_V); S.seedV=SEED_V }
     for(const k in R.banca||{}) if(!pending('banca/'+k)) S.banca[k]=R.banca[k];
     const before=Object.keys(S.extra).sort().join(), ex={};
     for(const id in R.extra||{}) ex[id]=pending('extra/'+id)?S.extra[id]:R.extra[id];
@@ -665,6 +735,8 @@ $('#concepts').addEventListener('keydown',e=>{if(e.target.dataset.n&&(e.key===' 
 $('#concepts').addEventListener('keyup',e=>{if(e.target.dataset.n&&e.key===' ')e.preventDefault()});
 $('#addConc').addEventListener('click',()=>{const id='x'+Date.now().toString(36);S.extra[id]={nome:'Novo conceito'};put('extra/'+id,S.extra[id]);drawConc();
  const d=$('#concepts').lastElementChild;d.open=true;const i=d.querySelector('input');i.focus();i.select();progress()});
+let clrT;$('#clearConc').addEventListener('click',e=>{const b=e.currentTarget;if(!b.dataset.arm){b.dataset.arm=1;b.textContent='Confirmar: apagar todos os campos';clrT=setTimeout(()=>{delete b.dataset.arm;b.textContent='Limpar todos os campos'},4000);return}
+ clearTimeout(clrT);delete b.dataset.arm;b.textContent='Limpar todos os campos';allConc().forEach(k=>CF.forEach(f=>{if(c(k.id)[f]){c(k.id)[f]='';put('conc/'+k.id+'/'+f,'')}}));saveLocal();drawConc();progress();toast('Campos de conceitos apagados')});
 $('#copyConc').addEventListener('click',()=>{const f=s=>String(s||'').replace(/\s+/g,' ');
  copy([['Conceito','Por que é importante?','Fontes iniciais']].concat(allConc().map(k=>[k.nome,f(c(k.id).pq),f(c(k.id).fontes)])).map(r=>r.join('\t')).join('\n'),'Conceitos copiados. Cole no Relatório Parcial.')});
 
