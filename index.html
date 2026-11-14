@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel do Caso Caatinga Velha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* Layout: faixa utilitária, hero dividido (problema + entregas), cartões de entrada sobre a borda do hero,
+   faixas escuras de números e de afirmação, seções em composição assimétrica 1/3 + 2/3. */
+:root{
+  --bg:#F3F5F1; --surface:#FFFFFF; --surface-2:#E9EDE6; --ink:#1B2620; --ink-2:#4C5A52; --line:#CDD5CC;
+  --accent:#2B6A4E; --accent-ink:#FFFFFF; --mark:#B7791F; --mark-soft:#F3E3C3;
+  --band:#17362A; --band-ink:#F1F5F0; --band-2:#C9D6CC; --band-mark:#F0C063; --band-line:#2F5444;
+  --fav:#2563A8; --amb:#6B7280; --con:#C2571A;
+  --font-display:"Bricolage Grotesque","Trebuchet MS",sans-serif;
+  --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#111814; --surface:#1A2420; --surface-2:#243029; --ink:#E7EDE8; --ink-2:#A5B3AA; --line:#35443B;
+    --accent:#6FBF98; --accent-ink:#0E1512; --mark:#E0A84A; --mark-soft:#4A3A1C;
+    --band:#0C1F18; --band-ink:#F1F5F0; --band-2:#B5C4BA; --band-mark:#F0C063; --band-line:#254236;
+    --fav:#7DB3F0; --amb:#A3ABB5; --con:#F0955C; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111814; --surface:#1A2420; --surface-2:#243029; --ink:#E7EDE8; --ink-2:#A5B3AA; --line:#35443B;
+  --accent:#6FBF98; --accent-ink:#0E1512; --mark:#E0A84A; --mark-soft:#4A3A1C;
+  --band:#0C1F18; --band-ink:#F1F5F0; --band-2:#B5C4BA; --band-mark:#F0C063; --band-line:#254236;
+  --fav:#7DB3F0; --amb:#A3ABB5; --con:#F0955C; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.5}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.15}
+h2{font-size:30px;font-weight:700}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+a{color:inherit}
+button,select,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.kicker{font-size:12px;letter-spacing:.07em;text-transform:uppercase;font-weight:600;color:var(--ink-2)}
+.muted{color:var(--ink-2);font-size:13.5px}
+
+/* faixa utilitária */
+.util{background:var(--band);color:var(--band-2);font-size:13px;border-bottom:1px solid var(--band-line)}
+.util .inner{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:space-between;padding-top:7px;padding-bottom:7px}
+.util b{color:var(--band-ink);font-weight:600}
+.util button{background:transparent;border:1px solid var(--band-line);color:var(--band-ink);border-radius:999px;padding:3px 12px;cursor:pointer;font-weight:600}
+.util button:hover{border-color:var(--band-mark)}
+
+/* barra de navegação */
+.bar{background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .inner{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;padding-top:12px;padding-bottom:12px}
+.brand{font-family:var(--font-display);font-weight:700;font-size:18px;text-decoration:none}
+nav.pill{display:flex;flex-wrap:wrap;gap:2px;background:var(--surface-2);border-radius:999px;padding:4px}
+nav.pill a{padding:6px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px;color:var(--ink-2)}
+nav.pill a:hover{color:var(--ink)}
+nav.pill a[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
+
+section.view{display:none}
+section.view.on{display:block}
+
+/* hero */
+.hero{background:var(--band);color:var(--band-ink)}
+.hero .inner{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:40px;padding-top:52px;padding-bottom:96px;align-items:start}
+.hero .kicker{color:var(--band-2)}
+.hero h1{font-size:40px;font-weight:700;margin:14px 0 18px;max-width:22ch}
+.hero h1 mark{background:none;color:var(--band-mark)}
+.hero p{color:var(--band-2);max-width:56ch;font-size:16px}
+.side{background:var(--surface);color:var(--ink);border-radius:10px;padding:20px 22px}
+.side .kicker{color:var(--ink-2)}
+.rows{display:flex;flex-direction:column}
+.rows .r{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.rows .r:last-child{border:0;padding-bottom:0}
+.rows .r b{font-weight:600}
+.rows .r small{display:block;color:var(--ink-2);font-size:12.5px}
+.rows .r.next{border-left:4px solid var(--mark);padding-left:10px;margin-left:-14px}
+
+/* cartões de entrada */
+.entry{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:-58px;position:relative}
+.entry a{display:flex;flex-direction:column;gap:8px;padding:18px 20px 16px;border-radius:10px;text-decoration:none;min-height:168px;border:1px solid var(--line);background:var(--surface)}
+.entry a.work{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.entry a.work .kicker,.entry a.work .prog{color:inherit;opacity:.85}
+.entry a:hover{border-color:var(--mark)}
+.entry h3{font-size:21px}
+.entry p{font-size:14px}
+.entry .prog{margin-top:auto;font-size:13px;font-weight:600;color:var(--ink-2);display:flex;justify-content:space-between;gap:8px}
+
+.block{padding:44px 0}
+.block.tight{padding:28px 0 44px}
+.bandsec{background:var(--band);color:var(--band-ink)}
+.bandsec .kicker{color:var(--band-2)}
+.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.figs .fig{padding:6px 22px;border-left:1px solid var(--band-line)}
+.figs .fig:first-child{border-left:0;padding-left:0}
+.figs .big{font-family:var(--font-display);font-weight:700;font-size:42px;line-height:1.1}
+.figs .big small{font-size:22px;color:var(--band-mark)}
+.figs p{color:var(--band-2);font-size:14px;margin-top:6px}
+.state{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:36px;align-items:start}
+.state h2 mark{background:none;color:var(--mark)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pair>a{display:flex;flex-direction:column;gap:8px;padding:24px;border-radius:10px;text-decoration:none}
+.pair .p1{background:var(--accent);color:var(--accent-ink)}
+.pair .p2{background:var(--mark-soft);color:var(--ink);border:1px solid var(--mark)}
+.pair .p1 .kicker{color:inherit;opacity:.85}
+.pair h3{font-size:22px}
+
+/* cabeçalho de seção */
+.sechead{padding:34px 0 20px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:36px;align-items:end;border-bottom:1px solid var(--line);margin-bottom:24px}
+.sechead p{color:var(--ink-2);max-width:66ch}
+.split{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;align-items:start}
+.split.rev{grid-template-columns:minmax(0,1fr) 300px}
+.aside{display:flex;flex-direction:column;gap:14px;position:sticky;top:12px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 13px;cursor:pointer;font-weight:600}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input[type=search],select,textarea,input[type=text]{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%}
+textarea{resize:vertical;min-height:58px}
+label.f{display:flex;flex-direction:column;gap:3px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.groups{display:flex;flex-direction:column;gap:2px}
+.groups button{display:flex;justify-content:space-between;gap:8px;background:transparent;border:0;border-left:3px solid transparent;padding:7px 10px;text-align:left;cursor:pointer;font-weight:500;border-radius:0 6px 6px 0}
+.groups button:hover{background:var(--surface-2)}
+.groups button[aria-pressed="true"]{border-left-color:var(--accent);background:var(--surface-2);font-weight:600}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.actor{display:flex;flex-direction:column;gap:9px}
+.actor ul,.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.tagx{font-size:11.5px;font-weight:600;border:1px dashed var(--line);border-radius:999px;padding:1px 8px;color:var(--ink-2);white-space:nowrap}
+blockquote{margin:0;padding:7px 11px;border-left:3px solid var(--mark);background:var(--surface-2);font-style:italic;font-size:14px;border-radius:0 6px 6px 0}
+
+/* mapa */
+.matrix{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto}
+.matrix .ax{font-size:12px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;justify-content:center;padding:4px 8px;text-align:center}
+.matrix .cell{min-height:104px;min-width:130px;background:var(--surface-2);border-radius:4px;padding:6px 6px 20px;display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start;position:relative}
+.matrix .cell small{position:absolute;right:6px;bottom:4px;font-size:10.5px;color:var(--ink-2)}
+.chip{font-size:12px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--amb);display:inline-flex;gap:4px;align-items:center}
+.chip.fav{border-left-color:var(--fav)}.chip.con{border-left-color:var(--con)}.chip.nd{border-left-color:var(--line)}
+.legend{display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--ink-2)}
+.tray{display:flex;flex-wrap:wrap;gap:4px}
+.mrow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.mrow .w2{grid-column:span 2}.mrow .w3{grid-column:span 3}
+details.card>summary{cursor:pointer;font-weight:600;display:flex;justify-content:space-between;gap:8px;align-items:center}
+details.card[open]>summary{margin-bottom:12px}
+.done{color:var(--accent);font-size:12px;font-weight:600;white-space:nowrap}
+
+/* linha do tempo em linhas rótulo + conteúdo */
+.tlrow{display:grid;grid-template-columns:190px minmax(0,1fr);gap:24px;padding:14px 0 14px 14px;border-bottom:1px solid var(--line);border-left:4px solid transparent}
+.tlrow .when{font-family:var(--font-display);font-weight:700;font-size:17px}
+.tlrow .when small{display:block;font-family:var(--font-body);font-weight:600;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.tlrow p{max-width:68ch}
+.tlrow.now{border-left-color:var(--mark);background:var(--mark-soft)}
+.tlrow.fut .when{color:var(--ink-2)}
+
+/* dados */
+.bars{display:flex;flex-direction:column;gap:10px}
+.barx{display:grid;grid-template-columns:minmax(120px,230px) 1fr 62px;gap:10px;align-items:center;font-size:13.5px}
+.barx .track{height:12px;background:var(--surface-2);border-radius:0 4px 4px 0}
+.barx .fill{height:100%;background:var(--accent);border-radius:0 4px 4px 0;min-width:2px}
+.barx .v{text-align:right;font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.figs.six{grid-template-columns:repeat(6,minmax(0,1fr))}
+.figs.six .big{font-size:30px}
+.figs.six .fig{padding:4px 16px}
+
+/* banca */
+.stagewrap{background:var(--band);color:var(--band-ink);border-radius:10px;padding:26px 28px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px}
+.stagewrap .kicker{color:var(--band-mark)}
+.stagewrap .q{font-family:var(--font-display);font-size:27px;font-weight:700;line-height:1.2;margin:10px 0 12px}
+.stagewrap .muted{color:var(--band-2)}
+.stagewrap label.f{color:var(--band-2)}
+.stagewrap textarea{background:var(--surface);color:var(--ink);min-height:150px}
+.timer{font-family:var(--font-display);font-size:22px;font-weight:700;min-width:60px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--ink-2)}
+td:last-child{white-space:nowrap}
+.scroll{overflow-x:auto}
+
+footer{padding:26px 0 40px;color:var(--ink-2);font-size:13px;border-top:1px solid var(--line);margin-top:44px}
+dialog{border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);max-width:640px;width:calc(100% - 32px);padding:20px}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+#toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13.5px;opacity:0;pointer-events:none}
+#toast.on{opacity:1}
+
+@media (max-width:900px){
+  .hero .inner,.state,.sechead,.split,.split.rev,.stagewrap,.two,.pair{grid-template-columns:1fr}
+  .hero .inner{padding-top:36px;gap:24px}.hero h1{font-size:30px}
+  .entry{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr}
+  .figs,.figs.six{grid-template-columns:1fr 1fr;gap:18px 0}.figs .fig:nth-child(odd){border-left:0;padding-left:0}
+  .aside{position:static}.sechead{gap:10px}
+  .tlrow{grid-template-columns:1fr;gap:4px}
+  .mrow{grid-template-columns:1fr 1fr}.mrow .w2,.mrow .w3{grid-column:span 2}
+}
+@media (max-width:520px){.entry{grid-template-columns:1fr}.barx{grid-template-columns:1fr 54px}.barx .track{grid-column:1/-1;order:3}h2{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="util"><div class="inner">
+  <span>ADMT0346 · Gestão de Conflitos · PBL · <b>Próxima entrega: Relatório Parcial até 15/11</b></span>
+  <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span id="saveState">Salvo neste navegador</span><button id="btnBackup" type="button">Salvar e compartilhar</button></span>
+</div></div>
+<div class="bar"><div class="inner">
+  <a class="brand" href="#inicio">Painel do Caso Caatinga Velha</a>
+  <nav class="pill" aria-label="Seções do painel">
+    <a href="#inicio">Início</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a>
+  </nav>
+</div></div>
+
+<main>
+<section class="view" id="v-inicio">
+  <div class="hero"><div class="inner">
+    <div>
+      <div class="kicker">Problema direcionador sugerido pela disciplina</div>
+      <h1>Como <mark>mediar e transformar</mark> o conflito em torno das PICs em Caatinga Velha, garantindo <mark>direitos sanitários, culturais e epistêmicos</mark>?</h1>
+      <p>Conflito entre Vigilância Sanitária, UBS e comunidade quilombola. Produto final: Plano de Mediação e Governança Colaborativa das PICs em Caatinga Velha.</p>
+    </div>
+    <div class="side">
+      <div class="kicker" style="margin-bottom:4px">Entregas</div>
+      <div class="rows">
+        <div class="r next"><span><b>Relatório Parcial</b><small>10 pontos · problema, conceitos, cronograma, papéis</small></span><span class="num">até 15/11</span></div>
+        <div class="r"><span><b>Roteiro da apresentação</b><small>20 pontos · com material complementar</small></span><span class="num">até 02/12</span></div>
+        <div class="r"><span><b>Apresentação e banca</b><small>15 min de defesa e 10 min de banca</small></span><span class="num">03/12</span></div>
+        <div class="r"><span><b>Relatório Final</b><small>70 pontos</small></span><span class="num">07 a 11/12</span></div>
+      </div>
+    </div>
+  </div></div>
+  <div class="inner">
+    <div class="entry">
+      <a href="#fichas"><span class="kicker">Consultar</span><h3>Fichas dos atores</h3><p>Quem é quem, com fatos e falas do caso.</p><span class="prog"><span>17 fichas</span><span>abrir</span></span></a>
+      <a href="#linha-do-tempo"><span class="kicker">Consultar</span><h3>Linha do tempo</h3><p>Do Mês -12 ao fim do prazo da notificação.</p><span class="prog"><span>11 eventos</span><span>abrir</span></span></a>
+      <a href="#dados"><span class="kicker">Consultar</span><h3>Dados do caso</h3><p>Indicadores, população e pontos a esclarecer.</p><span class="prog"><span>11 indicadores</span><span>abrir</span></span></a>
+      <a class="work" href="#mapa"><span class="kicker">Preencher</span><h3>Mapa de atores</h3><p>Interesses, posições, poder e alianças. Gera a matriz.</p><span class="prog"><span id="pMapa"></span><span>abrir</span></span></a>
+      <a class="work" href="#banca"><span class="kicker">Preencher</span><h3>Treino de banca</h3><p>As perguntas de cada papel e a resposta do grupo.</p><span class="prog"><span id="pBanca"></span><span>abrir</span></span></a>
+      <a class="work" href="#conceitos"><span class="kicker">Preencher</span><h3>Conceitos</h3><p>O que pesquisar, por quê e com quais fontes.</p><span class="prog"><span id="pConc"></span><span>abrir</span></span></a>
+    </div>
+  </div>
+  <div class="block"><div class="inner state">
+    <div><div class="kicker">Onde estamos</div><h2 style="margin-top:8px">Dia +5. O prazo da notificação vence em <mark>cinco dias</mark>.</h2></div>
+    <div class="three">
+      <div class="card"><div class="kicker">Próximo sábado</div><h3 style="margin:6px 0">Caminhada em Defesa das Benzedeiras</h3><p class="muted">Articulada pelo Pe. José.</p></div>
+      <div class="card"><div class="kicker">Cerca do Dia +8</div><h3 style="margin:6px 0">Plenária do Conselho Local</h3><p class="muted">Com Dona Margarida, Pe. José e Ministério Público.</p></div>
+      <div class="card"><div class="kicker">Dia +10</div><h3 style="margin:6px 0">Fim do prazo da VISA</h3><p class="muted">Multa de R$ 5.000,00 e apreensão.</p></div>
+    </div>
+  </div></div>
+  <div class="bandsec block"><div class="inner">
+    <div class="kicker" style="margin-bottom:18px">O caso em quatro números</div>
+    <div class="figs">
+      <div class="fig"><div class="big num">73%</div><p>da população do distrito usa alguma prática integrativa.</p></div>
+      <div class="fig"><div class="big num">82% <small>e 18%</small></div><p>dos profissionais da UBS usam chás em casa; só 18% recomendariam benzimento a um paciente.</p></div>
+      <div class="fig"><div class="big num">R$ 0,00</div><p>de verba municipal anual para PICs, com adesão à PNPIC desde 2019.</p></div>
+      <div class="fig"><div class="big num">7</div><p>denúncias contra raizeiros em dois anos; duas multas, ambas suspensas pelo MP.</p></div>
+    </div>
+  </div></div>
+  <div class="block tight" style="padding-top:44px"><div class="inner pair">
+    <a class="p1" href="#conceitos"><span class="kicker">Próxima entrega</span><h3>Relatório Parcial, até 15/11</h3><p>A aba Conceitos tem as mesmas colunas da tabela do relatório. Preencham e copiem.</p></a>
+    <a class="p2" href="#dados"><span class="kicker">Para o tutor</span><h3>Cinco pontos do caso a esclarecer</h3><p>Trechos do material que se contradizem ou pedem confirmação antes de entrar no plano.</p></a>
+  </div></div>
+</section>
+
+<section class="view" id="v-fichas"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Consultar</div><h2>Fichas dos atores</h2></div><p>As fichas trazem só o que o texto do caso diz. A interpretação do grupo fica no Mapa de atores.</p></div>
+  <div class="split">
+    <div class="aside">
+      <input type="search" id="q" placeholder="Buscar: denúncia, CAPS, plenária" aria-label="Buscar nas fichas">
+      <div class="groups" id="groups"></div>
+      <p class="muted">Fichas marcadas como fora do template são atores que o caso cita, mas o mapa do professor não lista.</p>
+    </div>
+    <div><div class="grid2" id="actors"></div><p class="muted" id="noActors" hidden>Nenhuma ficha corresponde à busca.</p></div>
+  </div>
+</div></section>
+
+<section class="view" id="v-mapa"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Mapa de atores</h2></div><p>A matriz se monta a partir do poder e do interesse que o grupo atribuir. A borda de cada nome mostra a postura diante das práticas tradicionais.</p></div>
+  <div class="split rev">
+    <div class="matrix" id="matrix" role="img" aria-label="Matriz poder por interesse"></div>
+    <div class="aside">
+      <div class="card"><div class="kicker" style="margin-bottom:8px">Postura</div><div class="legend">
+        <span><span class="chip fav">▲ Nome</span> favorável</span><span><span class="chip">● Nome</span> ambivalente</span><span><span class="chip con">▼ Nome</span> contrária</span><span><span class="chip nd">Nome</span> a definir</span></div></div>
+      <div class="card"><div class="kicker" style="margin-bottom:8px">A classificar</div><div class="tray" id="tray"></div></div>
+      <button class="btn primary" id="copyMapa" type="button">Copiar mapa como tabela</button>
+      <p class="muted">Cola no Word ou no Excel, nas colunas do template do professor.</p>
+    </div>
+  </div>
+  <div class="stack" id="mapForms" style="margin-top:24px;gap:8px"></div>
+</div></section>
+
+<section class="view" id="v-linha-do-tempo"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Consultar</div><h2>Linha do tempo</h2></div><p>Doze meses de tentativas de diálogo antes da notificação. A atividade começa no Dia +5.</p></div>
+  <div id="tl"></div>
+</div></section>
+
+<section class="view" id="v-dados">
+  <div class="inner"><div class="sechead"><div><div class="kicker">Consultar</div><h2>Dados do caso</h2></div><p>Indicadores do item 5 do caso, fictícios mas verossímeis, e a distribuição da população pelo território.</p></div></div>
+  <div class="bandsec block" style="padding:30px 0"><div class="inner"><div class="figs six" id="tiles"></div></div></div>
+  <div class="inner stack" style="margin-top:24px">
+    <div class="two">
+      <div class="card"><h3>Uso e percepção das práticas</h3><p class="muted" style="margin:3px 0 14px">Percentual. População: inquérito domiciliar da UBS, 2023, não publicado. Profissionais: levantamento interno da Enf. Carla, 2024.</p><div class="bars" id="barsPct"></div></div>
+      <div class="card"><h3>População por localidade</h3><p class="muted" style="margin:3px 0 14px">Habitantes, valores aproximados do caso. As três primeiras são comunidades rurais.</p><div class="bars" id="barsPop"></div></div>
+    </div>
+    <div class="card"><h3>Pontos do caso a esclarecer com o tutor</h3><ul class="plain" style="margin-top:10px" id="incons"></ul></div>
+  </div>
+</section>
+
+<section class="view" id="v-banca"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Treino de banca</h2></div><p>A banca tem 5 minutos de perguntas e 5 de defesa. Sorteiem uma pergunta, respondam em voz alta e registrem a resposta combinada.</p></div>
+  <div class="stack">
+    <div class="toolbar">
+      <div style="width:260px"><select id="bRole" aria-label="Papel da banca"></select></div>
+      <button class="btn primary" id="bDraw" type="button">Sortear pergunta</button>
+      <button class="btn" id="bTimer" type="button">Iniciar 5 minutos</button>
+      <span class="timer num" id="bClock">5:00</span>
+    </div>
+    <div class="stagewrap" id="stage"></div>
+    <div class="card"><div class="toolbar" style="justify-content:space-between;margin-bottom:6px"><h3>Todas as perguntas</h3><span class="muted" id="bCount"></span></div><div class="scroll"><table id="bTable"></table></div></div>
+  </div>
+</div></section>
+
+<section class="view" id="v-conceitos"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Conceitos</h2></div><p>Mesmas colunas da tabela do Relatório Parcial. As pistas de fonte indicam onde começar; a definição é do grupo e toda referência deve ser conferida antes de citar.</p></div>
+  <div class="split">
+    <div class="aside">
+      <button class="btn primary" id="copyConc" type="button">Copiar conceitos como tabela</button>
+      <button class="btn" id="addConc" type="button">Adicionar conceito</button>
+      <p class="muted" id="concSum"></p>
+    </div>
+    <div class="stack" id="concepts" style="gap:8px"></div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="inner">Material de apoio do grupo para a disciplina ADMT0346, PPGDiDeS/UNIVASF. Os dados do caso são fictícios e vêm do material da disciplina.</div></footer>
+
+<dialog id="dlg">
+  <h3 style="font-size:20px">Salvar e compartilhar</h3>
+  <p class="muted" id="dIntro" style="margin:8px 0 10px"></p>
+  <textarea id="dump" style="min-height:150px;font-family:monospace;font-size:12px" aria-label="Dados do grupo"></textarea>
+  <div class="toolbar" style="margin-top:10px">
+    <button class="btn primary" id="dCopy" type="button">Copiar dados</button>
+    <button class="btn" id="dLoad" type="button">Carregar o texto colado</button>
+    <button class="btn" id="dFile" type="button" hidden>Baixar arquivo</button>
+    <button class="btn" id="dClose" type="button" style="margin-left:auto">Fechar</button>
+  </div>
+  <p class="muted" id="dMsg" style="margin-top:8px"></p>
+</dialog>
+<div id="toast" role="status"></div>
+
+<script>
+/* ============================================================
+   CONFIGURAÇÃO DO SALVAMENTO NA WEB
+   Cole abaixo o endereço do Firebase Realtime Database do grupo,
+   por exemplo: https://meu-projeto-default-rtdb.firebaseio.com
+   Com o campo vazio, o painel salva só no navegador de cada pessoa.
+   "sala" separa os dados deste grupo; use um nome difícil de adivinhar.
+   ============================================================ */
+const CONFIG = { dbUrl: '', sala: 'grupo-caatinga-velha' };
+
+const GRUPOS = ['Praticantes e comunidade','UBS e rede de saúde','Gestão municipal','Controle social e justiça','Lideranças religiosas'];
+const ATORES = [
+ {id:'margarida',nome:'Dona Margarida dos Santos',curto:'D. Margarida',tipo:'Praticante tradicional',g:0,t:1,
+  perfil:'78 anos, quilombola do Baixio das Mulheres, raizeira e benzedeira. Filha de parteira e neta de rezadeira, maneja mais de 60 espécies da caatinga. Saber transmitido oralmente.',
+  fatos:['Atende cerca de 30 pessoas por semana, de graça ou em troca de alimentos e pequenos serviços.','Sua casa é ponto de referência no território, com grande horta medicinal.','Dia 0: notificada pela Vigilância Sanitária (processo nº 045/2024-VISA), com prazo de 10 dias, multa de R$ 5.000,00 e apreensão.','Parou de atender, queimou parte dos frascos e passou a receber pessoas à noite.','Presença confirmada na plenária do Conselho Local de Saúde.'],
+  fala:'vou morrer e minha sabedoria morre comigo, porque os doutor não quer'},
+ {id:'comunidade',nome:'Comunidade quilombola do Baixio das Mulheres',curto:'Comunidade',tipo:'Usuários',g:0,t:1,banca:'comunidade',
+  perfil:'Cerca de 400 pessoas, comunidade reconhecida pela Fundação Cultural Palmares, com liderança feminina e matrilinear e cuidado coletivo baseado em plantas nativas.',
+  fatos:['Sofre pressão de fazendeiros vizinhos por limites de terra.','Mantém uma Casa de Rezas aberta a todo o distrito três vezes por semana.','O acesso à UBS Dr. Ângelo exige 1h30 de transporte coletivo ou 3h de caminhada.','Mobilizou-se para esconder os frascos que restaram após a notificação.']},
+ {id:'benedito',nome:'Seu Benedito',curto:'Seu Benedito',tipo:'Liderança quilombola',g:0,t:1,
+  perfil:'73 anos, neto de escravizada, liderança política e espiritual do Baixio das Mulheres.',
+  fatos:['Articula o território quilombola.','Ameaça acionar a Organização dos Estados Americanos (OEA) por violação de direitos territoriais e culturais, caso a perseguição continue.']},
+ {id:'raimundo',nome:'ACS Seu Raimundo',curto:'ACS Raimundo',tipo:'ACS e raizeiro',g:1,t:1,
+  perfil:'62 anos, agente comunitário de saúde há 15 anos, raizeiro e benzedor reconhecido pelos vizinhos. Esconde seus saberes na UBS.',
+  fatos:['Mês -9: atendido por Dona Margarida em uma crise de ansiedade; melhorou e contou aos colegas.','Após a notificação, passou a ser monitorado pelos colegas.','Sente-se dividido entre o que aprendeu com os avós e o que diz a Vigilância.','Considera pedir demissão.']},
+ {id:'ricardo',nome:'Dr. Ricardo Albuquerque',curto:'Dr. Ricardo',tipo:'Profissional da UBS',g:1,t:1,banca:'ricardo',
+  perfil:'38 anos, médico generalista, 5 anos de UBS, formado em universidade federal. Define-se como “baseado em evidências”.',
+  fatos:['Mês -9: chamou o relato de Raimundo de “placebo e irresponsabilidade”.','Mês -3: registrou “abandono de tratamento” no caso Seu João.','Mês -1: publicou em rede fechada de médicos um post cobrando punição a praticantes; o print chegou à comunidade.','Barrou a ventosaterapia proposta pela fisioterapeuta (“isso não é fisioterapia”).','É o principal suspeito de ter feito a denúncia anônima.'],
+  fala:'a lei é clara'},
+ {id:'carla',nome:'Enf. Carla Mendes',curto:'Enf. Carla',tipo:'Profissional da UBS',g:1,t:1,banca:'carla',
+  perfil:'34 anos, enfermeira, 8 anos de UBS. Única profissional que implementou PICs de forma institucional (auriculoterapia e ventosaterapia).',
+  fatos:['Lista de espera de 6 meses para auriculoterapia; sala improvisada e falta de insumos.','Mês -12: propôs à SMS um Programa Municipal de Plantas Medicinais e PICs, com R$ 50 mil anuais. Foi arquivado.','Fez o levantamento interno de 2024 com os profissionais da UBS.','Visitou Dona Margarida três vezes, às escondidas.','Tem conflito aberto com o Dr. Ricardo, mas evita confronto direto; teme retaliação.','Sonha em fazer mestrado sobre PICs no semiárido.']},
+ {id:'renata',nome:'Dra. Renata Lima',curto:'Dra. Renata',tipo:'Fisioterapeuta do NASF-AB',g:1,t:0,
+  perfil:'41 anos. Interessada em PICs, com cursos de shantala e auriculoterapia, mas sem respaldo institucional.',
+  fatos:['A gestão não libera tempo na agenda para PICs.','Faz auriculoterapia durante o almoço, em sala trancada.']},
+ {id:'juliana',nome:'Dra. Juliana Alves',curto:'Dra. Juliana',tipo:'Psicóloga, coordenadora do CAPS I',g:1,t:0,
+  perfil:'Coordena o CAPS tipo I, no bairro Cohab II.',
+  fatos:['Propôs uma horta medicinal para usuários com sofrimento mental grave.','O projeto foi vetado pela Vigilância Sanitária por “falta de controle de qualidade”.']},
+ {id:'lucia',nome:'ACS Dona Lúcia',curto:'ACS Lúcia',tipo:'ACS e raizeira',g:1,t:0,
+  perfil:'58 anos, raizeira reconhecida na comunidade.',
+  fatos:['Esconde a prática no trabalho, como Seu Raimundo.','A maioria dos 12 ACS usa chás e benzeduras em casa, mas se sente intimidada a falar disso com os profissionais de nível superior.']},
+ {id:'joao',nome:'Seu João',curto:'Seu João',tipo:'Usuário da UBS',g:0,t:0,
+  perfil:'Usuário atendido por lombalgia.',
+  fatos:['Mês -3: teve o prontuário anotado como “abandono de tratamento”.','Registrou reclamação na Ouvidoria do SUS, que recomendou “diálogo” sem ação concreta.','O caso motivou a denúncia de Dona Zefa ao Ministério Público.']},
+ {id:'vera',nome:'Dra. Vera Lúcia',curto:'Dra. Vera',tipo:'Vigilância Sanitária',g:2,t:1,banca:'vera',
+  perfil:'52 anos, farmacêutica, chefe da Vigilância Sanitária municipal, com equipe de três fiscais. Atuação inspirada na Lei 6.437/77.',
+  fatos:['Já foi criticada por ações consideradas truculentas em outros distritos.','Acolheu rapidamente a denúncia e vê nela um “caso exemplar”.','A notificação foi entregue por oficial de justiça.','Prepara novas fiscalizações em feiras livres e casas de raizeiros.','Vetou a horta medicinal do CAPS.'],
+  fala:'a lei é para todos; não posso abrir exceção para chá de mato'},
+ {id:'heitor',nome:'Dr. Heitor Carneiro',curto:'Dr. Heitor',tipo:'Secretário Municipal de Saúde',g:2,t:1,banca:'heitor',
+  perfil:'56 anos, médico cirurgião, ex-vereador, sem formação em saúde coletiva. Foco em produtividade e nas metas do Previne Brasil.',
+  fatos:['Vê as PICs como “gasto com coisas sem comprovação”.','Arquivou a proposta de programa municipal de R$ 50 mil anuais.','Opôs-se à criação de um Programa Municipal de Plantas Medicinais alegando “falta de recursos”.','Orientou Márcia Torres a “não tomar partido” e “evitar polêmica na imprensa”.','Verba municipal anual para PICs: R$ 0,00.']},
+ {id:'marcia',nome:'Enf. Márcia Torres',curto:'Enf. Márcia',tipo:'Coordenadora da Atenção Básica',g:2,t:1,
+  perfil:'44 anos, mestra em Saúde Coletiva, entusiasta das PICs e isolada politicamente.',
+  fatos:['Tentou, sem sucesso, incluir cláusula de respeito aos saberes tradicionais no contrato de gestão das UBSs.','Foi pressionada pelo secretário a “não se envolver”.']},
+ {id:'zefa',nome:'Dona Zefa',curto:'Dona Zefa',tipo:'Presidenta do Conselho Local de Saúde',g:3,t:1,banca:'zefa',
+  perfil:'61 anos, agricultora aposentada, usuária do SUS, de oratória combativa. O Conselho tem 12 membros (50% usuários, 25% profissionais, 25% gestão).',
+  fatos:['Mês -6: o Conselho aprovou moção por parceria da UBS com raizeiros. A gestão ignorou.','Denunciou a UBS ao Ministério Público por “desrespeito à cultura popular” (caso Seu João).','Dia +3: convocou plenária extraordinária sobre a notificação.','O Conselho é deliberativo, mas a gestão historicamente ignora suas resoluções.']},
+ {id:'mp',nome:'Ministério Público Estadual',curto:'MP',tipo:'Órgão de controle',g:3,t:1,banca:'mp',
+  perfil:'Acompanha o caso e estará representado na plenária do Conselho.',
+  fatos:['Dia +3: abriu procedimento preparatório.','Suspendeu as duas multas aplicadas a raizeiros nos últimos dois anos.','Já havia recebido a denúncia de Dona Zefa.']},
+ {id:'jose',nome:'Pe. José de Anchieta',curto:'Pe. José',tipo:'Liderança religiosa',g:4,t:1,
+  perfil:'68 anos, vigário da paróquia, ligado à Teologia da Libertação e defensor declarado do diálogo com as benzedeiras.',
+  fatos:['Articulou a Caminhada em Defesa das Benzedeiras, marcada para o próximo sábado.','Publicou no jornal local o artigo “O Espírito Santo sopra onde quer: contra o racismo epistêmico na saúde”.','Presença confirmada na plenária.']},
+ {id:'sandra',nome:'Pastora Sandra de Paula',curto:'Pastora Sandra',tipo:'Liderança religiosa',g:4,t:1,
+  perfil:'45 anos, Igreja Evangélica Missão Plena, lidera um ministério de cura divina.',
+  fatos:['Orienta a comunidade a não buscar benzedeiras.','Apoia a ação da Vigilância Sanitária.','Sua posição divide os fiéis de origem rural.'],
+  fala:'Deus usou a denúncia para limpar o território'},
+];
+const BANCA = [
+ {id:'heitor',papel:'Gestor municipal (Dr. Heitor)',postura:'Cético, pragmático, preocupado com orçamento e indicadores.',qs:['Qual o custo total da proposta? De onde virá o financiamento?','Como isso impacta as metas do Previne Brasil e os indicadores de produtividade?','A proposta tem respaldo legal? A PNPIC é suficiente para justificar o investimento?','Qual o retorno esperado em termos de saúde pública?']},
+ {id:'ricardo',papel:'Dr. Ricardo (UBS)',postura:'Cético, cientificista, defensor do modelo biomédico.',qs:['Como garantir que a prática tradicional não cause danos à saúde?','O que fazer com riscos de interação medicamentosa entre fitoterápicos e medicamentos alopáticos?','Qual a evidência científica que sustenta a proposta?','Quem será responsabilizado legalmente em caso de reações adversas?']},
+ {id:'carla',papel:'Enf. Carla (UBS)',postura:'Defensora das PICs, cobrando condições e reconhecimento.',qs:['Como garantir condições de trabalho adequadas para implementar as PICs?','A proposta prevê formação continuada para a equipe?','Como lidar com a resistência do corpo clínico?','Qual o papel da enfermagem na mediação do conflito?']},
+ {id:'comunidade',papel:'Comunidade quilombola',postura:'Reivindicatória, centrada no direito à cultura e à saúde.',qs:['O que vocês esperam da UBS?','Como querem ser incluídos na gestão do cuidado?','Qual o papel de Dona Margarida na proposta?','Como garantir que o saber tradicional não seja cooptado ou folclorizado?']},
+ {id:'vera',papel:'Vigilância Sanitária (Dra. Vera)',postura:'Legalista, inflexível, defensora do controle sanitário.',qs:['A proposta respeita a legislação sanitária vigente?','Como garantir controle de qualidade e segurança dos produtos tradicionais?','É possível uma vigilância sanitária dialógica sem abrir mão da lei?','Quem fiscaliza os praticantes tradicionais? Com que critérios?']},
+ {id:'mp',papel:'Ministério Público',postura:'Garantidor de direitos, provocador de soluções jurídicas.',qs:['Quais dispositivos legais podem ser acionados para proteger o saber tradicional?','A Convenção 169 da OIT e o Estatuto da Igualdade Racial se aplicam a este caso?','Como garantir que a mediação seja efetiva e não apenas simbólica?','Qual o papel do MP na governança proposta?']},
+ {id:'zefa',papel:'Conselho Local de Saúde (Dona Zefa)',postura:'Exigente, participativa, defensora do controle social.',qs:['Como garantir que as decisões do Conselho sejam respeitadas?','Qual o papel do controle social na governança proposta?','Como evitar que a proposta seja apenas mais uma política simbólica?','Quem fiscaliza a execução da proposta?']},
+ {id:'debate',papel:'Debate geral',postura:'Perguntas adicionais do material, para todos os grupos.',qs:['Como o racismo epistêmico e o etarismo operam na criminalização de Dona Margarida?','Qual o papel da vigilância sanitária em um SUS que se pretende integral e equânime?','O que fazer com profissionais de saúde que ativamente sabotam a PNPIC?','Como lidar com o conflito entre gerações e religiões dentro do próprio território?','O produto proposto é reformista (apenas gerencia o conflito) ou transformador (muda a relação de poder entre saberes)?']},
+ {id:'sintese',papel:'Pergunta-síntese',postura:'Todo grupo responde ao final da banca.',qs:['As PICs no SUS, a partir do caso de Caatinga Velha, representam uma transformação do modelo de cuidado ou uma incorporação periférica e controlada?']},
+];
+const TL = [
+ ['Mês -12','Enf. Carla propõe à SMS um Programa Municipal de Plantas Medicinais e PICs, com R$ 50 mil anuais. O secretário Heitor Carneiro arquiva a proposta.',''],
+ ['Mês -9','Dona Margarida atende Seu Raimundo em uma crise de ansiedade. Ele melhora e conta aos colegas. Dr. Ricardo responde: “placebo e irresponsabilidade”.',''],
+ ['Mês -6','O Conselho Local de Saúde aprova moção recomendando parceria da UBS com raizeiros. A gestão ignora.',''],
+ ['Mês -3','Caso Seu João (lombalgia): prontuário registra “abandono de tratamento”. Ele reclama à Ouvidoria do SUS, que recomenda “diálogo” sem ação concreta.',''],
+ ['Mês -1','Post do Dr. Ricardo em rede fechada de médicos cobra punição a praticantes tradicionais. O print chega à comunidade.',''],
+ ['Dia 0','A Vigilância Sanitária notifica Dona Margarida: 10 dias para retirar os produtos, sob pena de multa de R$ 5.000,00 e apreensão. Entrega por oficial de justiça.',''],
+ ['Dia +3','Dona Zefa convoca plenária extraordinária do Conselho Local de Saúde. O Ministério Público abre procedimento preparatório.',''],
+ ['Dia +5','Início da atividade: a turma entra como consultoria crítica e propositiva. O jornal “Voz do Sertão” já noticiou o caso, que circula em grupos de WhatsApp e coletivos nacionais.','now'],
+ ['Próximo sábado','Caminhada em Defesa das Benzedeiras, articulada pelo Pe. José.','fut'],
+ ['Cerca do Dia +8','Plenária do Conselho Local, convocada para cinco dias após a convocação, com Dona Margarida, Pe. José e Ministério Público.','fut'],
+ ['Dia +10','Vence o prazo da notificação sanitária.','fut'],
+];
+const PCT = [['População que usa alguma PIC',73],['População que já buscou benzedeira ou raizeiro',58],['População que acredita que “benzimento cura”',64],['Profissionais da UBS que usam chás em casa',82],['Profissionais que recomendariam benzimento a um paciente',18]];
+const POP = [['Quilombo do Baixio das Mulheres',400],['Riacho do Meio',250],['Barro Vermelho',150],['Novo Horizonte',5000],['Cohab II',4000],['Lagoa Seca',2200]];
+const TILES = [['12.150','População do distrito (IBGE 2022, estimativa)'],['7','Denúncias contra raizeiros em 2 anos'],['2','Multas aplicadas, ambas suspensas pelo MP'],['R$ 0,00','Verba municipal anual para PICs (LOA 2024)'],['2','Profissionais com capacitação em PICs acima de 40h'],['Não','Programa Farmácia Viva ativo']];
+const INCONS = ['Capacitação da Enf. Carla: o texto fala em curso de 20 horas online; a tabela de dados a lista entre os profissionais com mais de 40h.','Seu Benedito é descrito como “capitão do mato” do quilombo, termo que historicamente designa o oposto de uma liderança quilombola.','A oposição do secretário a um programa municipal aparece em reunião da CIB, que é instância estadual de pactuação.','Dona Margarida “nunca foi à escola, mas é analfabeta funcional”: a frase parece ter um conectivo trocado.','As orientações de temas sensíveis dizem que o caso envolve abortos, malformações e intoxicações, que não aparecem no texto do caso.'];
+const CONCEITOS = [
+ ['mediacao','Mediação de conflitos','Bacellar, Mediação e arbitragem, caps. 7, 8 e 11; slides da aula dialogada; Lei 13.140/2015; Manual de Mediação Judicial do CNJ.'],
+ ['atores','Análise de atores','Template do mapa de atores do material; buscar literatura sobre matriz poder x interesse e análise de stakeholders.'],
+ ['racismo','Racismo epistêmico','O material indica Grosfoguel e Boaventura de Sousa Santos como ponto de partida.'],
+ ['pnpic','Política Nacional de Práticas Integrativas e Complementares (PNPIC)','Portaria GM/MS nº 971/2006 e documentos do Ministério da Saúde; no caso, Portaria Municipal nº 047/2019.'],
+ ['medicalizacao','Medicalização social','A pesquisar. Relacionar com o modelo flexneriano citado na Etapa 1 do caso.'],
+ ['epistemologias','Epistemologias do Sul','Boaventura de Sousa Santos; Funasa, Territórios Sustentáveis e Saudáveis, cap. 5 (ecologia de saberes).'],
+ ['justica','Justiça epistêmica','A pesquisar. Ponto de partida comum na literatura: Miranda Fricker.'],
+ ['visa','Vigilância sanitária dialógica','A pesquisar. Confrontar com a Lei 6.437/77, citada no caso.'],
+ ['governanca','Governança colaborativa','Funasa, cap. 5 (governança viva); buscar Ansell e Gash sobre governança colaborativa.'],
+ ['eps','Educação permanente em saúde','Política Nacional de Educação Permanente em Saúde (Portaria GM/MS nº 198/2004).'],
+ ['lide','Lide processual e lide sociológica','Bacellar, seção “Lide processual e lide sociológica”. Sugestão do grupo, fora da lista do professor.'],
+ ['origem','Conflito de origem e conflito processual','Teixeira (2026), Revista Brasileira de Educação Médica. Sugestão do grupo, fora da lista do professor.'],
+ ['legal','Dispositivos legais de proteção do saber tradicional','Convenção 169 da OIT e Estatuto da Igualdade Racial (Lei 12.288/2010), citados nas perguntas do caso.'],
+];
+
+/* ---------- estado ---------- */
+const KEY='painel-caatinga-velha-v1';
+let S={mapa:{},banca:{},conc:{},extra:{}};
+let canStore=true;
+try{const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r));}catch(e){canStore=false}
+if(Array.isArray(S.extra)){const o={};S.extra.forEach(x=>o[x.id]={nome:x.nome});S.extra=o}
+const $=s=>document.querySelector(s), el=(t,a={},h='')=>{const e=document.createElement(t);for(const k in a){if(k==='class')e.className=a[k];else e.setAttribute(k,a[k])}e.innerHTML=h;return e};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200)}
+function status(m){$('#saveState').textContent=m}
+let saveT; function saveLocal(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},300)}
+async function copy(text,ok){try{await navigator.clipboard.writeText(text);toast(ok)}catch(e){$('#dump').value=text;$('#dMsg').textContent='Não foi possível copiar automaticamente. Selecione o texto acima e copie.';$('#dlg').showModal();$('#dump').select()}}
+
+/* ---------- sincronização com a web (Firebase Realtime Database, via REST) ---------- */
+const WEB=!!CONFIG.dbUrl;
+const base=WEB?CONFIG.dbUrl.replace(/\/+$/,'')+'/painel/'+encodeURIComponent(CONFIG.sala):'';
+const queue=new Map(); let flushT, firstPull=true, online=false;
+const hhmm=()=>new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+/* grava um campo: path como "mapa/vera/poder" */
+function put(path,value){saveLocal(); if(!WEB)return; queue.set(path,value); clearTimeout(flushT); flushT=setTimeout(flush,700)}
+async function flush(){ if(!queue.size)return; const items=[...queue.entries()];
+  try{ for(const [p,v] of items){ const r=await fetch(base+'/'+p+'.json',{method:'PUT',body:JSON.stringify(v)}); if(!r.ok)throw new Error(r.status); if(queue.get(p)===v)queue.delete(p)}
+    online=true; status('Salvo na web às '+hhmm()) }
+  catch(e){ online=false; status('Sem conexão com o banco. Alterações guardadas neste navegador') } }
+function pending(p){return queue.has(p)}
+function mergeObj(kind,remote){ // kind: mapa | conc (dois níveis)
+  for(const id in remote||{}){ const tgt=kind==='mapa'?m(id):c(id); for(const f in remote[id]){ if(!pending(kind+'/'+id+'/'+f)) tgt[f]=remote[id][f] } } }
+async function pull(){ if(!WEB||document.hidden)return;
+  try{ const r=await fetch(base+'.json'); if(!r.ok)throw new Error(r.status); const R=(await r.json())||{};
+    if(firstPull){ // envia o que já existia só neste navegador e ainda não está na web
+      for(const id in S.mapa)for(const f in S.mapa[id]) if(S.mapa[id][f]&&(R.mapa?.[id]?.[f]===undefined)) queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);
+      for(const id in S.conc)for(const f in S.conc[id]) if(S.conc[id][f]&&(R.conc?.[id]?.[f]===undefined)) queue.set('conc/'+id+'/'+f,S.conc[id][f]);
+      for(const k in S.banca) if(S.banca[k]&&(R.banca?.[k]===undefined)) queue.set('banca/'+k,S.banca[k]);
+      for(const id in S.extra) if(R.extra?.[id]===undefined) queue.set('extra/'+id,S.extra[id]);
+    }
+    mergeObj('mapa',R.mapa); mergeObj('conc',R.conc);
+    for(const k in R.banca||{}) if(!pending('banca/'+k)) S.banca[k]=R.banca[k];
+    const before=Object.keys(S.extra).sort().join(), ex={};
+    for(const id in R.extra||{}) ex[id]=pending('extra/'+id)?S.extra[id]:R.extra[id];
+    for(const id in S.extra) if(pending('extra/'+id)&&queue.get('extra/'+id)!==null) ex[id]=S.extra[id];
+    const extraChanged=before!==Object.keys(ex).sort().join()||JSON.stringify(S.extra)!==JSON.stringify(ex); S.extra=ex;
+    firstPull=false; online=true; saveLocal(); refresh(extraChanged);
+    if(queue.size)flush(); else status('Sincronizado com a web às '+hhmm());
+  }catch(e){ online=false; status('Sem conexão com o banco. Alterações guardadas neste navegador') } }
+/* atualiza a tela com o que veio da web, sem mexer no campo que a pessoa está digitando */
+function refresh(extraChanged){ const act=document.activeElement;
+  document.querySelectorAll('[data-a]').forEach(e=>{if(e!==act){const v=m(e.dataset.a)[e.dataset.f]||'';if(e.value!==v)e.value=v}});
+  if(extraChanged&&!$('#concepts').contains(act)) drawConc();
+  else document.querySelectorAll('[data-c]').forEach(e=>{if(e!==act){const v=c(e.dataset.c)[e.dataset.f]||'';if(e.value!==v)e.value=v}});
+  const a=$('#bAns'); if(a&&a!==act){const v=S.banca[cur.k]||'';if(a.value!==v)a.value=v}
+  drawMatrix(); drawBTable(); concStatus(); progress(); }
+
+/* ---------- rotas ---------- */
+const VIEWS=['inicio','fichas','mapa','linha-do-tempo','dados','banca','conceitos'];
+function route(){const h=location.hash.replace('#','');const v=VIEWS.includes(h)?h:'inicio';
+ VIEWS.forEach(x=>$('#v-'+x).classList.toggle('on',x===v));
+ document.querySelectorAll('nav.pill a').forEach(a=>{if(a.getAttribute('href')==='#'+v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+ window.scrollTo(0,0);}
+window.addEventListener('hashchange',route);
+
+/* ---------- fichas ---------- */
+let gSel='';
+function drawGroups(){$('#groups').innerHTML=[['','Todos os atores',ATORES.length]].concat(GRUPOS.map((g,i)=>[String(i),g,ATORES.filter(a=>a.g===i).length]))
+ .map(g=>`<button type="button" data-g="${g[0]}" aria-pressed="${gSel===g[0]}"><span>${esc(g[1])}</span><span class="num muted">${g[2]}</span></button>`).join('')}
+$('#groups').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;gSel=b.dataset.g;drawGroups();drawActors()});
+function drawActors(){const q=$('#q').value.trim().toLowerCase();const box=$('#actors');box.innerHTML='';let n=0;
+ ATORES.forEach(a=>{const hay=(a.nome+' '+a.tipo+' '+a.perfil+' '+a.fatos.join(' ')+' '+(a.fala||'')).toLowerCase();
+  if(q&&!hay.includes(q))return; if(gSel!==''&&String(a.g)!==gSel)return; n++;
+  const b=BANCA.find(x=>x.id===a.banca);
+  box.appendChild(el('article',{class:'card actor'},`
+   <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span class="kicker">${esc(a.tipo)}</span>${a.t?'':'<span class="tagx">fora do template</span>'}</div>
+   <h3>${esc(a.nome)}</h3><p>${esc(a.perfil)}</p>
+   <ul>${a.fatos.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+   ${a.fala?`<blockquote>“${esc(a.fala)}”</blockquote>`:''}
+   ${b?`<div class="muted">Na banca: ${esc(b.postura)} <a href="#banca">Ver perguntas</a></div>`:''}`));});
+ $('#noActors').hidden=n>0;}
+$('#q').addEventListener('input',drawActors);
+
+/* ---------- mapa ---------- */
+const MA=ATORES.filter(a=>a.t);
+const MF=['int','pos','poder','interesse','postura','ali','opo','est'];
+function m(id){return S.mapa[id]||(S.mapa[id]={})}
+function chip(a){const p=m(a.id).postura;const k=p==='fav'?'fav':p==='con'?'con':p==='amb'?'':'nd';const g=p==='fav'?'▲ ':p==='con'?'▼ ':p==='amb'?'● ':'';return `<span class="chip ${k}">${g}${esc(a.curto)}</span>`}
+const QUAD={'alto-alto':'gerenciar de perto','alto-baixo':'manter satisfeito','baixo-alto':'manter informado','baixo-baixo':'monitorar'};
+function placed(a){return m(a.id).poder&&m(a.id).interesse}
+function drawMatrix(){let h='<div class="ax"></div>'+['baixo','médio','alto'].map(i=>`<div class="ax">Interesse ${i}</div>`).join('');
+ ['alto','médio','baixo'].forEach(p=>{h+=`<div class="ax">Poder ${p}</div>`;['baixo','médio','alto'].forEach(i=>{
+  h+=`<div class="cell">${MA.filter(a=>m(a.id).poder===p&&m(a.id).interesse===i).map(chip).join('')}${QUAD[p+'-'+i]?`<small>${QUAD[p+'-'+i]}</small>`:''}</div>`})});
+ $('#matrix').innerHTML=h;
+ const out=MA.filter(a=>!placed(a));
+ $('#tray').innerHTML=out.length?out.map(chip).join(''):'<span class="muted">Todos os atores estão na matriz.</span>';
+ MA.forEach(a=>{const d=document.getElementById('st-'+a.id);if(d){const k=MF.filter(f=>m(a.id)[f]).length;d.textContent=k===8?'completo':k+' de 8 campos'}})}
+function sel(id,f,opts,lab){const v=m(id)[f]||'';return `<label class="f">${lab}<select id="m-${id}-${f}" data-a="${id}" data-f="${f}">${opts.map(o=>`<option value="${o[0]}" ${v===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></label>`}
+function ta(id,f,lab,cls){return `<label class="f ${cls}">${lab}<textarea id="m-${id}-${f}" data-a="${id}" data-f="${f}">${esc(m(id)[f]||'')}</textarea></label>`}
+function drawForms(){const box=$('#mapForms');box.innerHTML='';const nv=[['','a definir'],['baixo','baixo'],['médio','médio'],['alto','alto']];
+ MA.forEach(a=>{box.appendChild(el('details',{class:'card'},`<summary><span>${esc(a.nome)} <span class="muted">· ${esc(a.tipo)}</span></span><span class="done" id="st-${a.id}"></span></summary>
+  <div class="mrow">${ta(a.id,'int','Interesses (o que precisa ou quer de fato)','w3')}${ta(a.id,'pos','Posições (o que declara ou exige)','w3')}
+  <div class="w2">${sel(a.id,'poder',nv,'Poder')}</div><div class="w2">${sel(a.id,'interesse',nv,'Interesse no desfecho')}</div>
+  <div class="w2">${sel(a.id,'postura',[['','a definir'],['fav','favorável'],['amb','ambivalente'],['con','contrária']],'Postura diante das práticas tradicionais')}</div>
+  ${ta(a.id,'ali','Alianças','w3')}${ta(a.id,'opo','Oposições','w3')}
+  <label class="f" style="grid-column:1/-1">Estratégia de mediação (como envolver este ator na solução)<textarea id="m-${a.id}-est" data-a="${a.id}" data-f="est">${esc(m(a.id).est||'')}</textarea></label></div>`));});}
+$('#mapForms').addEventListener('input',e=>{const t=e.target;if(!t.dataset.a)return;m(t.dataset.a)[t.dataset.f]=t.value;put('mapa/'+t.dataset.a+'/'+t.dataset.f,t.value);drawMatrix();progress()});
+$('#copyMapa').addEventListener('click',()=>{const P={fav:'favorável',amb:'ambivalente',con:'contrária'};const f=s=>String(s||'').replace(/\s+/g,' ');
+ const rows=[['Ator','Tipo','Interesses','Posições','Poder','Interesse','Postura','Alianças','Oposições','Estratégia de mediação']].concat(MA.map(a=>{const x=m(a.id);return [a.nome,a.tipo,f(x.int),f(x.pos),x.poder||'',x.interesse||'',P[x.postura]||'',f(x.ali),f(x.opo),f(x.est)]}));
+ copy(rows.map(r=>r.join('\t')).join('\n'),'Mapa copiado. Cole no Word ou no Excel.')});
+
+/* ---------- linha do tempo e dados ---------- */
+$('#tl').innerHTML=TL.map(e=>`<div class="tlrow ${e[2]}"><div class="when">${e[2]==='now'?'<small>Estamos aqui</small>':e[2]==='fut'?'<small>Previsto</small>':''}${e[0]}</div><p>${esc(e[1])}</p></div>`).join('');
+$('#tiles').innerHTML=TILES.map(t=>`<div class="fig"><div class="big num">${t[0]}</div><p>${t[1]}</p></div>`).join('');
+function bars(id,data,max,fmt){$(id).innerHTML=data.map(d=>`<div class="barx" title="${esc(d[0])}: ${fmt(d[1])}"><span>${esc(d[0])}</span><div class="track"><div class="fill" style="width:${d[1]/max*100}%"></div></div><span class="v num">${fmt(d[1])}</span></div>`).join('')}
+bars('#barsPct',PCT,100,v=>v+'%');bars('#barsPop',POP,5000,v=>v.toLocaleString('pt-BR'));
+$('#incons').innerHTML=INCONS.map(i=>`<li>${esc(i)}</li>`).join('');
+
+/* ---------- banca ---------- */
+const ALLQ=[];BANCA.forEach(b=>b.qs.forEach((q,i)=>ALLQ.push({k:b.id+'-'+i,b,q})));
+$('#bRole').innerHTML='<option value="">Todos os papéis</option>'+BANCA.map(b=>`<option value="${b.id}">${esc(b.papel)}</option>`).join('');
+let cur=ALLQ[0];
+const answered=x=>(S.banca[x.k]||'').trim();
+function showQ(){ $('#stage').innerHTML=`<div><div class="kicker">${esc(cur.b.papel)}</div><div class="q">${esc(cur.q)}</div><div class="muted">Postura esperada: ${esc(cur.b.postura)}</div></div>
+  <label class="f">Resposta combinada do grupo<textarea id="bAns">${esc(S.banca[cur.k]||'')}</textarea></label>`;
+  $('#bAns').addEventListener('input',e=>{S.banca[cur.k]=e.target.value;put('banca/'+cur.k,e.target.value);drawBTable();progress()});}
+function drawBTable(){$('#bCount').textContent=ALLQ.filter(answered).length+' de '+ALLQ.length+' com resposta registrada';
+ $('#bTable').innerHTML='<tr><th>Papel</th><th>Pergunta</th><th>Resposta</th></tr>'+ALLQ.map((x,i)=>`<tr><td>${esc(x.b.papel)}</td><td><a href="#banca" data-i="${i}">${esc(x.q)}</a></td><td>${answered(x)?'<span class="done">registrada</span>':'<span class="muted">em aberto</span>'}</td></tr>`).join('')}
+$('#bTable').addEventListener('click',e=>{const i=e.target.dataset.i;if(i===undefined)return;e.preventDefault();cur=ALLQ[i];showQ();$('#stage').scrollIntoView({block:'nearest'})});
+$('#bDraw').addEventListener('click',()=>{const r=$('#bRole').value;let pool=ALLQ.filter(x=>!r||x.b.id===r);const open=pool.filter(x=>!answered(x)&&x!==cur);if(open.length)pool=open;cur=pool[Math.floor(Math.random()*pool.length)];showQ()});
+let tm,left=300;function clock(){$('#bClock').textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0')}
+$('#bTimer').addEventListener('click',()=>{if(tm){clearInterval(tm);tm=null;left=300;clock();$('#bTimer').textContent='Iniciar 5 minutos';return}
+ $('#bTimer').textContent='Parar e zerar';tm=setInterval(()=>{left--;clock();if(left<=0){clearInterval(tm);tm=null;left=300;$('#bTimer').textContent='Iniciar 5 minutos';toast('Tempo encerrado');clock()}},1000)});
+
+/* ---------- conceitos ---------- */
+const CF=['pq','def','fontes'];
+function c(id){return S.conc[id]||(S.conc[id]={})}
+function allConc(){return CONCEITOS.map(x=>({id:x[0],nome:x[1],pista:x[2]})).concat(Object.keys(S.extra).sort().map(id=>({id,nome:(S.extra[id]&&S.extra[id].nome)||'Novo conceito',extra:1})))}
+const cDone=id=>CF.filter(f=>(c(id)[f]||'').trim()).length;
+function concStatus(){allConc().forEach(k=>{const d=document.getElementById('cs-'+k.id);if(d){const n=cDone(k.id);d.textContent=n===3?'completo':n+' de 3 campos'}});
+ const a=allConc();$('#concSum').textContent=a.filter(k=>cDone(k.id)===3).length+' de '+a.length+' conceitos completos'}
+function drawConc(){const box=$('#concepts');const open=new Set([...box.querySelectorAll('details[open]')].map(d=>d.dataset.id));box.innerHTML='';
+ allConc().forEach(k=>{const x=c(k.id);const d=el('details',{class:'card','data-id':k.id},`<summary><span>${k.extra?`<input type="text" id="n-${k.id}" data-n="${k.id}" value="${esc(k.nome)}" aria-label="Nome do conceito" style="min-width:240px">`:esc(k.nome)}</span><span class="done" id="cs-${k.id}"></span></summary>
+  ${k.pista?`<p class="muted" style="margin-bottom:10px">Pista de fonte: ${esc(k.pista)}</p>`:''}
+  <div class="mrow"><label class="f w3">Por que é importante para o nosso problema?<textarea id="c-${k.id}-pq" data-c="${k.id}" data-f="pq">${esc(x.pq||'')}</textarea></label>
+  <label class="f w3">Definição, com as palavras do grupo<textarea id="c-${k.id}-def" data-c="${k.id}" data-f="def">${esc(x.def||'')}</textarea></label>
+  <label class="f" style="grid-column:1/-1">Fontes conferidas (ABNT)<textarea id="c-${k.id}-fontes" data-c="${k.id}" data-f="fontes">${esc(x.fontes||'')}</textarea></label></div>
+  ${k.extra?`<button class="btn" type="button" data-del="${k.id}" style="margin-top:10px">Remover este conceito</button>`:''}`);
+  if(open.has(k.id))d.open=true;box.appendChild(d)});concStatus()}
+$('#concepts').addEventListener('input',e=>{const t=e.target;
+ if(t.dataset.n){S.extra[t.dataset.n]={nome:t.value};put('extra/'+t.dataset.n,{nome:t.value});return}
+ if(!t.dataset.c)return;c(t.dataset.c)[t.dataset.f]=t.value;put('conc/'+t.dataset.c+'/'+t.dataset.f,t.value);concStatus();progress()});
+$('#concepts').addEventListener('click',e=>{if(e.target.dataset.n){e.preventDefault();return}
+ const d=e.target.dataset.del;if(!d)return;delete S.extra[d];delete S.conc[d];put('extra/'+d,null);put('conc/'+d,null);drawConc();progress()});
+$('#concepts').addEventListener('keydown',e=>{if(e.target.dataset.n&&(e.key===' '||e.key==='Enter'))e.stopPropagation()});
+$('#concepts').addEventListener('keyup',e=>{if(e.target.dataset.n&&e.key===' ')e.preventDefault()});
+$('#addConc').addEventListener('click',()=>{const id='x'+Date.now().toString(36);S.extra[id]={nome:'Novo conceito'};put('extra/'+id,S.extra[id]);drawConc();
+ const d=$('#concepts').lastElementChild;d.open=true;const i=d.querySelector('input');i.focus();i.select();progress()});
+$('#copyConc').addEventListener('click',()=>{const f=s=>String(s||'').replace(/\s+/g,' ');
+ copy([['Conceito','Por que é importante?','Fontes iniciais']].concat(allConc().map(k=>[k.nome,f(c(k.id).pq),f(c(k.id).fontes)])).map(r=>r.join('\t')).join('\n'),'Conceitos copiados. Cole no Relatório Parcial.')});
+
+/* ---------- progresso na página inicial ---------- */
+function progress(){ $('#pMapa').textContent=MA.filter(placed).length+' de '+MA.length+' atores na matriz';
+ $('#pBanca').textContent=ALLQ.filter(answered).length+' de '+ALLQ.length+' respostas';
+ const a=allConc();$('#pConc').textContent=a.filter(k=>cDone(k.id)===3).length+' de '+a.length+' completos' }
+
+/* ---------- cópia de segurança ---------- */
+const dlg=$('#dlg');
+$('#btnBackup').addEventListener('click',()=>{$('#dump').value=JSON.stringify(S);$('#dMsg').textContent='';
+ $('#dIntro').textContent=WEB?'O preenchimento é salvo na web e aparece para todo o grupo. O texto abaixo é uma cópia de segurança: guarde-o antes das entregas.':'O preenchimento fica só neste navegador. Para passar a um colega ou guardar uma cópia, copie o texto abaixo e envie; quem receber cola aqui e clica em Carregar.';
+ dlg.showModal()});
+$('#dClose').addEventListener('click',()=>dlg.close());
+$('#dCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#dump').value);$('#dMsg').textContent='Dados copiados.'}catch(e){$('#dump').select();$('#dMsg').textContent='Selecione o texto e copie manualmente.'}});
+$('#dLoad').addEventListener('click',()=>{try{const d=JSON.parse($('#dump').value);if(typeof d!=='object'||!d||!d.mapa)throw 0;
+  if(Array.isArray(d.extra)){const o={};d.extra.forEach(x=>o[x.id]={nome:x.nome});d.extra=o}
+  S=Object.assign({mapa:{},banca:{},conc:{},extra:{}},d);saveLocal();
+  if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);flush()}
+  drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();$('#dMsg').textContent='Dados carregados.'}
+ catch(e){$('#dMsg').textContent='O texto colado não é um arquivo válido deste painel. Copie novamente o conteúdo completo.'}});
+if(window.top===window.self){const b=$('#dFile');b.hidden=false;b.addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('#dump').value],{type:'application/json'}));a.download='painel-caatinga-velha.json';a.click()})}
+
+/* ---------- início ---------- */
+drawGroups();drawActors();drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();route();
+if(WEB){status('Conectando ao banco do grupo');pull();setInterval(pull,6000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});window.addEventListener('beforeunload',()=>{if(queue.size)flush()})}
+else status(canStore?'Salvo só neste navegador':'Este navegador não permite salvar');
+</script>
+</body>
+</html>
