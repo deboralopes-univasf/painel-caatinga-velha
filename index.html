@@ -77,7 +77,7 @@ section.view.on{display:block}
 
 /* cartões de entrada */
 .entry{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:-58px;position:relative}
-.entry.work3{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:14px}
+.entry.work3{grid-template-columns:repeat(5,minmax(0,1fr));margin-top:14px}
 .entry.work3 a{min-height:148px}
 .defs{display:flex;flex-direction:column;margin-top:6px}
 .defs .d{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
@@ -184,7 +184,7 @@ details.card[open]>summary{margin-bottom:12px}
 table{border-collapse:collapse;width:100%;font-size:14px}
 th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 th{font-size:12px;color:var(--ink-2)}
-td:last-child{white-space:nowrap}
+#bTable td:last-child{white-space:nowrap}
 .scroll{overflow-x:auto}
 
 footer{padding:26px 0 40px;color:var(--ink-2);font-size:13px;border-top:1px solid var(--line);margin-top:44px}
@@ -251,6 +251,81 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
   .mrow{grid-template-columns:1fr 1fr}.mrow .w2,.mrow .w3{grid-column:span 2}
 }
 @media (max-width:520px){.entry{grid-template-columns:1fr}.barx{grid-template-columns:1fr 54px}.barx .track{grid-column:1/-1;order:3}h2{font-size:24px}}
+
+
+/* ---------- relatório e referências ---------- */
+::placeholder{color:#A2ABA5;opacity:1;font-style:italic}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.okd{color:var(--accent);font-weight:600}
+.relsum{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;padding:5px 12px;border-radius:999px;background:var(--surface-2);font-size:13px;font-weight:600;color:var(--ink)}
+.pill.ok{background:#DDEFE5;color:#1E5B3F}.pill.bad{background:#FBE4D6;color:#8A3410}
+.erow{display:grid;gap:10px;align-items:end;padding:10px 0;border-bottom:1px solid var(--line)}
+.erow:last-child{border-bottom:0}
+.er-p{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,2.4fr) auto}
+.er-c{grid-template-columns:minmax(0,2fr) minmax(0,1.3fr) 150px 150px 92px auto}
+.late{font-size:12px;font-weight:600;color:#A6400F;align-self:center;padding-bottom:9px}
+select[data-st="Concluído"]{border-color:#7DBE9A;background:#EEF8F2}
+select[data-st="Em andamento"]{border-color:#E0B25C;background:#FFF7E6}
+.btn.icon{padding:8px 11px;font-size:13px}
+.btn[data-arm]{background:#A6400F;border-color:#A6400F;color:#fff}
+.prevbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin:26px 0 10px}
+.prevbar h3{font-size:20px}
+.banner{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;background:var(--mark-soft);border:1px solid var(--mark);border-radius:8px;padding:10px 14px;margin-bottom:10px;font-weight:600}
+.banner[hidden]{display:none}
+.docwrap{background:var(--surface-2);border-radius:10px;padding:26px;overflow-x:auto}
+#reportDoc{background:#fff;color:#000;max-width:794px;min-height:400px;margin:0 auto;padding:113px 76px 76px 113px;border:1px solid var(--line);box-shadow:0 12px 30px -20px rgba(0,0,0,.5)}
+.ent{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.ent:last-child{border-bottom:0}
+.ccheck{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;padding:5px 11px;border:1px solid var(--line);border-radius:999px;cursor:pointer;background:var(--surface)}
+.ccheck input{margin:0;accent-color:var(--accent)}
+.grid-f{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.grid-f .full{grid-column:1/-1}
+.grid-f .ccheck{border-radius:8px;justify-content:flex-start}
+.drop{border:1.5px dashed var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.drop.over{border-color:var(--accent);background:var(--surface-2)}
+.abntprev{background:var(--surface-2);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14.5px;line-height:1.6}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.cchip{font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-2)}
+.ref{display:flex;flex-direction:column;gap:10px}
+.ref .abnt{font-size:15px;line-height:1.6}
+.ref .nota{font-size:14px;color:var(--ink-2);border-left:3px solid var(--mark);padding-left:10px}
+.rmeta{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:12.5px;color:var(--ink-2)}
+.lidos{display:inline-flex;flex-wrap:wrap;gap:5px;align-items:center}
+.lido{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.lido[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.crefs ul{font-size:13.5px}
+#printArea{display:none}
+@media print{body>*:not(#printArea){display:none!important}#printArea{display:block!important}@page{size:A4;margin:3cm 2cm 2cm 3cm}}
+@media (max-width:760px){
+  .er-p,.er-c{grid-template-columns:1fr 1fr}
+  .er-p label:nth-child(1),.er-p label:nth-child(4),.er-c label:nth-child(1){grid-column:1/-1}
+  .late{grid-column:1/-1;padding:0}
+  .grid-f{grid-template-columns:1fr}
+  .docwrap{padding:8px;margin:0 -6px}
+  #reportDoc{padding:22px 16px;min-height:0}
+  .prevbar .toolbar{width:100%}
+  .prevbar .btn{flex:1 1 150px}
+}
+
+
+/* cronograma na página inicial */
+.hchead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px}
+.hcr{display:grid;grid-template-columns:86px minmax(0,1fr) auto 160px;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.hcr:last-child{border-bottom:0}
+.hcr .hd{display:flex;flex-direction:column;line-height:1.2}
+.hcr .hd b{font-family:var(--font-display);font-size:18px}
+.hcr .hd small{font-size:12px;color:var(--ink-2)}
+.hcr .ha{display:flex;flex-direction:column;min-width:0}
+.hcr .ha b{font-weight:600}
+.hcr .late{padding:0}
+.hcr.isdone .hd,.hcr.isdone .ha{opacity:.55}
+.hcr.isdone .ha b{text-decoration:line-through;text-decoration-thickness:1px}
+.hcr.islate .hd b{color:#A6400F}
+#reportDoc th,#reportDoc td,#printArea th,#printArea td{color:inherit;font-size:inherit;white-space:normal}
+#reportDoc mark{background:none}
+@media print{#printArea tr{break-inside:avoid;page-break-inside:avoid}#printArea thead{display:table-header-group}#printArea h2{break-after:avoid;page-break-after:avoid}#printArea p{orphans:3;widows:3}}
+@media (max-width:760px){.hcr{grid-template-columns:62px minmax(0,1fr);gap:4px 12px}.hcr select{grid-column:2}.hcr .late{grid-column:2}.hcr .hd b{font-size:16px}}
 
 /* ---------- celular ---------- */
 @media (max-width:760px){
@@ -335,13 +410,13 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
 </head>
 <body>
 <div class="util"><div class="inner">
-  <span class="ulong">ADMT0346 · Gestão de Conflitos · PBL · <b>Próxima entrega: Relatório Parcial até 15/11</b></span><a class="ushort" href="#inicio"><b>Painel Caatinga Velha</b></a>
+  <span class="ulong">ADMT0346 · Gestão de Conflitos · PBL · <b>Próxima entrega: roteiro da apresentação até 02/12</b></span><a class="ushort" href="#inicio"><b>Painel Caatinga Velha</b></a>
   <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="sync"><i class="dot" id="syncDot" aria-hidden="true"></i><span id="saveState">Salvo neste navegador</span></span><button id="btnBackup" type="button">Salvar e compartilhar</button></span>
 </div></div>
 <div class="bar"><div class="inner">
   <a class="brand" href="#inicio">Painel do Caso Caatinga Velha</a>
   <nav class="pill" aria-label="Seções do painel">
-    <i class="ind" aria-hidden="true"></i><a href="#inicio">Início</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#siglas">Siglas</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a>
+    <i class="ind" aria-hidden="true"></i><a href="#inicio">Início</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#siglas">Siglas</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#relatorio">Relatório</a>
   </nav>
 </div></div>
 
@@ -349,15 +424,15 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
 <section class="view" id="v-inicio">
   <div class="hero"><div class="inner">
     <div>
-      <div class="kicker">Problema direcionador sugerido pela disciplina</div>
-      <h1>Como <mark>mediar e transformar</mark> o conflito em torno das PICs em Caatinga Velha, garantindo <mark>direitos sanitários, culturais e epistêmicos</mark>?</h1>
+      <div class="kicker">Problema formulado pelo grupo</div>
+      <h1 id="heroProb">Como <mark>mediar e transformar</mark> o conflito em torno das PICs em Caatinga Velha, garantindo <mark>direitos sanitários, culturais e epistêmicos</mark>, por meio de um arranjo de <mark>governança colaborativa</mark> viável no SUS municipal?</h1>
       <p>Caatinga Velha é um distrito sanitário de Coração do Sertão, município de 80 mil habitantes no Semiárido nordestino. O conflito envolve Vigilância Sanitária, UBS e comunidade quilombola. Produto final: Plano de Mediação e Governança Colaborativa das PICs.</p>
     </div>
     <div class="side">
       <div class="kicker" style="margin-bottom:4px">Entregas</div>
       <div class="rows">
-        <div class="r next"><span><b>Relatório Parcial</b><small>10 pontos · problema, conceitos, cronograma, papéis</small></span><span class="num">até 15/11</span></div>
-        <div class="r"><span><b>Roteiro da apresentação</b><small>20 pontos · com material complementar</small></span><span class="num">até 02/12</span></div>
+        <div class="r"><span><b>Relatório Parcial</b><small>10 pontos · entregue</small></span><span class="num okd">entregue 15/11</span></div>
+        <div class="r next"><span><b>Roteiro da apresentação</b><small>20 pontos · com material complementar</small></span><span class="num">até 02/12</span></div>
         <div class="r"><span><b>Apresentação e banca</b><small>15 min de defesa e 10 min de banca</small></span><span class="num">03/12</span></div>
         <div class="r"><span><b>Relatório Final</b><small>70 pontos</small></span><span class="num">07 a 11/12</span></div>
       </div>
@@ -374,8 +449,15 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
       <a class="work" href="#mapa"><span class="kicker">Preencher</span><h3>Mapa de atores</h3><p>Interesses, posições, poder e alianças. Gera a matriz.</p><span class="prog"><span id="pMapa"></span><span>abrir</span></span></a>
       <a class="work" href="#banca"><span class="kicker">Preencher</span><h3>Treino de banca</h3><p>As perguntas de cada papel e a resposta do grupo.</p><span class="prog"><span id="pBanca"></span><span>abrir</span></span></a>
       <a class="work" href="#conceitos"><span class="kicker">Preencher</span><h3>Conceitos</h3><p>O que pesquisar, por quê e com quais fontes.</p><span class="prog"><span id="pConc"></span><span>abrir</span></span></a>
+      <a class="work" href="#referencias"><span class="kicker">Preencher</span><h3>Referências</h3><p>Arquivos e links da pesquisa, com a referência em ABNT.</p><span class="prog"><span id="pRefs"></span><span>abrir</span></span></a>
+      <a class="work" href="#relatorio"><span class="kicker">Preencher</span><h3>Relatório</h3><p>Cronograma com status e o relatório pronto para entregar.</p><span class="prog"><span id="pRel"></span><span>abrir</span></span></a>
     </div>
   </div>
+  <div class="block tight" style="padding-top:34px"><div class="inner">
+    <div class="hchead"><div><div class="kicker">Cronograma do grupo</div><h2 style="margin-top:6px">O que falta fazer</h2></div><a class="btn" href="#relatorio">Editar o cronograma</a></div>
+    <div class="relsum" id="homeSum" style="margin:12px 0"></div>
+    <div class="card" style="padding:4px 18px"><div id="homeCrono"></div></div>
+  </div></div>
   <div class="block"><div class="inner state">
     <div><div class="kicker">Onde estamos</div><h2 class="words" style="margin-top:8px">Dia +5. O prazo da notificação vence em <mark>cinco dias</mark>.</h2></div>
     <div class="three">
@@ -394,7 +476,7 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
     </div>
   </div></div>
   <div class="block tight" style="padding-top:44px"><div class="inner pair">
-    <a class="p1" href="#conceitos"><span class="kicker">Próxima entrega</span><h3>Relatório Parcial, até 15/11</h3><p>A aba Conceitos tem as mesmas colunas da tabela do relatório. Preencham e copiem.</p></a>
+    <a class="p1" href="#relatorio"><span class="kicker">Relatório do grupo</span><h3>Pronto sempre que o professor pedir</h3><p>Montado a partir do painel, com o cronograma e os status em dia. Copie para o Google Docs ou salve em PDF.</p></a>
     <a class="p2" href="#dados"><span class="kicker">Para o tutor</span><h3>Seis pontos do caso a esclarecer</h3><p>Trechos do material que se contradizem ou pedem confirmação antes de entrar no plano.</p></a>
   </div></div>
 </section>
@@ -530,13 +612,64 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
     <div class="stack" id="concepts" style="gap:8px"></div>
   </div>
 </div></section>
+<section class="view" id="v-referencias"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Referências</h2></div><p>A biblioteca do grupo. Suba o arquivo (até 5 MB) ou cole o link do Google Drive. Se o PDF tiver DOI ou ISBN, o painel busca os dados da obra e monta a referência em ABNT; confiram sempre antes de usar.</p></div>
+  <div class="split">
+    <div class="aside">
+      <button class="btn primary" id="rfNew" type="button">Adicionar referência</button>
+      <input type="search" id="rq" placeholder="Buscar: autor, título, nota" aria-label="Buscar referências">
+      <select id="rcf" aria-label="Filtrar por conceito"></select>
+      <button class="btn" id="rfCopyAll" type="button">Copiar todas em ABNT</button>
+      <p class="muted" id="rfCount"></p>
+    </div>
+    <div class="stack">
+      <div class="card rform stack" id="rform" hidden>
+        <div class="toolbar" style="justify-content:space-between"><h3 id="rfTitle" style="font-size:19px">Nova referência</h3><button class="btn" id="rfCancel" type="button">Cancelar</button></div>
+        <div class="drop" id="rfDrop"><div style="flex:1 1 220px"><b>Arquivo</b><p class="muted" id="rfFileInfo"></p></div><label class="btn" for="rfFile">Escolher arquivo</label><input type="file" id="rfFile" class="vh" accept=".pdf,.doc,.docx,.odt,.png,.jpg,.jpeg"></div>
+        <label class="f">Ou link do arquivo (Google Drive ou site)<input type="text" id="rf-link" placeholder="https://drive.google.com/..."></label>
+        <div class="toolbar" style="align-items:flex-end"><label class="f" style="flex:1 1 220px">Buscar dados pelo DOI ou ISBN<input type="text" id="rfQ" placeholder="10.1590/... ou 978-85-444-2566-4"></label><button class="btn" id="rfLook" type="button">Buscar dados</button></div>
+        <p class="muted" id="rfMsg" role="status"></p>
+        <label class="f">Tipo de obra<select id="rf-tipo" data-d="tipo"></select></label>
+        <div class="grid-f" id="rfFields"></div>
+        <div><div class="kicker" style="margin-bottom:6px">Referência em ABNT (prévia)</div><div class="abntprev" id="rfPrev"></div></div>
+        <div><div class="kicker" style="margin-bottom:6px">Conceitos relacionados</div><div class="chips" id="rfConc"></div></div>
+        <div class="grid-f"><label class="f">Adicionada por<select id="rf-por" data-d="por"></select></label></div>
+        <label class="f">Nota para o grupo: o que essa leitura traz para o caso<textarea id="rf-nota"></textarea></label>
+        <div class="toolbar"><button class="btn primary" id="rfSave" type="button">Salvar referência</button><span class="muted" id="rfSaveMsg" role="status"></span></div>
+      </div>
+      <div class="stack" id="refList"></div>
+      <p class="muted" id="noRefs" hidden></p>
+    </div>
+  </div>
+</div></section>
+
+<section class="view" id="v-relatorio"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Relatório do grupo</h2></div><p>O relatório é montado com o que está no painel: identificação, papéis, problema e cronograma desta aba, e os conceitos da aba Conceitos. Quando o professor pedir, confiram a prévia, copiem para o Google Docs ou salvem em PDF e registrem a entrega.</p></div>
+  <div class="relsum" id="relSum"></div>
+  <div class="stack" id="relEdit" style="margin-top:16px;gap:10px">
+    <details class="card"><summary><span>Identificação</span></summary>
+      <div class="mrow"><label class="f w2">Título do relatório<input type="text" id="r-titulo" data-p="rel/titulo"></label><label class="f w2">Grupo nº<input type="text" id="r-grupo" data-p="rel/grupo"></label><label class="f w2">Data de entrega<input type="date" id="r-data" data-p="rel/data"></label></div></details>
+    <details class="card"><summary><span>Componentes e papéis</span><span class="done" id="papCount"></span></summary><div id="papeisRows"></div><button class="btn" id="addPapel" type="button" style="margin-top:10px">Adicionar integrante</button></details>
+    <details class="card"><summary><span>Problema e justificativa</span></summary><div class="stack" style="gap:10px"><label class="f">Problema formulado<textarea id="r-problema" data-p="rel/problema" style="min-height:90px"></textarea></label><label class="f">Justificativa<textarea id="r-just" data-p="rel/justificativa" style="min-height:170px"></textarea></label><p class="muted">Os conceitos do relatório vêm da aba <a href="#conceitos">Conceitos</a>.</p></div></details>
+    <details class="card" open><summary><span>Seções do relatório</span></summary>
+      <p class="muted" style="margin-bottom:10px">Escolham um modelo e ajustem as seções. O levantamento bibliográfico sai da aba Referências; o andamento compara o cronograma de agora com o da última entrega registrada.</p>
+      <div class="toolbar" id="secPresets" style="margin-bottom:10px"><button class="btn" type="button" data-preset="p1">Modelo do 1º parcial</button><button class="btn" type="button" data-preset="p2">Parcial com levantamento bibliográfico</button></div>
+      <div class="chips" id="secList"></div></details>
+    <details class="card" open><summary><span>Cronograma e status</span><span class="done" id="cronoCount"></span></summary><div id="cronoRows"></div><button class="btn" id="addCrono" type="button" style="margin-top:10px">Adicionar ação</button></details>
+  </div>
+  <div class="prevbar"><h3>Prévia do relatório</h3><div class="toolbar"><button class="btn primary" id="relCopy" type="button">Copiar para o Google Docs</button><button class="btn" id="relPrint" type="button">Imprimir ou salvar PDF</button><button class="btn" id="relReg" type="button">Registrar entrega</button></div></div>
+  <div class="banner" id="viewBanner" hidden><span id="viewBannerT"></span><button class="btn" id="viewBack" type="button">Voltar ao relatório atual</button></div>
+  <div class="docwrap"><div id="reportDoc"></div></div>
+  <div class="card" style="margin-top:18px"><h3>Entregas registradas</h3><p class="muted" style="margin:3px 0 6px">Cada entrega guarda uma cópia do relatório como estava no dia em que foi registrada.</p><div id="entList"></div></div>
+  <datalist id="papelOpts"><option value="Líder"><option value="Redator"><option value="Porta-voz"><option value="Pesquisadora"><option value="Pesquisador"></datalist>
+</div></section>
 </main>
 
 <footer><div class="inner foot">
   <div><div class="brand">Painel do Caso Caatinga Velha</div><p style="margin-top:8px;max-width:44ch">Material de apoio do grupo para a disciplina ADMT0346, PPGDiDeS/UNIVASF. Os dados do caso são fictícios e vêm do material da disciplina.</p></div>
   <div class="col"><span class="kicker">Consultar</span><a href="#fichas">Fichas dos atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados do caso</a><a href="#siglas">Siglas e termos</a></div>
-  <div class="col"><span class="kicker">Preencher</span><a href="#mapa">Mapa de atores</a><a href="#banca">Treino de banca</a><a href="#conceitos">Conceitos</a></div>
-  <div class="col"><span class="kicker">Entregas</span><span>Relatório Parcial · 15/11</span><span>Roteiro · 02/12</span><span>Relatório Final · 07 a 11/12</span></div>
+  <div class="col"><span class="kicker">Preencher</span><a href="#mapa">Mapa de atores</a><a href="#banca">Treino de banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#relatorio">Relatório</a></div>
+  <div class="col"><span class="kicker">Entregas</span><span>Relatório Parcial · entregue 15/11</span><span>Roteiro · 02/12</span><span>Relatório Final · 07 a 11/12</span></div>
 </div></footer>
 
 <dialog id="dlg">
@@ -552,6 +685,7 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
   <p class="muted" id="dMsg" style="margin-top:8px"></p>
 </dialog>
 <div id="toast" role="status"></div>
+<div id="printArea" aria-hidden="true"></div>
 
 <script>
 /* ============================================================
@@ -738,12 +872,51 @@ const TERMOS = [
  ['Ventosaterapia','Aplicação de copos que fazem sucção sobre a pele. Na UBS é feita com copos de vidro reaproveitados.'],
 ];
 
+
+/* Relatório Parcial entregue em 15/11/2026: base inicial do relatório e primeira entrega registrada */
+const DISC='ADMT0346 - Tópicos Especiais VI - Gestão de Conflitos: estudos de caso em cenários no Semiárido';
+const CASO='Entre o Sertão e a Universidade: A Implantação das PICs no Território de Caatinga Velha';
+const SEED_REL_V=1;
+const PROB_1511='Como mediar e transformar o conflito em torno das PICs em Caatinga Velha, garantindo direitos sanitários, culturais e epistêmicos, por meio de um arranjo de governança colaborativa viável no SUS municipal?';
+const JUST_1511='O problema é relevante porque o município aderiu formalmente à PNPIC, mas não destina recursos às PICs, enquanto 73% da população usa essas práticas. A notificação da Vigilância Sanitária contra Dona Margarida transformou essa contradição em conflito aberto, que já envolve UBS, gestão municipal, Conselho Local de Saúde, Ministério Público e lideranças comunitárias e religiosas. Por se tratar de relações continuadas e de uma hierarquia entre saberes marcada pelo racismo epistêmico, não basta resolver o caso pontual.';
+const CRONO_1511=[['Leitura do caso','Todos','2026-11-14','Concluído'],['Pesquisa bibliográfica','Débora / Pedro','2026-11-18','Pendente'],['Análise dos dados','Katherine/Fernando','2026-11-18','Pendente'],['Construção do produto','Todos','2026-11-19','Pendente'],['Preparação da apresentação','Todos','2026-11-21','Pendente'],['Apresentação','Todos','2026-12-03','Pendente'],['Relatório final','Katherine / Campinho','2026-12-11','Pendente']];
+const PAPEIS_1511=[['Katherine de Araújo Rodrigues','Katherine','Líder','Coordenar o grupo, mediar conflitos internos, garantir prazos.'],['Fernando Campinho Braga Passos','Fernando','Redator','Consolidar os textos do relatório parcial e final.'],['José Pedro Costa dos Santos','José Pedro','Porta-voz','Apresentar o produto na banca e responder às perguntas.'],['Débora Silva Lopes','Débora','Pesquisadora','Pesquisar conceitos e referências.']];
+const SNAP_1511={titulo:'Relatório Parcial',grupo:'03',data:'2026-11-15',
+ componentes:[['Katherine de Araújo Rodrigues','Líder'],['Fernando Campinho Braga Passos','Redator'],['José Pedro Costa dos Santos','Porta-voz'],['Débora Silva Lopes','Pesquisador(a)']],
+ problema:PROB_1511,justificativa:JUST_1511,
+ conceitos:[
+  ['Mediação de conflitos','Define o método do plano: princípios, etapas e a diferença entre mediar e conciliar.','Bacellar (2012), Mediação e arbitragem; CNJ, Manual de Mediação Judicial (2016); Lei 13.140/2015.'],
+  ['Análise de atores','','Template da disciplina; literatura de análise de stakeholders (a localizar).'],
+  ['Racismo epistêmico','Explica por que o saber de Dona Margarida é tratado como infração e não como conhecimento.','Grosfoguel (2016); Santos e Meneses (2009).'],
+  ['Política Nacional de Práticas Integrativas e Complementares (PNPIC)','Marco legal a que o município aderiu em 2019 e não financia.','Portaria GM/MS nº 971/2006.'],
+  ['Medicalização social','Explica a redução do cuidado à consulta e ao fármaco, e a queixa dos moradores de Lagoa Seca.','Tesser (2006).'],
+  ['Epistemologias do Sul','Fundamenta o diálogo entre saber técnico e saber tradicional como horizonte do plano.','Santos e Meneses (2009), a conferir; Funasa (2021), Territórios Sustentáveis e Saudáveis, cap. 5.'],
+  ['Justiça epistêmica','Dá nome ao terceiro direito do problema e critério para a reflexão “reformista ou transformador”.','Fricker (2007).'],
+  ['Vigilância sanitária dialógica','Responde à pergunta da banca: é possível fiscalizar sem criminalizar?','Lei 6.437/77.'],
+  ['Governança colaborativa','Estrutura os mecanismos do plano: mesa de mediação, Conselho, MP, VISA e comunidade.','Ansell e Gash (2008), a conferir; Funasa (2021), cap. 5.'],
+  ['Educação permanente em saúde','Sustenta a formação da equipe e a resposta ao que fazer com a resistência profissional.','Portaria GM/MS nº 198/2004; Ceccim (2005).'],
+  ['Lide processual e lide sociológica','Separa a autuação (processo nº 045/2024-VISA) do conflito real; orienta a delimitação do problema.','Bacellar (2012), seção “Lide processual e lide sociológica”.'],
+  ['Conflito de origem e conflito processual','Justifica a intervenção de um terceiro: conflitos de valor e de poder não se resolvem sozinhos.','Teixeira (2026), Revista Brasileira de Educação Médica.'],
+  ['Inovação no setor público','Enquadra o plano como inovação de gestão e explica as barreiras que mantiveram a PNPIC apenas no papel.','Isidro (2018), Gestão pública inovadora, caps. 2, 4, 21 e 22.'],
+  ['Dispositivos legais de proteção do saber tradicional','Responde ao MP na banca e ampara o salvo-conduto do protocolo de convivência.','Convenção 169 da OIT; Lei 12.288/2010 (Estatuto da Igualdade Racial).'],
+  ['Limites de atuação da Vigilância Sanitária','Entender a notificação para uma pessoa física.','Lei nº 8.080/1990, CARVALHO, Jéssica T. C.; RAMALHO, Marcelo M. (2021/2022)']],
+ crono:CRONO_1511,
+ papeis:[['Líder','Katherine','Coordenar o grupo, mediar conflitos internos, garantir prazos.'],['Redator','Fernando','Consolidar os textos do relatório parcial e final.'],['Porta-voz','José Pedro','Apresentar o produto na banca e responder às perguntas.'],['Pesquisadora','Débora','Pesquisar conceitos e referências.']]};
+const SEED_REL={
+ rel:{titulo:'Relatório Parcial',grupo:'03',data:'2026-11-15',problema:PROB_1511,justificativa:JUST_1511,inclRefs:false},
+ papeis:Object.fromEntries(PAPEIS_1511.map((p,i)=>['p'+(i+1),{ord:i+1,nome:p[0],curto:p[1],papel:p[2],resp:p[3]}])),
+ crono:Object.fromEntries(CRONO_1511.map((c,i)=>['c'+(i+1),{ord:i+1,acao:c[0],resp:c[1],prazo:c[2],status:c[3]}])),
+ entregas:{e20261115:{titulo:'Relatório Parcial',data:'2026-11-15',registrado:'2026-11-15',snap:SNAP_1511}}
+};
 /* ---------- estado ---------- */
 const KEY='painel-caatinga-velha-v1';
-let S={mapa:{},banca:{},conc:{},extra:{}};
+let S={mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{}};
 let canStore=true;
 try{const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r));}catch(e){canStore=false}
 if(!CONFIG.dbUrl&&S.seedV!==SEED_V){for(const id in SEED)for(const f in SEED[id]){const t=S.conc[id]||(S.conc[id]={});if(!t[f])t[f]=SEED[id][f]}S.seedV=SEED_V;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+for(const k of ['rel','papeis','crono','entregas','refs'])if(!S[k]||typeof S[k]!=='object')S[k]={};
+if(!CONFIG.dbUrl&&S.seedRel!==SEED_REL_V){for(const k of ['rel','papeis','crono','entregas'])if(!Object.keys(S[k]).length)S[k]=JSON.parse(JSON.stringify(SEED_REL[k]));S.seedRel=SEED_REL_V;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+if(!CONFIG.dbUrl&&S.rel&&Object.keys(S.rel).length&&!S.rel.sec){S.rel.sec=Object.assign({problema:true,conceitos:true,levantamento:false,cronograma:true,andamento:false,papeis:true},{refs:!!S.rel.inclRefs});S.rel.pontos=true}
 if(Array.isArray(S.extra)){const o={};S.extra.forEach(x=>o[x.id]={nome:x.nome});S.extra=o}
 const $=s=>document.querySelector(s), el=(t,a={},h='')=>{const e=document.createElement(t);for(const k in a){if(k==='class')e.className=a[k];else e.setAttribute(k,a[k])}e.innerHTML=h;return e};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -776,6 +949,12 @@ async function flush(){ if(!queue.size)return; const items=[...queue.entries()];
     online=true; status('Salvo na web às '+hhmm(),'live') }
   catch(e){ online=false; status('Sem conexão com o banco. Alterações guardadas neste navegador','off') } }
 function pending(p){return queue.has(p)}
+/* junta uma coleção (papeis, crono, entregas, refs) vinda da web com o que ainda não foi enviado daqui */
+function mergeCol(col,rc){if(queue.has(col))return S[col]||{};rc=(rc&&typeof rc==='object')?rc:{};const loc=S[col]||{},out={};
+ for(const id in rc){if(queue.has(col+'/'+id)){const v=queue.get(col+'/'+id);if(v!==null&&loc[id])out[id]=loc[id];continue}
+  const o=Object.assign({},rc[id]);for(const k of queue.keys())if(k.startsWith(col+'/'+id+'/')){const f=k.slice(col.length+id.length+2).split('/')[0];if(loc[id]&&loc[id][f]!==undefined)o[f]=loc[id][f];else delete o[f]}out[id]=o}
+ for(const id in loc)if(!(id in rc)&&queue.has(col+'/'+id)&&queue.get(col+'/'+id)!==null)out[id]=loc[id];
+ return out}
 function mergeObj(kind,remote){ // kind: mapa | conc (dois níveis)
   for(const id in remote||{}){ const tgt=kind==='mapa'?m(id):c(id); for(const f in remote[id]){ if(!pending(kind+'/'+id+'/'+f)) tgt[f]=remote[id][f] } } }
 async function pull(){ if(!WEB||document.hidden)return;
@@ -789,6 +968,10 @@ async function pull(){ if(!WEB||document.hidden)return;
     mergeObj('mapa',R.mapa); mergeObj('conc',R.conc);
     if(firstPull&&(R.meta&&R.meta.seed)!==SEED_V){ for(const id in SEED)for(const f in SEED[id]) if(R.conc?.[id]?.[f]===undefined&&!c(id)[f]){c(id)[f]=SEED[id][f];queue.set('conc/'+id+'/'+f,SEED[id][f])}
       queue.set('meta/seed',SEED_V); S.seedV=SEED_V }
+    if(firstPull&&(R.meta&&R.meta.seedRel)!==SEED_REL_V){for(const k of ['rel','papeis','crono','entregas'])if(R[k]===undefined){S[k]=JSON.parse(JSON.stringify(SEED_REL[k]));queue.set(k,S[k])}queue.set('meta/seedRel',SEED_REL_V)}
+    if(!queue.has('rel'))for(const f in R.rel||{}){if(f==='sec'&&R.rel.sec&&typeof R.rel.sec==='object'){if(queue.has('rel/sec'))continue;const o=Object.assign({},R.rel.sec);for(const k of queue.keys())if(k.startsWith('rel/sec/'))o[k.slice(8)]=(S.rel.sec||{})[k.slice(8)];S.rel.sec=o}else if(!pending('rel/'+f))S.rel[f]=R.rel[f]}
+    if(!S.rel.sec){S.rel.sec=defSec();queue.set('rel/sec',S.rel.sec)}if(S.rel.pontos===undefined){S.rel.pontos=true;queue.set('rel/pontos',true)}
+    for(const col of ['papeis','crono','entregas','refs'])S[col]=mergeCol(col,R[col]);
     for(const k in R.banca||{}) if(!pending('banca/'+k)) S.banca[k]=R.banca[k];
     const before=Object.keys(S.extra).sort().join(), ex={};
     for(const id in R.extra||{}) ex[id]=pending('extra/'+id)?S.extra[id]:R.extra[id];
@@ -803,10 +986,11 @@ function refresh(extraChanged){ const act=document.activeElement;
   if(extraChanged&&!$('#concepts').contains(act)) drawConc();
   else document.querySelectorAll('[data-c]').forEach(e=>{if(e!==act){const v=c(e.dataset.c)[e.dataset.f]||'';if(e.value!==v)e.value=v}});
   const a=$('#bAns'); if(a&&a!==act){const v=S.banca[cur.k]||'';if(a.value!==v)a.value=v}
-  drawMatrix(); drawBTable(); concStatus(); progress(); }
+  if(extraChanged)drawRefFilter();
+  drawMatrix(); drawBTable(); concStatus(); refreshNew(); progress(); }
 
 /* ---------- rotas ---------- */
-const VIEWS=['inicio','fichas','mapa','linha-do-tempo','dados','siglas','banca','conceitos'];
+const VIEWS=['inicio','fichas','mapa','linha-do-tempo','dados','siglas','banca','conceitos','referencias','relatorio'];
 function route(){const h=location.hash.replace('#','');const v=VIEWS.includes(h)?h:'inicio';
  VIEWS.forEach(x=>$('#v-'+x).classList.toggle('on',x===v));
  document.querySelectorAll('nav.pill a').forEach(a=>{if(a.getAttribute('href')==='#'+v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
@@ -908,8 +1092,9 @@ function drawConc(){const box=$('#concepts');const open=new Set([...box.querySel
   <div class="mrow"><label class="f w3">Por que é importante para o nosso problema?<textarea id="c-${k.id}-pq" data-c="${k.id}" data-f="pq">${esc(x.pq||'')}</textarea></label>
   <label class="f w3">Definição, com as palavras do grupo<textarea id="c-${k.id}-def" data-c="${k.id}" data-f="def">${esc(x.def||'')}</textarea></label>
   <label class="f" style="grid-column:1/-1">Fontes conferidas (ABNT)<textarea id="c-${k.id}-fontes" data-c="${k.id}" data-f="fontes">${esc(x.fontes||'')}</textarea></label></div>
+  <div class="crefs" id="crf-${k.id}"></div>
   ${k.extra?`<button class="btn" type="button" data-del="${k.id}" style="margin-top:10px">Remover este conceito</button>`:''}`);
-  if(open.has(k.id))d.open=true;box.appendChild(d)});concStatus()}
+  if(open.has(k.id))d.open=true;box.appendChild(d)});concStatus();updateConcRefs();drawRefFilter()}
 $('#concepts').addEventListener('input',e=>{const t=e.target;
  if(t.dataset.n){S.extra[t.dataset.n]={nome:t.value};put('extra/'+t.dataset.n,{nome:t.value});return}
  if(!t.dataset.c)return;c(t.dataset.c)[t.dataset.f]=t.value;put('conc/'+t.dataset.c+'/'+t.dataset.f,t.value);concStatus();progress()});
@@ -927,7 +1112,9 @@ $('#copyConc').addEventListener('click',()=>{const f=s=>String(s||'').replace(/\
 /* ---------- progresso na página inicial ---------- */
 function progress(){ $('#pMapa').textContent=MA.filter(placed).length+' de '+MA.length+' atores na matriz';
  $('#pBanca').textContent=ALLQ.filter(answered).length+' de '+ALLQ.length+' respostas';
- const a=allConc();$('#pConc').textContent=a.filter(k=>cDone(k.id)===3).length+' de '+a.length+' completos' }
+ const a=allConc();$('#pConc').textContent=a.filter(k=>cDone(k.id)===3).length+' de '+a.length+' completos';
+ const nr=Object.keys(S.refs||{}).length;$('#pRefs').textContent=nr+(nr===1?' referência':' referências');
+ const cs=Object.values(S.crono||{}).filter(x=>x&&typeof x==='object');$('#pRel').textContent=cs.filter(x=>x.status==='Concluído').length+' de '+cs.length+' ações concluídas' }
 
 /* ---------- cópia de segurança ---------- */
 const dlg=$('#dlg');
@@ -938,12 +1125,357 @@ $('#dClose').addEventListener('click',()=>dlg.close());
 $('#dCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#dump').value);$('#dMsg').textContent='Dados copiados.'}catch(e){$('#dump').select();$('#dMsg').textContent='Selecione o texto e copie manualmente.'}});
 $('#dLoad').addEventListener('click',()=>{try{const d=JSON.parse($('#dump').value);if(typeof d!=='object'||!d||!d.mapa)throw 0;
   if(Array.isArray(d.extra)){const o={};d.extra.forEach(x=>o[x.id]={nome:x.nome});d.extra=o}
-  S=Object.assign({mapa:{},banca:{},conc:{},extra:{}},d);saveLocal();
-  if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);flush()}
-  drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();$('#dMsg').textContent='Dados carregados.'}
+  S=Object.assign({mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{}},d);saveLocal();
+  if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);for(const k of ['rel','papeis','crono','entregas','refs'])if(Object.keys(S[k]||{}).length)queue.set(k,S[k]);flush()}
+  drawForms();drawMatrix();drawConc();showQ();drawBTable();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();progress();$('#dMsg').textContent='Dados carregados.'}
  catch(e){$('#dMsg').textContent='O texto colado não é um arquivo válido deste painel. Copie novamente o conteúdo completo.';const t=$('#dump');t.classList.remove('shake');void t.offsetWidth;t.classList.add('shake')}});
 if(window.top===window.self){const b=$('#dFile');b.hidden=false;b.addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('#dump').value],{type:'application/json'}));a.download='painel-caatinga-velha.json';a.click()})}
 
+
+
+/* ====================== utilidades compartilhadas ====================== */
+const getP=p=>p.split('/').reduce((o,k)=>o==null?undefined:o[k],S);
+function setP(p,v){const ks=p.split('/');let o=S;for(let i=0;i<ks.length-1;i++){if(o[ks[i]]==null||typeof o[ks[i]]!=='object')o[ks[i]]={};o=o[ks[i]]}const k=ks[ks.length-1];if(v===null||v===undefined)delete o[k];else o[k]=v}
+function setPut(p,v){setP(p,v);put(p,v)}
+function delItem(col,id){for(const k of [...queue.keys()]) if(k.startsWith(col+'/'+id+'/')) queue.delete(k); setP(col+'/'+id,null); put(col+'/'+id,null)}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const clone=o=>JSON.parse(JSON.stringify(o));
+const todayISO=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const fmtD=iso=>{if(!iso)return '';const m=String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);return m?m[3]+'/'+m[2]+'/'+m[1]:String(iso)};
+const MESES=['jan.','fev.','mar.','abr.','maio','jun.','jul.','ago.','set.','out.','nov.','dez.'];
+const fmtAcesso=iso=>{const m=String(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m?(+m[3])+' '+MESES[+m[2]-1]+' '+m[1]:''};
+const sorted=col=>Object.entries(S[col]||{}).filter(([,v])=>v&&typeof v==='object').sort((a,b)=>(a[1].ord||0)-(b[1].ord||0));
+const members=()=>sorted('papeis').map(([id,p])=>({id,nome:(p.curto||p.nome||'').trim()||'Sem nome'}));
+const plain=html=>String(html).replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"');
+const norm=s=>plain(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+function twoStep(btn,fn,label){if(btn.dataset.arm){delete btn.dataset.arm;btn.textContent=btn.dataset.orig;fn();return}
+ btn.dataset.arm=1;btn.dataset.orig=btn.textContent;btn.textContent=label||'Confirmar';setTimeout(()=>{if(btn.isConnected&&btn.dataset.arm){delete btn.dataset.arm;btn.textContent=btn.dataset.orig}},4000)}
+async function copyHTML(html,text,ok){
+ try{await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([text],{type:'text/plain'})})]);toast(ok);return}catch(e){}
+ try{const box=document.createElement('div');box.style.cssText='position:fixed;left:-9999px;top:0;background:#fff;color:#000';box.innerHTML=html;document.body.appendChild(box);
+  const sel=getSelection(),rg=document.createRange();rg.selectNode(box);sel.removeAllRanges();sel.addRange(rg);const done=document.execCommand('copy');sel.removeAllRanges();box.remove();if(done){toast(ok);return}}catch(e){}
+ copy(text,ok)}
+
+/* campos ligados direto ao estado: data-p="caminho/no/estado" */
+function onBind(e){const t=e.target;if(!t||!t.dataset||!t.dataset.p)return;const v=t.type==='checkbox'?t.checked:t.value;if(getP(t.dataset.p)===v)return;setPut(t.dataset.p,v);afterEdit(t.dataset.p)}
+document.addEventListener('input',onBind);document.addEventListener('change',onBind);
+function syncBound(){const act=document.activeElement;document.querySelectorAll('[data-p]').forEach(e=>{if(e===act)return;const v=getP(e.dataset.p);
+ if(e.type==='checkbox')e.checked=!!v;else{const s=v==null?'':String(v);if(e.value!==s)e.value=s}})}
+let prevT;function afterEdit(p){if(p.startsWith('crono/')){syncBound();cronoBadges();if(!/\/status$/.test(p))maybeHomeCrono()}if(p==='rel/problema')updateHero();relSummary();clearTimeout(prevT);prevT=setTimeout(renderPreview,250);progress()}
+
+/* ====================== relatório ====================== */
+let relSig='',viewing=null;
+const HL=['mediar e transformar','direitos sanitários, culturais e epistêmicos','governança colaborativa'];
+function heroHTML(p){let s=esc(p);HL.forEach(x=>{const e=esc(x);if(s.includes(e))s=s.replace(e,'<mark>'+e+'</mark>')});return s}
+function updateHero(){const p=((S.rel&&S.rel.problema)||'').trim();const h=$('#heroProb');if(p&&h.textContent.replace(/\s+/g,' ').trim()!==p.replace(/\s+/g,' '))h.innerHTML=heroHTML(p)}
+function drawRelEdit(){
+ const ps=sorted('papeis'),cs=sorted('crono');
+ $('#papeisRows').innerHTML=ps.length?ps.map(([id])=>`<div class="erow er-p">
+   <label class="f">Nome completo<input type="text" id="pn-${id}" data-p="papeis/${id}/nome"></label>
+   <label class="f">Nome curto<input type="text" id="pc-${id}" data-p="papeis/${id}/curto"></label>
+   <label class="f">Papel<input type="text" id="pp-${id}" data-p="papeis/${id}/papel" list="papelOpts"></label>
+   <label class="f">Responsabilidades<input type="text" id="pr-${id}" data-p="papeis/${id}/resp"></label>
+   <button class="btn icon" type="button" data-delp="${id}">Remover</button></div>`).join(''):'<p class="muted">Nenhum integrante cadastrado.</p>';
+ $('#cronoRows').innerHTML=cs.length?cs.map(([id])=>`<div class="erow er-c">
+   <label class="f">Ação<input type="text" id="kra-${id}" data-p="crono/${id}/acao"></label>
+   <label class="f">Responsável<input type="text" id="krr-${id}" data-p="crono/${id}/resp"></label>
+   <label class="f">Prazo<input type="date" id="krp-${id}" data-p="crono/${id}/prazo"></label>
+   <label class="f">Status<select id="krs-${id}" data-p="crono/${id}/status"><option>Pendente</option><option>Em andamento</option><option>Concluído</option></select></label>
+   <span class="late" id="krl-${id}"></span>
+   <button class="btn icon" type="button" data-delc="${id}">Remover</button></div>`).join(''):'<p class="muted">Nenhuma ação no cronograma.</p>';
+ syncBound();cronoBadges();drawHomeCrono();relSig=JSON.stringify([ps.map(x=>x[0]),cs.map(x=>x[0])])}
+function cronoBadges(){const t=todayISO();sorted('crono').forEach(([id,c])=>{const late=!!(c.prazo&&c.prazo<t&&c.status!=='Concluído');
+ ['krl-','hkl-'].forEach(p=>{const e=document.getElementById(p+id);if(e)e.textContent=late?'prazo vencido':''});
+ ['krs-','hks-'].forEach(p=>{const s=document.getElementById(p+id);if(s)s.dataset.st=c.status||'Pendente'});
+ const r=document.getElementById('hkr-'+id);if(r){r.classList.toggle('isdone',c.status==='Concluído');r.classList.toggle('islate',late)}});relSummary()}
+/* cronograma na página inicial */
+let homeSig='';
+function drawHomeCrono(){const t=todayISO();const cs=sorted('crono').filter(([,c])=>c.acao||c.prazo).sort((a,b)=>((a[1].prazo||'9')<(b[1].prazo||'9')?-1:(a[1].prazo||'9')>(b[1].prazo||'9')?1:(a[1].ord||0)-(b[1].ord||0)));
+ const wd=['dom','seg','ter','qua','qui','sex','sáb'];
+ $('#homeCrono').innerHTML=cs.length?cs.map(([id,c])=>{const dd=c.prazo?new Date(c.prazo+'T12:00:00'):null;
+  return `<div class="hcr" id="hkr-${id}"><div class="hd"><b class="num">${c.prazo?fmtD(c.prazo).slice(0,5):'sem prazo'}</b><small>${c.prazo===t?'hoje':dd?wd[dd.getDay()]:''}</small></div>
+  <div class="ha"><b>${esc(c.acao||'(sem nome)')}</b><span class="muted">${esc(c.resp||'')}</span></div>
+  <span class="late" id="hkl-${id}"></span>
+  <select id="hks-${id}" data-p="crono/${id}/status" aria-label="Status de ${esc(c.acao||'ação')}"><option>Pendente</option><option>Em andamento</option><option>Concluído</option></select></div>`}).join(''):'<p class="muted">O cronograma está vazio. Adicione ações na aba Relatório.</p>';
+ homeSig=JSON.stringify(cs.map(([id,c])=>[id,c.acao,c.resp,c.prazo]));syncBound();cronoBadges()}
+function maybeHomeCrono(){const sig=JSON.stringify(sorted('crono').filter(([,c])=>c.acao||c.prazo).map(([id,c])=>[id,c.acao,c.resp,c.prazo]).sort((a,b)=>((a[3]||'9')<(b[3]||'9')?-1:1)));
+ if(!$('#homeCrono').contains(document.activeElement))drawHomeCrono()}
+function relSummary(){relSummary2();}
+function relSummary2(){const cs=sorted('crono').map(x=>x[1]),t=todayISO(),done=cs.filter(c=>c.status==='Concluído').length,late=cs.filter(c=>c.prazo&&c.prazo<t&&c.status!=='Concluído').length;
+ const next=cs.filter(c=>c.status!=='Concluído'&&c.prazo).sort((a,b)=>a.prazo<b.prazo?-1:1)[0];
+ const ents=Object.values(S.entregas||{}).filter(e=>e&&e.data).sort((a,b)=>a.data<b.data?1:-1);
+ const html=`<span class="pill ok">${done} de ${cs.length} ações concluídas</span>${late?`<span class="pill bad">${late} com prazo vencido</span>`:''}${next?`<span class="pill">Próxima: ${esc(next.acao)} até ${fmtD(next.prazo).slice(0,5)}</span>`:''}${ents[0]?`<span class="pill">Última entrega: ${esc(ents[0].titulo)} em ${fmtD(ents[0].data)}</span>`:''}`;
+ $('#relSum').innerHTML=html;const hs=$('#homeSum');if(hs)hs.innerHTML=html;
+ const cc=$('#cronoCount');if(cc)cc.textContent=done+' de '+cs.length+' concluídas';const pc=$('#papCount');if(pc)pc.textContent=sorted('papeis').length+' integrantes'}
+function drawSecs(){$('#secList').innerHTML=SECS.map(([k,l])=>`<label class="ccheck"><input type="checkbox" id="sec-${k}" data-p="rel/sec/${k}"> ${l}</label>`).join('')+`<label class="ccheck"><input type="checkbox" id="sec-pontos" data-p="rel/pontos"> Mostrar a pontuação do template nos títulos</label>`;syncBound()}
+$('#secPresets').addEventListener('click',e=>{const b=e.target.closest('button[data-preset]');if(!b)return;const p=PRESETS[b.dataset.preset];setPut('rel/sec',clone(p.sec));setPut('rel/pontos',p.pontos);syncBound();renderPreview();toast('Modelo aplicado: '+b.textContent)});
+function nextOrd(col){return sorted(col).reduce((m,[,v])=>Math.max(m,v.ord||0),0)+1}
+$('#addPapel').addEventListener('click',()=>{const id='p'+uid();setPut('papeis/'+id,{ord:nextOrd('papeis'),nome:'',curto:'',papel:'',resp:''});drawRelEdit();renderPreview();document.getElementById('pn-'+id).focus()});
+$('#addCrono').addEventListener('click',()=>{const id='c'+uid();setPut('crono/'+id,{ord:nextOrd('crono'),acao:'',resp:'',prazo:'',status:'Pendente'});drawRelEdit();renderPreview();document.getElementById('kra-'+id).focus()});
+$('#relEdit').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.delp)twoStep(b,()=>{delItem('papeis',b.dataset.delp);drawRelEdit();renderPreview();fillMembers()},'Confirmar');
+ if(b.dataset.delc)twoStep(b,()=>{delItem('crono',b.dataset.delc);drawRelEdit();renderPreview()},'Confirmar')});
+
+const SECS=[['problema','Formulação do problema e justificativa'],['conceitos','Conceitos a pesquisar'],['levantamento','Levantamento bibliográfico (da aba Referências)'],['cronograma','Cronograma'],['andamento','Andamento desde a última entrega (do cronograma)'],['papeis','Papéis no grupo'],['refs','Lista de referências em ABNT, no fim']];
+const PRESETS={p1:{sec:{problema:true,conceitos:true,levantamento:false,cronograma:true,andamento:false,papeis:true,refs:false},pontos:true},
+ p2:{sec:{problema:true,conceitos:true,levantamento:true,cronograma:true,andamento:true,papeis:true,refs:true},pontos:false}};
+const defSec=()=>Object.assign(clone(PRESETS.p1.sec),{refs:!!(S.rel&&S.rel.inclRefs)});
+function lastEntrega(){return Object.values(S.entregas||{}).filter(e=>e&&e.data&&e.snap).sort((a,b)=>a.data<b.data?1:-1)[0]}
+function andamentoData(){const t=todayISO(),last=lastEntrega(),prev=new Map(((last&&last.snap.crono)||[]).map(r=>[norm(r[0]),r[3]]));
+ const cs=sorted('crono').map(x=>x[1]).filter(c=>c.acao);const row=c=>[c.acao||'',c.resp||'',c.prazo||''];
+ return {desde:last?last.data:'',
+  concl:cs.filter(c=>c.status==='Concluído'&&prev.get(norm(c.acao))!=='Concluído').map(row),
+  andam:cs.filter(c=>c.status==='Em andamento').map(row),
+  atras:cs.filter(c=>c.prazo&&c.prazo<t&&c.status!=='Concluído').map(row),
+  prox:cs.filter(c=>c.status==='Pendente'&&!(c.prazo&&c.prazo<t)).sort((a,b)=>(a.prazo||'9')<(b.prazo||'9')?-1:1).slice(0,4).map(row)}}
+function levantData(){const ks=allConc(),idx=id=>{const i=ks.findIndex(k=>k.id===id);return i<0?999:i};
+ return refsSorted().map(([,r])=>{const ids=Object.keys(r.conceitos||{}).sort((a,b)=>idx(a)-idx(b));return {o:ids.length?idx(ids[0]):999,row:[{h:abnt(r)},ids.map(concName).filter(Boolean).join('; ')||'—',(r.nota||'').trim()||'—'],arq:!!r.arquivo}})
+  .sort((a,b)=>a.o-b.o).map(x=>x.row)}
+function liveData(){const ps=sorted('papeis').map(x=>x[1]);const r=S.rel||{};const sec=Object.assign(defSec(),r.sec||{});
+ return {v:2,sec,pontos:r.pontos!==false,titulo:r.titulo||'Relatório Parcial',grupo:r.grupo||'',data:r.data||'',
+  componentes:ps.map(p=>[p.nome||'',p.papel||'']),problema:r.problema||'',justificativa:r.justificativa||'',
+  conceitos:allConc().map(k=>[k.nome,((S.conc[k.id]||{}).pq||'').trim(),((S.conc[k.id]||{}).fontes||'').trim()]),
+  levant:sec.levantamento?levantData():[],levantArq:Object.values(S.refs||{}).filter(x=>x&&x.arquivo).length,
+  crono:sorted('crono').map(([,x])=>[x.acao||'',x.resp||'',x.prazo||'',x.status||'']),
+  andamento:sec.andamento?andamentoData():null,
+  papeis:ps.map(p=>[p.papel||'',p.curto||p.nome||'',p.resp||'']),
+  refs:sec.refs?refsSorted().map(([,x])=>abnt(x)):[]}}
+/* documento no padrão ABNT: Arial 12, entrelinha 1,5, quadros com título acima e fonte abaixo, sem fundo e sem linhas verticais */
+function reportHTML(d){
+ const sec=d.sec||{problema:true,conceitos:true,cronograma:true,papeis:true,refs:!!(d.refs&&d.refs.length)};const pts=d.v?d.pontos:true;
+ const ano=(String(d.data||todayISO()).match(/\d{4}/)||[new Date().getFullYear()])[0];
+ const P='font-size:12pt;line-height:1.5;margin:0 0 6pt;text-align:justify';
+ const cell=c=>c&&typeof c==='object'?c.h:esc(c);
+ const TH='text-align:left;font-weight:bold;vertical-align:bottom;padding:4pt 5pt;border-top:1.5pt solid #000;border-bottom:0.75pt solid #000;border-left:none;border-right:none;background:none';
+ const TD=last=>`text-align:left;vertical-align:top;padding:4pt 5pt;border-left:none;border-right:none;border-top:none;border-bottom:${last?'1.5pt solid #000':'0.5pt solid #BFBFBF'}`;
+ const tbl=(head,rows,w)=>{rows=rows||[];return `<table style="border-collapse:collapse;width:100%;table-layout:fixed;font-size:10pt;line-height:1.25;margin:0;page-break-inside:auto" cellspacing="0" cellpadding="0"><colgroup>${w.map(x=>`<col style="width:${x}">`).join('')}</colgroup><thead style="display:table-header-group"><tr>${head.map((h,i)=>`<th style="${TH};width:${w[i]}">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map((r,i)=>`<tr style="page-break-inside:avoid">`+r.map(c=>`<td style="${TD(i===rows.length-1)}">${cell(c)}</td>`).join('')+'</tr>').join('')}</tbody></table>`};
+ let n=0,q=0;
+ const quadro=(t,head,rows,w)=>`<p style="font-size:10pt;line-height:1.2;margin:10pt 0 4pt;text-align:left;page-break-after:avoid"><b>Quadro ${++q}</b> – ${esc(t)}</p>${tbl(head,rows,w)}<p style="font-size:10pt;line-height:1.2;margin:3pt 0 12pt;text-align:left">Fonte: Elaborado pelo grupo (${ano}).</p>`;
+ const H=(t,p)=>`<h2 style="font-size:12pt;font-weight:bold;line-height:1.5;margin:18pt 0 6pt;text-align:left;page-break-after:avoid">${++n} ${esc(t.toUpperCase())}${pts&&p?` (${p} ${p===1?'ponto':'pontos'})`:''}</h2>`;
+ const pp=t=>String(t||'').split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>`<p style="${P};text-indent:1.25cm">${esc(x)}</p>`).join('')||`<p style="${P};color:#888">(em branco)</p>`;
+ const lab=(k,v)=>`<p style="${P};text-align:left;margin:0 0 2pt"><b>${k}</b> ${v}</p>`;
+ const lista=(rows,fmt)=>rows.map(fmt).join('; ');
+ const it=r=>`${esc(r[0])}${r[1]?' ('+esc(r[1])+')':''}`, itp=r=>`${esc(r[0])}${r[2]?', até '+fmtD(r[2]):''}${r[1]?' ('+esc(r[1])+')':''}`;
+ let s=`<div style="font-family:Arial,Helvetica,sans-serif;font-size:12pt;line-height:1.5;color:#000">
+<p style="font-size:12pt;font-weight:bold;text-align:center;text-transform:uppercase;margin:0 0 18pt;line-height:1.5">${esc(d.titulo)}</p>
+${lab('Disciplina:',esc(DISC))}${lab('Laboratório de Caso:',esc(CASO))}${lab('Grupo nº:',esc(d.grupo))}${lab('Data de entrega:',fmtD(d.data))}
+<p style="${P};text-align:left;margin:10pt 0 4pt"><b>Componentes do grupo:</b></p>${tbl(['Nome','Papel'],d.componentes,['66%','34%'])}<div style="height:6pt"></div>`;
+ if(sec.problema)s+=H('Formulação do problema',4)+`<p style="${P};text-align:left;margin:0 0 2pt"><b>Problema formulado:</b></p>${pp(d.problema)}<p style="${P};text-align:left;margin:8pt 0 2pt"><b>Justificativa:</b></p>${pp(d.justificativa)}`;
+ if(sec.conceitos)s+=H('Conceitos a pesquisar',3)+quadro('Conceitos a pesquisar',['Conceito','Por que é importante?','Fontes iniciais'],d.conceitos,['24%','38%','38%']);
+ if(sec.levantamento){const L=d.levant||[];s+=H('Levantamento bibliográfico')+(L.length?`<p style="${P};text-indent:1.25cm">${L.length===1?'Foi levantada 1 obra, relacionada':'Foram levantadas '+L.length+' obras, organizadas pelos'} ${L.length===1?'aos conceitos':'conceitos'} a pesquisar${d.levantArq?`; ${d.levantArq} ${d.levantArq===1?'está disponível':'estão disponíveis'} na biblioteca do grupo`:''}.</p>`+quadro('Levantamento bibliográfico',['Obra','Conceito relacionado','Contribuição para o caso'],L,['46%','22%','32%']):`<p style="${P};color:#888">(nenhuma referência na biblioteca)</p>`)}
+ if(sec.cronograma)s+=H('Cronograma',2)+quadro('Cronograma de pesquisa',['Ação','Responsável','Prazo','Status'],(d.crono||[]).map(r=>[r[0],r[1],fmtD(r[2]),r[3]]),['38%','26%','17%','19%']);
+ if(sec.andamento&&d.andamento){const a=d.andamento;s+=H('Andamento do cronograma')+`<p style="${P};text-indent:1.25cm">Situação em ${fmtD(d.data)||'—'}${a.desde?`, comparada à entrega de ${fmtD(a.desde)}`:''}.</p>`
+  +`<p style="${P}"><b>Concluído${a.desde?' desde a última entrega':''}:</b> ${a.concl.length?lista(a.concl,it)+'.':'nenhuma ação.'}</p>`
+  +(a.andam.length?`<p style="${P}"><b>Em andamento:</b> ${lista(a.andam,it)}.</p>`:'')
+  +(a.atras.length?`<p style="${P}"><b>Com prazo vencido:</b> ${lista(a.atras,itp)}.</p>`:'')
+  +(a.prox.length?`<p style="${P}"><b>Próximas ações:</b> ${lista(a.prox,itp)}.</p>`:'')}
+ if(sec.papeis)s+=H('Definição dos papéis no grupo',1)+quadro('Papéis no grupo',['Papel','Nome','Responsabilidades'],d.papeis,['20%','20%','60%']);
+ if(d.refs&&d.refs.length)s+=`<p style="font-size:12pt;font-weight:bold;text-align:center;margin:24pt 0 12pt;page-break-after:avoid">REFERÊNCIAS</p>`+d.refs.map(r=>`<p style="font-size:12pt;line-height:1;margin:0 0 12pt;text-align:left">${r}</p>`).join('');
+ return s+'</div>'}
+function curData(){const e=viewing&&S.entregas&&S.entregas[viewing];return e&&e.snap?e.snap:liveData()}
+function renderPreview(){const box=$('#reportDoc');if(!box)return;if(viewing&&!(S.entregas||{})[viewing])viewing=null;const e=viewing&&S.entregas[viewing];
+ $('#viewBanner').hidden=!e;if(e)$('#viewBannerT').textContent=`Mostrando a versão “${e.titulo}” entregue em ${fmtD(e.data)}.`;
+ box.innerHTML=reportHTML(curData())}
+function textOf(html){const d=document.createElement('div');d.innerHTML=html;d.style.cssText='position:fixed;left:-9999px';document.body.appendChild(d);const t=d.innerText;d.remove();return t}
+$('#relCopy').addEventListener('click',()=>{const h=reportHTML(curData());copyHTML(h,textOf(h),'Relatório copiado. Cole no Google Docs com Ctrl+V.')});
+$('#relPrint').addEventListener('click',()=>{$('#printArea').innerHTML=reportHTML(curData());try{window.print()}catch(e){toast('A impressão não abriu. Use o endereço do painel no GitHub.')}});
+$('#relReg').addEventListener('click',e=>{const b=e.currentTarget;const d=liveData();
+ twoStep(b,()=>{const id='e'+uid();setPut('entregas/'+id,{titulo:d.titulo,data:d.data||todayISO(),registrado:todayISO(),snap:d});drawEntregas();relSummary();progress();toast('Entrega registrada: '+d.titulo+' em '+fmtD(d.data||todayISO()))},'Confirmar: registrar “'+d.titulo+'” em '+fmtD(d.data||todayISO()))});
+$('#viewBack').addEventListener('click',()=>{viewing=null;renderPreview()});
+function drawEntregas(){const es=Object.entries(S.entregas||{}).filter(([,e])=>e&&e.data).sort((a,b)=>a[1].data<b[1].data?1:-1);
+ $('#entList').innerHTML=es.length?es.map(([id,e])=>`<div class="ent"><div><b>${esc(e.titulo)}</b><div class="muted">entregue em ${fmtD(e.data)}</div></div>
+  <div class="toolbar"><button class="btn" type="button" data-ver="${id}">Ver</button><button class="btn" type="button" data-cpy="${id}">Copiar</button><button class="btn" type="button" data-dele="${id}">Remover</button></div></div>`).join(''):'<p class="muted">Nenhuma entrega registrada.</p>'}
+$('#entList').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.ver){viewing=b.dataset.ver;renderPreview();$('#viewBanner').scrollIntoView({block:'center'})}
+ if(b.dataset.cpy){const x=S.entregas[b.dataset.cpy];if(x){const h=reportHTML(x.snap);copyHTML(h,textOf(h),'Versão de '+fmtD(x.data)+' copiada.')}}
+ if(b.dataset.dele)twoStep(b,()=>{delItem('entregas',b.dataset.dele);if(viewing===b.dataset.dele)viewing=null;drawEntregas();renderPreview();relSummary()},'Confirmar')});
+
+/* ====================== referências ====================== */
+const MAXF=5*1024*1024;
+const fileUrl=id=>CONFIG.dbUrl.replace(/\/+$/,'')+'/painel/'+encodeURIComponent(CONFIG.sala+'-arquivos')+'/'+id+'.json';
+const TIPOS=[['livro','Livro'],['capitulo','Capítulo de livro'],['artigo','Artigo de revista'],['lei','Lei, portaria ou norma'],['online','Documento ou página na internet'],['tese','Dissertação ou tese']];
+/* [campo, rótulo (ou {tipo:rótulo}), tipos, kind, exemplo] */
+const RF=[
+ ['autores','Autores, um por linha, como aparecem na obra','livro capitulo artigo online tese','area','Antonio Isidro'],
+ ['inst','Autoria institucional (ex.: BRASIL. Ministério da Saúde): o nome sai como foi digitado','livro capitulo artigo online tese','check'],
+ ['jur','Jurisdição ou órgão','lei','text','BRASIL ou BRASIL. Ministério da Saúde'],
+ ['titulo',{_:'Título',capitulo:'Título do capítulo',lei:'Identificação do ato'},'*','text',{_:'',lei:'Lei nº 8.080, de 19 de setembro de 1990'}],
+ ['subtitulo','Subtítulo','livro capitulo artigo online tese','text',''],
+ ['orgs','Organizadores do livro, um por linha','capitulo','area',''],
+ ['livro','Título do livro','capitulo','text',''],
+ ['ementa','Ementa','lei','area','Dispõe sobre...'],
+ ['periodico','Nome da revista','artigo','text',''],
+ ['edicao','Edição (vazio se for a 1ª)','livro capitulo','text','2'],
+ ['local',{_:'Cidade da publicação',artigo:'Cidade da revista (opcional)'},'livro capitulo artigo online tese lei','text',''],
+ ['editora',{_:'Editora',online:'Site ou instituição responsável'},'livro capitulo online','text',''],
+ ['pub','Onde foi publicada','lei','text','Diário Oficial da União'],
+ ['dataPub','Data da publicação','lei','text','20 set. 1990'],
+ ['volume','Volume','artigo','text',''],
+ ['numero','Número','artigo','text',''],
+ ['ano','Ano','livro capitulo artigo online tese','text',''],
+ ['paginas',{_:'Páginas (ex.: 25-40)',livro:'Total de páginas'},'livro capitulo artigo','text',''],
+ ['tipoTese','Tipo','tese','select',['Dissertação','Tese']],
+ ['grau','Grau e curso','tese','text','Mestrado em Dinâmicas de Desenvolvimento do Semiárido'],
+ ['instituicao','Instituição','tese','text',''],
+ ['doi','DOI','livro capitulo artigo','text','10.1590/...'],
+ ['url','Endereço na internet (se a obra foi consultada on-line)','*','text','https://'],
+ ['acesso','Data de acesso','*','date','']];
+const pick=(v,t)=>v&&typeof v==='object'&&!Array.isArray(v)?(v[t]!==undefined?v[t]:v._):v;
+function abntName(n){n=String(n||'').trim().replace(/\s+/g,' ');if(!n)return '';
+ if(n.includes(',')){const i=n.indexOf(',');return n.slice(0,i).trim().toUpperCase()+', '+n.slice(i+1).trim()}
+ const parts=n.split(' ');if(parts.length===1)return parts[0].toUpperCase();
+ let sur=parts.pop();if(/^(júnior|junior|jr\.?|filho|neto|sobrinho)$/i.test(sur)&&parts.length>1)sur=parts.pop()+' '+sur;
+ return sur.toUpperCase()+', '+parts.join(' ')}
+function fmtAut(txt,inst){const L=String(txt||'').split(/\n|;/).map(x=>x.trim()).filter(Boolean);if(!L.length)return '';
+ if(inst)return esc(L.join('; ')).replace(/\.?$/,'.');const n=L.map(abntName);return esc(n.length>3?n[0]+' et al':n.join('; ')).replace(/\.?$/,'.')}
+const upFirst=s=>s.replace(/^(\S+)/,m=>m.toUpperCase());
+function tidy(s){return s.replace(/\s{2,}/g,' ').replace(/\s+([.,:;])/g,'$1').replace(/\.(\s*)\./g,'.$1').replace(/\.\s+\./g,'.').replace(/,\s*\./g,'.').replace(/:\s*\./g,'.').trim()}
+function abnt(r){r=r||{};const t=k=>esc(String(r[k]||'').trim());
+ const A=fmtAut(r.autores,r.inst);const tit=t('titulo')+(t('subtitulo')?': '+t('subtitulo'):'');
+ const T=A?`<b>${tit||'[sem título]'}</b>`:upFirst(tit||'[SEM TÍTULO]');
+ const ed=String(r.edicao||'').trim();const E=ed?(/^\d+$/.test(ed)?ed+'. ed. ':esc(ed).replace(/\.?$/,'. ')):'';
+ const imp=(l,e,a)=>`${l||'[<i>S. l.</i>]'}: ${e||'[<i>s. n.</i>]'}, ${a||'[<i>s. d.</i>]'}`;
+ const ON=r.url?` Disponível em: ${t('url')}. Acesso em: ${fmtAcesso(r.acesso)||'[data de acesso]'}.`:'';
+ const DOI=r.doi?` DOI: ${t('doi')}.`:'';let s='';
+ switch(r.tipo){
+  case 'capitulo':{const O=fmtAut(r.orgs,false).replace(/\.$/,'');
+   s=`${A} ${tit}. In: ${O?O+' (org.). ':''}<b>${t('livro')||'[título do livro]'}</b>. ${E}${imp(t('local'),t('editora'),t('ano'))}.${r.paginas?' p. '+t('paginas')+'.':''}${DOI}${ON}`;break}
+  case 'artigo':s=`${A} ${A?tit:upFirst(tit)}. <b>${t('periodico')||'[revista]'}</b>, ${[t('local'),r.volume?'v. '+t('volume'):'',r.numero?'n. '+t('numero'):'',r.paginas?'p. '+t('paginas'):'',t('ano')||'[s. d.]'].filter(Boolean).join(', ')}.${DOI}${ON}`;break;
+  case 'lei':s=`${esc(String(r.jur||'BRASIL').trim()).replace(/\.?$/,'.')} ${t('titulo')}. ${r.ementa?t('ementa').replace(/\.?$/,'. '):''}${r.pub?'<b>'+t('pub')+'</b>':''}${[t('local'),t('dataPub')].filter(Boolean).map(x=>', '+x).join('')}.${ON}`;break;
+  case 'online':{const resp=t('local')&&t('editora')?t('local')+': '+t('editora'):(t('editora')||t('local'));s=`${A} ${T}. ${[resp,t('ano')].filter(Boolean).join(', ')}.${ON}`;break}
+  case 'tese':s=`${A} ${T}. ${t('ano')}. ${t('tipoTese')||'Dissertação'}${r.grau?' ('+t('grau')+')':''} – ${t('instituicao')||'[instituição]'}${t('local')?', '+t('local'):''}, ${t('ano')}.${ON}`;break;
+  default:s=`${A} ${T}. ${E}${imp(t('local'),t('editora'),t('ano'))}.${r.paginas?' '+t('paginas').replace(/\s*p\.?$/,'')+' p.':''}${DOI}${ON}`}
+ return tidy(s)}
+const refsSorted=()=>Object.entries(S.refs||{}).filter(([,r])=>r&&typeof r==='object').sort((a,b)=>norm(abnt(a[1]))<norm(abnt(b[1]))?-1:1);
+
+/* busca de dados pelo DOI (Crossref) ou ISBN (Google Livros, Open Library) */
+const strip=s=>String(s||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+async function fromCrossref(doi){const r=await fetch('https://api.crossref.org/works/'+encodeURIComponent(doi));if(!r.ok)throw new Error('nf');const m=(await r.json()).message;
+ const nm=a=>a.family?(a.family.toUpperCase()+(a.given?', '+a.given:'')):(a.name||'');
+ const map={'journal-article':'artigo','proceedings-article':'artigo','book-chapter':'capitulo','book-section':'capitulo','book':'livro','monograph':'livro','edited-book':'livro','reference-book':'livro','dissertation':'tese'};
+ const dp=(m.issued||m.published||m['published-print']||m['published-online']||{})['date-parts'];const y=dp&&dp[0]&&dp[0][0];
+ const o={tipo:map[m.type]||'artigo',autores:(m.author||[]).map(nm).join('\n'),titulo:strip((m.title||[''])[0]),subtitulo:strip((m.subtitle||[])[0]),ano:y?String(y):'',doi:m.DOI||doi};
+ if(o.tipo==='artigo'){o.periodico=strip((m['container-title']||[''])[0]);o.volume=m.volume||'';o.numero=m.issue||'';o.paginas=m.page||''}
+ else{o.editora=m.publisher||'';o.local=m['publisher-location']||''}
+ if(o.tipo==='capitulo'){o.livro=strip((m['container-title']||[''])[0]);o.orgs=(m.editor||[]).map(nm).join('\n');o.paginas=m.page||''}
+ return o}
+async function fromIsbn(isbn){
+ try{const r=await fetch('https://www.googleapis.com/books/v1/volumes?q=isbn:'+isbn);const j=await r.json();const v=j.items&&j.items[0]&&j.items[0].volumeInfo;
+  if(v)return {tipo:'livro',autores:(v.authors||[]).join('\n'),titulo:v.title||'',subtitulo:v.subtitle||'',editora:v.publisher||'',ano:(v.publishedDate||'').slice(0,4),paginas:v.pageCount?String(v.pageCount):''}}catch(e){}
+ const r=await fetch('https://openlibrary.org/api/books?bibkeys=ISBN:'+isbn+'&format=json&jscmd=data');const j=await r.json();const v=j['ISBN:'+isbn];if(!v)throw new Error('nf');
+ return {tipo:'livro',autores:(v.authors||[]).map(a=>a.name).join('\n'),titulo:v.title||'',subtitulo:v.subtitle||'',editora:((v.publishers||[])[0]||{}).name||'',local:((v.publish_places||[])[0]||{}).name||'',ano:((v.publish_date||'').match(/\d{4}/)||[''])[0],paginas:v.number_of_pages?String(v.number_of_pages):''}}
+function parseQ(q){q=String(q||'').trim();const d=(q.match(/10\.\d{4,9}\/[^\s"<>]+/i)||[])[0];if(d)return {doi:d.replace(/[.,;)\]]+$/,'')};
+ const i=q.replace(/[^\dXx]/g,'').toUpperCase();if(i.length===10||i.length===13)return {isbn:i};return null}
+
+/* leitura do PDF no navegador para achar DOI ou ISBN */
+const PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+let pdfjsP=null;
+function loadPdfjs(){if(pdfjsP)return pdfjsP;pdfjsP=new Promise((res,rej)=>{const s=document.createElement('script');s.src=PDFJS+'pdf.min.js';
+ s.onload=()=>{try{window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS+'pdf.worker.min.js';res(window.pdfjsLib)}catch(e){pdfjsP=null;rej(e)}};s.onerror=()=>{pdfjsP=null;rej(new Error('lib'))};document.head.appendChild(s)});return pdfjsP}
+async function scanPdf(file){const lib=await loadPdfjs();const doc=await lib.getDocument({data:new Uint8Array(await file.arrayBuffer())}).promise;
+ let info={};try{info=(await doc.getMetadata()).info||{}}catch(e){}
+ let txt='';for(let i=1;i<=Math.min(doc.numPages,5);i++){const pg=await doc.getPage(i);const tc=await pg.getTextContent();txt+=tc.items.map(x=>x.str).join(' ')+'\n'}
+ return {txt,info,pages:doc.numPages}}
+
+let draft=null,editingId=null,draftFile=null;
+const rmsg=m=>{$('#rfMsg').textContent=m||''};
+function fillMembers(){const ms=members();let me='';try{me=localStorage.getItem('painel-eu')||''}catch(e){}
+ const sel=$('#rf-por');if(sel){const v=draft&&draft.por!==undefined?draft.por:me;sel.innerHTML='<option value="">Escolha</option>'+ms.map(m=>`<option value="${m.id}" ${m.id===v?'selected':''}>${esc(m.nome)}</option>`).join('')}}
+function drawRefForm(){const tp=draft.tipo||'livro';
+ $('#rf-tipo').innerHTML=TIPOS.map(([v,l])=>`<option value="${v}" ${v===tp?'selected':''}>${l}</option>`).join('');
+ $('#rfFields').innerHTML=RF.filter(f=>f[2]==='*'||f[2].split(' ').includes(tp)).map(([k,lab,,kind,ph])=>{const L=esc(pick(lab,tp)),p0=pick(ph,tp),P=typeof p0==='string'&&p0&&p0!=='https://'?esc('ex.: '+p0):esc(p0||''),v=draft[k];
+  const full=kind==='area'||k==='titulo'||k==='url'||k==='ementa'||k==='inst'||k==='livro'||k==='periodico'?' full':'';
+  if(kind==='check')return `<label class="ccheck${full}"><input type="checkbox" id="rf-${k}" data-d="${k}" ${v?'checked':''}> ${L}</label>`;
+  if(kind==='area')return `<label class="f${full}">${L}<textarea id="rf-${k}" data-d="${k}" placeholder="${P}">${esc(v||'')}</textarea></label>`;
+  if(kind==='select')return `<label class="f${full}">${L}<select id="rf-${k}" data-d="${k}">${ph.map(o=>`<option ${o===(v||ph[0])?'selected':''}>${o}</option>`).join('')}</select></label>`;
+  return `<label class="f${full}">${L}<input type="${kind==='date'?'date':'text'}" id="rf-${k}" data-d="${k}" value="${esc(v||'')}" placeholder="${P}"></label>`}).join('');
+ const cs=draft.conceitos||{};$('#rfConc').innerHTML=allConc().map(k=>`<label class="ccheck"><input type="checkbox" data-dc="${k.id}" ${cs[k.id]?'checked':''}> ${esc(k.nome)}</label>`).join('');
+ $('#rf-link').value=draft.link||'';$('#rf-nota').value=draft.nota||'';fillMembers();
+ $('#rfFileInfo').textContent=draftFile?`${draftFile.name} · ${(draftFile.size/1048576).toFixed(1)} MB`:(draft.arquivo?`Arquivo atual: ${draft.arquivo.nome}. Escolha outro para substituir.`:(WEB?'PDF ou documento de até 5 MB. Arraste aqui ou escolha no computador.':'O upload precisa do banco do grupo configurado. Use o link do Google Drive.'));
+ refPrev()}
+function refPrev(){$('#rfPrev').innerHTML=abnt(draft)}
+function openRefForm(id){editingId=id||null;draftFile=null;draft=id?clone(S.refs[id]):{tipo:'livro',acesso:todayISO(),conceitos:{}};
+ $('#rfTitle').textContent=id?'Editar referência':'Nova referência';$('#rfQ').value='';rmsg('');$('#rfSaveMsg').textContent='';$('#rform').hidden=false;drawRefForm();$('#rform').scrollIntoView({block:'start'})}
+function closeRefForm(){$('#rform').hidden=true;draft=null;editingId=null;draftFile=null;$('#rfFile').value=''}
+$('#rfNew').addEventListener('click',()=>openRefForm());
+$('#rfCancel').addEventListener('click',closeRefForm);
+$('#rform').addEventListener('input',e=>{const t=e.target;if(!draft)return;
+ if(t.dataset.d){draft[t.dataset.d]=t.type==='checkbox'?t.checked:t.value;if(t.dataset.d==='tipo')drawRefForm();else refPrev();if(t.dataset.d==='por'){try{localStorage.setItem('painel-eu',t.value)}catch(e){}}}
+ if(t.dataset.dc){draft.conceitos=draft.conceitos||{};if(t.checked)draft.conceitos[t.dataset.dc]=true;else delete draft.conceitos[t.dataset.dc]}});
+$('#rform').addEventListener('change',e=>{const t=e.target;if(t.tagName==='SELECT'&&t.dataset.d&&draft){draft[t.dataset.d]=t.value;if(t.dataset.d==='tipo')drawRefForm();else refPrev()}});
+function applyFound(o){for(const k in o)if(o[k])draft[k]=o[k];drawRefForm()}
+async function runLookup(q){const p=parseQ(q);if(!p){rmsg('Digite um DOI (começa com 10.) ou um ISBN com 10 ou 13 dígitos.');return false}
+ rmsg('Buscando '+(p.doi?'o DOI':'o ISBN')+'…');try{const o=p.doi?await fromCrossref(p.doi):await fromIsbn(p.isbn);applyFound(o);
+  rmsg('Dados encontrados. Confira cada campo, principalmente a cidade e a editora, antes de salvar.');return true}
+ catch(e){rmsg('Não encontrei dados para '+(p.doi||p.isbn)+'. Preencha os campos à mão.');return false}}
+$('#rfLook').addEventListener('click',()=>runLookup($('#rfQ').value));
+$('#rfQ').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();runLookup($('#rfQ').value)}});
+async function onRefFile(f){if(!f)return;if(!WEB){rmsg('O upload precisa do banco do grupo configurado. Use o link do Google Drive.');$('#rfFile').value='';return}
+ if(f.size>MAXF){rmsg('Este arquivo tem '+(f.size/1048576).toFixed(1)+' MB, acima do limite de 5 MB. Suba no Google Drive e cole o link.');$('#rfFile').value='';return}
+ draftFile=f;$('#rfFileInfo').textContent=`${f.name} · ${(f.size/1048576).toFixed(1)} MB`;
+ if(!/\.pdf$/i.test(f.name)&&f.type!=='application/pdf'){rmsg('Arquivo escolhido. Preencha os dados da obra abaixo ou busque pelo DOI ou ISBN.');return}
+ rmsg('Lendo o PDF para procurar DOI ou ISBN…');
+ try{const {txt,info}=await scanPdf(f);const doi=(txt.match(/\b10\.\d{4,9}\/[^\s"<>]+/i)||[])[0];const isbn=(txt.match(/ISBN(?:-1[03])?[:\s]*((?:97[89][\s-]?)?(?:\d[\s-]?){9}[\dXx])/i)||[])[1];
+  const q=doi?doi.replace(/[.,;)\]]+$/,''):(isbn||'');
+  if(q){$('#rfQ').value=q;const ok=await runLookup(q);if(ok)return}
+  const T=String(info.Title||'').trim();if(!draft.titulo&&T.length>3&&!/microsoft|\.docx?|\.pdf|untitled|sem título/i.test(T)){draft.titulo=T;drawRefForm()}
+  if(!q)rmsg('Não achei DOI nem ISBN no PDF. Preencha os campos abaixo ou digite o DOI ou ISBN na busca.')}
+ catch(e){rmsg('Não consegui ler o PDF aqui. Preencha os campos abaixo ou busque pelo DOI ou ISBN.')}}
+$('#rfFile').addEventListener('change',e=>onRefFile(e.target.files[0]));
+const drop=$('#rfDrop');['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over')}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over')}));
+drop.addEventListener('drop',e=>{const f=e.dataTransfer&&e.dataTransfer.files[0];if(f)onRefFile(f)});
+const readDU=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)});
+$('#rfSave').addEventListener('click',async()=>{if(!draft)return;const b=$('#rfSave'),m=$('#rfSaveMsg');
+ if(!String(draft.titulo||'').trim()){m.textContent='Preencha ao menos o título.';$('#rf-titulo').focus();return}
+ draft.link=$('#rf-link').value.trim();draft.nota=$('#rf-nota').value;const id=editingId||('r'+uid());b.disabled=true;
+ try{if(draftFile){m.textContent='Enviando o arquivo…';const du=await readDU(draftFile);const r=await fetch(fileUrl(id),{method:'PUT',body:JSON.stringify(du)});if(!r.ok)throw new Error('up');
+   draft.arquivo={nome:draftFile.name,tam:draftFile.size,tipo:draftFile.type||''}}
+  const prev=S.refs[id]||{};const obj=clone(draft);obj.criado=prev.criado||todayISO();obj.lidos=prev.lidos||{};
+  if(!obj.por){try{obj.por=localStorage.getItem('painel-eu')||''}catch(e){}}
+  setPut('refs/'+id,obj);closeRefForm();drawRefs();updateConcRefs();progress();toast('Referência salva')}
+ catch(e){m.textContent='Não foi possível enviar o arquivo. Verifique a conexão e tente de novo, ou use o link do Drive.'}
+ finally{b.disabled=false}});
+function concName(id){const k=allConc().find(x=>x.id===id);return k?k.nome:''}
+function drawRefFilter(){const s=$('#rcf'),v=s.value;s.innerHTML='<option value="">Todos os conceitos</option>'+allConc().map(k=>`<option value="${k.id}" ${k.id===v?'selected':''}>${esc(k.nome)}</option>`).join('')}
+let refsSig='';
+function drawRefs(){const q=norm($('#rq').value.trim()),cf=$('#rcf').value,ms=members(),all=refsSorted();
+ const list=all.filter(([,r])=>(!cf||(r.conceitos||{})[cf])&&(!q||norm(abnt(r)+' '+(r.nota||'')+' '+(r.autores||'')).includes(q)));
+ $('#refList').innerHTML=list.map(([id,r])=>{const by=ms.find(m=>m.id===r.por);const cs=Object.keys(r.conceitos||{}).map(concName).filter(Boolean);
+  return `<article class="card ref"><p class="abnt">${abnt(r)}</p>
+  ${cs.length?`<div class="chips">${cs.map(n=>`<span class="cchip">${esc(n)}</span>`).join('')}</div>`:''}
+  ${r.nota?`<p class="nota">${esc(r.nota)}</p>`:''}
+  <div class="rmeta"><span>${by?'Adicionada por '+esc(by.nome):'Adicionada'}${r.criado?' em '+fmtD(r.criado):''}</span>${r.arquivo?`<span>Arquivo: ${esc(r.arquivo.nome)} · ${(r.arquivo.tam/1048576).toFixed(1)} MB</span>`:''}
+   <span class="lidos">Lido por: ${ms.map(m=>`<button type="button" class="lido" data-lido="${id}|${m.id}" aria-pressed="${!!(r.lidos||{})[m.id]}">${esc(m.nome)}</button>`).join('')}</span></div>
+  <div class="toolbar">${r.arquivo?`<button class="btn primary" type="button" data-open="${id}">${/\.(pdf|png|jpe?g)$/i.test(r.arquivo.nome||'')||/pdf|image/.test(r.arquivo.tipo||'')?'Abrir arquivo':'Baixar arquivo'}</button>`:''}${r.link?`<a class="btn${r.arquivo?'':' primary'}" href="${esc(r.link)}" target="_blank" rel="noopener">Abrir link</a>`:''}
+   <button class="btn" type="button" data-rcopy="${id}">Copiar referência</button><button class="btn" type="button" data-redit="${id}">Editar</button><button class="btn" type="button" data-rdel="${id}">Remover</button></div></article>`}).join('');
+ $('#noRefs').hidden=list.length>0;$('#noRefs').textContent=all.length?'Nenhuma referência com esse filtro.':'A biblioteca está vazia. Clique em Adicionar referência para subir a primeira.';
+ $('#rfCount').textContent=all.length+(all.length===1?' referência':' referências')+(all.length?' · '+all.filter(([,r])=>r.arquivo).length+' com arquivo':'');refsSig=JSON.stringify(S.refs||{})}
+$('#rq').addEventListener('input',drawRefs);$('#rcf').addEventListener('change',drawRefs);
+async function openFile(id,btn){const meta=(S.refs[id]||{}).arquivo||{};const view=/pdf|image/.test(meta.tipo||'')||/\.(pdf|png|jpe?g)$/i.test(meta.nome||'');
+ const w=view?window.open('','_blank'):null;const o=btn.textContent;btn.textContent='Abrindo…';
+ try{const r=await fetch(fileUrl(id));const du=await r.json();if(!du)throw 0;const blob=await (await fetch(du)).blob();const u=URL.createObjectURL(blob);
+  if(!view){const a=document.createElement('a');a.href=u;a.download=meta.nome||'arquivo';document.body.appendChild(a);a.click();a.remove();toast('Baixando '+(meta.nome||'o arquivo'))}
+  else if(w){w.location.href=u}else{const a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';a.textContent='Clique aqui para abrir o arquivo';a.className='btn';btn.after(a)}}
+ catch(e){if(w)w.close();toast('Não foi possível abrir o arquivo. Verifique a conexão.')}finally{btn.textContent=o}}
+$('#refList').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.lido){const [rid,mid]=b.dataset.lido.split('|');const on=b.getAttribute('aria-pressed')!=='true';setPut('refs/'+rid+'/lidos/'+mid,on?true:null);b.setAttribute('aria-pressed',String(on));refsSig=JSON.stringify(S.refs)}
+ if(b.dataset.open)openFile(b.dataset.open,b);
+ if(b.dataset.rcopy){const h=abnt(S.refs[b.dataset.rcopy]);copyHTML(h,plain(h),'Referência copiada.')}
+ if(b.dataset.redit)openRefForm(b.dataset.redit);
+ if(b.dataset.rdel)twoStep(b,()=>{const id=b.dataset.rdel,had=S.refs[id]&&S.refs[id].arquivo;delItem('refs',id);if(had&&WEB)fetch(fileUrl(id),{method:'DELETE'}).catch(()=>{});drawRefs();updateConcRefs();progress()},'Confirmar')});
+$('#rfCopyAll').addEventListener('click',()=>{const rs=refsSorted().map(([,r])=>abnt(r));if(!rs.length){toast('A biblioteca ainda está vazia.');return}
+ copyHTML(rs.map(x=>`<p style="font-family:Arial,sans-serif;font-size:11pt;margin:0 0 10pt;text-align:left">${x}</p>`).join(''),rs.map(plain).join('\n\n'),rs.length+' referências copiadas em ordem alfabética.')});
+function updateConcRefs(){allConc().forEach(k=>{const e=document.getElementById('crf-'+k.id);if(!e)return;const rs=refsSorted().filter(([,r])=>(r.conceitos||{})[k.id]);
+ e.innerHTML=rs.length?`<div class="kicker" style="margin:10px 0 4px">Na biblioteca do grupo</div><ul class="plain">${rs.map(([,r])=>`<li>${abnt(r)}</li>`).join('')}</ul>`:''})}
+
+/* chamado depois de cada leitura do banco */
+function refreshNew(){syncBound();updateHero();
+ const sig=JSON.stringify([sorted('papeis').map(x=>x[0]),sorted('crono').map(x=>x[0])]);
+ if(sig!==relSig&&!$('#relEdit').contains(document.activeElement))drawRelEdit();else{maybeHomeCrono();cronoBadges()}
+ drawEntregas();renderPreview();
+ if(JSON.stringify(S.refs||{})!==refsSig&&!$('#refList').contains(document.activeElement)){drawRefs();updateConcRefs()}
+ if(!draft)fillMembers()}
 
 /* ---------- movimento ---------- */
 const REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -969,6 +1501,7 @@ function sizeFill(f){const now=document.querySelector('#tl .tlrow.now');if(now)f
 if(!REDUCED){document.querySelectorAll('.hero h1,.words').forEach(splitWords)}
 
 /* ---------- início ---------- */
+drawSecs();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();
 drawGroups();drawActors();drawSig();drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();route();
 if(WEB){status('Conectando ao banco do grupo');pull();setInterval(pull,6000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});window.addEventListener('beforeunload',()=>{if(queue.size)flush()})}
 else status(canStore?'Salvo só neste navegador':'Este navegador não permite salvar');
