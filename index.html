@@ -40,6 +40,7 @@ button,select,input,textarea{font:inherit;color:inherit}
 .util{background:var(--band);color:var(--band-2);font-size:13px;border-bottom:1px solid var(--band-line)}
 .util .inner{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:space-between;padding-top:7px;padding-bottom:7px}
 .util b{color:var(--band-ink);font-weight:600}
+.ushort{display:none;text-decoration:none}
 .util button{background:transparent;border:1px solid var(--band-line);color:var(--band-ink);border-radius:999px;padding:3px 12px;cursor:pointer;font-weight:600}
 .util button:hover{border-color:var(--band-mark)}
 
@@ -75,7 +76,16 @@ section.view.on{display:block}
 .rows .r.next{border-left:4px solid var(--mark);padding-left:10px;margin-left:-14px}
 
 /* cartões de entrada */
-.entry{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:-58px;position:relative}
+.entry{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:-58px;position:relative}
+.entry.work3{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:14px}
+.entry.work3 a{min-height:148px}
+.defs{display:flex;flex-direction:column;margin-top:6px}
+.defs .d{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+.defs .d:last-child{border:0;padding-bottom:0}
+.defs .d b{font-family:var(--font-display);font-size:15.5px}
+.defs .d .full{font-weight:600}
+.defs .d p{color:var(--ink-2);font-size:14px;margin-top:2px}
+.defs.terms .d{grid-template-columns:190px minmax(0,1fr)}
 .entry a{display:flex;flex-direction:column;gap:8px;padding:18px 20px 16px;border-radius:10px;text-decoration:none;min-height:168px;border:1px solid var(--line);background:var(--surface)}
 .entry a.work{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .entry a.work .kicker,.entry a.work .prog{color:inherit;opacity:.85}
@@ -231,7 +241,8 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
 
 @media (max-width:900px){
   .foot{grid-template-columns:1fr 1fr}
-  .hero .inner,.state,.sechead,.split,.split.rev,.stagewrap,.two,.pair{grid-template-columns:1fr}
+  .hero .inner,.state,.sechead,.split,.split.rev,.stagewrap,.two,.pair{grid-template-columns:minmax(0,1fr)}
+  .aside,.split>*{min-width:0}
   .hero .inner{padding-top:36px;gap:24px}.hero h1{font-size:30px}
   .entry{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr}
   .figs,.figs.six{grid-template-columns:1fr 1fr;gap:18px 0}.figs .fig:nth-child(odd){border-left:0;padding-left:0}
@@ -240,17 +251,97 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
   .mrow{grid-template-columns:1fr 1fr}.mrow .w2,.mrow .w3{grid-column:span 2}
 }
 @media (max-width:520px){.entry{grid-template-columns:1fr}.barx{grid-template-columns:1fr 54px}.barx .track{grid-column:1/-1;order:3}h2{font-size:24px}}
+
+/* ---------- celular ---------- */
+@media (max-width:760px){
+  body{font-size:15.5px}
+  .inner{padding:0 14px}
+  .ulong{display:none}.ushort{display:inline}
+  .util .inner{padding-top:8px;padding-bottom:8px;flex-wrap:nowrap}
+  .util #saveState{display:none}
+  .bar .brand{display:none}
+  .bar .inner{padding:7px 10px}
+  nav.pill{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  nav.pill::-webkit-scrollbar{display:none}
+  nav.pill a{flex:none;white-space:nowrap;padding:9px 15px;font-size:14.5px}
+  input[type=search],select,textarea,input[type=text]{font-size:16px}
+  .btn{padding:11px 14px}
+  .hero .inner{padding-top:28px;padding-bottom:64px;gap:20px}
+  .hero h1{font-size:27px;margin:10px 0 14px}
+  .hero p{font-size:15px}
+  .side{padding:16px}
+  .entry,.entry.work3{grid-template-columns:1fr 1fr;gap:10px}
+  .entry{margin-top:-40px}.entry.work3{margin-top:10px}
+  .entry a,.entry.work3 a{min-height:0;padding:14px;gap:5px}
+  .entry h3{font-size:17px}
+  .entry p{display:none}
+  .entry .prog{margin-top:6px;font-size:12px}
+  .entry .prog span:last-child{display:none}
+  .entry.work3 a:last-child{grid-column:1/-1}
+  .block{padding:30px 0}.block.tight{padding:20px 0 30px}
+  h2{font-size:24px}
+  .figs .big{font-size:32px}
+  .pair>a{padding:18px}
+  .sechead{padding:22px 0 16px;margin-bottom:16px}
+  .card{padding:14px}
+  .grid2{grid-template-columns:1fr}
+  /* fichas: grupos viram uma fileira de botões que rola para o lado */
+  .groups{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:4px;scrollbar-width:none}
+  .groups::-webkit-scrollbar{display:none}
+  .groups button{flex:none;border:1px solid var(--line);border-radius:999px;padding:8px 13px;gap:8px;white-space:nowrap;background:var(--surface)}
+  .groups button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+  .groups button[aria-pressed="true"] .muted{color:inherit}
+  .aside{gap:10px}
+  #v-conceitos .aside{flex-direction:row;flex-wrap:wrap}
+  #v-conceitos .aside .btn{flex:1 1 150px}
+  #v-conceitos .aside p{flex-basis:100%}
+  /* linhas rótulo + valor empilhadas */
+  .side .rows .r{grid-template-columns:1fr auto}
+  .card .rows .r{grid-template-columns:1fr;gap:1px}
+  .card .rows .r>b{text-align:left}
+  .card .rows .r>span{font-size:13px;color:var(--ink-2)}
+  /* matriz: rola para o lado em vez de espremer */
+  .matrix{grid-template-columns:auto repeat(3,minmax(112px,1fr));padding:8px}
+  #v-mapa .split.rev>.matrix::after{content:"";}
+  .mhint{display:block!important}
+  .matrix .ax{font-size:11px;padding:3px 4px}
+  .matrix .cell{min-width:0;min-height:86px}
+  .mrow{grid-template-columns:1fr}.mrow .w2,.mrow .w3{grid-column:auto}
+  details.card>summary{align-items:flex-start;flex-direction:column;gap:2px}
+  /* tabelas viram blocos empilhados */
+  table.tm,table.tm tbody{display:block}
+  table.tm tr{display:block;padding:11px 0;border-bottom:1px solid var(--line)}
+  table.tm tr:first-child{display:none}
+  table.tm td{display:block;border:0;padding:0;white-space:normal!important}
+  table.tm td:first-child{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+  table.tm td:first-child b{font-weight:600}
+  table.tm td+td{margin-top:3px}
+  #bTable td:last-child{margin-top:5px}
+  table.tm td:nth-child(2):not(:last-child),table.tm td:nth-child(3):not(:last-child){display:inline;font-size:13px;color:var(--ink-2)}
+  #bTable td:nth-child(2){display:block!important;font-size:15px!important;color:var(--ink)!important}
+  table.tm td:nth-child(3):not(:last-child)::before{content:" · "}
+  .defs .d,.defs.terms .d{grid-template-columns:1fr;gap:2px}
+  .tlrow{padding:12px 0 12px 12px}
+  .stagewrap{padding:18px;gap:16px}
+  .stagewrap .q{font-size:22px}
+  .toolbar>div[style*="width"]{width:100%!important}
+  .barx{grid-template-columns:1fr 54px}.barx .track{grid-column:1/-1;order:3}
+  .foot{grid-template-columns:1fr 1fr;gap:20px}
+  .foot>div:first-child{grid-column:1/-1}
+  footer{margin-top:28px}
+  #toast{width:calc(100% - 28px);text-align:center}
+}
 </style>
 </head>
 <body>
 <div class="util"><div class="inner">
-  <span>ADMT0346 · Gestão de Conflitos · PBL · <b>Próxima entrega: Relatório Parcial até 15/11</b></span>
+  <span class="ulong">ADMT0346 · Gestão de Conflitos · PBL · <b>Próxima entrega: Relatório Parcial até 15/11</b></span><a class="ushort" href="#inicio"><b>Painel Caatinga Velha</b></a>
   <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="sync"><i class="dot" id="syncDot" aria-hidden="true"></i><span id="saveState">Salvo neste navegador</span></span><button id="btnBackup" type="button">Salvar e compartilhar</button></span>
 </div></div>
 <div class="bar"><div class="inner">
   <a class="brand" href="#inicio">Painel do Caso Caatinga Velha</a>
   <nav class="pill" aria-label="Seções do painel">
-    <i class="ind" aria-hidden="true"></i><a href="#inicio">Início</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a>
+    <i class="ind" aria-hidden="true"></i><a href="#inicio">Início</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#siglas">Siglas</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a>
   </nav>
 </div></div>
 
@@ -277,6 +368,9 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
       <a href="#fichas"><span class="kicker">Consultar</span><h3>Fichas dos atores</h3><p>Quem é quem, com fatos e falas do caso.</p><span class="prog"><span>17 fichas</span><span>abrir</span></span></a>
       <a href="#linha-do-tempo"><span class="kicker">Consultar</span><h3>Linha do tempo</h3><p>Do Mês -12 ao fim do prazo da notificação.</p><span class="prog"><span>11 eventos</span><span>abrir</span></span></a>
       <a href="#dados"><span class="kicker">Consultar</span><h3>Dados do caso</h3><p>Coração do Sertão, o distrito, a rede de saúde e os indicadores.</p><span class="prog"><span>município, distrito e indicadores</span><span>abrir</span></span></a>
+      <a href="#siglas"><span class="kicker">Consultar</span><h3>Siglas e termos</h3><p>O que significa cada sigla e cada termo do caso.</p><span class="prog"><span>47 verbetes</span><span>abrir</span></span></a>
+    </div>
+    <div class="entry work3">
       <a class="work" href="#mapa"><span class="kicker">Preencher</span><h3>Mapa de atores</h3><p>Interesses, posições, poder e alianças. Gera a matriz.</p><span class="prog"><span id="pMapa"></span><span>abrir</span></span></a>
       <a class="work" href="#banca"><span class="kicker">Preencher</span><h3>Treino de banca</h3><p>As perguntas de cada papel e a resposta do grupo.</p><span class="prog"><span id="pBanca"></span><span>abrir</span></span></a>
       <a class="work" href="#conceitos"><span class="kicker">Preencher</span><h3>Conceitos</h3><p>O que pesquisar, por quê e com quais fontes.</p><span class="prog"><span id="pConc"></span><span>abrir</span></span></a>
@@ -317,10 +411,25 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
   </div>
 </div></section>
 
+<section class="view" id="v-siglas"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Consultar</div><h2>Siglas e termos</h2></div><p>As siglas e os termos que aparecem no caso e no material da disciplina, com uma explicação curta e o papel de cada um na história.</p></div>
+  <div class="split">
+    <div class="aside">
+      <input type="search" id="qs" placeholder="Buscar: VISA, garrafada, conselho" aria-label="Buscar siglas e termos">
+      <p class="muted" id="sigCount"></p>
+    </div>
+    <div class="stack">
+      <div class="card"><h3>Siglas</h3><div class="defs" id="sigList"></div></div>
+      <div class="card"><h3>Termos do caso</h3><div class="defs terms" id="termList"></div></div>
+      <p class="muted" id="noSig" hidden>Nada encontrado. Tente outra palavra.</p>
+    </div>
+  </div>
+</div></section>
+
 <section class="view" id="v-mapa"><div class="inner">
   <div class="sechead"><div><div class="kicker">Preencher</div><h2>Mapa de atores</h2></div><p>A matriz se monta a partir do poder e do interesse que o grupo atribuir. A borda de cada nome mostra a postura diante das práticas tradicionais.</p></div>
   <div class="split rev">
-    <div class="matrix" id="matrix" role="img" aria-label="Matriz poder por interesse"></div>
+    <div><p class="muted mhint" style="display:none;margin-bottom:6px">No celular, deslize a matriz para o lado para ver a coluna “interesse alto”.</p><div class="matrix" id="matrix" role="img" aria-label="Matriz poder por interesse"></div></div>
     <div class="aside">
       <div class="card"><div class="kicker" style="margin-bottom:8px">Postura</div><div class="legend">
         <span><span class="chip fav">▲ Nome</span> favorável</span><span><span class="chip">● Nome</span> ambivalente</span><span><span class="chip con">▼ Nome</span> contrária</span><span><span class="chip nd">Nome</span> a definir</span></div></div>
@@ -365,7 +474,7 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
       <div class="card"><h3>Uso e percepção das práticas</h3><p class="muted" style="margin:3px 0 14px">Percentual. População: inquérito domiciliar da UBS, 2023, não publicado. Profissionais: levantamento interno da Enf. Carla, 2024.</p><div class="bars" id="barsPct"></div></div>
       <div class="card"><h3>População por localidade</h3><p class="muted" style="margin:3px 0 14px">Habitantes, valores aproximados do caso. As três primeiras são comunidades rurais.</p><div class="bars" id="barsPop"></div></div>
     </div>
-    <div class="card"><h3>As seis localidades do distrito</h3><div class="scroll" style="margin-top:8px"><table>
+    <div class="card"><h3>As seis localidades do distrito</h3><div class="scroll" style="margin-top:8px"><table class="tm">
       <tr><th>Localidade</th><th>Zona</th><th>População</th><th>O que o caso diz</th></tr>
       <tr><td><b>Quilombo do Baixio das Mulheres</b></td><td>Rural</td><td class="num">400</td><td style="white-space:normal">Onde vivem Dona Margarida e a maioria das raizeiras e benzedeiras. Liderança feminina e matrilinear. Pressão de fazendeiros por limites de terra. Cuidado coletivo com plantas nativas (aroeira, juazeiro, umburana, angico). Casa de Rezas aberta ao distrito três vezes por semana.</td></tr>
       <tr><td><b>Comunidade do Riacho do Meio</b></td><td>Rural</td><td class="num">250</td><td style="white-space:normal">Pequenos agricultores familiares, muitos deles raizeiros. Farmácia Viva comunitária desativada há dois anos por falta de apoio técnico e financeiro da prefeitura.</td></tr>
@@ -405,7 +514,7 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
     </div>
     <div class="tbar" id="tbar"><i></i></div>
     <div class="stagewrap" id="stage"></div>
-    <div class="card"><div class="toolbar" style="justify-content:space-between;margin-bottom:6px"><h3>Todas as perguntas</h3><span class="muted" id="bCount"></span></div><div class="scroll"><table id="bTable"></table></div></div>
+    <div class="card"><div class="toolbar" style="justify-content:space-between;margin-bottom:6px"><h3>Todas as perguntas</h3><span class="muted" id="bCount"></span></div><div class="scroll"><table id="bTable" class="tm"></table></div></div>
   </div>
 </div></section>
 
@@ -425,7 +534,7 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
 
 <footer><div class="inner foot">
   <div><div class="brand">Painel do Caso Caatinga Velha</div><p style="margin-top:8px;max-width:44ch">Material de apoio do grupo para a disciplina ADMT0346, PPGDiDeS/UNIVASF. Os dados do caso são fictícios e vêm do material da disciplina.</p></div>
-  <div class="col"><span class="kicker">Consultar</span><a href="#fichas">Fichas dos atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados do caso</a></div>
+  <div class="col"><span class="kicker">Consultar</span><a href="#fichas">Fichas dos atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados do caso</a><a href="#siglas">Siglas e termos</a></div>
   <div class="col"><span class="kicker">Preencher</span><a href="#mapa">Mapa de atores</a><a href="#banca">Treino de banca</a><a href="#conceitos">Conceitos</a></div>
   <div class="col"><span class="kicker">Entregas</span><span>Relatório Parcial · 15/11</span><span>Roteiro · 02/12</span><span>Relatório Final · 07 a 11/12</span></div>
 </div></footer>
@@ -576,6 +685,59 @@ const SEED={
  legal:{pq:'Responde ao MP na banca e ampara o salvo-conduto do protocolo de convivência.',fontes:'Convenção 169 da OIT; Lei 12.288/2010 (Estatuto da Igualdade Racial).'},
 };
 
+/* Siglas e termos do caso */
+const SIGLAS = [
+ ['ABNT','Associação Brasileira de Normas Técnicas','Define o padrão das referências bibliográficas exigido no Relatório Final.'],
+ ['ABP / PBL','Aprendizagem Baseada em Problemas (Problem-Based Learning)','Metodologia da disciplina: o grupo parte de um problema, levanta hipóteses, estuda e volta com a solução.'],
+ ['ACS','Agente Comunitário de Saúde','Morador do território que faz visitas domiciliares pela UBS. No caso são 12; Seu Raimundo e Dona Lúcia também são raizeiros.'],
+ ['BPC','Benefício de Prestação Continuada','Benefício assistencial de um salário mínimo para idosos e pessoas com deficiência de baixa renda. Muitas famílias da zona rural o recebem.'],
+ ['CAPS','Centro de Atenção Psicossocial','Serviço de saúde mental do SUS. O do caso é tipo I, a modalidade de menor porte, e fica na Cohab II.'],
+ ['CIB','Comissão Intergestores Bipartite','Instância em que o estado e os municípios pactuam a política de saúde. O secretário se opôs ali ao programa de plantas medicinais.'],
+ ['CLS','Conselho Local de Saúde','Espaço de controle social do SUS no território. Tem 12 membros e é presidido por Dona Zefa.'],
+ ['CNJ','Conselho Nacional de Justiça','Publica o Manual de Mediação Judicial, uma das referências da disciplina.'],
+ ['Cohab','Companhia de Habitação','Nome dado a conjuntos habitacionais populares. Cohab II é o bairro onde ficam a UBS e o CAPS.'],
+ ['EPS','Educação Permanente em Saúde','Formação dos profissionais a partir dos problemas do próprio trabalho. Base da formação “Entre o Fármaco e o Chá”.'],
+ ['FCP','Fundação Cultural Palmares','Órgão federal que certifica comunidades quilombolas. As três comunidades rurais do caso são reconhecidas por ela.'],
+ ['Funasa','Fundação Nacional de Saúde','Publicou o livro Territórios Sustentáveis e Saudáveis, do material complementar.'],
+ ['GM/MS','Gabinete do Ministro / Ministério da Saúde','Aparece na numeração das portarias federais, como a Portaria GM/MS nº 971/2006.'],
+ ['IBGE','Instituto Brasileiro de Geografia e Estatística','Fonte da estimativa de população do distrito (12.150).'],
+ ['IDH','Índice de Desenvolvimento Humano','Combina renda, educação e longevidade, de 0 a 1. O de Coração do Sertão é 0,62, classificado como médio.'],
+ ['LOA','Lei Orçamentária Anual','O orçamento do município. Na LOA 2024 a verba para PICs é R$ 0,00.'],
+ ['MFC','Medicina de Família e Comunidade','Especialidade médica da atenção básica. O Dr. Ricardo é residente nessa área.'],
+ ['MP','Ministério Público','Defende direitos coletivos. No caso é o estadual: suspendeu duas multas e abriu procedimento preparatório.'],
+ ['NASF-AB','Núcleo Ampliado de Saúde da Família e Atenção Básica','Equipe multiprofissional que apoia a UBS. No caso: nutricionista, fisioterapeuta e psicólogo.'],
+ ['OEA','Organização dos Estados Americanos','Tem um sistema de proteção de direitos humanos. Seu Benedito ameaça acioná-la.'],
+ ['OIT','Organização Internacional do Trabalho','Autora da Convenção 169, sobre direitos de povos indígenas e tribais, citada nas perguntas do MP.'],
+ ['PICs','Práticas Integrativas e Complementares em Saúde','Recursos terapêuticos reconhecidos no SUS, como fitoterapia, auriculoterapia e ventosaterapia.'],
+ ['PNPIC','Política Nacional de Práticas Integrativas e Complementares','Política federal que insere as PICs no SUS (Portaria GM/MS nº 971/2006). O município aderiu em 2019.'],
+ ['PPGDiDeS','Programa de Pós-Graduação em Dinâmicas de Desenvolvimento do Semiárido','Programa de mestrado da UNIVASF em que a disciplina é ofertada.'],
+ ['SMS','Secretaria Municipal de Saúde','Gestão municipal da saúde, comandada pelo Dr. Heitor Carneiro.'],
+ ['SUS','Sistema Único de Saúde','Sistema público de saúde brasileiro, orientado por universalidade, integralidade e equidade.'],
+ ['UBS','Unidade Básica de Saúde','Porta de entrada do SUS. A UBS Dr. Ângelo fica na Cohab II e funciona das 7h às 17h.'],
+ ['UNIVASF','Universidade Federal do Vale do São Francisco','Instituição do mestrado.'],
+ ['VISA','Vigilância Sanitária','Fiscaliza produtos e serviços que podem trazer risco à saúde. No caso é municipal, chefiada pela Dra. Vera Lúcia, com três fiscais.'],
+];
+const TERMOS = [
+ ['Auriculoterapia','Estímulo de pontos da orelha com sementes ou agulhas. Oferecida na UBS só pela Enf. Carla.'],
+ ['Benzedura (benzimento)','Prática tradicional de cura por rezas e gestos, muitas vezes com ramos de plantas. Quem pratica é a benzedeira ou o benzedor.'],
+ ['Contrarreferência','Retorno do paciente ao serviço de origem depois de atendido em outro ponto da rede. O plano propõe uma versão “popular”, entre UBS e praticantes tradicionais.'],
+ ['Farmácia Viva','Programa do SUS de cultivo de plantas medicinais e preparo de fitoterápicos. O município não tem; a do Riacho do Meio, comunitária, está desativada.'],
+ ['Fitoterapia','Uso terapêutico de plantas medicinais e de seus derivados.'],
+ ['Garrafada','Preparo tradicional de plantas medicinais deixadas em infusão ou maceração e guardadas em garrafa. Foi o alvo da notificação sanitária.'],
+ ['Infração sanitária','Descumprimento das normas de vigilância sanitária, previsto na Lei 6.437/77. É o enquadramento dado aos frascos de Dona Margarida.'],
+ ['Modelo flexneriano (biomédico)','Modelo de formação e de cuidado centrado na doença, no especialista e no hospital.'],
+ ['Moção','Manifestação formal de um conselho. A do Conselho Local, por parceria com raizeiros, foi ignorada pela gestão.'],
+ ['Previne Brasil','Modelo federal de financiamento da atenção básica, ligado a cadastros e indicadores de desempenho. Orienta as metas do secretário.'],
+ ['Procedimento preparatório','Apuração inicial do Ministério Público, anterior a um inquérito civil.'],
+ ['Quilombola','Integrante de comunidade remanescente de quilombo, com identidade, território e direitos culturais reconhecidos.'],
+ ['Raizeiro(a)','Pessoa que conhece, colhe e prepara plantas medicinais segundo o saber tradicional.'],
+ ['Referência','Encaminhamento do paciente de um serviço para outro de maior complexidade ou de outra especialidade.'],
+ ['Salvo-conduto','Garantia de que alguém não será punido por determinada prática. No plano, protegeria a prática tradicional dentro de regras acordadas.'],
+ ['Shantala','Técnica de massagem em bebês, de origem indiana, reconhecida entre as PICs.'],
+ ['Tarja preta','Medicamento de venda controlada, com retenção de receita. Queixa dos moradores de Lagoa Seca.'],
+ ['Ventosaterapia','Aplicação de copos que fazem sucção sobre a pele. Na UBS é feita com copos de vidro reaproveitados.'],
+];
+
 /* ---------- estado ---------- */
 const KEY='painel-caatinga-velha-v1';
 let S={mapa:{},banca:{},conc:{},extra:{}};
@@ -644,7 +806,7 @@ function refresh(extraChanged){ const act=document.activeElement;
   drawMatrix(); drawBTable(); concStatus(); progress(); }
 
 /* ---------- rotas ---------- */
-const VIEWS=['inicio','fichas','mapa','linha-do-tempo','dados','banca','conceitos'];
+const VIEWS=['inicio','fichas','mapa','linha-do-tempo','dados','siglas','banca','conceitos'];
 function route(){const h=location.hash.replace('#','');const v=VIEWS.includes(h)?h:'inicio';
  VIEWS.forEach(x=>$('#v-'+x).classList.toggle('on',x===v));
  document.querySelectorAll('nav.pill a').forEach(a=>{if(a.getAttribute('href')==='#'+v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
@@ -668,6 +830,16 @@ function drawActors(){const q=$('#q').value.trim().toLowerCase();const box=$('#a
    ${b?`<div class="muted">Na banca: ${esc(b.postura)} <a href="#banca">Ver perguntas</a></div>`:''}`));});
  $('#noActors').hidden=n>0;}
 $('#q').addEventListener('input',drawActors);
+
+
+/* ---------- siglas e termos ---------- */
+function drawSig(){const q=$('#qs').value.trim().toLowerCase();const hit=a=>!q||a.join(' ').toLowerCase().includes(q);
+ const s=SIGLAS.filter(hit),t=TERMOS.filter(hit);
+ $('#sigList').innerHTML=s.map(x=>`<div class="d"><b>${esc(x[0])}</b><div><div class="full">${esc(x[1])}</div><p>${esc(x[2])}</p></div></div>`).join('');
+ $('#termList').innerHTML=t.map(x=>`<div class="d"><b>${esc(x[0])}</b><div><p style="margin:0;color:var(--ink)">${esc(x[1])}</p></div></div>`).join('');
+ $('#sigList').parentElement.hidden=!s.length;$('#termList').parentElement.hidden=!t.length;$('#noSig').hidden=!!(s.length+t.length);
+ $('#sigCount').textContent=q?(s.length+t.length)+' resultados':SIGLAS.length+' siglas e '+TERMOS.length+' termos, em ordem alfabética'}
+$('#qs').addEventListener('input',drawSig);
 
 /* ---------- mapa ---------- */
 const MA=ATORES.filter(a=>a.t);
@@ -776,6 +948,7 @@ if(window.top===window.self){const b=$('#dFile');b.hidden=false;b.addEventListen
 /* ---------- movimento ---------- */
 const REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function moveInd(){const a=document.querySelector('nav.pill a[aria-current="page"]'),i=document.querySelector('nav.pill .ind');if(!a||!i)return;
+ const nv=a.parentElement;if(nv.scrollWidth>nv.clientWidth)nv.scrollLeft=a.offsetLeft-(nv.clientWidth-a.offsetWidth)/2;
  i.style.width=a.offsetWidth+'px';i.style.height=a.offsetHeight+'px';i.style.transform='translate('+a.offsetLeft+'px,'+a.offsetTop+'px)'}
 window.addEventListener('resize',moveInd);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(moveInd);
@@ -796,7 +969,7 @@ function sizeFill(f){const now=document.querySelector('#tl .tlrow.now');if(now)f
 if(!REDUCED){document.querySelectorAll('.hero h1,.words').forEach(splitWords)}
 
 /* ---------- início ---------- */
-drawGroups();drawActors();drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();route();
+drawGroups();drawActors();drawSig();drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();route();
 if(WEB){status('Conectando ao banco do grupo');pull();setInterval(pull,6000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});window.addEventListener('beforeunload',()=>{if(queue.size)flush()})}
 else status(canStore?'Salvo só neste navegador':'Este navegador não permite salvar');
 moveInd();
