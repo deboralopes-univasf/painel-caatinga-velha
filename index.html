@@ -254,6 +254,8 @@ details.card[open]>summary~*{animation:rise .35s var(--ease) both}
 
 
 /* ---------- relatório e referências ---------- */
+[hidden]{display:none!important}
+.pill.warn{background:var(--mark-soft);color:#7A4E10;align-self:flex-start}
 ::placeholder{color:#A2ABA5;opacity:1;font-style:italic}
 .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .okd{color:var(--accent);font-weight:600}
@@ -620,6 +622,7 @@ select[data-st="Em andamento"]{border-color:#E0B25C;background:#FFF7E6}
       <input type="search" id="rq" placeholder="Buscar: autor, título, nota" aria-label="Buscar referências">
       <select id="rcf" aria-label="Filtrar por conceito"></select>
       <button class="btn" id="rfCopyAll" type="button">Copiar todas em ABNT</button>
+      <button class="btn" id="rfImport" type="button" hidden>Importar a lista do grupo</button>
       <p class="muted" id="rfCount"></p>
     </div>
     <div class="stack">
@@ -908,6 +911,44 @@ const SEED_REL={
  crono:Object.fromEntries(CRONO_1511.map((c,i)=>['c'+(i+1),{ord:i+1,acao:c[0],resp:c[1],prazo:c[2],status:c[3]}])),
  entregas:{e20261115:{titulo:'Relatório Parcial',data:'2026-11-15',registrado:'2026-11-15',snap:SNAP_1511}}
 };
+
+/* Lista de referências levantada pelo grupo (texto enviado em 18/11), já corrigida onde o texto tinha erro.
+   "conferir" marca o que ainda precisa ser checado na fonte original antes de citar. */
+const IMPORT_V='imp1';
+const IMPORT_REFS=[
+ {tipo:'lei',jur:'BRASIL',titulo:'Lei nº 13.140, de 26 de junho de 2015',ementa:'Dispõe sobre a mediação entre particulares como meio de solução de controvérsias e sobre a autocomposição de conflitos no âmbito da administração pública',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'29 jun. 2015',c:['mediacao'],nota:'Art. 32: autoriza câmaras de prevenção e resolução administrativa de conflitos no setor público.'},
+ {tipo:'livro',autores:'AZEVEDO, André Gomma de (org.)',inst:true,titulo:'Manual de mediação judicial',edicao:'6',local:'Brasília, DF',editora:'Conselho Nacional de Justiça',ano:'2016',c:['mediacao'],nota:'Manual do CNJ citado como “CNJ (2016)”.'},
+ {tipo:'lei',jur:'CONSELHO NACIONAL DE JUSTIÇA (Brasil)',titulo:'Resolução nº 125, de 29 de novembro de 2010',ementa:'Dispõe sobre a Política Judiciária Nacional de tratamento adequado dos conflitos de interesses no âmbito do Poder Judiciário e dá outras providências',pub:'Diário da Justiça Eletrônico',local:'Brasília, DF',dataPub:'1 dez. 2010',c:['mediacao']},
+ {tipo:'livro',autores:'Roberto Portugal Bacellar',titulo:'Mediação e arbitragem',local:'São Paulo',editora:'Saraiva',ano:'2012',c:['mediacao','lide'],conferir:true,nota:'Conferir: o texto recebido mistura com “Juizados especiais”, que é outra obra do autor. Usem só “Mediação e arbitragem” (Coleção Saberes do Direito, 53). Traz a diferença entre lide processual e lide sociológica.'},
+ {tipo:'livro',autores:'Carlos Matus',titulo:'Política, planejamento e governo',local:'Brasília',editora:'IPEA',ano:'1993',c:['atores'],nota:'Planejamento Estratégico Situacional: atores, governabilidade e vetores de força.'},
+ {tipo:'capitulo',autores:'CECÍLIO, Luiz Carlos de Oliveira',titulo:'As necessidades de saúde como conceito estruturante na luta pela integralidade e equidade na atenção em saúde',orgs:'PINHEIRO, Roseni\nMATTOS, Ruben Araujo de',livro:'Os sentidos da integralidade na atenção e no cuidado à saúde',local:'Rio de Janeiro',editora:'UERJ, IMS: ABRASCO',ano:'2001',c:['atores'],conferir:true,nota:'Conferir: o texto recebido dava 1997 e título incompleto; o capítulo que conheço é de 2001, na coletânea de Pinheiro e Mattos. Avaliem se serve para análise de atores: o tema central é necessidades de saúde.'},
+ {tipo:'artigo',autores:'Ramón Grosfoguel',titulo:'A estrutura do conhecimento nas universidades ocidentalizadas',subtitulo:'racismo/sexismo epistêmico e os quatro genocídios/epistemicídios do longo século XVI',periodico:'Sociedade e Estado',local:'Brasília',volume:'31',numero:'1',paginas:'25-49',ano:'2016',c:['racismo']},
+ {tipo:'livro',autores:'SANTOS, Boaventura de Sousa\nMENESES, Maria Paula (org.)',inst:true,titulo:'Epistemologias do Sul',local:'São Paulo',editora:'Cortez',ano:'2010',c:['racismo','epistemologias'],nota:'Há também a edição portuguesa (Coimbra: Almedina, 2009). Usem a edição que tiverem em mãos e ajustem cidade, editora e ano.'},
+ {tipo:'lei',jur:'BRASIL. Ministério da Saúde',titulo:'Portaria nº 971, de 3 de maio de 2006',ementa:'Aprova a Política Nacional de Práticas Integrativas e Complementares (PNPIC) no Sistema Único de Saúde',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'4 maio 2006',c:['pnpic']},
+ {tipo:'lei',jur:'BRASIL. Ministério da Saúde',titulo:'Portaria nº 849, de 27 de março de 2017',ementa:'Inclui novas práticas à Política Nacional de Práticas Integrativas e Complementares',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'28 mar. 2017',c:['pnpic'],nota:'Amplia a PNPIC com 14 práticas.'},
+ {tipo:'lei',jur:'BRASIL. Ministério da Saúde',titulo:'Portaria nº 702, de 21 de março de 2018',ementa:'Altera a Portaria de Consolidação nº 2/GM/MS, de 28 de setembro de 2017, para incluir novas práticas na Política Nacional de Práticas Integrativas e Complementares',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'22 mar. 2018',c:['pnpic'],nota:'Com ela a PNPIC chega a 29 práticas.'},
+ {tipo:'lei',jur:'BRASIL. Ministério da Saúde',titulo:'Portaria de Consolidação nº 2, de 28 de setembro de 2017',ementa:'Consolidação das normas sobre as políticas nacionais de saúde do Sistema Único de Saúde',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'3 out. 2017',c:['pnpic'],conferir:true,nota:'Conferir: a PNPIC está no Anexo XXV, segundo o texto recebido.'},
+ {tipo:'artigo',autores:'TESSER, Charles Dalcanale',titulo:'Medicalização social (II)',subtitulo:'limites biomédicos e propostas para a clínica na atenção básica',periodico:'Interface: Comunicação, Saúde, Educação',local:'Botucatu',volume:'10',numero:'20',paginas:'347-362',ano:'2006',c:['medicalizacao']},
+ {tipo:'livro',autores:'Ivan Illich',titulo:'A expropriação da saúde',subtitulo:'nêmesis da medicina',local:'Rio de Janeiro',editora:'Nova Fronteira',ano:'1975',c:['medicalizacao'],nota:'Clássico sobre medicalização, citado por Guimarães et al. (2020).'},
+ {tipo:'artigo',autores:'NUNES, João Arriscado\nLOUVISON, Marília',titulo:'Epistemologias do Sul e descolonização da saúde',subtitulo:'por uma ecologia de cuidados na saúde coletiva',periodico:'Saúde e Sociedade',local:'São Paulo',volume:'29',numero:'3',ano:'2020',c:['epistemologias'],conferir:true,nota:'Conferir: falta o número de página ou de artigo (e-número) na revista.'},
+ {tipo:'livro',autores:'FUNDAÇÃO NACIONAL DE SAÚDE (Brasil)',inst:true,titulo:'Territórios sustentáveis e saudáveis',local:'Brasília, DF',editora:'Funasa',ano:'2021',c:['epistemologias','governanca'],conferir:true,nota:'Material complementar da disciplina; usar o cap. 5. Conferir na folha de rosto do PDF quem são os organizadores, a editora e o ano.'},
+ {tipo:'livro',autores:'Miranda Fricker',titulo:'Epistemic injustice',subtitulo:'power and the ethics of knowing',local:'Oxford',editora:'Oxford University Press',ano:'2007',c:['justica'],nota:'Origem dos conceitos de injustiça testemunhal e injustiça hermenêutica.'},
+ {tipo:'lei',jur:'BRASIL',titulo:'Lei nº 6.437, de 20 de agosto de 1977',ementa:'Configura infrações à legislação sanitária federal, estabelece as sanções respectivas, e dá outras providências',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'24 ago. 1977',c:['visa','@limites'],nota:'É a lei de infrações sanitárias. O texto recebido a chamava de “Código Sanitário Federal”, o que não é correto.'},
+ {tipo:'artigo',autores:'PORTO, Marcelo Firpo de Souza\nROCHA, Diogo Ferreira da\nFINAMORE, Renan',titulo:'Saúde coletiva, território e conflitos ambientais',subtitulo:'bases para um enfoque socioambiental crítico',periodico:'Ciência & Saúde Coletiva',local:'Rio de Janeiro',volume:'19',numero:'10',paginas:'4071-4080',ano:'2014',c:['visa','epistemologias'],conferir:true,nota:'Conferir: o texto recebido dava outro título (“ecologia de saberes e vigilância popular em saúde”). O artigo desses autores que conheço, na mesma revista e volume, tem o título acima.'},
+ {tipo:'livro',autores:'Geraldo Lucchese',titulo:'Globalização e regulação sanitária',subtitulo:'os rumos da vigilância sanitária no Brasil',local:'Brasília, DF',editora:'Anvisa',ano:'2008',c:['visa','@limites'],conferir:true,nota:'Conferir: o texto recebido dava só “Vigilância sanitária no Brasil”, título que não localizei. A obra de Lucchese que conheço é esta; confirmem antes de citar.'},
+ {tipo:'artigo',autores:'ANSELL, Chris\nGASH, Alison',titulo:'Collaborative governance in theory and practice',periodico:'Journal of Public Administration Research and Theory',volume:'18',numero:'4',paginas:'543-571',ano:'2008',doi:'10.1093/jopart/mum032',c:['governanca'],nota:'Referência internacional sobre o ciclo da governança colaborativa.'},
+ {tipo:'lei',jur:'BRASIL. Ministério da Saúde',titulo:'Portaria nº 198, de 13 de fevereiro de 2004',ementa:'Institui a Política Nacional de Educação Permanente em Saúde como estratégia do Sistema Único de Saúde para a formação e o desenvolvimento de trabalhadores para o setor e dá outras providências',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'16 fev. 2004',c:['eps']},
+ {tipo:'artigo',autores:'CECCIM, Ricardo Burg',titulo:'Educação permanente em saúde',subtitulo:'desafio ambicioso e necessário',periodico:'Interface: Comunicação, Saúde, Educação',local:'Botucatu',volume:'9',numero:'16',paginas:'161-177',ano:'2005',c:['eps']},
+ {tipo:'capitulo',autores:'Kazuo Watanabe',titulo:'Cultura da sentença e cultura da pacificação',orgs:'YARSHELL, Flávio Luiz\nMORAES, Maurício Zanoide de',livro:'Estudos em homenagem à professora Ada Pellegrini Grinover',local:'São Paulo',editora:'DPJ',ano:'2005',c:['lide'],conferir:true,nota:'Conferir as páginas do capítulo. Na obra, Yarshell e Moraes aparecem como coordenadores (coord.); ajustem “(org.)” na referência final.'},
+ {tipo:'artigo',autores:'Gustavo Assumpção Teixeira',titulo:'Gestão de conflitos na aprendizagem baseada em problemas (PBL)',subtitulo:'um modelo para mediação educacional',periodico:'Revista Brasileira de Educação Médica',volume:'50',numero:'3',paginas:'e129',ano:'2026',doi:'10.1590/1981-5271v50.3-2025-0228',c:['origem'],nota:'Material da disciplina. Dados conferidos no próprio PDF.'},
+ {tipo:'livro',autores:'MOORE, Christopher W.',titulo:'O processo de mediação',subtitulo:'estratégias práticas para a resolução de conflitos',edicao:'2',local:'Porto Alegre',editora:'Artmed',ano:'1998',c:['origem','mediacao'],conferir:true,nota:'Conferir: o texto recebido dizia 4. ed., 2014, que é a edição em inglês. Em português, a edição da Artmed que conheço é a 2ª, de 1998. Usem a que tiverem.'},
+ {tipo:'livro',autores:'Antonio Isidro',titulo:'Gestão pública inovadora',subtitulo:'um guia para a inovação no setor público',local:'Curitiba',editora:'CRV',ano:'2018',paginas:'138',doi:'10.24824/978854442566.4',c:['inovacao'],nota:'Corrigido pela ficha catalográfica do livro: o texto recebido atribuía a obra a “Ciro Campos Christo Isidro”, Enap/Ipea, o que não confere. Ler caps. 2, 4, 21 e 22.'},
+ {tipo:'lei',jur:'BRASIL',titulo:'Decreto nº 10.088, de 5 de novembro de 2019',ementa:'Consolida atos normativos editados pelo Poder Executivo Federal que dispõem sobre a promulgação de convenções e recomendações da Organização Internacional do Trabalho (OIT) ratificadas pela República Federativa do Brasil',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'6 nov. 2019',c:['legal'],conferir:true,nota:'Traz a Convenção 169 da OIT, antes promulgada pelo Decreto nº 5.051/2004. Conferir em qual anexo ela está.'},
+ {tipo:'lei',jur:'BRASIL',titulo:'Lei nº 12.288, de 20 de julho de 2010',ementa:'Institui o Estatuto da Igualdade Racial',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'21 jul. 2010',c:['legal'],conferir:true,nota:'O capítulo sobre saúde vai do art. 6º ao 8º. Conferir os artigos 14 e 15 citados no texto recebido.'},
+ {tipo:'lei',jur:'BRASIL',titulo:'Lei nº 13.123, de 20 de maio de 2015',ementa:'Dispõe sobre o acesso ao patrimônio genético, sobre a proteção e o acesso ao conhecimento tradicional associado e sobre a repartição de benefícios para conservação e uso sustentável da biodiversidade',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'21 maio 2015',c:['legal'],nota:'Marco da biodiversidade: protege o conhecimento tradicional associado às plantas.'},
+ {tipo:'lei',jur:'BRASIL',titulo:'Lei nº 8.080, de 19 de setembro de 1990',ementa:'Dispõe sobre as condições para a promoção, proteção e recuperação da saúde, a organização e o funcionamento dos serviços correspondentes e dá outras providências',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'20 set. 1990',c:['@limites','visa'],nota:'Art. 6º, § 1º: define a vigilância sanitária pelas ações que eliminam, diminuem ou previnem riscos à saúde. A leitura “e não a punição” é interpretação do grupo, não está escrita na lei.'},
+ {tipo:'online',autores:'CARVALHO, Jéssica T. C.\nRAMALHO, Marcelo M.',titulo:'Mediação na administração pública',subtitulo:'instrumento eficaz',editora:'Tribunal de Justiça de Minas Gerais',ano:'2021',c:['@limites','mediacao'],conferir:true,nota:'Dados incompletos: localizar o texto original (onde foi publicado, ano exato e endereço) antes de citar.'}
+];
 /* ---------- estado ---------- */
 const KEY='painel-caatinga-velha-v1';
 let S={mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{}};
@@ -1319,7 +1360,8 @@ const RF=[
  ['instituicao','Instituição','tese','text',''],
  ['doi','DOI','livro capitulo artigo','text','10.1590/...'],
  ['url','Endereço na internet (se a obra foi consultada on-line)','*','text','https://'],
- ['acesso','Data de acesso','*','date','']];
+ ['acesso','Data de acesso','*','date',''],
+ ['conferir','Ainda precisa ser conferida na fonte original','*','check']];
 const pick=(v,t)=>v&&typeof v==='object'&&!Array.isArray(v)?(v[t]!==undefined?v[t]:v._):v;
 function abntName(n){n=String(n||'').trim().replace(/\s+/g,' ');if(!n)return '';
  if(n.includes(',')){const i=n.indexOf(',');return n.slice(0,i).trim().toUpperCase()+', '+n.slice(i+1).trim()}
@@ -1340,7 +1382,7 @@ function abnt(r){r=r||{};const t=k=>esc(String(r[k]||'').trim());
  switch(r.tipo){
   case 'capitulo':{const O=fmtAut(r.orgs,false).replace(/\.$/,'');
    s=`${A} ${tit}. In: ${O?O+' (org.). ':''}<b>${t('livro')||'[título do livro]'}</b>. ${E}${imp(t('local'),t('editora'),t('ano'))}.${r.paginas?' p. '+t('paginas')+'.':''}${DOI}${ON}`;break}
-  case 'artigo':s=`${A} ${A?tit:upFirst(tit)}. <b>${t('periodico')||'[revista]'}</b>, ${[t('local'),r.volume?'v. '+t('volume'):'',r.numero?'n. '+t('numero'):'',r.paginas?'p. '+t('paginas'):'',t('ano')||'[s. d.]'].filter(Boolean).join(', ')}.${DOI}${ON}`;break;
+  case 'artigo':s=`${A} ${A?tit:upFirst(tit)}. <b>${t('periodico')||'[revista]'}</b>, ${[t('local'),r.volume?'v. '+t('volume'):'',r.numero?'n. '+t('numero'):'',r.paginas?(/^e\d/i.test(String(r.paginas).trim())?t('paginas'):'p. '+t('paginas')):'',t('ano')||'[s. d.]'].filter(Boolean).join(', ')}.${DOI}${ON}`;break;
   case 'lei':s=`${esc(String(r.jur||'BRASIL').trim()).replace(/\.?$/,'.')} ${t('titulo')}. ${r.ementa?t('ementa').replace(/\.?$/,'. '):''}${r.pub?'<b>'+t('pub')+'</b>':''}${[t('local'),t('dataPub')].filter(Boolean).map(x=>', '+x).join('')}.${ON}`;break;
   case 'online':{const resp=t('local')&&t('editora')?t('local')+': '+t('editora'):(t('editora')||t('local'));s=`${A} ${T}. ${[resp,t('ano')].filter(Boolean).join(', ')}.${ON}`;break}
   case 'tese':s=`${A} ${T}. ${t('ano')}. ${t('tipoTese')||'Dissertação'}${r.grau?' ('+t('grau')+')':''} – ${t('instituicao')||'[instituição]'}${t('local')?', '+t('local'):''}, ${t('ano')}.${ON}`;break;
@@ -1384,7 +1426,7 @@ function fillMembers(){const ms=members();let me='';try{me=localStorage.getItem(
 function drawRefForm(){const tp=draft.tipo||'livro';
  $('#rf-tipo').innerHTML=TIPOS.map(([v,l])=>`<option value="${v}" ${v===tp?'selected':''}>${l}</option>`).join('');
  $('#rfFields').innerHTML=RF.filter(f=>f[2]==='*'||f[2].split(' ').includes(tp)).map(([k,lab,,kind,ph])=>{const L=esc(pick(lab,tp)),p0=pick(ph,tp),P=typeof p0==='string'&&p0&&p0!=='https://'?esc('ex.: '+p0):esc(p0||''),v=draft[k];
-  const full=kind==='area'||k==='titulo'||k==='url'||k==='ementa'||k==='inst'||k==='livro'||k==='periodico'?' full':'';
+  const full=kind==='area'||k==='titulo'||k==='url'||k==='ementa'||k==='inst'||k==='conferir'||k==='livro'||k==='periodico'?' full':'';
   if(kind==='check')return `<label class="ccheck${full}"><input type="checkbox" id="rf-${k}" data-d="${k}" ${v?'checked':''}> ${L}</label>`;
   if(kind==='area')return `<label class="f${full}">${L}<textarea id="rf-${k}" data-d="${k}" placeholder="${P}">${esc(v||'')}</textarea></label>`;
   if(kind==='select')return `<label class="f${full}">${L}<select id="rf-${k}" data-d="${k}">${ph.map(o=>`<option ${o===(v||ph[0])?'selected':''}>${o}</option>`).join('')}</select></label>`;
@@ -1393,7 +1435,7 @@ function drawRefForm(){const tp=draft.tipo||'livro';
  $('#rf-link').value=draft.link||'';$('#rf-nota').value=draft.nota||'';fillMembers();
  $('#rfFileInfo').textContent=draftFile?`${draftFile.name} · ${(draftFile.size/1048576).toFixed(1)} MB`:(draft.arquivo?`Arquivo atual: ${draft.arquivo.nome}. Escolha outro para substituir.`:(WEB?'PDF ou documento de até 5 MB. Arraste aqui ou escolha no computador.':'O upload precisa do banco do grupo configurado. Use o link do Google Drive.'));
  refPrev()}
-function refPrev(){$('#rfPrev').innerHTML=abnt(draft)}
+function refPrev(){if(draft)$('#rfPrev').innerHTML=abnt(draft)}
 function openRefForm(id){editingId=id||null;draftFile=null;draft=id?clone(S.refs[id]):{tipo:'livro',acesso:todayISO(),conceitos:{}};
  $('#rfTitle').textContent=id?'Editar referência':'Nova referência';$('#rfQ').value='';rmsg('');$('#rfSaveMsg').textContent='';$('#rform').hidden=false;drawRefForm();$('#rform').scrollIntoView({block:'start'})}
 function closeRefForm(){$('#rform').hidden=true;draft=null;editingId=null;draftFile=null;$('#rfFile').value=''}
@@ -1410,7 +1452,7 @@ async function runLookup(q){const p=parseQ(q);if(!p){rmsg('Digite um DOI (começ
  catch(e){rmsg('Não encontrei dados para '+(p.doi||p.isbn)+'. Preencha os campos à mão.');return false}}
 $('#rfLook').addEventListener('click',()=>runLookup($('#rfQ').value));
 $('#rfQ').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();runLookup($('#rfQ').value)}});
-async function onRefFile(f){if(!f)return;if(!WEB){rmsg('O upload precisa do banco do grupo configurado. Use o link do Google Drive.');$('#rfFile').value='';return}
+async function onRefFile(f){if(!f)return;if(!draft)openRefForm();if(!WEB){rmsg('O upload precisa do banco do grupo configurado. Use o link do Google Drive.');$('#rfFile').value='';return}
  if(f.size>MAXF){rmsg('Este arquivo tem '+(f.size/1048576).toFixed(1)+' MB, acima do limite de 5 MB. Suba no Google Drive e cole o link.');$('#rfFile').value='';return}
  draftFile=f;$('#rfFileInfo').textContent=`${f.name} · ${(f.size/1048576).toFixed(1)} MB`;
  if(!/\.pdf$/i.test(f.name)&&f.type!=='application/pdf'){rmsg('Arquivo escolhido. Preencha os dados da obra abaixo ou busque pelo DOI ou ISBN.');return}
@@ -1436,13 +1478,22 @@ $('#rfSave').addEventListener('click',async()=>{if(!draft)return;const b=$('#rfS
   setPut('refs/'+id,obj);closeRefForm();drawRefs();updateConcRefs();progress();toast('Referência salva')}
  catch(e){m.textContent='Não foi possível enviar o arquivo. Verifique a conexão e tente de novo, ou use o link do Drive.'}
  finally{b.disabled=false}});
+
+/* importação da lista de referências levantada pelo grupo */
+function importPending(){const have=new Set(Object.values(S.refs||{}).filter(r=>r&&r.titulo).map(r=>norm(r.titulo)));return IMPORT_REFS.filter(r=>!have.has(norm(r.titulo)))}
+function drawImport(){const b=$('#rfImport');if(!b)return;const n=importPending().length;b.hidden=!n;if(!b.dataset.arm)b.textContent='Importar a lista do grupo ('+n+')'}
+$('#rfImport').addEventListener('click',e=>{const b=e.currentTarget,pend=importPending();if(!pend.length)return;
+ twoStep(b,()=>{const lim=allConc().find(k=>/limites de atua/.test(norm(k.nome)));let me='';try{me=localStorage.getItem('painel-eu')||''}catch(x){}
+  pend.forEach((r,i)=>{const o=clone(r);const cs={};(o.c||[]).forEach(id=>{const real=id==='@limites'?(lim&&lim.id):id;if(real)cs[real]=true});delete o.c;
+   o.conceitos=cs;o.criado=todayISO();o.por=me;o.lidos={};o.acesso=o.acesso||'';o.importado=IMPORT_V;setPut('refs/'+IMPORT_V+'-'+String(IMPORT_REFS.indexOf(r)+1).padStart(2,'0'),o)});
+  drawRefs();updateConcRefs();progress();toast(pend.length+' referências importadas. As marcadas “A conferir” precisam ser checadas.')},'Confirmar: importar '+pend.length+' referências')});
 function concName(id){const k=allConc().find(x=>x.id===id);return k?k.nome:''}
-function drawRefFilter(){const s=$('#rcf'),v=s.value;s.innerHTML='<option value="">Todos os conceitos</option>'+allConc().map(k=>`<option value="${k.id}" ${k.id===v?'selected':''}>${esc(k.nome)}</option>`).join('')}
+function drawRefFilter(){const s=$('#rcf'),v=s.value;s.innerHTML='<option value="">Todos os conceitos</option><option value="@conferir" '+(v==='@conferir'?'selected':'')+'>Só as que faltam conferir</option>'+allConc().map(k=>`<option value="${k.id}" ${k.id===v?'selected':''}>${esc(k.nome)}</option>`).join('')}
 let refsSig='';
 function drawRefs(){const q=norm($('#rq').value.trim()),cf=$('#rcf').value,ms=members(),all=refsSorted();
- const list=all.filter(([,r])=>(!cf||(r.conceitos||{})[cf])&&(!q||norm(abnt(r)+' '+(r.nota||'')+' '+(r.autores||'')).includes(q)));
+ const list=all.filter(([,r])=>(!cf||(cf==='@conferir'?r.conferir:(r.conceitos||{})[cf]))&&(!q||norm(abnt(r)+' '+(r.nota||'')+' '+(r.autores||'')).includes(q)));
  $('#refList').innerHTML=list.map(([id,r])=>{const by=ms.find(m=>m.id===r.por);const cs=Object.keys(r.conceitos||{}).map(concName).filter(Boolean);
-  return `<article class="card ref"><p class="abnt">${abnt(r)}</p>
+  return `<article class="card ref">${r.conferir?'<span class="pill warn">A conferir</span>':''}<p class="abnt">${abnt(r)}</p>
   ${cs.length?`<div class="chips">${cs.map(n=>`<span class="cchip">${esc(n)}</span>`).join('')}</div>`:''}
   ${r.nota?`<p class="nota">${esc(r.nota)}</p>`:''}
   <div class="rmeta"><span>${by?'Adicionada por '+esc(by.nome):'Adicionada'}${r.criado?' em '+fmtD(r.criado):''}</span>${r.arquivo?`<span>Arquivo: ${esc(r.arquivo.nome)} · ${(r.arquivo.tam/1048576).toFixed(1)} MB</span>`:''}
@@ -1450,7 +1501,7 @@ function drawRefs(){const q=norm($('#rq').value.trim()),cf=$('#rcf').value,ms=me
   <div class="toolbar">${r.arquivo?`<button class="btn primary" type="button" data-open="${id}">${/\.(pdf|png|jpe?g)$/i.test(r.arquivo.nome||'')||/pdf|image/.test(r.arquivo.tipo||'')?'Abrir arquivo':'Baixar arquivo'}</button>`:''}${r.link?`<a class="btn${r.arquivo?'':' primary'}" href="${esc(r.link)}" target="_blank" rel="noopener">Abrir link</a>`:''}
    <button class="btn" type="button" data-rcopy="${id}">Copiar referência</button><button class="btn" type="button" data-redit="${id}">Editar</button><button class="btn" type="button" data-rdel="${id}">Remover</button></div></article>`}).join('');
  $('#noRefs').hidden=list.length>0;$('#noRefs').textContent=all.length?'Nenhuma referência com esse filtro.':'A biblioteca está vazia. Clique em Adicionar referência para subir a primeira.';
- $('#rfCount').textContent=all.length+(all.length===1?' referência':' referências')+(all.length?' · '+all.filter(([,r])=>r.arquivo).length+' com arquivo':'');refsSig=JSON.stringify(S.refs||{})}
+ const nc=all.filter(([,r])=>r.conferir).length;$('#rfCount').textContent=all.length+(all.length===1?' referência':' referências')+(all.length?' · '+all.filter(([,r])=>r.arquivo).length+' com arquivo':'')+(nc?' · '+nc+' a conferir':'');drawImport();refsSig=JSON.stringify(S.refs||{})}
 $('#rq').addEventListener('input',drawRefs);$('#rcf').addEventListener('change',drawRefs);
 async function openFile(id,btn){const meta=(S.refs[id]||{}).arquivo||{};const view=/pdf|image/.test(meta.tipo||'')||/\.(pdf|png|jpe?g)$/i.test(meta.nome||'');
  const w=view?window.open('','_blank'):null;const o=btn.textContent;btn.textContent='Abrindo…';
