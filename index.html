@@ -476,6 +476,66 @@ textarea.big{min-height:130px}
   footer{margin-top:28px}
   #toast{width:calc(100% - 28px);text-align:center}
 }
+
+/* história completa */
+.entry.six{grid-template-columns:repeat(3,minmax(0,1fr))}
+.histwrap{display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;align-items:start}
+.histtoc{position:sticky;top:96px;padding:14px 12px}
+#histToc a{display:block;padding:5px 8px;border-radius:6px;font-size:13.5px;line-height:1.35;text-decoration:none;color:var(--ink-2)}
+#histToc a:hover{color:var(--ink)}
+#histToc a.on{background:var(--surface-2);color:var(--ink);font-weight:600}
+.hist{max-width:74ch}
+.hist h3{font-size:22px;margin:30px 0 10px;scroll-margin-top:110px}
+.hist h3:first-child{margin-top:0}
+.hist p{margin:0 0 12px;line-height:1.68;font-size:15.5px}
+.hist blockquote{border-left:4px solid var(--mark);margin:4px 0 16px;padding:8px 14px;background:var(--mark-soft);font-style:italic;border-radius:0 8px 8px 0}
+#historia-fato,#historia-instituicoes{color:#8A3B12}
+/* mapa mental */
+.mmwrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.mmstage{padding:6px}
+.mm-svg{width:100%;height:auto;display:block}
+.mmdetail{display:flex;flex-direction:column;gap:10px}.mmdetail p{max-width:80ch}
+.mmdetail h3{font-size:22px}.mmdetail p{margin:0;line-height:1.6}
+.mm-l{fill:none;stroke:#BFCBC2;stroke-width:2.4;transition:stroke .25s,stroke-width .25s}
+.mm-l.on{stroke:var(--accent);stroke-width:3.6}
+.mm-lf{fill:none;stroke:#D5DCD6;stroke-width:1.4}
+.mm-dot{fill:#98A69D}
+.mm-leaf{font:13px var(--font-body);fill:var(--ink)}
+.mm-side{font:600 12px var(--font-body);letter-spacing:.14em;fill:var(--ink-2)}
+.mm-b{cursor:pointer;outline:none}
+.mm-b rect{stroke-width:1.6;transition:stroke-width .2s}
+.mm-b:hover rect,.mm-b:focus-visible rect,.mm-b.on rect{stroke-width:3.4}
+.mm-warm rect{fill:#F8EDD8;stroke:#B7791F}.mm-warm .mm-n{fill:#8A5A12}
+.mm-cool rect{fill:#E3EFE8;stroke:#2B6A4E}.mm-cool .mm-n{fill:#2B6A4E}
+.mm-hot rect{fill:#FBE3D5;stroke:#C2571A}.mm-hot .mm-n{fill:#A3441A}
+.mm-nt{font:700 13px var(--font-body);fill:#fff;pointer-events:none}
+.mm-bt{font:700 18px var(--font-display);fill:var(--ink);pointer-events:none}
+.mm-bs{font:12.5px var(--font-body);fill:var(--ink-2);pointer-events:none}
+.mm-c rect{fill:var(--band)}
+.mm-ct{font:700 21px var(--font-display);fill:#fff}
+.mm-cs{font:600 12px var(--font-body);fill:var(--band-mark);letter-spacing:.06em}
+.mmlist{display:none}
+.mmcard{display:flex;flex-direction:column;gap:8px;border-left:5px solid var(--accent)}
+.mmcard.warm{border-left-color:#B7791F}.mmcard.hot{border-left-color:#C2571A}
+.mmcard p{margin:0;line-height:1.6}.mmcard .btn{align-self:flex-start}
+/* apresentação */
+.aslide{display:flex;flex-direction:column;gap:10px}
+.aslide.sel{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.ahead{display:flex;align-items:center;gap:10px}
+.ahead b{flex:1;min-width:0;font-family:var(--font-display);font-size:17px}
+.anum{flex:none;width:28px;height:28px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-weight:700;font-size:13px}
+.aslide.sel .anum{background:var(--accent);color:#fff}
+.slide.mini{width:100%;border:1px solid var(--line)}
+.sl-ul{margin:0;padding-left:1.3em;font-size:2.1cqw}
+.sl-ul li{margin:0 0 1cqw;padding-left:.3em}
+.sl-ul li::marker{color:var(--accent)}
+.sl-lead{font-size:2.5cqw;line-height:1.4}
+.presnotes{color:#E7EDE8;background:#1F3329;border-radius:8px;padding:10px 14px;width:min(100%,960px);margin:0 auto;font-size:16px}
+.presnotes[hidden]{display:none}
+.pres .btn[aria-pressed="true"]{border-color:#F0C063;color:#F0C063}
+@media (max-width:900px){.entry.six{grid-template-columns:1fr 1fr}.histwrap{grid-template-columns:1fr}.histtoc{position:static}.mmwrap{grid-template-columns:1fr}.mmdetail{position:static}}
+@media (max-width:760px){.entry.six{grid-template-columns:1fr 1fr;gap:10px}.mmwrap{display:none}.mmlist{display:grid;gap:12px}.hist h3{font-size:19px}.hist p{font-size:15px}.ahead{flex-wrap:wrap}.ahead .toolbar{width:100%}}
+@media (max-width:520px){.entry.six{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -486,7 +546,7 @@ textarea.big{min-height:130px}
 <div class="bar"><div class="inner">
   <a class="brand" href="#inicio">Painel do Caso Caatinga Velha</a>
   <nav class="pill" aria-label="Seções do painel">
-    <i class="ind" aria-hidden="true"></i><a href="#inicio">Início</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#siglas">Siglas</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#propostas">Propostas</a><a href="#fatos">Fatos novos</a><a href="#relatorio">Relatório</a>
+    <i class="ind" aria-hidden="true"></i><a href="#inicio">Início</a><a href="#historia">História</a><a href="#mapa-mental">Mapa mental</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#siglas">Siglas</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#propostas">Propostas</a><a href="#apresentacao">Apresentação</a><a href="#relatorio">Relatório</a>
   </nav>
 </div></div>
 
@@ -509,11 +569,13 @@ textarea.big{min-height:130px}
     </div>
   </div></div>
   <div class="inner">
-    <div class="entry">
-      <a href="#fichas"><span class="kicker">Consultar</span><h3>Fichas dos atores</h3><p>Quem é quem, com fatos e falas do caso.</p><span class="prog"><span>17 fichas</span><span>abrir</span></span></a>
-      <a href="#linha-do-tempo"><span class="kicker">Consultar</span><h3>Linha do tempo</h3><p>Do Mês -12 ao fim do prazo da notificação.</p><span class="prog"><span>11 eventos</span><span>abrir</span></span></a>
+    <div class="entry six">
+      <a href="#historia"><span class="kicker">Consultar</span><h3>História completa</h3><p>O caso do começo ao Dia +20, com o fato novo do Anexo A.</p><span class="prog"><span>10 partes</span><span>abrir</span></span></a>
+      <a href="#mapa-mental"><span class="kicker">Consultar</span><h3>Mapa mental</h3><p>O caso numa página, em oito ramos explicados.</p><span class="prog"><span>8 ramos</span><span>abrir</span></span></a>
+      <a href="#fichas"><span class="kicker">Consultar</span><h3>Fichas dos atores</h3><p>Quem é quem, com fatos e falas do caso.</p><span class="prog"><span id="cFichas"></span><span>abrir</span></span></a>
+      <a href="#linha-do-tempo"><span class="kicker">Consultar</span><h3>Linha do tempo</h3><p>Do Mês -12 ao Dia +20, com o fato novo.</p><span class="prog"><span id="cTL"></span><span>abrir</span></span></a>
       <a href="#dados"><span class="kicker">Consultar</span><h3>Dados do caso</h3><p>Coração do Sertão, o distrito, a rede de saúde e os indicadores.</p><span class="prog"><span>município, distrito e indicadores</span><span>abrir</span></span></a>
-      <a href="#siglas"><span class="kicker">Consultar</span><h3>Siglas e termos</h3><p>O que significa cada sigla e cada termo do caso.</p><span class="prog"><span>47 verbetes</span><span>abrir</span></span></a>
+      <a href="#siglas"><span class="kicker">Consultar</span><h3>Siglas e termos</h3><p>O que significa cada sigla e cada termo do caso.</p><span class="prog"><span id="cSig"></span><span>abrir</span></span></a>
     </div>
     <div class="entry work3">
       <a class="work" href="#mapa"><span class="kicker">Preencher</span><h3>Mapa de atores</h3><p>Interesses, posições, poder e alianças. Gera a matriz.</p><span class="prog"><span id="pMapa"></span><span>abrir</span></span></a>
@@ -521,25 +583,21 @@ textarea.big{min-height:130px}
       <a class="work" href="#conceitos"><span class="kicker">Preencher</span><h3>Conceitos</h3><p>O que pesquisar, por quê e com quais fontes.</p><span class="prog"><span id="pConc"></span><span>abrir</span></span></a>
       <a class="work" href="#referencias"><span class="kicker">Preencher</span><h3>Referências</h3><p>Arquivos e links da pesquisa, com a referência em ABNT.</p><span class="prog"><span id="pRefs"></span><span>abrir</span></span></a>
       <a class="work" href="#propostas"><span class="kicker">Preencher</span><h3>Propostas</h3><p>Planos de mediação e de governança, parte por parte.</p><span class="prog"><span id="pProp"></span><span>abrir</span></span></a>
-      <a class="work" href="#fatos"><span class="kicker">Preencher</span><h3>Fatos novos</h3><p>Lançar o fato, analisar e montar a mini apresentação.</p><span class="prog"><span id="pFatos"></span><span>abrir</span></span></a>
+      <a class="work" href="#apresentacao"><span class="kicker">Preencher</span><h3>Apresentação</h3><p>Slides dos achados sobre o problema e a justificativa.</p><span class="prog"><span id="pApres"></span><span>abrir</span></span></a>
       <a class="work" href="#relatorio"><span class="kicker">Preencher</span><h3>Relatório</h3><p>Cronograma com status e o relatório pronto para entregar.</p><span class="prog"><span id="pRel"></span><span>abrir</span></span></a>
     </div>
   </div>
-  <div class="block tight" id="homeFatos" style="padding-top:34px" hidden><div class="inner">
-    <div class="hchead"><div><div class="kicker">Fatos novos</div><h2 style="margin-top:6px">O caso mudou</h2></div><a class="btn" href="#fatos">Abrir os fatos novos</a></div>
-    <div class="hflist" id="homeFatosL"></div>
-  </div></div>
   <div class="block tight" style="padding-top:34px"><div class="inner">
     <div class="hchead"><div><div class="kicker">Cronograma do grupo</div><h2 style="margin-top:6px">O que falta fazer</h2></div><a class="btn" href="#relatorio">Editar o cronograma</a></div>
     <div class="relsum" id="homeSum" style="margin:12px 0"></div>
     <div class="card" style="padding:4px 18px"><div id="homeCrono"></div></div>
   </div></div>
   <div class="block"><div class="inner state">
-    <div><div class="kicker">Onde estamos</div><h2 class="words" style="margin-top:8px">Dia +5. O prazo da notificação vence em <mark>cinco dias</mark>.</h2></div>
+    <div><div class="kicker">Onde estamos</div><h2 class="words" style="margin-top:8px">Dia +20. O conflito saiu da casa de Dona Margarida e <mark>chegou à UBS</mark>.</h2></div>
     <div class="three">
-      <div class="card"><div class="kicker">Próximo sábado</div><h3 style="margin:6px 0">Caminhada em Defesa das Benzedeiras</h3><p class="muted">Articulada pelo Pe. José.</p></div>
-      <div class="card"><div class="kicker">Cerca do Dia +8</div><h3 style="margin:6px 0">Plenária do Conselho Local</h3><p class="muted">Com Dona Margarida, Pe. José e Ministério Público.</p></div>
-      <div class="card"><div class="kicker">Dia +10</div><h3 style="margin:6px 0">Fim do prazo da VISA</h3><p class="muted">Multa de R$ 5.000,00 e apreensão.</p></div>
+      <div class="card"><div class="kicker">Dia +10</div><h3 style="margin:6px 0">Denúncia de assédio moral</h3><p class="muted">Enf. Carla denuncia o Dr. Ricardo e é afastada. ACS Raimundo e Dra. Renata também relatam constrangimentos.</p></div>
+      <div class="card"><div class="kicker">Dia +15 e +18</div><h3 style="margin:6px 0">Discrição de um lado, cobrança do outro</h3><p class="muted">O secretário pede “discrição total”; o sindicato cobra canal de denúncia e o MP amplia o procedimento.</p></div>
+      <div class="card"><div class="kicker">A seguir</div><h3 style="margin:6px 0">Assembleia do Conselho Local</h3><p class="muted">Dona Zefa junta na pauta a perseguição a Dona Margarida e o assédio na UBS.</p></div>
     </div>
   </div></div>
   <div class="bandsec block"><div class="inner">
@@ -553,9 +611,71 @@ textarea.big{min-height:130px}
   </div></div>
   <div class="block tight" style="padding-top:44px"><div class="inner pair">
     <a class="p1" href="#relatorio"><span class="kicker">Relatório do grupo</span><h3>Pronto sempre que o professor pedir</h3><p>Montado a partir do painel, com o cronograma e os status em dia. Copie para o Google Docs ou salve em PDF.</p></a>
-    <a class="p2" href="#dados"><span class="kicker">Para o tutor</span><h3>Seis pontos do caso a esclarecer</h3><p>Trechos do material que se contradizem ou pedem confirmação antes de entrar no plano.</p></a>
+    <a class="p2" href="#mapa-mental"><span class="kicker">Para entender rápido</span><h3>O caso inteiro em um mapa mental</h3><p>Oito ramos, do território à proposta, cada um com a explicação do que significa para o grupo.</p></a>
   </div></div>
 </section>
+
+<section class="view" id="v-historia"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Consultar</div><h2>A história completa</h2></div><p>O caso contado do começo até o Dia +20, já com o fato novo do Anexo A. Texto do grupo a partir do material da disciplina; os dados são fictícios.</p></div>
+  <div class="histwrap">
+    <nav class="histtoc card" aria-label="Sumário da história"><div class="kicker" style="margin-bottom:6px">Sumário</div><div id="histToc"></div></nav>
+    <article class="hist" id="histBody">
+      <h3 id="historia-territorio">1. O lugar</h3>
+      <p>Coração do Sertão é um município de 80 mil habitantes no Semiárido nordestino, com IDH médio (0,62) e a 450 km da capital mais próxima. Um dos seus distritos sanitários é Caatinga Velha, onde vivem cerca de 12 mil pessoas divididas entre uma zona rural espalhada e uma periferia urbana que cresce sem planejamento.</p>
+      <p>Na zona rural ficam três comunidades tradicionais reconhecidas pela Fundação Cultural Palmares. O <b>Quilombo do Baixio das Mulheres</b> (cerca de 400 pessoas) é o coração da história: tem liderança feminina e matrilinear, sofre pressão de fazendeiros pelos limites da terra e mantém um cuidado coletivo com plantas nativas como aroeira, juazeiro, umburana e angico. Lá funciona uma Casa de Rezas aberta a todo o distrito três vezes por semana. O <b>Riacho do Meio</b> (cerca de 250 pessoas) reúne agricultores familiares, muitos deles raizeiros, e tinha uma Farmácia Viva comunitária, parada há dois anos por falta de apoio da prefeitura. O <b>Barro Vermelho</b> (cerca de 150 pessoas) é povoado de pescadores do açude, onde há benzeduras próprias, para “mal de água” e “quebranto de mãe d’água”.</p>
+      <p>Quem mora no campo vive de roça, criação e benefícios como Bolsa Família e BPC. Para chegar à única UBS, gasta uma hora e meia de ônibus, quando há, ou três horas a pé.</p>
+      <p>A parte urbana tem três bairros. O <b>Novo Horizonte</b> (cerca de 5 mil) nasceu da migração rural dos anos 1980 e 1990: os mais velhos ainda plantam ervas no quintal, os jovens chamam isso de atraso. A <b>Cohab II</b> (cerca de 4 mil) é um conjunto habitacional com 25% de desemprego, tráfico e violência armada; ali ficam a UBS Dr. Ângelo e o CAPS. A <b>Lagoa Seca</b> (cerca de 2.200) é a ocupação mais nova, sem saneamento; seus moradores vão ao posto e à benzedeira e reclamam que no posto “só dão remédio tarja preta”.</p>
+      <p>A feira de sábado é o ponto de encontro dos dois mundos: raizeiros vendem ervas, cascas e raízes, dão conselhos e benzem, e até profissionais de saúde compram, sem se identificar. Na religião o distrito também se divide: o padre da igreja rural defende o diálogo com as benzedeiras; parte dos pastores das três igrejas neopentecostais trata o benzimento como coisa do diabo.</p>
+
+      <h3 id="historia-rede">2. A rede de saúde e as PICs no papel</h3>
+      <p>Em 2019 o município aderiu à Política Nacional de Práticas Integrativas e Complementares, pela Portaria Municipal nº 047/2019. Na prática, a política ficou no papel.</p>
+      <p>Na UBS Dr. Ângelo, que funciona das 7h às 17h, só a enfermeira <b>Carla Mendes</b> oferece PICs. Ela faz auriculoterapia depois de um curso on-line de 20 horas, numa sala improvisada e muitas vezes sem agulhas, com fila de espera de seis meses. Faz também ventosaterapia, com copos de vidro reaproveitados, e ouve dos colegas piadas sobre os “copinhos”. Não há Farmácia Viva municipal; dois médicos prescrevem de vez em quando fitoterápicos industrializados, sem relação com o saber local.</p>
+      <p>O NASF-AB tem nutricionista, fisioterapeuta e psicólogo. A fisioterapeuta, <b>Dra. Renata Lima</b>, tem cursos de shantala e auriculoterapia, mas a gestão não libera agenda para isso; a nutricionista desconfia das plantas medicinais. Os 12 agentes comunitários moram no território e, em sua maioria, usam chás e benzeduras em casa, mas não falam disso com os profissionais de nível superior. Dois deles, <b>Seu Raimundo</b> e <b>Dona Lúcia</b>, são raizeiros reconhecidos e escondem isso no trabalho. No CAPS, a psicóloga <b>Juliana Alves</b> propôs uma horta medicinal para usuários com sofrimento mental grave; a Vigilância Sanitária vetou por “falta de controle de qualidade”.</p>
+      <p>No comando da Secretaria está o <b>Dr. Heitor Carneiro</b>, cirurgião e ex-vereador, sem formação em saúde coletiva, preocupado com produtividade e metas do Previne Brasil. Para ele, PICs são gasto sem comprovação, e ele se opôs a um programa municipal de plantas medicinais alegando falta de recursos. A coordenadora da Atenção Básica, <b>Márcia Torres</b>, mestra em Saúde Coletiva, apoia as PICs, mas está isolada: não conseguiu incluir o respeito aos saberes tradicionais no contrato de gestão das UBS.</p>
+      <p>A Vigilância Sanitária tem três fiscais e trabalha com o código sanitário federal (Lei 6.437/77) na mão, tratando preparo e entrega de remédio tradicional sem registro como infração grave. A chefe, a farmacêutica <b>Dra. Vera Lúcia</b>, já foi criticada por ações duras contra raizeiros em outros distritos e resume sua visão assim: “a lei é para todos”.</p>
+
+      <h3 id="historia-pessoas">3. As pessoas no centro da disputa</h3>
+      <p><b>Dona Margarida dos Santos</b>, 78 anos, nasceu no Baixio das Mulheres, filha de parteira e neta de rezadeira. Conhece mais de 60 plantas da caatinga, aprendidas de boca em boca, e diz que planta que não cura não presta. Não frequentou a escola, lê números e assina o nome. Atende umas 30 pessoas por semana, de graça ou em troca de comida e pequenos favores, e sua casa, com uma grande horta medicinal, é referência no território.</p>
+      <p>Na UBS, o conflito tem rosto. O <b>Dr. Ricardo Albuquerque</b>, 38 anos, médico generalista e residente em Medicina de Família, se define como “baseado em evidências” e despreza terapias alternativas; depois do caso Seu João passou a anotar nos prontuários que o paciente “preferiu curandeirismo”. A <b>Enf. Carla</b>, 34 anos, se sente sobrecarregada e desrespeitada, tem conflito aberto com ele mas evita o confronto, visitou Dona Margarida três vezes às escondidas e sonha com um mestrado sobre PICs no semiárido. <b>Seu Raimundo</b>, 62 anos, ACS há 15, é procurado pelos vizinhos para benzer e “passar folhas”, e se sente dividido entre o que aprendeu com os avós e o que diz a Vigilância.</p>
+      <p>Fora da UBS, o <b>Conselho Local de Saúde</b> tem 12 membros (metade usuários) e é presidido por <b>Dona Zefa</b>, 61 anos, agricultora aposentada de fala combativa. O Conselho é deliberativo, mas a gestão costuma ignorar suas resoluções. O <b>Pe. José de Anchieta</b>, 68 anos, ligado à Teologia da Libertação, defende as benzedeiras e organiza uma caminhada em defesa delas. A <b>Pastora Sandra de Paula</b>, 45 anos, à frente de um ministério de cura divina, orienta os fiéis a não procurar benzedeiras e apoia a Vigilância. <b>Seu Benedito</b>, 73 anos, neto de escravizada, é a liderança política e espiritual do quilombo e ameaça levar o caso à OEA.</p>
+      <p class="muted">Cada pessoa tem uma ficha completa na aba <a href="#fichas">Fichas</a>.</p>
+
+      <h3 id="historia-antes">4. Doze meses de sinais</h3>
+      <p>O conflito vinha se anunciando. Há um ano, Carla propôs um Programa Municipal de Plantas Medicinais e PICs de R$ 50 mil por ano, e o secretário arquivou. Três meses depois, Dona Margarida tratou uma crise de ansiedade de Seu Raimundo com garrafada de maracujá-do-mato; ele melhorou, contou aos colegas, e o Dr. Ricardo chamou aquilo de placebo e irresponsabilidade.</p>
+      <p>Seis meses antes do caso, o Conselho Local aprovou uma moção pedindo parceria entre a UBS e os raizeiros. Ninguém respondeu. Três meses antes, Seu João, atendido por lombalgia, teve “abandono de tratamento” anotado no prontuário e reclamou à Ouvidoria, que recomendou diálogo e não fez nada; Dona Zefa levou o caso ao Ministério Público. Um mês antes, o Dr. Ricardo cobrou numa rede fechada de médicos a punição dos “falsos curandeiros”, e o print chegou à comunidade.</p>
+
+      <h3 id="historia-estopim">5. O estopim</h3>
+      <p>No Dia 0, depois de uma denúncia anônima atribuída ao Dr. Ricardo, a Vigilância Sanitária notificou Dona Margarida (processo nº 045/2024-VISA). O documento fala em frascos de origem vegetal sem registro nem rótulo e em manipulação e dispensação ilegal de medicamentos. Ela teve 10 dias para retirar tudo, sob pena de multa de R$ 5.000,00 e apreensão. A notificação foi entregue por oficial de justiça, e o susto tomou conta da comunidade.</p>
+
+      <h3 id="historia-reacoes">6. A reação em cadeia</h3>
+      <p>Dona Margarida parou de atender, chorou e queimou parte dos frascos; a comunidade escondeu o resto. Depois passou a receber as pessoas à noite, com medo de multa ou prisão.</p>
+      <blockquote>“vou morrer e minha sabedoria morre comigo”</blockquote>
+      <p>Na UBS, o clima ficou de medo e divisão: o Dr. Ricardo comemorou dizendo que “a lei é clara”, Carla ficou revoltada mas com medo, Seu Raimundo passou a ser vigiado pelos colegas e a gerente, que já se omitia, pediu transferência. Na Secretaria, Márcia foi chamada pelo secretário e orientada a não tomar partido e a evitar a imprensa, enquanto a Vigilância planejava novas fiscalizações na feira e nas casas de raizeiros.</p>
+      <p>No Dia +3, Dona Zefa convocou uma assembleia extraordinária do Conselho Local, com presença confirmada de Dona Margarida, do Pe. José e do Ministério Público, que abriu procedimento preparatório. O jornal “Voz do Sertão” perguntou na manchete se era curandeirismo ou crime sanitário, e o caso correu os grupos de WhatsApp até chegar a coletivos nacionais de saúde coletiva e direitos humanos. No Dia +5, a turma do mestrado foi chamada para atuar como consultoria.</p>
+
+      <h3 id="historia-tensoes">7. O que está por baixo</h3>
+      <p>Uma fala de corredor de um médico, gravada por um técnico de enfermagem, resume o racismo epistêmico: chá, só na cozinha dela, não na sala de curativos. Dona Margarida reúne tudo o que o olhar normativo costuma punir: é mulher, idosa, negra, quilombola e pouco escolarizada, e muitos moradores leem a denúncia como caça às bruxas contra mulheres velhas que têm prestígio no território.</p>
+      <p>Há também conflito de gerações: jovens da cidade, influenciados pelas redes e por algumas igrejas, apoiam a denúncia e chamam as benzedeiras de atraso. Numa escola, alunos que defendiam a avó benzedeira discutiram com colegas que a chamavam de charlatã.</p>
+
+      <h3 id="historia-fato">8. Dias depois: o fato novo</h3>
+      <p>O Anexo A traz uma camada nova. No Dia +10, a <b>Enf. Carla</b> protocolou na Ouvidoria do SUS e na Comissão de Ética da Secretaria uma representação por <b>assédio moral</b> contra o Dr. Ricardo. Ela descreve um padrão que começou antes da notificação e piorou depois: humilhações em reunião, em que as PICs viraram “charlatanismo institucionalizado” e ela, protetora de curandeira; retirada de insumos da sala de PICs, pacientes desmarcados e horários trocados sem aviso; e-mails com cópia à gerência pondo em dúvida sua isenção por manter contato com raizeiras; e um bilhete anônimo deixado na sala dizendo que “quem protege bruxa é bruxa”, enquanto um áudio zombando dela circulava num grupo de profissionais. Carla apresentou atestado por crise de ansiedade e se afastou por 15 dias. Na Ouvidoria, contou que só queria cuidar das pessoas e que agora é ela quem adoece.</p>
+      <p>No mesmo período, <b>Seu Raimundo</b> virou alvo de colegas e da gerência: foi chamado de “raizeiro do posto” diante de usuários, levou advertência verbal por conversar com uma benzedeira durante uma visita, teve a área reduzida e mandada para as regiões mais violentas e passou a ser vigiado por colegas que repassam suas conversas. No Dia +12 relatou isso ao sindicato. Tem insônia, crises de choro, se isolou, não vai mais às reuniões e pensa em pedir demissão.</p>
+      <blockquote>“Agora me chamam de atraso no lugar onde eu deveria ajudar”</blockquote>
+      <p>A <b>Dra. Renata</b>, que faz auriculoterapia escondida no almoço, contou à Comissão de Ética, em caráter reservado, que também foi constrangida pelo Dr. Ricardo e, uma vez, pelo próprio secretário, que comentou sua aparência e sugeriu que ela teria mais espaço se fosse “mais colaborativa”. Ela não formalizou a denúncia, por medo de retaliação e por achar que não teria prova.</p>
+      <p class="muted">No anexo, o médico aparece como Dr. Ricardo Almeida; no caso, como Dr. Ricardo Albuquerque.</p>
+
+      <h3 id="historia-instituicoes">9. Como as instituições reagiram</h3>
+      <p>A <b>Comissão de Ética</b> abriu procedimento preliminar no Dia +15, mas o secretário Heitor mandou manter “total discrição” e pediu a Márcia que não transformasse o caso em pauta política nem em polêmica na imprensa. A <b>Ouvidoria</b> abriu protocolo e recomendou mediação, sem nenhuma medida de proteção imediata. A <b>gerente</b>, já de saída, disse não ter instrumentos para intervir e que o clima sempre foi tenso.</p>
+      <p>No Dia +18, o <b>sindicato</b> convocou assembleia e cobrou canal de denúncia e uma política contra o assédio na Secretaria; a partir de representação dele, o <b>Ministério Público</b> ampliou o procedimento do caso Margarida para apurar possível assédio moral e institucional na UBS. No Dia +20, <b>Dona Zefa</b>, que soube do caso pelos usuários, pôs o tema na pauta da assembleia ao lado da perseguição a Dona Margarida, dizendo que não é só a velha que querem calar, mas todo mundo que defende o saber do povo. O “Voz do Sertão” publicou nota sobre a enfermeira perseguida por defender chás e benzeduras, e o caso chegou a coletivos nacionais e sindicatos da saúde.</p>
+      <p>O anexo aponta o que esse fato revela: o assédio funciona como forma de manter o modelo biomédico e de disciplinar saber e gênero; a omissão da gestão configura, para o sindicato, <b>assédio institucional</b>; as vítimas cruzam gênero, raça, idade e hierarquia (<b>interseccionalidade</b>); só uma pessoa denunciou formalmente, por medo e por falta de canal; o adoecimento de Carla e Raimundo tira PICs da população justo quando ela mais precisa; e a UBS rachou entre quem apoia Carla e quem a acha exagerada.</p>
+      <p>Os números do anexo: 3 profissionais relataram “brincadeiras” sobre práticas tradicionais; 1 ACS pediu transferência; 2 processos na Comissão de Ética; 1 denúncia formal e 3 relatos não formalizados; nenhum canal de denúncia na UBS; nenhuma política municipal antiassédio; 2 afastamentos por adoecimento mental em 12 meses; nenhuma ação de educação permanente sobre ética e assédio. A tabela completa está em <a href="#dados">Dados</a>.</p>
+
+      <h3 id="historia-agora">10. Onde estamos agora</h3>
+      <p>No Dia +20, o conflito saiu da casa de Dona Margarida e chegou ao chão da UBS. Há três frentes abertas ao mesmo tempo: a notificação sanitária, a apuração do assédio na Comissão de Ética e o procedimento ampliado do Ministério Público, com a assembleia do Conselho Local reunindo os dois temas. O material não diz o que aconteceu com o prazo da notificação.</p>
+      <p>Para a atividade, o anexo pede que o grupo leve o fato novo para as três etapas: na fundamentação, perguntar se o assédio é instrumento de manutenção do modelo biomédico e de disciplinamento de gênero e saber; no levantamento de atores, incluir vítimas, testemunhas silenciosas e instâncias de proteção; na análise, somar a dimensão ética e de direitos às dimensões epistemológica, política e do cuidado. No produto, o grupo deve dizer se inclui canal de denúncia, política antiassédio, formação em ética, apoio à saúde mental e medidas protetivas imediatas, e se isso é reformista ou transformador.</p>
+    </article>
+  </div>
+</div></section>
 
 <section class="view" id="v-fichas"><div class="inner">
   <div class="sechead"><div><div class="kicker">Consultar</div><h2>Fichas dos atores</h2></div><p>As fichas trazem só o que o texto do caso diz. A interpretação do grupo fica no Mapa de atores.</p></div>
@@ -600,7 +720,7 @@ textarea.big{min-height:130px}
 </div></section>
 
 <section class="view" id="v-linha-do-tempo"><div class="inner">
-  <div class="sechead"><div><div class="kicker">Consultar</div><h2>Linha do tempo</h2></div><p>Doze meses de tentativas de diálogo antes da notificação. A atividade começa no Dia +5.</p></div>
+  <div class="sechead"><div><div class="kicker">Consultar</div><h2>Linha do tempo</h2></div><p>Doze meses de sinais antes da notificação e os vinte dias seguintes, com o fato novo do Anexo A em destaque.</p></div>
   <div id="tl"></div>
 </div></section>
 
@@ -657,7 +777,7 @@ textarea.big{min-height:130px}
         <li><b>Açude municipal</b>, base dos pescadores do Barro Vermelho.</li>
       </ul></div>
     </div>
-    <div class="card"><h3>Pontos do caso a esclarecer com o tutor</h3><ul class="plain" style="margin-top:10px" id="incons"></ul></div>
+    <div class="card"><div class="kicker">Anexo A · fato novo</div><h3 style="margin:4px 0 4px">Assédio moral na UBS Dr. Ângelo</h3><p class="muted" style="margin:0 0 10px">Dados complementares do anexo, também fictícios.</p><div class="scroll"><table class="tm"><thead><tr><th>Indicador</th><th>Valor</th><th>Fonte</th></tr></thead><tbody id="anexoDados"></tbody></table></div></div>
   </div>
 </section>
 
@@ -727,10 +847,10 @@ textarea.big{min-height:130px}
     <details class="card"><summary><span>Identificação</span></summary>
       <div class="mrow"><label class="f w2">Título do relatório<input type="text" id="r-titulo" data-p="rel/titulo"></label><label class="f w2">Grupo nº<input type="text" id="r-grupo" data-p="rel/grupo"></label><label class="f w2">Data de entrega<input type="date" id="r-data" data-p="rel/data"></label></div></details>
     <details class="card"><summary><span>Componentes e papéis</span><span class="done" id="papCount"></span></summary><div id="papeisRows"></div><button class="btn" id="addPapel" type="button" style="margin-top:10px">Adicionar integrante</button></details>
-    <details class="card"><summary><span>Problema e justificativa</span></summary><div class="stack" style="gap:10px"><label class="f">Problema formulado<textarea id="r-problema" data-p="rel/problema" style="min-height:90px"></textarea></label><label class="f">Justificativa<textarea id="r-just" data-p="rel/justificativa" style="min-height:170px"></textarea></label><p class="muted">Os conceitos do relatório vêm da aba <a href="#conceitos">Conceitos</a>.</p></div></details>
+    <details class="card"><summary><span>Problema e justificativa</span></summary><div class="stack" style="gap:10px"><label class="f">Problema formulado<textarea id="r-problema" data-p="rel/problema" style="min-height:90px"></textarea></label><label class="f">Justificativa<textarea id="r-just" data-p="rel/justificativa" style="min-height:170px"></textarea></label><details class="card sugj"><summary><span>Sugestão de justificativa reforçada: todos os dados, as normas e o fato novo</span></summary><p class="muted" style="margin:6px 0">Responde ao comentário do professor no Relatório Parcial (“não mobilizar todos os dados e normas”). Leiam, ajustem e, se quiserem, usem no relatório.</p><div id="justSug" class="hist" style="max-width:none"></div><div class="toolbar"><button class="btn" id="justUse" type="button">Usar esta versão no relatório</button><span class="muted" id="justSt"></span></div></details><p class="muted">Os conceitos do relatório vêm da aba <a href="#conceitos">Conceitos</a>.</p></div></details>
     <details class="card" open><summary><span>Seções do relatório</span></summary>
       <p class="muted" style="margin-bottom:10px">Escolham um modelo e ajustem as seções. O levantamento bibliográfico sai da aba Referências; o andamento compara o cronograma de agora com o da última entrega registrada.</p>
-      <div class="toolbar" id="secPresets" style="margin-bottom:10px"><button class="btn" type="button" data-preset="p1">Modelo do 1º parcial</button><button class="btn" type="button" data-preset="p2">Parcial com levantamento bibliográfico</button><button class="btn" type="button" data-preset="p3">Versão do produto (planos e fatos)</button></div>
+      <div class="toolbar" id="secPresets" style="margin-bottom:10px"><button class="btn" type="button" data-preset="p1">Modelo do 1º parcial</button><button class="btn" type="button" data-preset="p2">Parcial com levantamento bibliográfico</button><button class="btn" type="button" data-preset="p3">Versão do produto (planos)</button></div>
       <div class="chips" id="secList"></div></details>
     <details class="card" open><summary><span>Cronograma e status</span><span class="done" id="cronoCount"></span></summary><div id="cronoRows"></div><button class="btn" id="addCrono" type="button" style="margin-top:10px">Adicionar ação</button></details>
   </div>
@@ -741,7 +861,7 @@ textarea.big{min-height:130px}
   <datalist id="papelOpts"><option value="Líder"><option value="Redator"><option value="Porta-voz"><option value="Pesquisadora"><option value="Pesquisador"></datalist>
 </div></section>
 <section class="view" id="v-propostas"><div class="inner">
-  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Propostas</h2></div><p>O Plano de Mediação e Governança Colaborativa, dividido nas partes que o produto pede. A cada encontro, atualizem o texto, subam a maturidade e salvem uma versão. Os fatos novos marcam aqui o que precisa ser revisto.</p></div>
+  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Propostas</h2></div><p>O Plano de Mediação e Governança Colaborativa, dividido nas partes que o produto pede. A cada encontro, atualizem o texto, subam a maturidade e salvem uma versão. As partes vieram com um rascunho para discussão, já considerando o fato novo do Anexo A.</p></div>
   <div class="segs" id="planTabs"></div>
   <div class="split rev" style="margin-top:16px">
     <div class="stack" id="compList"></div>
@@ -753,23 +873,37 @@ textarea.big{min-height:130px}
   </div>
 </div></section>
 
-<section class="view" id="v-fatos"><div class="inner">
-  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Fatos novos</h2></div><p>Quando o professor trouxer um fato novo, lancem aqui. O grupo registra o que muda no conflito e nos planos, marca as partes das propostas a revisar e gera a mini apresentação de 5 minutos.</p></div>
-  <div class="split">
+<section class="view" id="v-mapa-mental"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Consultar</div><h2>Mapa mental do caso</h2></div><p>O caso inteiro numa página: o que aconteceu, à esquerda, e o que o grupo faz com isso, à direita. Cliquem em cada ramo para ler a explicação.</p></div>
+  <div class="mmwrap">
+    <div class="card mmstage" id="mmStage"></div>
+    <div class="card mmdetail" id="mmDetail" aria-live="polite"></div>
+  </div>
+  <div class="mmlist" id="mmList"></div>
+</div></section>
+
+<section class="view" id="v-apresentacao"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Apresentação dos achados</h2></div><p>Uma apresentação curta sobre o problema, a justificativa e o fato novo, para o compartilhamento das pesquisas (5 minutos por grupo). Os slides vieram preenchidos como ponto de partida: editem, reordenem e apaguem o que não servir.</p></div>
+  <div class="split rev">
+    <div class="stack" id="apresList"></div>
     <div class="aside">
-      <button class="btn primary" id="fatoNew" type="button">Lançar fato novo</button>
-      <p class="muted">Copiem o fato como o professor apresentou. Ele aparece para todo o grupo, na linha do tempo e na página inicial.</p>
-      <details class="card"><summary><span>Fatos para treinar</span></summary><p class="muted" style="margin:6px 0 4px">Fatos hipotéticos criados para o grupo ensaiar a análise e a apresentação. Não são do professor.</p><div id="treinoList"></div></details>
+      <div class="card"><div class="kicker" style="margin-bottom:8px" id="apresPrevN"></div><div class="slide mini" id="apresPrev"></div><p class="muted" id="apresTempo" style="margin-top:8px"></p></div>
+      <div class="card stack" style="gap:8px">
+        <label class="f">Tempo da apresentação<select id="apresMin"><option value="5">5 minutos</option><option value="10">10 minutos</option><option value="15">15 minutos</option></select></label>
+        <button class="btn primary" id="apresGo" type="button">Apresentar</button>
+        <button class="btn" id="apresPrint" type="button">Imprimir slides em PDF</button>
+        <button class="btn" id="apresCopy" type="button">Copiar roteiro com as falas</button>
+        <button class="btn" id="apresAdd" type="button">Adicionar slide</button>
+      </div>
     </div>
-    <div class="stack" id="fatoList"></div>
   </div>
 </div></section>
 </main>
 
 <footer><div class="inner foot">
   <div><div class="brand">Painel do Caso Caatinga Velha</div><p style="margin-top:8px;max-width:44ch">Material de apoio do grupo para a disciplina ADMT0346, PPGDiDeS/UNIVASF. Os dados do caso são fictícios e vêm do material da disciplina.</p></div>
-  <div class="col"><span class="kicker">Consultar</span><a href="#fichas">Fichas dos atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados do caso</a><a href="#siglas">Siglas e termos</a></div>
-  <div class="col"><span class="kicker">Preencher</span><a href="#mapa">Mapa de atores</a><a href="#banca">Treino de banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#propostas">Propostas</a><a href="#fatos">Fatos novos</a><a href="#relatorio">Relatório</a></div>
+  <div class="col"><span class="kicker">Consultar</span><a href="#historia">História completa</a><a href="#mapa-mental">Mapa mental</a><a href="#fichas">Fichas dos atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados do caso</a><a href="#siglas">Siglas e termos</a></div>
+  <div class="col"><span class="kicker">Preencher</span><a href="#mapa">Mapa de atores</a><a href="#banca">Treino de banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#propostas">Propostas</a><a href="#apresentacao">Apresentação</a><a href="#relatorio">Relatório</a></div>
   <div class="col"><span class="kicker">Entregas</span><span>Relatório Parcial · entregue 15/11</span><span>Roteiro · 02/12</span><span>Relatório Final · 07 a 11/12</span></div>
 </div></footer>
 
@@ -788,9 +922,10 @@ textarea.big{min-height:130px}
 <div id="toast" role="status"></div>
 <div id="printArea" aria-hidden="true"></div>
 <dialog id="verDlg"><h3 id="verDlgT" style="font-size:19px"></h3><div id="verDlgB" class="verb"></div><div class="toolbar" style="margin-top:12px"><button class="btn" id="verClose" type="button">Fechar</button></div></dialog>
-<div id="pres" class="pres" hidden role="dialog" aria-label="Mini apresentação">
-  <div class="presbar"><span id="presCount" class="num"></span><span class="timer num" id="presClock">5:00</span><button class="btn" id="presTimer" type="button">Iniciar 5 minutos</button><button class="btn" id="presFull" type="button">Tela cheia</button><button class="btn" id="presClose" type="button">Fechar</button></div>
+<div id="pres" class="pres" hidden role="dialog" aria-label="Apresentação">
+  <div class="presbar"><span id="presCount" class="num"></span><span class="timer num" id="presClock">5:00</span><button class="btn" id="presNotesBtn" type="button" aria-pressed="false">Falas</button><button class="btn" id="presTimer" type="button">Iniciar 5 minutos</button><button class="btn" id="presFull" type="button">Tela cheia</button><button class="btn" id="presClose" type="button">Fechar</button></div>
   <div class="presstage"><section class="slide" id="presSlide"></section></div>
+  <div class="presnotes" id="presNotes" hidden></div>
   <div class="presnav"><button class="btn" id="presPrev" type="button">Anterior</button><button class="btn primary" id="presNext" type="button">Próximo</button></div>
 </div>
 
@@ -1053,13 +1188,225 @@ const IMPORT_REFS=[
  {tipo:'lei',jur:'BRASIL',titulo:'Lei nº 8.080, de 19 de setembro de 1990',ementa:'Dispõe sobre as condições para a promoção, proteção e recuperação da saúde, a organização e o funcionamento dos serviços correspondentes e dá outras providências',pub:'Diário Oficial da União',local:'Brasília, DF',dataPub:'20 set. 1990',c:['@limites','visa'],nota:'Art. 6º, § 1º: define a vigilância sanitária pelas ações que eliminam, diminuem ou previnem riscos à saúde. A leitura “e não a punição” é interpretação do grupo, não está escrita na lei.'},
  {tipo:'online',autores:'CARVALHO, Jéssica T. C.\nRAMALHO, Marcelo M.',titulo:'Mediação na administração pública',subtitulo:'instrumento eficaz',editora:'Tribunal de Justiça de Minas Gerais',ano:'2021',c:['@limites','mediacao'],conferir:true,nota:'Dados incompletos: localizar o texto original (onde foi publicado, ano exato e endereço) antes de citar.'}
 ];
+
+/* ====================== Anexo A: fato novo (assédio moral na UBS) ====================== */
+GRUPOS[3]='Controle social, justiça e proteção';
+{const A=id=>ATORES.find(a=>a.id===id);
+ A('carla').fatos.push('Dia +10: protocolou na Ouvidoria do SUS e na Comissão de Ética uma representação por assédio moral contra o Dr. Ricardo.','Relata humilhações em reuniões, retirada de insumos da sala de PICs, pacientes desmarcados sem justificativa, e-mails com cópia à gerência questionando sua “isenção técnica” e um bilhete anônimo: “quem protege bruxa é bruxa”.','Afastada por 15 dias com atestado por crise de ansiedade. Era a única profissional que oferecia PICs na UBS.');
+ A('carla').fala='eu só queria cuidar das pessoas com o que a comunidade reconhece como cuidado';
+ A('raimundo').fatos.push('Fato novo: chamado de “raizeiro do posto” na frente de usuários, advertido por conversar com uma benzedeira durante visita domiciliar e transferido para as áreas de maior violência.','Dia +12: relatou ao sindicato o monitoramento e a advertência. Deixou de ir às reuniões de equipe.');
+ A('raimundo').fala='aprendi com meus avós que cuidar é com as mãos e com as folhas';
+ const r=A('renata');r.t=1;r.fatos.push('Fato novo: relatou à Comissão de Ética, em caráter reservado, constrangimentos do Dr. Ricardo e comentários do secretário Heitor sobre sua aparência, com a sugestão de que teria “mais espaço” se fosse “mais colaborativa”.','Não formalizou denúncia por medo de retaliação e por achar que não teria prova.');
+ A('ricardo').fatos.push('Fato novo: acusado pela Enf. Carla de assédio moral. No anexo do caso aparece como Dr. Ricardo Almeida.');
+ A('heitor').fatos.push('Dia +15: determinou “total discrição” no procedimento da Comissão de Ética.','Citado por Renata, em relato reservado, por comentários sobre a aparência dela.');
+ A('marcia').fatos.push('Fato novo: orientada pelo secretário a “não transformar isso em pauta política” e a evitar a imprensa.');
+ A('zefa').fatos.push('Dia +20: incluiu o assédio na pauta da assembleia, ao lado da perseguição a Dona Margarida.');
+ A('zefa').fala='não é só a velha que eles querem calar';
+ A('mp').fatos.push('Dia +18: ampliou o procedimento para apurar possível assédio moral e institucional na UBS, a partir de representação do sindicato.');
+}
+ATORES.push(
+ {id:'gerente',nome:'Gerente da UBS Dr. Ângelo',curto:'Gerente da UBS',tipo:'Gestão da unidade',g:1,t:1,
+  perfil:'Gerente da unidade, descrita no caso como omissa. Pediu transferência logo depois da notificação.',
+  fatos:['Não priorizava a compra de insumos para as PICs.','Recebia com cópia os e-mails que questionavam a “isenção técnica” da Enf. Carla.','Diante da denúncia, disse não ter “instrumentos para intervir” e que o clima “sempre foi tenso”.']},
+ {id:'colegas',nome:'Técnicos e colegas da UBS',curto:'Colegas da UBS',tipo:'Testemunhas',g:1,t:1,
+  perfil:'Técnicos de enfermagem, ACS e demais profissionais que presenciaram as condutas. A UBS está rachada entre quem apoia Carla e quem a acha “exagerada”.',
+  fatos:['Um técnico gravou a fala de corredor de um médico sobre o chá “na cozinha dela”.','Um técnico chamou Seu Raimundo de “raizeiro do posto” na frente de usuários; colegas passaram a relatar as conversas dele à gerência.','Três profissionais dizem já ter sofrido “brincadeiras” sobre práticas tradicionais.','Um áudio zombando das práticas de Carla circulou em grupo fechado de profissionais.']},
+ {id:'sindicato',nome:'Sindicato dos Servidores',curto:'Sindicato',tipo:'Entidade sindical',g:3,t:1,
+  perfil:'Representa os servidores municipais. Entra no caso com as denúncias de assédio.',
+  fatos:['Dia +12: recebeu o relato de Seu Raimundo.','Fez a representação que levou o MP a ampliar o procedimento.','Dia +18: convocou assembleia e cobrou canal de denúncia e política contra o assédio na SMS.','Classifica a omissão da gestão como assédio institucional. Guarda três relatos reservados de assédio.']},
+ {id:'etica',nome:'Comissão de Ética da SMS',curto:'Comissão de Ética',tipo:'Instância de apuração',g:3,t:1,
+  perfil:'Instância da Secretaria Municipal de Saúde que apura a conduta dos profissionais. Tem dois processos em análise.',
+  fatos:['Dia +10: recebeu a representação de Carla; depois, o relato reservado de Renata.','Dia +15: instaurou procedimento preliminar, sob ordem de “total discrição” do secretário.']},
+ {id:'ouvidoria',nome:'Ouvidoria do SUS',curto:'Ouvidoria',tipo:'Canal de manifestações',g:3,t:1,
+  perfil:'Canal de reclamações e denúncias do SUS no município.',
+  fatos:['Mês -3: recebeu a reclamação de Seu João e recomendou “diálogo”, sem ação concreta.','Dia +10: abriu protocolo para a denúncia de Carla e recomendou “mediação”, sem medida protetiva imediata.']},
+ {id:'imprensa',nome:'Jornal Voz do Sertão',curto:'Voz do Sertão',tipo:'Mídia local',g:3,t:0,
+  perfil:'Jornal local que acompanha o caso desde a notificação.',
+  fatos:['Dia 0 em diante: manchete sobre “curandeirismo ou crime sanitário” no caso de Dona Margarida.','Dia +20: nota sobre a enfermeira que denuncia perseguição por defender chás e benzeduras. O caso viraliza e chega a coletivos nacionais e sindicatos da saúde.']}
+);
+
+TL.length=0;TL.push(
+ ['Mês -12','Enf. Carla propõe à SMS um Programa Municipal de Plantas Medicinais e PICs, com R$ 50 mil anuais. O secretário Heitor Carneiro arquiva a proposta.',''],
+ ['Mês -9','Dona Margarida atende Seu Raimundo em uma crise de ansiedade. Ele melhora e conta aos colegas. Dr. Ricardo responde: “placebo e irresponsabilidade”.',''],
+ ['Mês -6','O Conselho Local de Saúde aprova moção recomendando parceria da UBS com raizeiros. A gestão ignora.',''],
+ ['Mês -3','Caso Seu João (lombalgia): prontuário registra “abandono de tratamento”. Ele reclama à Ouvidoria do SUS, que recomenda “diálogo” sem ação concreta.',''],
+ ['Mês -1','Post do Dr. Ricardo em rede fechada de médicos cobra punição a praticantes tradicionais. O print chega à comunidade.',''],
+ ['Dia 0','A Vigilância Sanitária notifica Dona Margarida: 10 dias para retirar os produtos, sob pena de multa de R$ 5.000,00 e apreensão. Entrega por oficial de justiça.',''],
+ ['Dia +3','Dona Zefa convoca assembleia extraordinária do Conselho Local de Saúde. O Ministério Público abre procedimento preparatório.',''],
+ ['Dia +5','Início da atividade: a turma entra como consultoria crítica e propositiva. O caso já está no jornal “Voz do Sertão” e nos grupos de WhatsApp.',''],
+ ['Dia +10','Fato novo: Enf. Carla protocola representação por assédio moral contra o Dr. Ricardo na Ouvidoria e na Comissão de Ética. A Ouvidoria recomenda “mediação”, sem medida protetiva. Na mesma data vence o prazo da notificação; o material não informa o desfecho.','novo'],
+ ['Dia +12','ACS Seu Raimundo relata ao sindicato o monitoramento pelos colegas e a advertência verbal. Cogita pedir demissão.','novo'],
+ ['Dia +15','A Comissão de Ética instaura procedimento preliminar. O secretário Heitor determina “discrição total”.','novo'],
+ ['Dia +18','O sindicato convoca assembleia e cobra canal de denúncia e política antiassédio. O MP amplia o procedimento para apurar assédio moral e institucional.','novo'],
+ ['Dia +20','Dona Zefa põe o assédio na pauta da assembleia, ao lado da perseguição a Dona Margarida. O jornal publica nota e o caso viraliza.','now'],
+ ['A seguir','Assembleia extraordinária do Conselho Local com os dois temas. Procedimentos em andamento na Comissão de Ética e no MP.','fut']
+);
+
+BANCA.splice(BANCA.length-1,0,{id:'anexo',papel:'Fato novo: assédio (Anexo A)',postura:'Perguntas do anexo, para todos os grupos.',qs:[
+ 'O assédio moral contra Carla e Raimundo é questão trabalhista ou de saúde coletiva? Por que a gestão tenta separar as duas coisas?',
+ 'Como gênero, raça, idade e hierarquia profissional operam na escolha das vítimas? O que a interseccionalidade revela sobre o padrão de violência institucional?',
+ 'Quais dispositivos poderiam proteger Carla e Raimundo (Comissão de Ética, Ouvidoria, MPT, sindicato, Conselho Local, Convenção 190 da OIT)? Por que nenhum foi acionado a tempo?',
+ 'O que a omissão de Márcia Torres e a “discrição total” de Heitor revelam sobre os limites da gestão intermediária e sobre o assédio institucional?',
+ 'Um produto que proponha canal de denúncia, política antiassédio e formação em ética é reformista ou transformador?',
+ 'Como articular a luta antirracista com a proteção dos trabalhadores que defendem saberes tradicionais, sem individualizar a culpa nem esvaziar a denúncia?',
+ 'O adoecimento de Carla e Raimundo precariza o cuidado. Como a gestão deveria responder sem transformar o assédio em “caso pessoal”?',
+ 'Que responsabilidade ética têm os colegas que testemunharam e se calaram? O silêncio é cumplicidade ou medo legítimo?']});
+
+CONCEITOS.push(
+ ['assedio','Assédio moral e assédio institucional','Pedido pelo Anexo A. Começar por Hirigoyen e pelos guias de prevenção do assédio no serviço público.'],
+ ['intersec','Interseccionalidade','Pedido pelo Anexo A. Crenshaw (1989) e Akotirene (2019) como ponto de partida.']);
+const SEED2_CONC={
+ assedio:{pq:'Nomeia o que acontece com Carla, Raimundo e Renata e a omissão da gestão; separa o que é mediável do que exige proteção e apuração.',fontes:'Hirigoyen (2002), Mal-estar no trabalho; Convenção 190 da OIT (2019, ainda não ratificada pelo Brasil); Lei 14.540/2023. A conferir.'},
+ intersec:{pq:'Explica por que as vítimas são uma mulher enfermeira, um homem negro e idoso e uma mulher fisioterapeuta: gênero, raça, idade e hierarquia se somam.',fontes:'Crenshaw (1989); Akotirene (2019), Interseccionalidade; Collins e Bilge (2021). A conferir.'}};
+
+SIGLAS.push(['MPT','Ministério Público do Trabalho','Ramo do MP que atua em relações de trabalho. O Anexo A cita como possível proteção para Carla e Raimundo.'],
+ ['PNSIPN','Política Nacional de Saúde Integral da População Negra','Política do SUS (Portaria GM/MS nº 992/2009) que reconhece o racismo como determinante de saúde e valoriza saberes populares de matriz africana.'],
+ ['PNPMF','Política Nacional de Plantas Medicinais e Fitoterápicos','Decreto nº 5.813/2006. Base da Farmácia Viva e do uso de plantas no SUS.']);
+SIGLAS.sort((a,b)=>a[0].localeCompare(b[0],'pt'));
+TERMOS.push(['Assédio moral','Exposição repetida a humilhações e constrangimentos no trabalho, que degrada as condições de trabalho e a saúde de quem sofre. É o que Carla denuncia.'],
+ ['Assédio institucional','Quando a própria organização produz, tolera ou naturaliza a violência, por ação ou omissão. O sindicato usa o termo para a “discrição total” da gestão.'],
+ ['Interseccionalidade','Leitura de como gênero, raça, idade, classe e posição profissional se cruzam e somam opressões sobre a mesma pessoa.'],
+ ['Medida protetiva','Providência imediata para proteger quem denuncia, como afastar o acusado da chefia direta ou impedir retaliação, antes do fim da apuração.'],
+ ['Comissão de Ética','Instância que apura a conduta de profissionais. A da SMS tem dois processos em análise.'],
+ ['Ouvidoria do SUS','Canal para reclamações e denúncias de usuários e trabalhadores. No caso, recomendou diálogo e mediação, sem medidas concretas.']);
+TERMOS.sort((a,b)=>a[0].localeCompare(b[0],'pt'));
+
+const ANEXO_DADOS=[['Profissionais da UBS que relataram “brincadeiras” sobre práticas tradicionais','3','Comissão de Ética'],['ACS que pediram transferência após o caso','1','SMS'],['Processos em análise na Comissão de Ética','2','Comissão de Ética'],['Denúncias formais de assédio moral','1 (Carla)','Ouvidoria do SUS'],['Relatos reservados de assédio, não formalizados','3','Sindicato dos Servidores'],['Canal de denúncia interna na UBS','Não','SMS'],['Política municipal antiassédio','Não','SMS'],['Afastamentos por adoecimento mental na UBS (12 meses)','2 (Carla e Raimundo)','SMS'],['Ações de educação permanente sobre ética e assédio','0','SMS']];
+
+/* ====================== sugestões preenchidas para o grupo revisar (entram uma vez, só em campos vazios) ====================== */
+const SEED2_V='s2';
+const JUST_V2=`O problema é relevante porque o município de Coração do Sertão aderiu formalmente à Política Nacional de Práticas Integrativas e Complementares (Portaria GM/MS nº 971/2006; Portaria Municipal nº 047/2019), mas não a financia: a verba municipal para PICs na Lei Orçamentária de 2024 é de R$ 0,00, a proposta de um programa de R$ 50 mil anuais foi arquivada, não há Farmácia Viva ativa (a do Riacho do Meio está parada há dois anos) e só duas profissionais têm capacitação acima de 40 horas, o que gera fila de seis meses para auriculoterapia. Enquanto isso, 73% da população do distrito usa alguma PIC, 58% já buscaram benzedeira ou raizeiro e 64% acreditam que o benzimento cura. Entre os profissionais da UBS, 82% usam chás em casa, mas só 18% recomendariam benzimento a um paciente. A distância entre o uso privado e o reconhecimento institucional mostra uma apropriação seletiva da política: o município usa o nome da PNPIC sem integrá-la ao cuidado, contrariando a integralidade prevista na Lei nº 8.080/1990 e a Política Nacional de Plantas Medicinais e Fitoterápicos (Decreto nº 5.813/2006).
+A notificação da Vigilância Sanitária contra Dona Margarida (processo nº 045/2024-VISA, com base na Lei nº 6.437/1977) transformou essa contradição em conflito aberto. Não é um episódio isolado: foram sete denúncias contra raizeiros em dois anos e duas multas, ambas suspensas pelo Ministério Público, e as resoluções do Conselho Local de Saúde, que tem caráter deliberativo (Lei nº 8.142/1990), vêm sendo ignoradas pela gestão. O conflito envolve UBS, Secretaria Municipal de Saúde, Conselho Local, Ministério Público e lideranças comunitárias e religiosas, e atinge uma comunidade quilombola cujo saber é protegido pela Convenção nº 169 da OIT, pelo Estatuto da Igualdade Racial (Lei nº 12.288/2010) e pela Política Nacional de Saúde Integral da População Negra.
+O fato novo surgido depois da notificação amplia o alcance do problema. A representação por assédio moral da Enf. Carla Mendes, o assédio sofrido pelo ACS Seu Raimundo e os constrangimentos relatados pela Dra. Renata Lima mostram que a violência institucional não recai só sobre a comunidade, mas também sobre os trabalhadores que defendem as PICs. A UBS não tem canal de denúncia, o município não tem política contra o assédio e não houve nenhuma ação de educação permanente sobre ética e assédio; já são dois afastamentos por adoecimento mental, o que interrompe a única oferta institucional de PICs do distrito. Por se tratar de relações continuadas e de uma hierarquia entre saberes marcada pelo racismo epistêmico, cruzada por gênero, raça, idade e posição profissional, não basta resolver o caso pontual: é preciso um arranjo de governança colaborativa que proteja quem cuida e quem é cuidado.`;
+
+/* cronograma revisto: pesquisa antes do produto e alinhado aos encontros (comentário do professor no Relatório Parcial) */
+const CRONO_V2=[
+ ['Leitura do caso e formulação do problema (Encontros 1 e 2)','Todos','2026-11-14','Concluído',['leitura do caso']],
+ ['Relatório Parcial','Fernando / Katherine','2026-11-15','Concluído',[]],
+ ['Pesquisa bibliográfica e fichamento dos conceitos (estudo autônomo)','Débora / José Pedro','2026-11-18','Em andamento',['pesquisa bibliografica']],
+ ['Compartilhamento das pesquisas e análise crítica, incluindo o fato novo (Encontro 3)','Todos','2026-11-19','Em andamento',[]],
+ ['Mapa de atores e análise dos dados do caso e do anexo','Katherine / Fernando','2026-11-25','Pendente',['analise dos dados']],
+ ['Plano de Mediação, primeira versão (Encontro 4)','Todos','2026-11-26','Pendente',['construcao do produto']],
+ ['Plano de Governança Colaborativa e versão avançada do produto (Encontro 5)','Todos','2026-11-28','Pendente',['construcao do produto']],
+ ['Roteiro da apresentação e material complementar','José Pedro / Fernando','2026-12-02','Pendente',['preparacao da apresentacao']],
+ ['Apresentação e banca simulada (Encontro 6)','José Pedro e todos','2026-12-03','Pendente',['apresentacao']],
+ ['Devolutiva e ajustes (Encontro 7)','Todos','2026-12-05','Pendente',[]],
+ ['Relatório Final','Fernando / Katherine','2026-12-11','Pendente',['relatorio final']]];
+
+const MAPA_SEED={
+ margarida:{int:'Continuar cuidando e passar adiante o saber, sem medo de multa ou prisão. Ser respeitada como quem sabe.',pos:'Parou de atender de dia e queimou parte dos frascos. Diz que o saber vai morrer com ela porque os doutores não querem.',poder:'baixo',interesse:'alto',postura:'fav',ali:'Comunidade do Baixio, Seu Benedito, Dona Zefa, Pe. José, Enf. Carla, ACS Raimundo.',opo:'Dra. Vera e a Vigilância Sanitária, Dr. Ricardo, Pastora Sandra.',est:'Ouvir primeiro, na casa dela e com pessoas de confiança. Pedir a suspensão do prazo da notificação enquanto durar a mediação. Tratá-la como mestra do saber, não como infratora: nada é decidido sobre ela sem ela.'},
+ comunidade:{int:'Manter o cuidado coletivo com plantas, a Casa de Rezas e o território; ser atendida pela UBS sem desprezo.',pos:'Escondeu os frascos que restaram e apoia Dona Margarida.',poder:'médio',interesse:'alto',postura:'fav',ali:'Seu Benedito, Dona Zefa, Pe. José, Ministério Público.',opo:'Vigilância Sanitária, fazendeiros vizinhos, Pastora Sandra.',est:'Assento com voz e voto na governança; registro do próprio saber feito e controlado pela comunidade; reuniões no território, não só na sede.'},
+ benedito:{int:'Proteger o território e a cultura quilombola.',pos:'Ameaça acionar a OEA se a perseguição continuar.',poder:'médio',interesse:'alto',postura:'fav',ali:'Comunidade, Dona Margarida, Ministério Público, Pe. José.',opo:'Vigilância Sanitária e gestão municipal.',est:'Reconhecê-lo como interlocutor oficial do quilombo e garantir consulta prévia (Convenção 169 da OIT). A ameaça à OEA é pressão que a mediação deve tornar desnecessária.'},
+ raimundo:{int:'Trabalhar sem esconder o que sabe, sem ser vigiado nem punido; manter o emprego e a saúde.',pos:'Cogita pedir demissão e deixou de ir às reuniões de equipe.',poder:'baixo',interesse:'alto',postura:'fav',ali:'Enf. Carla, Dona Lúcia e outros ACS, sindicato, comunidade.',opo:'Colegas que o vigiam, gerência, Dr. Ricardo.',est:'Proteção imediata: rever a advertência e a mudança de área, garantir não retaliação e apoio em saúde mental. Depois, papel reconhecido de ponte entre a UBS e os raizeiros.'},
+ ricardo:{int:'Segurança do paciente, prestígio profissional e um cuidado que ele considera baseado em evidências.',pos:'“A lei é clara”: trata as PICs como charlatanismo e cobra punição dos praticantes.',poder:'alto',interesse:'alto',postura:'con',ali:'Dra. Vera, secretário Heitor, parte da equipe e da rede de médicos; converge com a Pastora Sandra.',opo:'Enf. Carla, Dra. Renata, ACS Raimundo, Conselho Local, Pe. José.',est:'Separar as trilhas: a denúncia de assédio vai para a Comissão de Ética e não é mediada com as vítimas. Na discussão das PICs, partir do interesse legítimo dele (segurança e interações medicamentosas) e chamá-lo para o protocolo de segurança. Educação permanente e responsabilização, sem fazer dele o “médico vilão” que esconde o problema institucional.'},
+ carla:{int:'Condições de trabalho, insumos, reconhecimento das PICs e proteção contra o assédio.',pos:'Protocolou representação por assédio moral e está afastada por 15 dias.',poder:'médio',interesse:'alto',postura:'fav',ali:'Dona Margarida, ACS Raimundo, Dra. Renata, Márcia Torres, sindicato, Conselho Local.',opo:'Dr. Ricardo, gerência e parte da equipe.',est:'Proteção e apoio em saúde mental antes de qualquer mesa. Garantir que o afastamento não encerre a auriculoterapia. Depois, referência técnica do comitê de PICs.'},
+ renata:{int:'Praticar PICs com respaldo e trabalhar sem constrangimento.',pos:'Faz auriculoterapia escondida e não formalizou denúncia, por medo.',poder:'baixo',interesse:'alto',postura:'fav',ali:'Enf. Carla, Márcia Torres.',opo:'Dr. Ricardo e secretário Heitor.',est:'Canal sigiloso e escuta protegida para que possa formalizar se quiser (o relato envolve possível assédio sexual, previsto na Lei 14.540/2023). Liberar agenda para PICs no NASF-AB.'},
+ vera:{int:'Cumprir a lei sanitária, evitar danos à saúde e manter a autoridade da Vigilância.',pos:'“A lei é para todos”: vê o caso como exemplar e prepara novas fiscalizações.',poder:'alto',interesse:'alto',postura:'con',ali:'Dr. Ricardo, secretário Heitor, Pastora Sandra.',opo:'Comunidade, Conselho Local, Ministério Público, Pe. José.',est:'Reconhecer o mandato de proteger a saúde e oferecer saída honrosa: vigilância educativa, boas práticas de preparo construídas com as raizeiras e critério de risco concreto para autuar. O MP pode ajudar a suspender o prazo enquanto o protocolo é construído.'},
+ heitor:{int:'Metas do Previne Brasil, orçamento controlado, evitar desgaste político e na imprensa.',pos:'PICs são “gasto sem comprovação”; mandou tratar o assédio com “total discrição”.',poder:'alto',interesse:'médio',postura:'con',ali:'Dr. Ricardo e Dra. Vera.',opo:'Márcia Torres, Conselho Local, Enf. Carla, sindicato, Ministério Público.',est:'Falar a língua dele: custo baixo, ganho de vínculo e de indicadores, menos risco jurídico (MP, sindicato, imprensa). A omissão diante do assédio já virou risco institucional; o comitê é a saída para ele deixar o foco negativo.'},
+ marcia:{int:'Implementar as PICs e o cuidado integral sem perder o cargo.',pos:'Apoia as PICs, mas foi mandada a não se envolver e a não fazer “pauta política”.',poder:'médio',interesse:'alto',postura:'fav',ali:'Enf. Carla, Dra. Renata, Conselho Local.',opo:'Secretário Heitor, pela hierarquia.',est:'Dar a ela respaldo institucional: a governança e o MP criam a ordem que hoje lhe falta. É a melhor articuladora interna do plano.'},
+ zefa:{int:'Fazer valer o controle social e a cultura popular.',pos:'Assembleia extraordinária com a perseguição a Dona Margarida e o assédio na pauta.',poder:'médio',interesse:'alto',postura:'fav',ali:'Comunidade, Pe. José, Ministério Público, sindicato.',opo:'Gestão municipal, Vigilância Sanitária, Dr. Ricardo.',est:'O Conselho convoca e acompanha a governança; deliberações com prazo de resposta e encaminhamento ao MP quando forem ignoradas.'},
+ mp:{int:'Garantir direitos coletivos e uma solução efetiva, não simbólica.',pos:'Procedimento aberto e ampliado para apurar assédio moral e institucional.',poder:'alto',interesse:'alto',postura:'fav',ali:'Conselho Local, comunidade, sindicato.',opo:'Não declara oposição; pressiona a gestão e a Vigilância.',est:'Garantidor da mediação: pode recomendar a suspensão da autuação, acompanhar o termo de cooperação e cobrar as medidas contra o assédio.'},
+ jose:{int:'Defender as benzedeiras e o diálogo entre fé e saber popular.',pos:'Caminhada em Defesa das Benzedeiras e artigo contra o racismo epistêmico.',poder:'médio',interesse:'alto',postura:'fav',ali:'Comunidade, Dona Margarida, Dona Zefa.',opo:'Pastora Sandra.',est:'Mobilizador e ponte com os fiéis. Cuidar para que a mediação não vire disputa entre igrejas.'},
+ sandra:{int:'Proteger sua comunidade de fé e o ministério de cura divina.',pos:'Benzimento é “feitiçaria”; apoia a Vigilância Sanitária.',poder:'médio',interesse:'médio',postura:'con',ali:'Vigilância Sanitária e jovens evangélicos.',opo:'Pe. José e benzedeiras.',est:'Não exigir que ela concorde; buscar o mínimo comum: ninguém perseguido e liberdade de escolha. Convite à escuta, sem obrigação.'},
+ gerente:{int:'Sair do conflito: pediu transferência.',pos:'Diz não ter instrumentos para intervir.',poder:'médio',interesse:'baixo',postura:'amb',ali:'Não se posiciona.',opo:'Não se posiciona; a omissão favorece quem tem mais poder.',est:'A troca de gerência é uma janela: as atribuições do novo gerente devem incluir prevenção do assédio e apoio às PICs.'},
+ colegas:{int:'Evitar exposição e retaliação.',pos:'Racha: alguns técnicos e ACS apoiam Carla; outros a acham “exagerada” ou defensora de charlatanismo.',poder:'baixo',interesse:'médio',postura:'amb',ali:'Divididos entre Carla e Dr. Ricardo.',opo:'Divididos entre Carla e Dr. Ricardo.',est:'Formação em ética e assédio; canal sigiloso também para testemunhas; tratar o silêncio como problema coletivo, não como culpa individual.'},
+ sindicato:{int:'Proteger os servidores e responsabilizar a gestão.',pos:'Cobra canal de denúncia e política antiassédio; aponta assédio institucional.',poder:'médio',interesse:'alto',postura:'fav',ali:'Enf. Carla, ACS Raimundo, Ministério Público, Conselho Local.',opo:'Secretário Heitor.',est:'Assento no núcleo de proteção ao trabalhador e coautoria da política antiassédio.'},
+ etica:{int:'Apurar as condutas com isenção.',pos:'Procedimento preliminar aberto, sob ordem de “discrição total”.',poder:'médio',interesse:'médio',postura:'amb',ali:'Depende da autonomia diante da gestão.',opo:'Pressão do secretário por discrição.',est:'Garantir autonomia frente ao secretário, prazo para concluir, sigilo para as vítimas e retorno às partes.'},
+ ouvidoria:{int:'Registrar e encaminhar manifestações.',pos:'Recomendou “mediação” sem medida protetiva, como já tinha recomendado “diálogo” no caso Seu João.',poder:'baixo',interesse:'baixo',postura:'amb',ali:'Nenhuma declarada.',opo:'Nenhuma declarada.',est:'Rever o fluxo: denúncia de assédio não vai para mediação entre vítima e acusado; a Ouvidoria encaminha à Comissão de Ética com pedido de medida protetiva.'}};
+
+const PLANO_SEED={
+ m1:{texto:`Conflito de origem: disputa entre o modelo biomédico e o saber tradicional quilombola sobre quem pode cuidar e com que conhecimento. Conflito processual: a notificação nº 045/2024-VISA, que é a lide processual; a lide sociológica é o não reconhecimento do saber e de quem o defende.
+Com o fato novo, o conflito tem duas arenas ligadas: (1) Vigilância Sanitária contra praticantes tradicionais e comunidade; (2) dentro da UBS, assédio moral contra quem defende as PICs (Carla, Raimundo, Renata), com omissão da gestão.
+O poder formal está na gestão (Heitor), na Vigilância (Vera) e no corpo médico (Ricardo). O poder de pressão está no MP, no Conselho Local, no sindicato e na imprensa. Os mais vulneráveis são Dona Margarida, Raimundo e Carla.
+Arenas: assembleia do Conselho Local, procedimento do MP, Comissão de Ética, Ouvidoria, imprensa e redes.`,abertas:'O assédio entra no mesmo plano de mediação ou exige uma trilha própria, de proteção e apuração?'},
+ m2:{texto:`Favoráveis ao reconhecimento do saber: Dona Margarida, comunidade do Baixio, Seu Benedito, Enf. Carla, ACS Raimundo, Dra. Renata, Márcia Torres, Dona Zefa e o Conselho, Pe. José e o sindicato. Apoio institucional externo: Ministério Público.
+Contrários: secretário Heitor, Dra. Vera, Dr. Ricardo, Pastora Sandra.
+Ambivalentes decisivos: gerência e colegas da UBS (testemunhas silenciosas), Comissão de Ética e Ouvidoria, que podem proteger ou arquivar.
+Pontes possíveis: Márcia Torres entre gestão e UBS; MP entre comunidade e Vigilância; Pe. José entre os fiéis; universidade como terceira parte técnica.`},
+ m3:{texto:`Canal de denúncia sigiloso, fora da chefia imediata, ligado à Ouvidoria e à Comissão de Ética.
+Formação em ética, assédio e PICs para toda a equipe da UBS, dentro da educação permanente (hoje não há nenhuma ação).
+Círculos de Cuidado: rodas entre ACS, profissionais e praticantes tradicionais, para que o saber deixe de ser escondido.
+Orientação antes de autuação: a Vigilância conversa e orienta praticantes tradicionais antes de notificar.
+Comunicação pública combinada entre as partes, para reduzir a escalada na imprensa.`,abertas:'Quem coordena os Círculos de Cuidado? Há horário protegido na agenda para a formação?'},
+ m4:{texto:`Duas trilhas, nesta ordem.
+1) Proteção imediata, que não se media: medidas protetivas para Carla, Raimundo e Renata (o acusado fora da chefia direta das vítimas, agenda e insumos de Carla recompostos, revisão da advertência e da mudança de área de Raimundo, sigilo e garantia de não retaliação); apuração pela Comissão de Ética com prazo e sem interferência do secretário; apoio em saúde mental.
+2) Mesa de mediação do caso Dona Margarida: convocada pelo Conselho Local, com o MP como garantidor e um mediador neutro aceito pelas partes. Partes: Vigilância Sanitária, SMS, UBS, Dona Margarida e representantes do quilombo. Pauta: suspensão do prazo da notificação durante a mediação, orientação sanitária no lugar da apreensão, reconhecimento da prática no território. Etapas: conversa prévia com cada parte, sessões conjuntas e termo de acordo.`,abertas:'Quem será o mediador aceito por todos? O MP pode recomendar a suspensão do prazo da notificação?'},
+ m5:{texto:`Dona Margarida e outras praticantes reconhecidas como mestras do saber, com participação reconhecida nas ações da UBS (Círculos de Cuidado, horto, Farmácia Viva).
+Registro do saber feito pela comunidade e sob controle dela, para evitar apropriação.
+Assento com voz e voto para os praticantes e o quilombo na instância de governança.
+Política antiassédio que nomeie também o racismo e a discriminação contra saberes tradicionais.
+Critério para avaliar a proposta: ela muda quem decide e quem é ouvido, não só quem é punido.`},
+ m6:{texto:`Termo de cooperação entre SMS, Vigilância Sanitária, UBS, Conselho Local e comunidade do Baixio:
+a Vigilância atua de forma educativa com praticantes tradicionais que não comercializam, e só autua diante de risco sanitário concreto e depois de orientar;
+referência e contrarreferência popular: UBS e raizeiras se encaminham pessoas, com registro no prontuário sem termos depreciativos como “curandeirismo” ou “abandono”;
+boas práticas de preparo e conservação construídas junto com as raizeiras;
+compromisso de não retaliação a trabalhadores que defendem as PICs;
+revisão do termo a cada seis meses no Conselho Local.`,abertas:'Qual o limite legal da Vigilância diante de prática tradicional não comercial? Pesquisar antes de fechar o texto.'},
+ g1:{texto:`Comitê Gestor Local das PICs e do Cuidado Tradicional, ligado ao Conselho Local de Saúde.
+Membros: Conselho Local (preside), praticantes tradicionais e quilombo, ACS, UBS (enfermagem, medicina e NASF-AB), Coordenação da Atenção Básica, Vigilância Sanitária e CAPS.
+Convidados permanentes: Ministério Público, como garantidor; sindicato dos servidores; UNIVASF, como apoio técnico.
+Núcleo de proteção ao trabalhador: Comissão de Ética, Ouvidoria e sindicato, responsáveis pelo canal de denúncia.`},
+ g2:{texto:`Reuniões mensais com atas públicas.
+Decisões por consenso; sem consenso, votação com metade dos votos para usuários e comunidade.
+O que for pactuado vai ao Conselho Municipal de Saúde para entrar no Plano Municipal de Saúde e na Programação Anual.
+Se a gestão ignorar uma deliberação: notificação formal, prazo de resposta e acionamento do MP (o Conselho é deliberativo pela Lei nº 8.142/1990).`},
+ g3:{texto:`Rubrica própria para PICs na Lei Orçamentária e na Programação Anual de Saúde (hoje R$ 0,00), partindo dos R$ 50 mil anuais da proposta arquivada.
+Fontes possíveis: recursos da atenção primária, emendas parlamentares, editais federais de plantas medicinais e Farmácia Viva, parceria com a universidade.
+Gastos de baixo custo e alto efeito: insumos de auriculoterapia, ventosas adequadas, formação, reativação da Farmácia Viva do Riacho do Meio.
+Para sobreviver à troca de gestão: inscrever no Plano Municipal de Saúde e em portaria municipal.`,abertas:'Levantar o custo real dos insumos e conferir editais abertos.'},
+ g4:{texto:`A favor da proposta: PNPIC (Portaria GM/MS nº 971/2006) e adesão municipal (Portaria nº 047/2019); Política Nacional de Plantas Medicinais e Fitoterápicos (Decreto nº 5.813/2006) e Farmácia Viva (Portaria GM/MS nº 886/2010); Lei nº 8.080/1990 (integralidade e participação) e Lei nº 8.142/1990 (Conselho deliberativo); Convenção nº 169 da OIT; Estatuto da Igualdade Racial (Lei nº 12.288/2010); Política Nacional de Saúde Integral da População Negra (Portaria GM/MS nº 992/2009); Política Nacional de Educação Permanente em Saúde.
+Para o assédio: Lei nº 14.540/2023 (prevenção do assédio sexual em toda a administração pública); código de ética das profissões e estatuto dos servidores municipais; Convenção nº 190 da OIT como referência, ainda não ratificada pelo Brasil (tramita no Congresso desde 2023).
+Limite a negociar: Lei nº 6.437/1977, base da notificação.`,abertas:'Conferir no estatuto dos servidores do município se há regra sobre assédio moral.'},
+ g5:{texto:`Fila de auriculoterapia (hoje 6 meses).
+Profissionais capacitados em PICs (hoje 2).
+Autuações de praticantes tradicionais sem orientação prévia (meta: zero).
+Denúncias de assédio recebidas e apuradas no prazo; existência do canal e da política (hoje: não).
+Afastamentos por adoecimento mental na UBS (hoje 2).
+Deliberações do Conselho Local cumpridas pela gestão.
+Satisfação da comunidade quilombola com a UBS, em escuta anual.`},
+ g6:{texto:`Formação: educação permanente sobre PICs, ética e assédio para toda a UBS, com participação das raizeiras como formadoras.
+Círculos de Cuidado mensais no território.
+Comunicação: nota pública conjunta depois da mesa de mediação, uma pessoa porta-voz por instituição e informação à comunidade na Casa de Rezas, na feira e nas igrejas.`},
+ g7:{texto:`Canal de denúncia, política antiassédio e formação sozinhos são reformistas: administram o conflito. A proposta fica transformadora se mudar quem decide: assento com voto para o quilombo e os praticantes, financiamento garantido, Vigilância dialógica e saber tradicional reconhecido como conhecimento.
+Limites: dependência da vontade política do secretário, rotatividade de profissionais, risco de folclorizar o saber e de individualizar a culpa no “médico vilão” em vez de enfrentar o modelo.`}};
+
+const APRES_SEED=[
+ {k:'Equipe 03 · Compartilhamento das pesquisas',titulo:'Caatinga Velha: o conflito das PICs depois do fato novo',texto:'Problema, justificativa e o que o Anexo A muda na nossa leitura',fala:'Abertura: apresentar a equipe e o roteiro em 20 segundos.',capa:true},
+ {k:'Nosso problema',titulo:'Mantivemos o recorte',texto:'Como mediar e transformar o conflito em torno das PICs em Caatinga Velha, garantindo direitos sanitários, culturais e epistêmicos, por meio de um arranjo de governança colaborativa viável no SUS municipal?\nO fato novo amplia quem precisa de proteção: a comunidade e os trabalhadores que defendem as PICs.',fala:'O professor elogiou o recorte autoral. Mantemos a pergunta e ampliamos a justificativa.'},
+ {k:'Justificativa · dados',titulo:'A política existe no papel; o cuidado acontece fora dela',texto:'73% da população usa PICs; 58% já buscaram benzedeira ou raizeiro\n82% dos profissionais usam chás em casa; só 18% recomendariam benzimento\nR$ 0,00 para PICs na LOA 2024; proposta de R$ 50 mil arquivada\n2 profissionais capacitadas e fila de 6 meses para auriculoterapia\n7 denúncias contra raizeiros em 2 anos; 2 multas, ambas suspensas pelo MP',fala:'Aqui respondemos ao desconto do Relatório Parcial: mobilizar todos os dados do caso.'},
+ {k:'Justificativa · normas',titulo:'O que o município já assumiu',texto:'PNPIC (Portaria GM/MS nº 971/2006) e adesão municipal (Portaria nº 047/2019)\nPlantas medicinais e Farmácia Viva (Decreto nº 5.813/2006; Portaria GM/MS nº 886/2010)\nLei 8.080/1990 (integralidade) e Lei 8.142/1990 (Conselho deliberativo)\nConvenção 169 da OIT, Estatuto da Igualdade Racial e Saúde Integral da População Negra\nDo outro lado: Lei 6.437/1977, base da notificação',fala:'Mostrar que o conflito é também entre normas: as que protegem o saber e a que pune.'},
+ {k:'Fato novo · Anexo A',titulo:'O conflito chegou a quem trabalha na UBS',texto:'Enf. Carla denuncia assédio moral do Dr. Ricardo e é afastada por ansiedade\nACS Raimundo é vigiado, advertido e mandado para a área mais violenta\nDra. Renata relata constrangimentos, inclusive do secretário, mas não formaliza\nResposta institucional: “discrição total” e mediação sem proteção\nMP amplia o procedimento e o sindicato cobra canal de denúncia',fala:'Contar em ordem de dias: +10, +12, +15, +18, +20.'},
+ {k:'Fato novo · dados',titulo:'Nenhum instrumento de proteção',texto:'Canal de denúncia na UBS: não existe\nPolítica municipal antiassédio: não existe\nEducação permanente sobre ética e assédio: 0 ações\n1 denúncia formal e 3 relatos sem formalização\n2 afastamentos: a única oferta de PICs da UBS parou',fala:'A subnotificação vem do medo e da falta de canal.'},
+ {k:'O que muda na leitura',titulo:'Uma violência institucional com dois alvos',texto:'Não é só Vigilância contra Dona Margarida: é um padrão que disciplina saberes e gênero\nAtinge a comunidade e os trabalhadores que defendem as PICs\nInterseccionalidade: mulher enfermeira, homem negro e idoso, mulher fisioterapeuta\nNova dimensão de análise: ética e direitos\nA omissão também é conduta: assédio institucional',fala:'Ligar com os conceitos: racismo epistêmico, assédio institucional, interseccionalidade.'},
+ {k:'Atores',titulo:'Quem pesa no conflito',texto:'Poder alto e contrários: secretário Heitor, Dra. Vera, Dr. Ricardo\nPressão a favor: MP, Conselho Local, sindicato, imprensa\nMais vulneráveis: Dona Margarida, ACS Raimundo, Enf. Carla, Dra. Renata\nPontes possíveis: Márcia Torres, Pe. José, universidade\nTestemunhas silenciosas: gerência e colegas da UBS',fala:'Mostrar a matriz poder x interesse da aba Mapa de atores, se houver tempo.'},
+ {k:'Hipóteses para a proposta',titulo:'Proteger primeiro, mediar depois, governar junto',texto:'Assédio não se media com a vítima: proteção imediata e apuração pela Comissão de Ética\nMesa de mediação do caso Margarida, com o MP como garantidor\nComitê gestor das PICs com voz e voto para o quilombo e os praticantes\nCanal e política antiassédio: reformistas se vierem sozinhos, transformadores se mudarem quem decide',fala:'Fechar com a pergunta do professor: reformista ou transformador?'},
+ {k:'Para o debate',titulo:'O que ainda vamos pesquisar',texto:'Assédio moral e institucional; interseccionalidade\nLimites legais da Vigilância diante de prática tradicional não comercial\nQuem pode ser o mediador aceito por todas as partes?\nComo financiar sem depender da vontade do secretário?',fala:'Abrir para perguntas.'}];
+
+/* ====================== mapa mental ====================== */
+const MM={centro:'Conflito das PICs em Caatinga Velha',ramos:[
+ {id:'territorio',lado:'e',titulo:'Território',sub:'onde acontece',folhas:['12 mil pessoas, 6 localidades','Quilombo, agricultores, pescadores','Acesso à UBS: 1h30 a 3h','73% usam PICs'],link:['#dados','Ver os dados'],
+  texto:['Caatinga Velha é um distrito pobre do Semiárido, com 12 mil pessoas espalhadas entre três comunidades rurais tradicionais e três bairros de periferia. A zona rural fica longe da UBS, e o cuidado com plantas e benzeduras é o que está à mão.','Por isso as PICs não são “alternativa”: para a maioria, são o primeiro cuidado. Esse é o ponto de partida do conflito.']},
+ {id:'raizes',lado:'e',titulo:'Raízes',sub:'por que já vinha',folhas:['PNPIC no papel, R$ 0,00','Proposta de R$ 50 mil arquivada','Moção do Conselho ignorada','Caso Seu João e post do médico'],link:['#linha-do-tempo','Ver a linha do tempo'],
+  texto:['Durante doze meses houve sinais de que o conflito vinha: o município aderiu à PNPIC sem colocar dinheiro, arquivou a proposta da Enf. Carla, ignorou a moção do Conselho Local e deixou sem resposta a reclamação de Seu João.','Isso mostra que o problema não começa na notificação: ela é o estopim de uma tensão acumulada.']},
+ {id:'estopim',lado:'e',titulo:'Estopim',sub:'o que disparou',folhas:['Denúncia anônima','Notificação da VISA (Dia 0)','Prazo de 10 dias e multa','Dona Margarida para de atender'],link:['#historia','Ler a história'],
+  texto:['Uma denúncia anônima, atribuída ao Dr. Ricardo, levou a Vigilância Sanitária a notificar Dona Margarida, com prazo de 10 dias, multa de R$ 5 mil e entrega por oficial de justiça.','Aqui está a diferença entre lide processual e lide sociológica: o processo é sobre frascos sem registro; o conflito real é sobre quem tem o direito de cuidar.']},
+ {id:'fato',lado:'e',titulo:'Fato novo',sub:'o conflito se espalhou',folhas:['Assédio moral contra Carla','Assédio cruzado contra Raimundo','Renata constrangida, sem denunciar','“Discrição total” da gestão'],link:['#historia-fato','Ler o fato novo'],
+  texto:['Dias depois da notificação, a Enf. Carla denunciou assédio moral do Dr. Ricardo. O ACS Raimundo passou a ser vigiado e punido, e a Dra. Renata relatou constrangimentos, inclusive do secretário.','A resposta da gestão foi pedir discrição. O anexo mostra que a violência atinge também quem defende as PICs dentro da UBS, e que a omissão da gestão é parte do problema (assédio institucional).']},
+ {id:'atores',lado:'d',titulo:'Atores',sub:'quem disputa',folhas:['Contra: Heitor, Vera, Ricardo','A favor: MP, Conselho, sindicato','Vulneráveis: Margarida, Raimundo','Pontes: Márcia, Pe. José'],link:['#mapa','Abrir o mapa de atores'],
+  texto:['O poder formal está com quem resiste às práticas tradicionais: o secretário, a chefe da Vigilância e o médico. O poder de pressão está do outro lado: MP, Conselho Local, sindicato e imprensa.','Quem mais sofre tem menos poder. Por isso a mediação precisa de um garantidor (o MP) e de pontes internas (Márcia Torres) para não reproduzir a desigualdade.']},
+ {id:'dimensoes',lado:'d',titulo:'Dimensões',sub:'como analisar',folhas:['Epistemológica: saber x saber','Política: PNPIC sem verba','Cuidado: quem atende o povo','Ética e direitos: assédio'],link:['#conceitos','Ver os conceitos'],
+  texto:['O caso pede análise em três dimensões: a epistemológica (o saber da universidade contra o saber quilombola), a política (a gestão usa o nome da PNPIC sem financiar) e a do cuidado (as práticas tradicionais são o cuidado real do território).','O anexo acrescenta a quarta: ética e direitos, ligando assédio moral, assédio institucional, racismo epistêmico e interseccionalidade.']},
+ {id:'leis',lado:'d',titulo:'Marco legal',sub:'o que ampara',folhas:['PNPIC e plantas medicinais','Leis 8.080 e 8.142','Convenção 169 e Igualdade Racial','Do outro lado: Lei 6.437'],link:['#propostas','Ver a base legal no plano'],
+  texto:['As normas que o município já assumiu protegem o saber: PNPIC, a política de plantas medicinais, a integralidade e o controle social do SUS, a Convenção 169 da OIT e o Estatuto da Igualdade Racial.','A notificação se apoia na Lei 6.437/1977. A proposta precisa mostrar como as duas coisas convivem. Para o assédio, a Convenção 190 da OIT ainda não foi ratificada pelo Brasil e serve como referência.']},
+ {id:'proposta',lado:'d',titulo:'Nossa proposta',sub:'para onde vamos',folhas:['Proteger primeiro','Mesa de mediação com o MP','Comitê gestor com o quilombo','Reformista ou transformadora?'],link:['#propostas','Abrir as propostas'],
+  texto:['O produto é o Plano de Mediação e Governança Colaborativa. Com o fato novo, ele começa pela proteção imediata de quem denunciou, porque assédio não se media com a vítima.','Depois vêm a mesa de mediação do caso Dona Margarida e um comitê gestor permanente em que o quilombo e os praticantes tenham voz e voto. O teste final: a proposta muda quem decide, ou só administra o conflito?']}]};
 /* ---------- estado ---------- */
 const KEY='painel-caatinga-velha-v1';
-let S={mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{}};
+let S={mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{}};
 let canStore=true;
 try{const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r));}catch(e){canStore=false}
 if(!CONFIG.dbUrl&&S.seedV!==SEED_V){for(const id in SEED)for(const f in SEED[id]){const t=S.conc[id]||(S.conc[id]={});if(!t[f])t[f]=SEED[id][f]}S.seedV=SEED_V;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','fatos'])if(!S[k]||typeof S[k]!=='object')S[k]={};
+for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','fatos','apres'])if(!S[k]||typeof S[k]!=='object')S[k]={};
 if(!CONFIG.dbUrl&&S.seedRel!==SEED_REL_V){for(const k of ['rel','papeis','crono','entregas'])if(!Object.keys(S[k]).length)S[k]=JSON.parse(JSON.stringify(SEED_REL[k]));S.seedRel=SEED_REL_V;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 if(!CONFIG.dbUrl&&S.rel&&Object.keys(S.rel).length&&!S.rel.sec){S.rel.sec=Object.assign({problema:true,conceitos:true,levantamento:false,cronograma:true,andamento:false,papeis:true},{refs:!!S.rel.inclRefs});S.rel.pontos=true}
 if(Array.isArray(S.extra)){const o={};S.extra.forEach(x=>o[x.id]={nome:x.nome});S.extra=o}
@@ -1116,7 +1463,8 @@ async function pull(){ if(!WEB||document.hidden)return;
     if(firstPull&&(R.meta&&R.meta.seedRel)!==SEED_REL_V){for(const k of ['rel','papeis','crono','entregas'])if(R[k]===undefined){S[k]=JSON.parse(JSON.stringify(SEED_REL[k]));queue.set(k,S[k])}queue.set('meta/seedRel',SEED_REL_V)}
     if(!queue.has('rel'))for(const f in R.rel||{}){if(f==='sec'&&R.rel.sec&&typeof R.rel.sec==='object'){if(queue.has('rel/sec'))continue;const o=Object.assign({},R.rel.sec);for(const k of queue.keys())if(k.startsWith('rel/sec/'))o[k.slice(8)]=(S.rel.sec||{})[k.slice(8)];S.rel.sec=o}else if(!pending('rel/'+f))S.rel[f]=R.rel[f]}
     if(!S.rel.sec){S.rel.sec=defSec();queue.set('rel/sec',S.rel.sec)}if(S.rel.pontos===undefined){S.rel.pontos=true;queue.set('rel/pontos',true)}
-    for(const col of ['papeis','crono','entregas','refs','planos','versoes','fatos'])S[col]=mergeCol(col,R[col]);
+    for(const col of ['papeis','crono','entregas','refs','planos','versoes','apres'])S[col]=mergeCol(col,R[col]);
+    if(firstPull&&(R.meta&&R.meta.seed2)!==SEED2_V){seed2Web(R);queue.set('meta/seed2',SEED2_V)}
     for(const k in R.banca||{}) if(!pending('banca/'+k)) S.banca[k]=R.banca[k];
     const before=Object.keys(S.extra).sort().join(), ex={};
     for(const id in R.extra||{}) ex[id]=pending('extra/'+id)?S.extra[id]:R.extra[id];
@@ -1135,7 +1483,7 @@ function refresh(extraChanged){ const act=document.activeElement;
   drawMatrix(); drawBTable(); concStatus(); refreshNew(); progress(); }
 
 /* ---------- rotas ---------- */
-const VIEWS=['inicio','fichas','mapa','linha-do-tempo','dados','siglas','banca','conceitos','referencias','propostas','fatos','relatorio'];
+const VIEWS=['inicio','historia','mapa-mental','fichas','mapa','linha-do-tempo','dados','siglas','banca','conceitos','referencias','propostas','apresentacao','relatorio'];
 function route(){const h=location.hash.replace('#','');const v=VIEWS.includes(h)?h:'inicio';
  VIEWS.forEach(x=>$('#v-'+x).classList.toggle('on',x===v));
  document.querySelectorAll('nav.pill a').forEach(a=>{if(a.getAttribute('href')==='#'+v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
@@ -1206,7 +1554,7 @@ const TC=['data-to="12150"','data-to="7"','data-to="2"','data-to="0" data-from="
 $('#tiles').innerHTML=TILES.map((t,i)=>`<div class="fig"><div class="big num"><span ${TC[i]}>${t[0]}</span></div><p>${t[1]}</p></div>`).join('');
 function bars(id,data,max,fmt){$(id).innerHTML=data.map(d=>`<div class="barx" title="${esc(d[0])}: ${fmt(d[1])}"><span>${esc(d[0])}</span><div class="track"><div class="fill" style="--w:${d[1]/max*100}%"></div></div><span class="v num">${fmt(d[1])}</span></div>`).join('')}
 bars('#barsPct',PCT,100,v=>v+'%');bars('#barsPop',POP,5000,v=>v.toLocaleString('pt-BR'));
-$('#incons').innerHTML=INCONS.map(i=>`<li>${esc(i)}</li>`).join('');
+$('#anexoDados').innerHTML=ANEXO_DADOS.map(r=>`<tr><td style="white-space:normal">${esc(r[0])}</td><td class="num"><b>${esc(r[1])}</b></td><td>${esc(r[2])}</td></tr>`).join('');
 
 /* ---------- banca ---------- */
 const ALLQ=[];BANCA.forEach(b=>b.qs.forEach((q,i)=>ALLQ.push({k:b.id+'-'+i,b,q})));
@@ -1259,7 +1607,7 @@ function progress(){ $('#pMapa').textContent=MA.filter(placed).length+' de '+MA.
  $('#pBanca').textContent=ALLQ.filter(answered).length+' de '+ALLQ.length+' respostas';
  const a=allConc();$('#pConc').textContent=a.filter(k=>cDone(k.id)===3).length+' de '+a.length+' completos';
  const nr=Object.keys(S.refs||{}).length;$('#pRefs').textContent=nr+(nr===1?' referência':' referências');
- $('#pProp').textContent=PLANOS.map(p=>p.curto+' '+maturidade(p.id)+'%').join(' · ');const fa=fatosSorted();$('#pFatos').textContent=fa.length?fa.length+(fa.length===1?' fato':' fatos')+' · '+fa.filter(([,f])=>!analisado(f)).length+' em análise':'nenhum fato ainda';
+ $('#pProp').textContent=PLANOS.map(p=>p.curto+' '+maturidade(p.id)+'%').join(' · ');const na=sorted('apres').length;$('#pApres').textContent=na+(na===1?' slide':' slides');
  const cs=Object.values(S.crono||{}).filter(x=>x&&typeof x==='object');$('#pRel').textContent=cs.filter(x=>x.status==='Concluído').length+' de '+cs.length+' ações concluídas' }
 
 /* ---------- cópia de segurança ---------- */
@@ -1271,9 +1619,9 @@ $('#dClose').addEventListener('click',()=>dlg.close());
 $('#dCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#dump').value);$('#dMsg').textContent='Dados copiados.'}catch(e){$('#dump').select();$('#dMsg').textContent='Selecione o texto e copie manualmente.'}});
 $('#dLoad').addEventListener('click',()=>{try{const d=JSON.parse($('#dump').value);if(typeof d!=='object'||!d||!d.mapa)throw 0;
   if(Array.isArray(d.extra)){const o={};d.extra.forEach(x=>o[x.id]={nome:x.nome});d.extra=o}
-  S=Object.assign({mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{}},d);saveLocal();
-  if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','fatos'])if(Object.keys(S[k]||{}).length)queue.set(k,S[k]);flush()}
-  drawForms();drawMatrix();drawConc();showQ();drawBTable();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();progress();$('#dMsg').textContent='Dados carregados.'}
+  S=Object.assign({mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{}},d);saveLocal();
+  if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','apres'])if(Object.keys(S[k]||{}).length)queue.set(k,S[k]);flush()}
+  drawForms();drawMatrix();drawConc();showQ();drawBTable();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();drawPlanos();drawApres();progress();$('#dMsg').textContent='Dados carregados.'}
  catch(e){$('#dMsg').textContent='O texto colado não é um arquivo válido deste painel. Copie novamente o conteúdo completo.';const t=$('#dump');t.classList.remove('shake');void t.offsetWidth;t.classList.add('shake')}});
 if(window.top===window.self){const b=$('#dFile');b.hidden=false;b.addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('#dump').value],{type:'application/json'}));a.download='painel-caatinga-velha.json';a.click()})}
 
@@ -1307,7 +1655,7 @@ function onBind(e){const t=e.target;if(!t||!t.dataset||!t.dataset.p)return;const
 document.addEventListener('input',onBind);document.addEventListener('change',onBind);
 function syncBound(){const act=document.activeElement;document.querySelectorAll('[data-p]').forEach(e=>{if(e===act)return;const v=getP(e.dataset.p);
  if(e.type==='checkbox')e.checked=!!v;else if(e.tagName==='SELECT'&&(v==null||v==='')){if(e.selectedIndex<0)e.selectedIndex=0;if(e.value!==e.options[0].value)e.selectedIndex=0}else{const s=v==null?'':String(v);if(e.value!==s)e.value=s}})}
-let prevT;function afterEdit(p){if(p.startsWith('planos/')||p.startsWith('fatos/'))refreshPF();if(p.startsWith('crono/')){syncBound();cronoBadges();if(!/\/status$/.test(p))maybeHomeCrono()}if(p==='rel/problema')updateHero();relSummary();clearTimeout(prevT);prevT=setTimeout(renderPreview,250);progress()}
+let prevT;function afterEdit(p){if(p.startsWith('planos/'))refreshPF();if(p.startsWith('apres/'))apresEdited(p);if(p.startsWith('crono/')){syncBound();cronoBadges();if(!/\/status$/.test(p))maybeHomeCrono()}if(p==='rel/problema')updateHero();relSummary();clearTimeout(prevT);prevT=setTimeout(renderPreview,250);progress()}
 
 /* ====================== relatório ====================== */
 let relSig='',viewing=null;
@@ -1362,8 +1710,8 @@ $('#relEdit').addEventListener('click',e=>{const b=e.target.closest('button');if
  if(b.dataset.delp)twoStep(b,()=>{delItem('papeis',b.dataset.delp);drawRelEdit();renderPreview();fillMembers()},'Confirmar');
  if(b.dataset.delc)twoStep(b,()=>{delItem('crono',b.dataset.delc);drawRelEdit();renderPreview()},'Confirmar')});
 
-const SECS=[['problema','Formulação do problema e justificativa'],['conceitos','Conceitos a pesquisar'],['levantamento','Levantamento bibliográfico (da aba Referências)'],['cronograma','Cronograma'],['andamento','Andamento desde a última entrega (do cronograma)'],['planoMed','Plano de mediação (da aba Propostas)'],['planoGov','Plano de governança colaborativa (da aba Propostas)'],['fatos','Fatos novos e respostas da equipe'],['papeis','Papéis no grupo'],['refs','Lista de referências em ABNT, no fim']];
-const PRESETS={p3:{sec:{problema:true,conceitos:false,levantamento:false,cronograma:false,andamento:false,planoMed:true,planoGov:true,fatos:true,papeis:false,refs:true},pontos:false},
+const SECS=[['problema','Formulação do problema e justificativa'],['conceitos','Conceitos a pesquisar'],['levantamento','Levantamento bibliográfico (da aba Referências)'],['cronograma','Cronograma'],['andamento','Andamento desde a última entrega (do cronograma)'],['planoMed','Plano de mediação (da aba Propostas)'],['planoGov','Plano de governança colaborativa (da aba Propostas)'],['papeis','Papéis no grupo'],['refs','Lista de referências em ABNT, no fim']];
+const PRESETS={p3:{sec:{problema:true,conceitos:false,levantamento:false,cronograma:false,andamento:false,planoMed:true,planoGov:true,papeis:false,refs:true},pontos:false},
  p1:{sec:{problema:true,conceitos:true,levantamento:false,cronograma:true,andamento:false,papeis:true,refs:false},pontos:true},
  p2:{sec:{problema:true,conceitos:true,levantamento:true,cronograma:true,andamento:true,papeis:true,refs:true},pontos:false}};
 const defSec=()=>Object.assign(clone(PRESETS.p1.sec),{refs:!!(S.rel&&S.rel.inclRefs)});
@@ -1378,7 +1726,7 @@ function andamentoData(){const t=todayISO(),last=lastEntrega(),prev=new Map(((la
 function levantData(){const ks=allConc(),idx=id=>{const i=ks.findIndex(k=>k.id===id);return i<0?999:i};
  return refsSorted().map(([,r])=>{const ids=Object.keys(r.conceitos||{}).sort((a,b)=>idx(a)-idx(b));return {o:ids.length?idx(ids[0]):999,row:[{h:abnt(r)},ids.map(concName).filter(Boolean).join('; ')||'—',(r.nota||'').trim()||'—'],arq:!!r.arquivo}})
   .sort((a,b)=>a.o-b.o).map(x=>x.row)}
-function liveData(){const ps=sorted('papeis').map(x=>x[1]);const r=S.rel||{};const sec=Object.assign(defSec(),r.sec||{});
+function liveData(){const ps=sorted('papeis').map(x=>x[1]);const r=S.rel||{};const sec=Object.assign(defSec(),r.sec||{});delete sec.fatos;
  return {v:2,sec,pontos:r.pontos!==false,titulo:r.titulo||'Relatório Parcial',grupo:r.grupo||'',data:r.data||'',
   componentes:ps.map(p=>[p.nome||'',p.papel||'']),problema:r.problema||'',justificativa:r.justificativa||'',
   conceitos:allConc().map(k=>[k.nome,((S.conc[k.id]||{}).pq||'').trim(),((S.conc[k.id]||{}).fontes||'').trim()]),
@@ -1388,7 +1736,6 @@ function liveData(){const ps=sorted('papeis').map(x=>x[1]);const r=S.rel||{};con
   papeis:ps.map(p=>[p.papel||'',p.curto||p.nome||'',p.resp||'']),
   planoMed:sec.planoMed?COMPS.filter(c=>c.plano==='med').map(c=>[c.t,pl(c.id).texto||'',pl(c.id).status||'Ideia']):[],
   planoGov:sec.planoGov?COMPS.filter(c=>c.plano==='gov').map(c=>[c.t,pl(c.id).texto||'',pl(c.id).status||'Ideia']):[],
-  fatos:sec.fatos?fatosSorted().slice().reverse().filter(([,f])=>f.origem!=='Simulação do grupo').map(([,f])=>[f.titulo||'',f.quando||'',f.texto||'',f.leitura||'',f.impMed||'',f.impGov||'',f.resposta||'']):[],
   refs:sec.refs?refsSorted().map(([,x])=>abnt(x)):[]}}
 /* documento no padrão ABNT: Arial 12, entrelinha 1,5, quadros com título acima e fonte abaixo, sem fundo e sem linhas verticais */
 function reportHTML(d){
@@ -1649,18 +1996,18 @@ const PLANOS=[
  {id:'med',nome:'Plano de mediação',curto:'Mediação',comps:[
   {id:'m1',t:'Análise do conflito',ajuda:'Atores, interesses, posições, poder e arenas do conflito (item 1 do produto).',conc:['atores','lide','origem'],qs:['debate-0','debate-3'],auto:'analise'},
   {id:'m2',t:'Mapa de alianças e oposições',ajuda:'Quem se alia a quem, quem se opõe e quais atores são decisivos para a mediação (item 2).',conc:['atores'],qs:['debate-3'],auto:'aliancas'},
-  {id:'m3',t:'Estratégia preventiva',ajuda:'Formação, diálogo e acordos que evitam novos conflitos antes que virem denúncia ou autuação (item 3).',conc:['eps','medicalizacao'],qs:['carla-1','ricardo-0']},
-  {id:'m4',t:'Estratégia corretiva',ajuda:'A mesa de mediação para o conflito atual: quem convoca, quem media, etapas, o que fazer com a notificação e com o prazo (item 3).',conc:['mediacao','lide','visa'],qs:['mp-2','vera-2','comunidade-0']},
-  {id:'m5',t:'Estratégia transformativa',ajuda:'Como a proposta muda a relação de poder entre saberes, e não só administra o conflito (item 3).',conc:['racismo','justica','epistemologias'],qs:['debate-4','comunidade-3','sintese-0']},
+  {id:'m3',t:'Estratégia preventiva',ajuda:'Formação, diálogo e acordos que evitam novos conflitos antes que virem denúncia ou autuação (item 3).',conc:['eps','medicalizacao','assedio'],qs:['carla-1','ricardo-0','anexo-2']},
+  {id:'m4',t:'Estratégia corretiva',ajuda:'A mesa de mediação para o conflito atual: quem convoca, quem media, etapas, o que fazer com a notificação e com o prazo (item 3).',conc:['mediacao','lide','visa','assedio'],qs:['mp-2','vera-2','comunidade-0','anexo-6']},
+  {id:'m5',t:'Estratégia transformativa',ajuda:'Como a proposta muda a relação de poder entre saberes, e não só administra o conflito (item 3).',conc:['racismo','justica','epistemologias','intersec'],qs:['debate-4','comunidade-3','anexo-5','sintese-0']},
   {id:'m6',t:'Protocolo de convivência',ajuda:'Acordo entre UBS, Vigilância Sanitária e praticantes: termo de cooperação, referência e contrarreferência popular, salvo-conduto (item 4).',conc:['legal','visa','pnpic'],qs:['vera-1','ricardo-1','ricardo-3','comunidade-2','mp-0']}]},
  {id:'gov',nome:'Plano de governança colaborativa',curto:'Governança',comps:[
   {id:'g1',t:'Instâncias e composição',ajuda:'Quem participa (Conselho Local, MP, VISA, UBS, comunidade, universidade) e com que papel (item 5).',conc:['governanca'],qs:['zefa-1','mp-3']},
   {id:'g2',t:'Fluxo de decisão e pactuação',ajuda:'Como as decisões são tomadas, registradas e cumpridas, e o que acontece se a gestão ignorar o que foi pactuado (item 5).',conc:['governanca','mediacao'],qs:['zefa-0','zefa-3']},
   {id:'g3',t:'Financiamento e sustentabilidade',ajuda:'Custo, fonte de recursos e como a proposta sobrevive a uma troca de gestão.',conc:['pnpic','inovacao'],qs:['heitor-0','heitor-1','heitor-3']},
-  {id:'g4',t:'Base legal',ajuda:'Normas que sustentam a proposta e os limites de atuação da Vigilância Sanitária.',conc:['legal','pnpic','visa'],qs:['heitor-2','mp-0','mp-1','vera-0','debate-1']},
+  {id:'g4',t:'Base legal',ajuda:'Normas que sustentam a proposta e os limites de atuação da Vigilância Sanitária.',conc:['legal','pnpic','visa','assedio'],qs:['heitor-2','mp-0','mp-1','vera-0','debate-1','anexo-2']},
   {id:'g5',t:'Indicadores de monitoramento',ajuda:'O que medir, com que meta, com que frequência e quem acompanha (item 6).',conc:['governanca'],qs:['zefa-2','heitor-3']},
-  {id:'g6',t:'Comunicação e formação',ajuda:'Formação da equipe, Círculos de Cuidado e comunicação com a comunidade e com os profissionais (item 7).',conc:['eps'],qs:['carla-1','carla-2','debate-2']},
-  {id:'g7',t:'Reflexão crítica',ajuda:'A proposta é reformista ou transformadora? Quais os desafios e limites de implementação?',conc:['racismo','justica'],qs:['debate-4','sintese-0']}]}];
+  {id:'g6',t:'Comunicação e formação',ajuda:'Formação da equipe, Círculos de Cuidado e comunicação com a comunidade e com os profissionais (item 7).',conc:['eps','assedio'],qs:['carla-1','carla-2','debate-2','anexo-7']},
+  {id:'g7',t:'Reflexão crítica',ajuda:'A proposta é reformista ou transformadora? Quais os desafios e limites de implementação?',conc:['racismo','justica','intersec'],qs:['debate-4','anexo-4','sintese-0']}]}];
 const COMPS=PLANOS.flatMap(p=>p.comps.map((c,i)=>Object.assign({plano:p.id,n:i+1},c)));
 const NIVEIS=['Ideia','Rascunho','Discutido no grupo','Pronto'];
 const pl=id=>(S.planos||{})[id]||{};
@@ -1674,7 +2021,7 @@ function autoBlock(kind){const P={fav:'favorável',amb:'ambivalente',con:'contr�
  const by=p=>cls.filter(a=>m(a.id).postura===p).map(a=>esc(a.curto)).join(', ')||'—';
  return `<p><b>Favoráveis:</b> ${by('fav')}. <b>Ambivalentes:</b> ${by('amb')}. <b>Contrários:</b> ${by('con')}.</p>`}
 function autoText(kind){return plain(autoBlock(kind).replace(/<a [^>]*>.*?<\/a>/g,'')).trim()}
-function compFlags(cid){return Object.entries(S.fatos||{}).filter(([,f])=>f&&(f.comps||{})[cid]&&!(f.resolvidos||{})[cid])}
+function compFlags(){return []}
 function drawPlanos(){
  $('#planTabs').innerHTML=PLANOS.map(p=>`<button type="button" class="seg" data-plano="${p.id}" aria-pressed="${p.id===planoAtual}"><span>${p.nome}</span><span class="mat" id="mat-${p.id}"></span></button>`).join('');
  const P=PLANOS.find(p=>p.id===planoAtual);
@@ -1699,7 +2046,7 @@ function refreshPlanos(){PLANOS.forEach(p=>{const e=document.getElementById('mat
 $('#planTabs').addEventListener('click',e=>{const b=e.target.closest('[data-plano]');if(!b)return;planoAtual=b.dataset.plano;drawPlanos()});
 $('#compList').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
  if(b.dataset.autoins){const c=COMPS.find(x=>x.id===b.dataset.autoins);if(!MA.some(placed)){toast('Classifiquem os atores no mapa primeiro.');return}const add='Do mapa de atores: '+autoText(c.auto);const cur=(pl(c.id).texto||'').trim();setPut('planos/'+c.id+'/texto',cur?cur+'\n\n'+add:add);syncBound();toast('Resumo do mapa trazido para o texto')}
- if(b.dataset.resolve){const [fid,cid]=b.dataset.resolve.split('|');setPut('fatos/'+fid+'/resolvidos/'+cid,true);refreshPlanos();drawFatoStatus()}});
+ });
 /* versões dos planos */
 function drawVersoes(){const vs=Object.entries(S.versoes||{}).filter(([,v])=>v&&v.plano===planoAtual).sort((a,b)=>(a[1].quando||'')<(b[1].quando||'')?1:-1);
  $('#verList').innerHTML=vs.length?vs.map(([id,v])=>`<div class="ent"><div><b>${esc(v.nota||'Versão sem nota')}</b><div class="muted">${fmtD(v.data)}${v.hora?' às '+v.hora:''} · ${v.mat}% maduro</div></div><div class="toolbar"><button class="btn" type="button" data-vver="${id}">Ver</button><button class="btn" type="button" data-vdel="${id}">Remover</button></div></div>`).join(''):'<p class="muted">Nenhuma versão salva deste plano.</p>'}
@@ -1716,83 +2063,140 @@ $('#verClose').addEventListener('click',()=>verDlg.close());
 function planHTML(pid){const P=PLANOS.find(p=>p.id===pid);return `<h2 style="font-family:Arial,sans-serif;font-size:13pt">${P.nome}</h2>`+P.comps.map((c,i)=>`<h3 style="font-family:Arial,sans-serif;font-size:12pt;margin:10pt 0 4pt">${i+1} ${c.t}</h3>`+((pl(c.id).texto||'').trim()?String(pl(c.id).texto).split(/\n+/).map(p=>`<p style="font-family:Arial,sans-serif;font-size:11pt;margin:0 0 6pt;text-align:justify">${esc(p)}</p>`).join(''):'<p style="color:#888">(em branco)</p>')).join('')}
 $('#planCopy').addEventListener('click',()=>{const h=planHTML(planoAtual);copyHTML(h,textOf(h),'Plano copiado. Cole no Google Docs.')});
 
-/* ====================== fatos novos ====================== */
-const ORIGENS=['Professor ou tutor em sala','Material da disciplina','Simulação do grupo'];
-const TREINO=[
- {titulo:'MP propõe termo de ajustamento de conduta',quando:'Dia +9',texto:'O Ministério Público convoca Secretaria de Saúde, Vigilância Sanitária e Conselho Local e propõe um termo de ajustamento de conduta: a autuação de Dona Margarida fica suspensa por 90 dias, desde que o município apresente um plano para as práticas tradicionais nesse prazo.',atores:['mp','heitor','vera','zefa','margarida']},
- {titulo:'Apreensão na feira livre',quando:'Sábado, Dia +11',texto:'A Vigilância Sanitária apreende ervas, cascas e garrafadas de três raizeiros na feira livre. Um vídeo da ação circula nos grupos de WhatsApp do distrito e chega a coletivos nacionais.',atores:['vera','comunidade','jose']},
- {titulo:'Secretário anuncia Farmácia Viva sem as benzedeiras',quando:'Dia +12',texto:'Depois de reportagem no jornal estadual, o secretário anuncia que vai reativar a Farmácia Viva do Riacho do Meio, com farmacêutico contratado, mas sem participação das raizeiras e benzedeiras.',atores:['heitor','marcia','comunidade','margarida']},
- {titulo:'ACS Raimundo pede desligamento',quando:'Dia +13',texto:'Seu Raimundo pede desligamento da UBS. Diz que não aguenta mais esconder o que sabe e ser vigiado pelos colegas. Outros ACS ameaçam paralisar as visitas em solidariedade.',atores:['raimundo','lucia','ricardo','carla']},
- {titulo:'Universidade oferece parceria',quando:'Dia +14',texto:'A UNIVASF propõe um projeto de extensão para registrar, com Dona Margarida, as plantas que ela usa e estudar possíveis interações com medicamentos, com devolutiva para a comunidade.',atores:['margarida','ricardo','carla','benedito']}];
-const fatosSorted=()=>Object.entries(S.fatos||{}).filter(([,f])=>f&&typeof f==='object').sort((a,b)=>(a[1].ord||0)<(b[1].ord||0)?1:-1);
-const analisado=f=>!!((f.leitura||'').trim()&&(f.resposta||'').trim());
-let fatosSig='';
-function novoFato(base){const id='f'+uid();const o=Object.assign({titulo:'',quando:'',data:todayISO(),origem:ORIGENS[0],texto:'',atores:{}},base||{});o.ord=Date.now();setPut('fatos/'+id,o);drawFatos(id);drawTL();homeFatos();progress();return id}
-$('#fatoNew').addEventListener('click',()=>{const id=novoFato();const t=document.getElementById('ftt-'+id);if(t)t.focus()});
-$('#treinoList').innerHTML=TREINO.map((t,i)=>`<div class="ent"><div><b>${esc(t.titulo)}</b><div class="muted">${esc(t.quando)} · ${esc(t.texto.slice(0,110))}…</div></div><button class="btn" type="button" data-treino="${i}">Lançar para treinar</button></div>`).join('');
-$('#treinoList').addEventListener('click',e=>{const b=e.target.closest('[data-treino]');if(!b)return;const t=TREINO[+b.dataset.treino];const at={};t.atores.forEach(a=>at[a]=true);novoFato({titulo:t.titulo,quando:t.quando,texto:t.texto,origem:'Simulação do grupo',atores:at});toast('Fato de treino lançado');document.getElementById('fatoList').scrollIntoView({block:'start'})});
-function drawFatos(openId){const box=$('#fatoList');const was=new Set([...box.querySelectorAll('details[open]')].map(d=>d.dataset.id));if(openId)was.add(openId);
- const fs=fatosSorted();if(!fs.length){box.innerHTML='<p class="muted">Nenhum fato novo lançado ainda.</p>';fatosSig='';return}
- box.innerHTML=fs.map(([id,f],i)=>`<details class="card fato" data-id="${id}" ${was.has(id)||(!was.size&&i===0)?'open':''}>
-  <summary><span class="fsum"><span class="pill ${f.origem==='Simulação do grupo'?'':'warn'}">${esc(f.origem==='Simulação do grupo'?'Treino':'Fato novo')}</span><b id="fts-${id}">${esc(f.titulo||'Fato sem título')}</b><span class="muted" id="ftq-${id}">${esc(f.quando||'')}</span></span><span class="done" id="ftst-${id}"></span></summary>
-  <div class="stack" style="gap:12px">
-   <div class="mrow"><label class="f w3">Título<input type="text" id="ftt-${id}" data-p="fatos/${id}/titulo"></label><label class="f">Quando, no caso<input type="text" id="ftw-${id}" data-p="fatos/${id}/quando" placeholder="ex.: Dia +12"></label><label class="f">Lançado em<input type="date" id="ftd-${id}" data-p="fatos/${id}/data"></label><label class="f">Origem<select id="fto-${id}" data-p="fatos/${id}/origem">${ORIGENS.map(o=>`<option>${o}</option>`).join('')}</select></label></div>
-   <label class="f">O que aconteceu<textarea id="ftx-${id}" data-p="fatos/${id}/texto" placeholder="Copiem aqui o fato como o professor apresentou."></textarea></label>
-   <div><div class="kicker" style="margin-bottom:6px">Atores envolvidos</div><div class="chips">${ATORES.map(a=>`<label class="ccheck"><input type="checkbox" id="fta-${id}-${a.id}" data-p="fatos/${id}/atores/${a.id}"> ${esc(a.curto)}</label>`).join('')}</div></div>
-   <h3 class="fah">Análise da equipe</h3>
-   <div class="mrow"><label class="f w3">O que muda no conflito<textarea id="ftl-${id}" data-p="fatos/${id}/leitura"></textarea></label><label class="f w3">Riscos e pontos de atenção<textarea id="ftr-${id}" data-p="fatos/${id}/riscos"></textarea></label>
-    <label class="f w3">O que muda no plano de mediação<textarea id="ftm-${id}" data-p="fatos/${id}/impMed"></textarea></label><label class="f w3">O que muda na governança<textarea id="ftg-${id}" data-p="fatos/${id}/impGov"></textarea></label></div>
-   <label class="f">Nossa resposta: o que a equipe vai defender<textarea id="fte-${id}" data-p="fatos/${id}/resposta" style="min-height:90px"></textarea></label>
-   <div><div class="kicker" style="margin-bottom:6px">Partes dos planos que este fato obriga a revisar</div>${PLANOS.map(p=>`<div class="chips" style="margin-bottom:6px"><span class="muted" style="align-self:center;min-width:96px">${p.curto}:</span>${p.comps.map(c=>`<label class="ccheck"><input type="checkbox" id="ftc-${id}-${c.id}" data-p="fatos/${id}/comps/${c.id}"> ${c.t}</label>`).join('')}</div>`).join('')}</div>
-   <div class="toolbar"><button class="btn primary" type="button" data-pres="${id}">Apresentar</button><button class="btn" type="button" data-fprint="${id}">Imprimir slides em PDF</button><button class="btn" type="button" data-fcopy="${id}">Copiar resumo</button><button class="btn" type="button" data-fdel="${id}">Remover</button></div>
-  </div></details>`).join('');
- fatosSig=JSON.stringify(fs.map(x=>x[0]));syncBound();drawFatoStatus()}
-function drawFatoStatus(){fatosSorted().forEach(([id,f])=>{const s=document.getElementById('ftst-'+id);if(s){const pend=Object.keys(f.comps||{}).filter(c=>f.comps[c]&&!(f.resolvidos||{})[c]).length;s.textContent=(analisado(f)?'analisado':'em análise')+(pend?' · '+pend+(pend===1?' parte a revisar':' partes a revisar'):'')}
- const t=document.getElementById('fts-'+id);if(t&&document.activeElement!==document.getElementById('ftt-'+id))t.textContent=f.titulo||'Fato sem título';const q=document.getElementById('ftq-'+id);if(q)q.textContent=f.quando||''})}
-$('#fatoList').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
- if(b.dataset.pres)openPres(b.dataset.pres);
- if(b.dataset.fprint){$('#printArea').innerHTML=slidesFor(b.dataset.fprint).map(s=>`<section class="slide pslide">${s}</section>`).join('');try{window.print()}catch(x){toast('A impressão não abriu. Use o endereço do painel no GitHub.')}}
- if(b.dataset.fcopy){const f=S.fatos[b.dataset.fcopy];if(f){const h=fatoHTML(f);copyHTML(h,textOf(h),'Resumo do fato copiado.')}}
- if(b.dataset.fdel)twoStep(b,()=>{delItem('fatos',b.dataset.fdel);drawFatos();drawTL();homeFatos();refreshPlanos();progress()},'Confirmar')});
-function fatoHTML(f){const L=(k,v)=>(v||'').trim()?`<p style="font-family:Arial,sans-serif;font-size:11pt;margin:0 0 6pt"><b>${k}</b> ${esc(v)}</p>`:'';
- return `<h3 style="font-family:Arial,sans-serif;font-size:12pt">${esc(f.titulo||'Fato novo')}${f.quando?' ('+esc(f.quando)+')':''}</h3>`+L('Fato:',f.texto)+L('O que muda no conflito:',f.leitura)+L('Riscos:',f.riscos)+L('Plano de mediação:',f.impMed)+L('Governança:',f.impGov)+L('Nossa resposta:',f.resposta)}
-function homeFatos(){const fs=fatosSorted().filter(([,f])=>f.origem!=='Simulação do grupo');const box=$('#homeFatos');if(!box)return;box.hidden=!fs.length;
- $('#homeFatosL').innerHTML=fs.slice(0,3).map(([,f])=>`<a class="hf" href="#fatos"><span class="pill ${analisado(f)?'ok':'warn'}">${analisado(f)?'analisado':'em análise'}</span><b>${esc(f.titulo||'Fato sem título')}</b><span class="muted">${esc(f.quando||fmtD(f.data))}</span></a>`).join('');
- const p=$('#pFatos');if(p){const all=fatosSorted();p.textContent=all.length?all.length+(all.length===1?' fato':' fatos')+' · '+all.filter(([,f])=>!analisado(f)).length+' em análise':'nenhum fato ainda'}}
-/* fatos novos também entram na linha do tempo */
-function drawTL(){$('#tl').innerHTML='<i class="tlfill" aria-hidden="true"></i>'+TL.map(e=>`<div class="tlrow ${e[2]}"><div class="when">${e[2]==='now'?'<small>Estamos aqui</small>':e[2]==='fut'?'<small>Previsto</small>':''}${e[0]}</div><p>${esc(e[1])}</p></div>`).join('')
- +fatosSorted().slice().reverse().map(([,f])=>`<div class="tlrow novo"><div class="when"><small>${f.origem==='Simulação do grupo'?'Fato de treino':'Fato novo'}</small>${esc(f.quando||fmtD(f.data))}</div><p><b>${esc(f.titulo||'Fato sem título')}.</b> ${esc(f.texto||'')}</p></div>`).join('')}
+/* ====================== sugestões do grupo (segunda rodada): entram uma vez, só onde está vazio ====================== */
+const _n=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();
+function cronoIsOriginal(col){col=col||{};const ids=Object.keys(col);if(ids.length!==CRONO_1511.length)return false;
+ return CRONO_1511.every((c,i)=>{const x=col['c'+(i+1)];return x&&_n(x.acao)===_n(c[0])})}
+function cronoV2From(col){const old={},rank={'Pendente':0,'Em andamento':1,'Concluído':2};Object.values(col||{}).forEach(x=>{if(x&&x.acao)old[_n(x.acao)]=x.status});
+ const out={};CRONO_V2.forEach((c,i)=>{let st=c[3];c[4].forEach(k=>{const o=old[k];if(o&&rank[o]>rank[st])st=o});out['k'+(i+1)]={ord:i+1,acao:c[0],resp:c[1],prazo:c[2],status:st}});return out}
+function apresSeedObj(){const o={};APRES_SEED.forEach((x,i)=>{o['s'+(i+1)]=Object.assign({ord:i+1},x)});return o}
+function seed2Local(){
+ for(const id in SEED2_CONC)for(const f in SEED2_CONC[id]){const t=S.conc[id]||(S.conc[id]={});if(!t[f])t[f]=SEED2_CONC[id][f]}
+ for(const id in MAPA_SEED)for(const f in MAPA_SEED[id]){const t=S.mapa[id]||(S.mapa[id]={});if(!t[f])t[f]=MAPA_SEED[id][f]}
+ for(const id in PLANO_SEED){const t=S.planos[id]||(S.planos[id]={});for(const f in PLANO_SEED[id])if(!t[f])t[f]=PLANO_SEED[id][f];if(!t.status)t.status='Rascunho'}
+ if(!Object.keys(S.apres||{}).length)S.apres=apresSeedObj();
+ if(S.rel&&(!S.rel.justificativa||S.rel.justificativa===JUST_1511))S.rel.justificativa=JUST_V2;
+ if(cronoIsOriginal(S.crono))S.crono=cronoV2From(S.crono)}
+function seed2Web(R){const q=(p,v)=>queue.set(p,v);
+ for(const id in SEED2_CONC)for(const f in SEED2_CONC[id]){const t=S.conc[id]||(S.conc[id]={});if(!t[f]&&R.conc?.[id]?.[f]===undefined){t[f]=SEED2_CONC[id][f];q('conc/'+id+'/'+f,t[f])}}
+ for(const id in MAPA_SEED)for(const f in MAPA_SEED[id]){const t=m(id);if(!t[f]&&R.mapa?.[id]?.[f]===undefined){t[f]=MAPA_SEED[id][f];q('mapa/'+id+'/'+f,t[f])}}
+ for(const id in PLANO_SEED){const t=S.planos[id];
+  if(!t||typeof t!=='object'){S.planos[id]=Object.assign({status:'Rascunho'},PLANO_SEED[id]);q('planos/'+id,S.planos[id]);continue}
+  for(const f in PLANO_SEED[id])if(!t[f]){t[f]=PLANO_SEED[id][f];q('planos/'+id+'/'+f,t[f])}
+  if(!t.status){t.status='Rascunho';q('planos/'+id+'/status','Rascunho')}}
+ if(R.apres===undefined&&!Object.keys(S.apres||{}).length){S.apres=apresSeedObj();q('apres',S.apres)}
+ const j=(S.rel||{}).justificativa;if(!j||j===JUST_1511){S.rel.justificativa=JUST_V2;q('rel/justificativa',JUST_V2)}
+ if(cronoIsOriginal(S.crono)){S.crono=cronoV2From(S.crono);q('crono',S.crono)}
+ drawPlanos();drawApres()}
 
-/* mini apresentação gerada a partir da análise */
-function slidesFor(fid){const f=S.fatos[fid]||{};const nomes=members().map(x=>x.nome).join(', ');
- const at=ATORES.filter(a=>(f.atores||{})[a.id]).map(a=>`<span class="sl-chip">${esc(a.curto)}</span>`).join('');
- const comps=pid=>COMPS.filter(c=>c.plano===pid&&(f.comps||{})[c.id]).map(c=>`<span class="sl-chip">${c.t}</span>`).join('');
- const conc=[...new Set(COMPS.filter(c=>(f.comps||{})[c.id]).flatMap(c=>c.conc))].map(id=>(allConc().find(k=>k.id===id)||{}).nome).filter(Boolean).slice(0,6).map(n=>`<span class="sl-chip">${esc(n)}</span>`).join('');
- const body=t=>(t||'').trim()?String(t).split(/\n+/).map(p=>`<p>${esc(p)}</p>`).join(''):'<p class="sl-empty">A preencher na análise do fato.</p>';
- const sl=(k,t,b,foot)=>`<div class="sl-in"><div class="sl-k">${k}</div><div class="sl-t">${t}</div><div class="sl-b">${b}</div>${foot?`<div class="sl-f">${foot}</div>`:''}<div class="sl-brand">Equipe ${esc((S.rel||{}).grupo||'')} · Caatinga Velha</div></div>`;
- const out=[`<div class="sl-in sl-cover"><div class="sl-k">${f.origem==='Simulação do grupo'?'Fato de treino':'Fato novo'}${f.quando?' · '+esc(f.quando):''}</div><div class="sl-t big">${esc(f.titulo||'Fato novo')}</div><div class="sl-b"><p>Como a equipe lê o fato e o que muda na proposta.</p></div><div class="sl-f">Equipe ${esc((S.rel||{}).grupo||'')} · ${esc(nomes)} · ${fmtD(f.data||todayISO())}</div></div>`,
-  sl('O fato','O que aconteceu',body(f.texto),at?`<div class="sl-chips"><span>Atores envolvidos</span>${at}</div>`:'')];
- if((f.leitura||'').trim()||(f.riscos||'').trim())out.push(sl('Leitura do conflito','O que muda',body(f.leitura)+((f.riscos||'').trim()?`<div class="sl-box"><b>Riscos</b>${body(f.riscos)}</div>`:'')));
- if((f.impMed||'').trim()||comps('med'))out.push(sl('Plano de mediação','Ajustes na mediação',body(f.impMed),comps('med')?`<div class="sl-chips"><span>Partes revistas</span>${comps('med')}</div>`:''));
- if((f.impGov||'').trim()||comps('gov'))out.push(sl('Governança colaborativa','Ajustes na governança',body(f.impGov),comps('gov')?`<div class="sl-chips"><span>Partes revistas</span>${comps('gov')}</div>`:''));
- out.push(sl('Nossa resposta','O que a equipe defende',body(f.resposta),conc?`<div class="sl-chips"><span>Fundamentação</span>${conc}</div>`:''));
- return out}
-let pres={fid:null,i:0,sl:[],tm:null,left:300};
-function openPres(fid){pres.fid=fid;pres.i=0;pres.sl=slidesFor(fid);$('#pres').hidden=false;document.body.style.overflow='hidden';showSlide();$('#presNext').focus()}
-function showSlide(){$('#presSlide').innerHTML=pres.sl[pres.i];$('#presCount').textContent=(pres.i+1)+' de '+pres.sl.length;$('#presPrev').disabled=pres.i===0;$('#presNext').disabled=pres.i===pres.sl.length-1}
-function closePres(){$('#pres').hidden=true;document.body.style.overflow='';clearInterval(pres.tm);pres.tm=null;pres.left=300;presClock();$('#presTimer').textContent='Iniciar 5 minutos';if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}
+/* ====================== apresentação dos achados ====================== */
+let apresSel=null,apresSig='';
+const apresList=()=>sorted('apres');
+const lines=t=>String(t||'').split(/\n+/).map(x=>x.replace(/^\s*[-•·]\s*/,'').trim()).filter(Boolean);
+function slideHTML(x,i,tot){const nomes=members().map(p=>p.nome).join(' · ');
+ if(x.capa)return `<div class="sl-in sl-cover"><div class="sl-k">${esc(x.k||'')}</div><div class="sl-t big">${esc(x.titulo||'Título')}</div><div class="sl-b"><p>${esc(lines(x.texto).join(' '))}</p></div><div class="sl-f">${esc(nomes)}</div></div>`;
+ const L=lines(x.texto);
+ return `<div class="sl-in"><div class="sl-k">${esc(x.k||'')}</div><div class="sl-t">${esc(x.titulo||'Título')}</div><div class="sl-b">${L.length>1?`<ul class="sl-ul">${L.map(l=>`<li>${esc(l)}</li>`).join('')}</ul>`:L.length?`<p class="sl-lead">${esc(L[0])}</p>`:'<p class="sl-empty">Escreva os tópicos, um por linha.</p>'}</div><div class="sl-brand">Equipe ${esc((S.rel||{}).grupo||'')} · Caatinga Velha · ${i+1}/${tot}</div></div>`}
+function drawApres(){const box=$('#apresList');if(!box)return;const xs=apresList();
+ if(!xs.length){box.innerHTML='<p class="muted">Nenhum slide. Use “Adicionar slide”.</p>';apresSig='';drawApresPrev();progress();return}
+ if(!apresSel||!S.apres[apresSel])apresSel=xs[0][0];
+ box.innerHTML=xs.map(([id,x],i)=>`<article class="card aslide${id===apresSel?' sel':''}" data-sid="${id}">
+  <div class="ahead"><span class="anum num">${i+1}</span><b id="ast-${id}">${esc(x.titulo||'Slide sem título')}</b><span class="toolbar"><button class="btn icon" type="button" data-up="${id}" ${i===0?'disabled':''} aria-label="Subir">↑</button><button class="btn icon" type="button" data-down="${id}" ${i===xs.length-1?'disabled':''} aria-label="Descer">↓</button><button class="btn icon" type="button" data-sdel="${id}">Remover</button></span></div>
+  <div class="mrow"><label class="f w3">Chamada (pequena, acima do título)<input type="text" id="ask-${id}" data-p="apres/${id}/k"></label><label class="f w3">Título<input type="text" id="asti-${id}" data-p="apres/${id}/titulo"></label></div>
+  <label class="f">Tópicos do slide, um por linha<textarea id="astx-${id}" data-p="apres/${id}/texto" style="min-height:110px"></textarea></label>
+  <label class="f">O que falar (não aparece no slide)<textarea id="asfa-${id}" data-p="apres/${id}/fala" style="min-height:60px"></textarea></label>
+  <label class="ccheck"><input type="checkbox" id="ascp-${id}" data-p="apres/${id}/capa"> Usar como capa</label></article>`).join('');
+ apresSig=JSON.stringify(xs.map(x=>x[0]));syncBound();drawApresPrev();progress()}
+function drawApresPrev(){const xs=apresList();const i=Math.max(0,xs.findIndex(x=>x[0]===apresSel));const p=$('#apresPrev');if(!p)return;
+ p.innerHTML=xs.length?slideHTML(xs[i][1],i,xs.length):'';const c=$('#apresPrevN');if(c)c.textContent=xs.length?'Slide '+(i+1)+' de '+xs.length:'';
+ const t=$('#apresTempo');if(t)t.textContent=xs.length?'Cerca de '+Math.round(+($('#apresMin').value||5)*60/xs.length)+' segundos por slide':''}
+function apresEdited(p){const id=p.split('/')[1];if(id!==apresSel){apresSel=id;document.querySelectorAll('.aslide').forEach(a=>a.classList.toggle('sel',a.dataset.sid===id))}
+ const t=document.getElementById('ast-'+id);if(t)t.textContent=(S.apres[id]||{}).titulo||'Slide sem título';drawApresPrev()}
+$('#apresList').addEventListener('focusin',e=>{const a=e.target.closest('.aslide');if(a&&a.dataset.sid!==apresSel){apresSel=a.dataset.sid;document.querySelectorAll('.aslide').forEach(x=>x.classList.toggle('sel',x===a));drawApresPrev()}});
+$('#apresList').addEventListener('click',e=>{const a=e.target.closest('.aslide');const b=e.target.closest('button');
+ if(a&&!b&&a.dataset.sid!==apresSel){apresSel=a.dataset.sid;document.querySelectorAll('.aslide').forEach(x=>x.classList.toggle('sel',x===a));drawApresPrev()}
+ if(!b)return;const xs=apresList();
+ const mv=(id,d)=>{const i=xs.findIndex(x=>x[0]===id),j=i+d;if(j<0||j>=xs.length)return;const oi=xs[i][1].ord,oj=xs[j][1].ord;setPut('apres/'+xs[i][0]+'/ord',oj===oi?oj+d:oj);setPut('apres/'+xs[j][0]+'/ord',oi);apresSel=id;drawApres()};
+ if(b.dataset.up)mv(b.dataset.up,-1);if(b.dataset.down)mv(b.dataset.down,1);
+ if(b.dataset.sdel)twoStep(b,()=>{delItem('apres',b.dataset.sdel);if(apresSel===b.dataset.sdel)apresSel=null;drawApres()},'Confirmar')});
+$('#apresAdd').addEventListener('click',()=>{const id='s'+uid();setPut('apres/'+id,{ord:nextOrd('apres'),k:'',titulo:'',texto:'',fala:''});apresSel=id;drawApres();const t=document.getElementById('asti-'+id);if(t){t.scrollIntoView({block:'center'});t.focus()}});
+$('#apresMin').addEventListener('change',()=>{drawApresPrev();if(!pres.tm){pres.left=+$('#apresMin').value*60;presClock();$('#presTimer').textContent='Iniciar '+$('#apresMin').value+' minutos'}});
+$('#apresGo').addEventListener('click',()=>{const xs=apresList();if(!xs.length){toast('Adicionem ao menos um slide.');return}openPres(Math.max(0,xs.findIndex(x=>x[0]===apresSel)))});
+$('#apresPrint').addEventListener('click',()=>{const xs=apresList();$('#printArea').innerHTML=xs.map(([,x],i)=>`<section class="slide pslide">${slideHTML(x,i,xs.length)}</section>`).join('');try{window.print()}catch(x){toast('A impressão não abriu. Use o endereço do painel no GitHub.')}});
+$('#apresCopy').addEventListener('click',()=>{const F='font-family:Arial,sans-serif;font-size:11pt';const xs=apresList();
+ const h=xs.map(([,x],i)=>`<h3 style="font-family:Arial,sans-serif;font-size:12pt;margin:12pt 0 4pt">${i+1}. ${esc(x.titulo||'')}</h3>${lines(x.texto).length?`<ul style="${F};margin:0 0 4pt">${lines(x.texto).map(l=>`<li>${esc(l)}</li>`).join('')}</ul>`:''}${(x.fala||'').trim()?`<p style="${F};color:#555;margin:0 0 6pt"><i>Fala: ${esc(x.fala)}</i></p>`:''}`).join('');
+ copyHTML(h,textOf(h),'Roteiro copiado. Cole no Google Docs.')});
+
+/* modo apresentação */
+let pres={i:0,sl:[],notes:[],tm:null,left:300,showN:false};
+const presTotal=()=>+(($('#apresMin')||{}).value||5)*60;
+function openPres(start){const xs=apresList();pres.sl=xs.map(([,x],i)=>slideHTML(x,i,xs.length));pres.notes=xs.map(([,x])=>x.fala||'');pres.i=start||0;if(!pres.tm)pres.left=presTotal();presClock();
+ $('#pres').hidden=false;document.body.style.overflow='hidden';showSlide();$('#presNext').focus()}
+function showSlide(){$('#presSlide').innerHTML=pres.sl[pres.i];$('#presCount').textContent=(pres.i+1)+' de '+pres.sl.length;$('#presPrev').disabled=pres.i===0;$('#presNext').disabled=pres.i===pres.sl.length-1;
+ const n=$('#presNotes');n.hidden=!pres.showN;n.textContent=pres.notes[pres.i]||'(sem fala anotada)'}
+function closePres(){$('#pres').hidden=true;document.body.style.overflow='';clearInterval(pres.tm);pres.tm=null;pres.left=presTotal();presClock();$('#presTimer').textContent='Iniciar '+(presTotal()/60)+' minutos';if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}
 function presClock(){$('#presClock').textContent=Math.floor(pres.left/60)+':'+String(pres.left%60).padStart(2,'0');$('#presClock').classList.toggle('low',pres.left<=60&&!!pres.tm)}
 $('#presPrev').addEventListener('click',()=>{if(pres.i>0){pres.i--;showSlide()}});
 $('#presNext').addEventListener('click',()=>{if(pres.i<pres.sl.length-1){pres.i++;showSlide()}});
 $('#presClose').addEventListener('click',closePres);
+$('#presNotesBtn').addEventListener('click',()=>{pres.showN=!pres.showN;$('#presNotesBtn').setAttribute('aria-pressed',pres.showN);showSlide()});
 $('#presFull').addEventListener('click',()=>{const el=$('#pres');(document.fullscreenElement?document.exitFullscreen():el.requestFullscreen()).catch(()=>toast('A tela cheia não está disponível aqui.'))});
-$('#presTimer').addEventListener('click',()=>{if(pres.tm){clearInterval(pres.tm);pres.tm=null;pres.left=300;presClock();$('#presTimer').textContent='Iniciar 5 minutos';return}
- $('#presTimer').textContent='Parar e zerar';pres.tm=setInterval(()=>{pres.left--;presClock();if(pres.left<=0){clearInterval(pres.tm);pres.tm=null;pres.left=300;$('#presTimer').textContent='Iniciar 5 minutos';toast('Tempo encerrado');presClock()}},1000);presClock()});
+$('#presTimer').addEventListener('click',()=>{if(pres.tm){clearInterval(pres.tm);pres.tm=null;pres.left=presTotal();presClock();$('#presTimer').textContent='Iniciar '+(presTotal()/60)+' minutos';return}
+ $('#presTimer').textContent='Parar e zerar';pres.tm=setInterval(()=>{pres.left--;presClock();if(pres.left<=0){clearInterval(pres.tm);pres.tm=null;pres.left=presTotal();$('#presTimer').textContent='Iniciar '+(presTotal()/60)+' minutos';toast('Tempo encerrado');presClock()}},1000);presClock()});
 document.addEventListener('keydown',e=>{if($('#pres').hidden)return;if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();$('#presNext').click()}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();$('#presPrev').click()}else if(e.key==='Escape'&&!document.fullscreenElement)closePres()});
 
+/* ====================== linha do tempo ====================== */
+function drawTL(){const lab={now:'Estamos aqui',fut:'Previsto',novo:'Fato novo'};
+ $('#tl').innerHTML='<i class="tlfill" aria-hidden="true"></i>'+TL.map(e=>`<div class="tlrow ${e[2]}"><div class="when">${lab[e[2]]?`<small>${lab[e[2]]}</small>`:''}${esc(e[0])}</div><p>${esc(e[1])}</p></div>`).join('')}
+
+/* ====================== história: sumário com destaque da seção lida ====================== */
+function drawHist(){const toc=$('#histToc');if(!toc)return;const hs=[...document.querySelectorAll('#histBody h3[id]')];
+ toc.innerHTML=hs.map(h=>`<a href="#${h.id}" data-to="${h.id}">${esc(h.textContent)}</a>`).join('');
+ toc.addEventListener('click',e=>{const a=e.target.closest('a[data-to]');if(!a)return;e.preventDefault();document.getElementById(a.dataset.to).scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'start'})});
+ if('IntersectionObserver' in window){const ob=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)toc.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.to===en.target.id))})},{rootMargin:'-20% 0px -70% 0px'});hs.forEach(h=>ob.observe(h))}}
+/* links internos para trechos da história (ex.: #historia-fato) */
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(h.startsWith('historia-')){const t=document.getElementById(h);location.replace('#historia');setTimeout(()=>t&&t.scrollIntoView({block:'start'}),60)}});
+
+/* ====================== mapa mental ====================== */
+let mmSel=null;
+function drawMM(){const W=1200,H=700,cx=600,cy=352,ys=[100,268,436,604],bw=210,bh=66;
+ const L=MM.ramos.filter(r=>r.lado==='e'),D=MM.ramos.filter(r=>r.lado==='d');
+ let links='',nodes='';
+ const branch=(r,i,left)=>{const n=MM.ramos.indexOf(r)+1,bx=left?385:815,by=ys[i],inner=left?bx+bw/2:bx-bw/2,outer=left?bx-bw/2:bx+bw/2,sx=left?cx-118:cx+118;
+  links+=`<path class="mm-l mm-l-${r.id}" d="M${sx},${cy} C${(sx+inner)/2},${cy} ${(sx+inner)/2},${by} ${inner},${by}"/>`;
+  r.folhas.forEach((f,j)=>{const fy=by+(j-1.5)*27,fx=left?outer-34:outer+34;links+=`<path class="mm-lf" d="M${outer},${by} C${(outer+fx)/2},${by} ${(outer+fx)/2},${fy} ${fx},${fy}"/>`;
+   nodes+=`<circle class="mm-dot" cx="${fx}" cy="${fy}" r="3.2"/><text class="mm-leaf" x="${left?fx-8:fx+8}" y="${fy+4.5}" text-anchor="${left?'end':'start'}">${esc(f)}</text>`});
+  nodes+=`<g class="mm-b ${r.id==='fato'?'mm-hot':left?'mm-warm':'mm-cool'}" data-mm="${r.id}" tabindex="0" role="button" aria-label="${esc(r.titulo)}: ${esc(r.sub)}">
+   <rect x="${bx-bw/2}" y="${by-bh/2}" width="${bw}" height="${bh}" rx="12"/><circle class="mm-n" cx="${bx-bw/2+24}" cy="${by}" r="13"/><text class="mm-nt" x="${bx-bw/2+24}" y="${by+5}" text-anchor="middle">${n}</text>
+   <text class="mm-bt" x="${bx-bw/2+46}" y="${by-3}">${esc(r.titulo)}</text><text class="mm-bs" x="${bx-bw/2+46}" y="${by+17}">${esc(r.sub)}</text></g>`};
+ L.forEach((r,i)=>branch(r,i,true));D.forEach((r,i)=>branch(r,i,false));
+ const svg=`<svg viewBox="0 0 ${W} ${H}" class="mm-svg" role="img" aria-label="Mapa mental do caso"><text class="mm-side" x="270" y="28" text-anchor="middle">O QUE ACONTECEU</text><text class="mm-side" x="930" y="28" text-anchor="middle">O QUE FAZEMOS COM ISSO</text>${links}${nodes}
+  <g class="mm-c"><rect x="${cx-118}" y="${cy-56}" width="236" height="112" rx="18"/><text x="${cx}" y="${cy-12}" text-anchor="middle" class="mm-ct">Conflito das PICs</text><text x="${cx}" y="${cy+14}" text-anchor="middle" class="mm-ct">em Caatinga Velha</text><text x="${cx}" y="${cy+38}" text-anchor="middle" class="mm-cs">Dia +20 do caso</text></g></svg>`;
+ $('#mmStage').innerHTML=svg;
+ $('#mmList').innerHTML=MM.ramos.map((r,i)=>`<article class="card mmcard ${r.id==='fato'?'hot':r.lado==='e'?'warm':'cool'}"><div class="kicker">${i+1} · ${esc(r.sub)}</div><h3>${esc(r.titulo)}</h3><div class="chips">${r.folhas.map(f=>`<span class="cchip">${esc(f)}</span>`).join('')}</div>${r.texto.map(p=>`<p>${esc(p)}</p>`).join('')}<a class="btn" href="${r.link[0]}">${esc(r.link[1])}</a></article>`).join('');
+ mmShow(mmSel)}
+function mmShow(id){mmSel=id;const box=$('#mmDetail');document.querySelectorAll('.mm-b').forEach(g=>g.classList.toggle('on',g.dataset.mm===id));
+ document.querySelectorAll('.mm-l').forEach(p=>p.classList.toggle('on',!!id&&p.classList.contains('mm-l-'+id)));
+ const i=MM.ramos.findIndex(r=>r.id===id);
+ if(i<0){box.innerHTML=`<div class="kicker">Como ler este mapa</div><h3>Do conflito para a proposta, em oito passos</h3><p>No centro está o conflito. À esquerda, a história em quatro passos: onde acontece, por que já vinha, o que disparou e como se espalhou com o fato novo. À direita, o que o grupo faz com ela: quem disputa, como analisar, o que ampara legalmente e o que propomos.</p><p>Sigam os números de 1 a 8 e cliquem em cada ramo para ler a explicação. O ramo em laranja é o fato novo (Anexo A).</p><div class="toolbar"><button class="btn primary" type="button" data-mmgo="0">Começar pelo 1</button></div>`;return}
+ const r=MM.ramos[i];box.innerHTML=`<div class="kicker">${i+1} de ${MM.ramos.length} · ${esc(r.sub)}</div><h3>${esc(r.titulo)}</h3>${r.texto.map(p=>`<p>${esc(p)}</p>`).join('')}<div class="chips">${r.folhas.map(f=>`<span class="cchip">${esc(f)}</span>`).join('')}</div>
+  <div class="toolbar"><button class="btn" type="button" data-mmgo="${i-1}" ${i===0?'disabled':''}>Anterior</button><button class="btn primary" type="button" data-mmgo="${i+1}" ${i===MM.ramos.length-1?'disabled':''}>Próximo</button><a class="btn" href="${r.link[0]}">${esc(r.link[1])}</a><button class="btn" type="button" data-mmgo="-9">Como ler</button></div>`}
+$('#mmStage').addEventListener('click',e=>{const g=e.target.closest('[data-mm]');if(!g)return;mmShow(g.dataset.mm===mmSel?null:g.dataset.mm);const r=$('#mmDetail').getBoundingClientRect();if(r.top>innerHeight-120)$('#mmDetail').scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'nearest'})});
+$('#mmStage').addEventListener('keydown',e=>{const g=e.target.closest('[data-mm]');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();mmShow(g.dataset.mm)}});
+$('#mmDetail').addEventListener('click',e=>{const b=e.target.closest('[data-mmgo]');if(!b)return;const i=+b.dataset.mmgo;mmShow(i<0?null:MM.ramos[i].id)});
+
+/* justificativa reforçada sugerida */
+$('#justSug').innerHTML=JUST_V2.split('\n').map(p=>`<p>${esc(p)}</p>`).join('');
+function justState(){const e=$('#justSt');if(e)e.textContent=((S.rel||{}).justificativa||'').trim()===JUST_V2.trim()?'O relatório já usa esta versão.':''}
+$('#justUse').addEventListener('click',e=>twoStep(e.target,()=>{setPut('rel/justificativa',JUST_V2);syncBound();renderPreview();justState();toast('Justificativa reforçada aplicada ao relatório')},'Confirmar: substitui o texto atual'));
+/* contagens da página inicial */
+function homeCounts(){const s=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=t};
+ s('cFichas',ATORES.length+' fichas');s('cTL',TL.length+' eventos');s('cSig',(SIGLAS.length+TERMOS.length)+' verbetes');}
+
 /* atualizações depois de editar ou de ler o banco */
-let pfT;function refreshPF(){clearTimeout(pfT);pfT=setTimeout(()=>{refreshPlanos();drawFatoStatus();homeFatos();drawTL();progress()},300)}
-function refreshNew2(){if(JSON.stringify(fatosSorted().map(x=>x[0]))!==fatosSig&&!$('#fatoList').contains(document.activeElement))drawFatos();else drawFatoStatus();refreshPlanos();homeFatos();drawTL()}
+let pfT;function refreshPF(){clearTimeout(pfT);pfT=setTimeout(()=>{refreshPlanos();progress()},300)}
+function refreshNew2(){justState();const sig=JSON.stringify(apresList().map(x=>x[0]));if(sig!==apresSig&&!$('#apresList').contains(document.activeElement))drawApres();else{apresList().forEach(([id,x])=>{const t=document.getElementById('ast-'+id);if(t)t.textContent=x.titulo||'Slide sem título'});drawApresPrev()}refreshPlanos()}
+
 
 /* ---------- movimento ---------- */
 const REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1818,8 +2222,9 @@ function sizeFill(f){const now=document.querySelector('#tl .tlrow.now');if(now)f
 if(!REDUCED){document.querySelectorAll('.hero h1,.words').forEach(splitWords)}
 
 /* ---------- início ---------- */
+if(!CONFIG.dbUrl&&S.seed2!==SEED2_V){seed2Local();S.seed2=SEED2_V;saveLocal()}
 drawSecs();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();
-drawPlanos();drawFatos();drawTL();homeFatos();
+drawPlanos();drawApres();drawTL();drawHist();drawMM();homeCounts();justState();
 drawGroups();drawActors();drawSig();drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();route();
 if(WEB){status('Conectando ao banco do grupo');pull();setInterval(pull,6000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});window.addEventListener('beforeunload',()=>{if(queue.size)flush()})}
 else status(canStore?'Salvo só neste navegador':'Este navegador não permite salvar');
