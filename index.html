@@ -2219,9 +2219,9 @@ function drawTL(){const lab={now:'Estamos aqui',fut:'Previsto',novo:'Fato novo'}
 
 /* ====================== história: sumário com destaque da seção lida ====================== */
 function drawHist(){const toc=$('#histToc');if(!toc)return;const hs=[...document.querySelectorAll('#histBody h3[id]')];
- toc.innerHTML=hs.map(h=>`<a href="#${h.id}" data-to="${h.id}">${esc(h.textContent)}</a>`).join('');
- toc.addEventListener('click',e=>{const a=e.target.closest('a[data-to]');if(!a)return;e.preventDefault();document.getElementById(a.dataset.to).scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'start'})});
- if('IntersectionObserver' in window){const ob=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)toc.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.to===en.target.id))})},{rootMargin:'-20% 0px -70% 0px'});hs.forEach(h=>ob.observe(h))}}
+ toc.innerHTML=hs.map(h=>`<a href="#${h.id}" data-sec="${h.id}">${esc(h.textContent)}</a>`).join('');
+ toc.addEventListener('click',e=>{const a=e.target.closest('a[data-sec]');if(!a)return;e.preventDefault();document.getElementById(a.dataset.sec).scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'start'})});
+ if('IntersectionObserver' in window){const ob=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)toc.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.sec===en.target.id))})},{rootMargin:'-20% 0px -70% 0px'});hs.forEach(h=>ob.observe(h))}}
 /* links internos para trechos da história (ex.: #historia-fato) */
 window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(h.startsWith('historia-')){const t=document.getElementById(h);location.replace('#historia');setTimeout(()=>t&&t.scrollIntoView({block:'start'}),60)}});
 
