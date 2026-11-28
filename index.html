@@ -1628,6 +1628,14 @@ const ROT_BLOCOS=[
  {bloco:'Mediação',tempo:'2,5',quem:'José Pedro',slides:'9 a 11',conteudo:'Trilha 1 (proteção imediata), trilha 2 (mesa de mediação com o MP) e o termo de cooperação.'},
  {bloco:'Governança, implantação e indicadores',tempo:'3',quem:'Katherine e Fernando',slides:'12 a 15',conteudo:'Comissão de PICs no Conselho Local, financiamento em duas etapas, formação e comunicação, cronograma de 30, 60 e 90 dias e indicadores.'},
  {bloco:'Reflexão crítica e fechamento',tempo:'1',quem:'José Pedro',slides:'16 e 17',conteudo:'Reformista ou transformador, limites do plano e principais referências. Abrir para a banca.'}];
+
+/* 28/11 (3): fonte teórica da análise de atores */
+const SEED9_V='s9';
+const MENDELOW={tipo:'capitulo',autores:'Aubrey Mendelow',titulo:'Stakeholder mapping',livro:'Proceedings of the 2nd International Conference on Information Systems',local:'Cambridge, MA',ano:'1991',c:['atores'],conferir:true,nota:'Origem da matriz poder × interesse usada no mapa de atores. Conferir os dados do evento na fonte original.'};
+IMPORT_REFS.push(MENDELOW);
+const ATORES_FONTES_OLD='Template da disciplina; literatura de análise de stakeholders (a localizar).';
+const ATORES_FONTES_NEW='Matus (1993), Política, planejamento e governo; Mendelow (1991), Stakeholder mapping, matriz poder × interesse; material da disciplina (template de mapeamento de atores).';
+const ATORES_FRASE='A matriz poder × interesse de Mendelow (1991) orientou a classificação dos 19 atores do caso; o resultado está no material complementar.';
 /* ---------- estado ---------- */
 const KEY='painel-caatinga-velha-v1';
 let S={mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{},rot:{}};
@@ -1698,6 +1706,7 @@ async function pull(){ if(!WEB||document.hidden)return;
     if(firstPull&&(R.meta&&R.meta.seed6)!==SEED6_V){seed6(true);queue.set('meta/seed6',SEED6_V)}
     if(firstPull&&(R.meta&&R.meta.seed7)!==SEED7_V){seed7(true,R);queue.set('meta/seed7',SEED7_V)}
     if(firstPull&&(R.meta&&R.meta.seed8)!==SEED8_V){seed8(true,R);queue.set('meta/seed8',SEED8_V)}
+    if(firstPull&&(R.meta&&R.meta.seed9)!==SEED9_V){seed9(true);queue.set('meta/seed9',SEED9_V)}
     for(const k in R.banca||{}) if(!pending('banca/'+k)) S.banca[k]=R.banca[k];
     const before=Object.keys(S.extra).sort().join(), ex={};
     for(const id in R.extra||{}) ex[id]=pending('extra/'+id)?S.extra[id]:R.extra[id];
@@ -2521,6 +2530,16 @@ function seed8(web,R){const q=(p,v)=>{if(web)queue.set(p,v)};
  if(!rotBlocos().length)ROT_BLOCOS.forEach((b,i)=>{const id='b'+(i+1);S.rot[id]=Object.assign({ord:i+1},b);q('rot/'+id,S.rot[id])});
  if(web){refresh(true);drawEntrega();drawApres();refreshPlanos()}}
 
+/* 28/11 (3): Mendelow (1991) como fonte da análise de atores */
+function seed9(web){const q=(p,v)=>{if(web)queue.set(p,v)};const t=S.conc.atores||(S.conc.atores={});
+ const f=(t.fontes||'').trim();if(!f||f===ATORES_FONTES_OLD||/a localizar/i.test(f)){t.fontes=ATORES_FONTES_NEW;q('conc/atores/fontes',t.fontes)}
+ else if(!/mendelow/i.test(f)){t.fontes=f.replace(/\.?$/,'; ')+'Mendelow (1991), Stakeholder mapping, matriz poder × interesse.';q('conc/atores/fontes',t.fontes)}
+ const si=(t.sintese||'').trim();if(!/mendelow/i.test(si)){t.sintese=(si?si+' ':'')+ATORES_FRASE;q('conc/atores/sintese',t.sintese)}
+ const has=Object.values(S.refs||{}).some(r=>r&&/stakeholder mapping/i.test(r.titulo||''));
+ if(Object.keys(S.refs||{}).length&&!has){const o=clone(MENDELOW);delete o.c;o.conceitos={atores:true};o.criado=todayISO();o.por='';o.lidos={};o.acesso='';o.importado=IMPORT_V;
+  const id='refs/'+IMPORT_V+'-'+String(IMPORT_REFS.indexOf(MENDELOW)+1).padStart(2,'0');S.refs[id.split('/')[1]]=o;q(id,o)}
+ if(web){refresh(true);drawRefs();drawEntrega();updateConcRefs&&updateConcRefs()}}
+
 /* contagens da página inicial */
 function homeCounts(){const s=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=t};
  s('cFichas',ATORES.length+' fichas');s('cTL',TL.length+' eventos');s('cSig',(SIGLAS.length+TERMOS.length)+' verbetes');}
@@ -2560,6 +2579,7 @@ if(!CONFIG.dbUrl&&S.seed5!==SEED5_V){seed5(false);S.seed5=SEED5_V;saveLocal()}
 if(!CONFIG.dbUrl&&S.seed6!==SEED6_V){seed6(false);S.seed6=SEED6_V;saveLocal()}
 if(!CONFIG.dbUrl&&S.seed7!==SEED7_V){seed7(false);S.seed7=SEED7_V;saveLocal()}
 if(!CONFIG.dbUrl&&S.seed8!==SEED8_V){seed8(false);S.seed8=SEED8_V;saveLocal()}
+if(!CONFIG.dbUrl&&S.seed9!==SEED9_V){seed9(false);S.seed9=SEED9_V;saveLocal()}
 drawSecs();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();
 drawPlanos();drawApres();drawTL();drawHist();drawMM();homeCounts();justState();drawEntrega();
 drawGroups();drawActors();drawSig();drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();route();
