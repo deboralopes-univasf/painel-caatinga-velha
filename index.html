@@ -890,7 +890,7 @@ textarea.big{min-height:130px}
 </div></section>
 
 <section class="view" id="v-entrega"><div class="inner">
-  <div class="sechead"><div><div class="kicker">Preencher · até 02/12</div><h2>Roteiro da Apresentação e Material Complementar</h2></div><p>Entrega de 20 pontos: problema formulado (4), conceitos teóricos pesquisados (6), solução proposta (8) e referências (2). Os campos vieram preenchidos com o que o painel já tem; o que for editado aqui muda também nas outras abas.</p></div>
+  <div class="sechead"><div><div class="kicker">Preencher · até 02/12</div><h2>Roteiro da Apresentação e Material Complementar</h2></div><p>Documento escrito com o conteúdo da apresentação, avaliado em 20 pontos: problema formulado (4), conceitos teóricos pesquisados (6), solução proposta (8) e referências (2). Os campos vieram preenchidos com o que o painel já tem; o que for editado aqui muda também nas outras abas. A divisão das falas fica na aba Apresentação.</p></div>
   <div class="split rev">
     <div class="stack" id="entForm">
       <details class="card" open><summary><span>Formato da apresentação e do material complementar</span></summary>
@@ -904,10 +904,6 @@ textarea.big{min-height:130px}
       <details class="card"><summary><span>3 · Solução proposta (8 pontos)</span></summary>
         <p class="muted" style="margin:4px 0 10px">Resumo do plano organizado pelos sete itens que o material exige. O detalhamento parte a parte está na aba Propostas.</p>
         <label class="f">Solução proposta<textarea id="en-sol" data-p="rot/info/solucao" style="min-height:420px"></textarea></label></details>
-      <details class="card"><summary><span>Roteiro da apresentação (15 minutos)</span></summary>
-        <p class="muted" style="margin:4px 0 10px" id="entTempo"></p>
-        <div class="stack" id="entBlocos" style="gap:12px"></div>
-        <div class="toolbar"><button class="btn" id="entAddB" type="button">Adicionar bloco</button></div></details>
       <details class="card"><summary><span>Material complementar</span></summary>
         <label class="f">Itens, um por linha<textarea id="en-mat" data-p="rot/info/material" style="min-height:120px"></textarea></label></details>
       <details class="card"><summary><span>4 · Referências (2 pontos)</span></summary>
@@ -940,6 +936,10 @@ textarea.big{min-height:130px}
         <button class="btn" id="apresAdd" type="button">Adicionar slide</button>
       </div>
     </div>
+  </div>
+  <div class="block tight" style="padding-top:36px">
+    <div class="hchead"><div><div class="kicker">Guia interno do grupo · não entra na entrega</div><h2 style="margin-top:6px">Quem fala o quê nos 15 minutos</h2><p class="muted" style="max-width:70ch;margin-top:6px" id="entTempo"></p></div><div class="toolbar"><button class="btn" id="entAddB" type="button">Adicionar bloco</button></div></div>
+    <div class="stack" id="entBlocos" style="gap:12px;margin-top:12px"></div>
   </div>
 </div></section>
 </main>
@@ -2479,7 +2479,7 @@ function entTempo(){const t=rotBlocos().reduce((s,[,x])=>s+minOf(x.tempo),0);con
 function entRefsList(){const lib=refsSorted().map(([,x])=>abnt(x));if(lib.length)return lib;return IMPORT_REFS.slice().map(r=>abnt(Object.assign({},r))).sort((a,b)=>norm(plain(a))<norm(plain(b))?-1:1)}
 function drawEntRefs(){const e=$('#entRefs');if(!e)return;const L=entRefsList();e.innerHTML=(refsSorted().length?'':'<p class="muted">A biblioteca ainda não tem as obras importadas; a lista abaixo usa a lista de referências do grupo.</p>')+L.map(r=>`<p style="margin:0 0 8px">${r}</p>`).join('')}
 function entStatus(){const e=$('#entStatus');if(!e)return;const cs=allConc(),ok=cs.filter(k=>((S.conc[k.id]||{}).sintese||'').trim()).length;
- e.innerHTML=`Problema: ${((S.rel||{}).problema||'').trim()?'preenchido':'<b>vazio</b>'}<br>Conceitos com síntese: ${ok} de ${cs.length}<br>Solução: ${(rotInfo().solucao||'').trim()?'preenchida':'<b>vazia</b>'}<br>Roteiro: ${rotBlocos().length} blocos<br>Referências: ${entRefsList().length}`}
+ e.innerHTML=`Problema: ${((S.rel||{}).problema||'').trim()?'preenchido':'<b>vazio</b>'}<br>Conceitos com síntese: ${ok} de ${cs.length}<br>Solução: ${(rotInfo().solucao||'').trim()?'preenchida':'<b>vazia</b>'}<br>Material complementar: ${String(rotInfo().material||'').split(/\n+/).filter(x=>x.trim()).length} itens<br>Referências: ${entRefsList().length}`}
 function entEdited(p){if(p.startsWith('rot/')){const id=p.split('/')[1];if(id!=='info'){const t=document.getElementById('ebt-'+id);if(t)t.textContent=(S.rot[id]||{}).bloco||'Bloco sem título';entTempo()}}entStatus();if(!$('#entDocWrap').hidden)$('#entDoc').innerHTML=entHTML()}
 function entHTML(){const r=S.rel||{},ano=new Date().getFullYear(),P='font-size:12pt;line-height:1.5;margin:0 0 6pt;text-align:justify';
  const TH='text-align:left;font-weight:bold;vertical-align:bottom;padding:4pt 5pt;border-top:1.5pt solid #000;border-bottom:0.75pt solid #000;border-left:none;border-right:none;background:none';
@@ -2498,8 +2498,7 @@ function entHTML(){const r=S.rel||{},ano=new Date().getFullYear(),P='font-size:1
  s+=H('Problema formulado',4)+SUB('Problema')+pp(r.problema)+SUB('Justificativa')+pp(r.justificativa);
  s+=H('Conceitos teóricos pesquisados',6);allConc().forEach(k=>{const x=S.conc[k.id]||{};s+=SUB(k.nome)+pp(x.sintese||x.pq)+((x.fontes||'').trim()?`<p style="${P};font-size:11pt"><b>Fontes:</b> ${esc(x.fontes)}</p>`:'')});
  s+=H('Solução proposta',8)+pp(rotInfo().solucao);
- const B=rotBlocos();s+=H('Roteiro da apresentação')+`<p style="${P};text-indent:1.25cm">Apresentação de 15 minutos, seguida de 10 minutos de banca simulada.</p>`+quadro('Roteiro da apresentação',['Bloco','Min.','Quem fala','O que dizer','Slides'],B.map(([,x])=>[x.bloco||'',x.tempo||'',x.quem||'',x.conteudo||'',x.slides||'']),['20%','8%','16%','44%','12%']);
- const M=String(rotInfo().material||'').split(/\n+/).map(x=>x.trim()).filter(Boolean);s+=H('Material complementar')+(M.length?`<ul style="${P};text-align:left;padding-left:1.25cm">${M.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:pp(''));
+ const M=String(rotInfo().material||'').split(/\n+/).map(x=>x.trim()).filter(Boolean);s+=`<h2 style="font-size:12pt;font-weight:bold;line-height:1.5;margin:18pt 0 6pt;page-break-after:avoid">MATERIAL COMPLEMENTAR</h2>`+(M.length?`<ul style="${P};text-align:left;padding-left:1.25cm">${M.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:pp(''));
  s+=`<p style="font-size:12pt;font-weight:bold;text-align:center;margin:24pt 0 12pt;page-break-after:avoid">REFERÊNCIAS (2 pontos)</p>`+entRefsList().map(x=>`<p style="font-size:12pt;line-height:1;margin:0 0 12pt;text-align:left">${x}</p>`).join('');
  return s+'</div>'}
 function drawEntrega(){drawEntConc();drawEntBlocos();drawEntRefs();entStatus();syncBound()}
