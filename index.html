@@ -536,6 +536,13 @@ textarea.big{min-height:130px}
 @media (max-width:900px){.entry.six{grid-template-columns:1fr 1fr}.histwrap{grid-template-columns:1fr}.histtoc{position:static}.mmwrap{grid-template-columns:1fr}.mmdetail{position:static}}
 @media (max-width:760px){.entry.six{grid-template-columns:1fr 1fr;gap:10px}.mmwrap{display:none}.mmlist{display:grid;gap:12px}.hist h3{font-size:19px}.hist p{font-size:15px}.ahead{flex-wrap:wrap}.ahead .toolbar{width:100%}}
 @media (max-width:520px){.entry.six{grid-template-columns:1fr 1fr}}
+
+#entDoc{background:#fff;color:#000;max-width:794px;margin:0 auto;padding:60px 56px;border:1px solid var(--line)}
+.entc{border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:8px}
+.entc:first-child{border-top:none;padding-top:0}
+.entb{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:8px}
+#entTempo.warn{color:#A3441A;font-weight:600}
+@media (max-width:760px){#entDoc{padding:22px 16px}}
 </style>
 </head>
 <body>
@@ -546,7 +553,7 @@ textarea.big{min-height:130px}
 <div class="bar"><div class="inner">
   <a class="brand" href="#inicio">Painel do Caso Caatinga Velha</a>
   <nav class="pill" aria-label="Seções do painel">
-    <i class="ind" aria-hidden="true"></i><a href="#inicio">Início</a><a href="#historia">História</a><a href="#mapa-mental">Mapa mental</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#siglas">Siglas</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#propostas">Propostas</a><a href="#apresentacao">Apresentação</a><a href="#relatorio">Relatório</a>
+    <i class="ind" aria-hidden="true"></i><a href="#inicio">Início</a><a href="#historia">História</a><a href="#mapa-mental">Mapa mental</a><a href="#fichas">Fichas</a><a href="#mapa">Mapa de atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados</a><a href="#siglas">Siglas</a><a href="#banca">Banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#propostas">Propostas</a><a href="#apresentacao">Apresentação</a><a href="#entrega">Entrega 02/12</a><a href="#relatorio">Relatório</a>
   </nav>
 </div></div>
 
@@ -583,7 +590,7 @@ textarea.big{min-height:130px}
       <a class="work" href="#conceitos"><span class="kicker">Preencher</span><h3>Conceitos</h3><p>O que pesquisar, por quê e com quais fontes.</p><span class="prog"><span id="pConc"></span><span>abrir</span></span></a>
       <a class="work" href="#referencias"><span class="kicker">Preencher</span><h3>Referências</h3><p>Arquivos e links da pesquisa, com a referência em ABNT.</p><span class="prog"><span id="pRefs"></span><span>abrir</span></span></a>
       <a class="work" href="#propostas"><span class="kicker">Preencher</span><h3>Propostas</h3><p>Planos de mediação e de governança, parte por parte.</p><span class="prog"><span id="pProp"></span><span>abrir</span></span></a>
-      <a class="work" href="#apresentacao"><span class="kicker">Preencher</span><h3>Apresentação</h3><p>Slides dos achados sobre o problema e a justificativa.</p><span class="prog"><span id="pApres"></span><span>abrir</span></span></a>
+      <a class="work" href="#apresentacao"><span class="kicker">Preencher</span><h3>Apresentação</h3><p>Slides da defesa do produto (03/12).</p><span class="prog"><span id="pApres"></span><span>abrir</span></span></a>
       <a class="work" href="#relatorio"><span class="kicker">Preencher</span><h3>Relatório</h3><p>Cronograma com status e o relatório pronto para entregar.</p><span class="prog"><span id="pRel"></span><span>abrir</span></span></a>
     </div>
   </div>
@@ -882,14 +889,51 @@ textarea.big{min-height:130px}
   <div class="mmlist" id="mmList"></div>
 </div></section>
 
+<section class="view" id="v-entrega"><div class="inner">
+  <div class="sechead"><div><div class="kicker">Preencher · até 02/12</div><h2>Roteiro da Apresentação e Material Complementar</h2></div><p>Entrega de 20 pontos: problema formulado (4), conceitos teóricos pesquisados (6), solução proposta (8) e referências (2). Os campos vieram preenchidos com o que o painel já tem; o que for editado aqui muda também nas outras abas.</p></div>
+  <div class="split rev">
+    <div class="stack" id="entForm">
+      <details class="card" open><summary><span>Formato da apresentação e do material complementar</span></summary>
+        <label class="f">Decisão do grupo<textarea id="en-formato" data-p="rot/info/formato" style="min-height:80px"></textarea></label></details>
+      <details class="card" open><summary><span>1 · Problema formulado (4 pontos)</span></summary>
+        <label class="f">Problema<textarea id="en-prob" data-p="rel/problema" style="min-height:80px"></textarea></label>
+        <label class="f">Justificativa<textarea id="en-just" data-p="rel/justificativa" style="min-height:220px"></textarea></label></details>
+      <details class="card"><summary><span>2 · Conceitos teóricos pesquisados (6 pontos)</span></summary>
+        <p class="muted" style="margin:4px 0 10px">Para cada conceito: o que dizem os autores e como o grupo usa no plano. Os campos “por que é importante” e “fontes” são os mesmos da aba Conceitos.</p>
+        <div class="stack" id="entConc" style="gap:12px"></div></details>
+      <details class="card"><summary><span>3 · Solução proposta (8 pontos)</span></summary>
+        <p class="muted" style="margin:4px 0 10px">Resumo do plano organizado pelos sete itens que o material exige. O detalhamento parte a parte está na aba Propostas.</p>
+        <label class="f">Solução proposta<textarea id="en-sol" data-p="rot/info/solucao" style="min-height:420px"></textarea></label></details>
+      <details class="card"><summary><span>Roteiro da apresentação (15 minutos)</span></summary>
+        <p class="muted" style="margin:4px 0 10px" id="entTempo"></p>
+        <div class="stack" id="entBlocos" style="gap:12px"></div>
+        <div class="toolbar"><button class="btn" id="entAddB" type="button">Adicionar bloco</button></div></details>
+      <details class="card"><summary><span>Material complementar</span></summary>
+        <label class="f">Itens, um por linha<textarea id="en-mat" data-p="rot/info/material" style="min-height:120px"></textarea></label></details>
+      <details class="card"><summary><span>4 · Referências (2 pontos)</span></summary>
+        <p class="muted" style="margin:4px 0 10px">Vêm da aba Referências, em ABNT. Para incluir ou corrigir, use aquela aba.</p><div id="entRefs" class="hist" style="max-width:none;font-size:14px"></div></details>
+    </div>
+    <div class="aside">
+      <div class="card stack" style="gap:8px">
+        <div class="kicker">Documento da entrega</div>
+        <p class="muted" style="margin:0" id="entStatus"></p>
+        <button class="btn primary" id="entCopy" type="button">Copiar para o Google Docs</button>
+        <button class="btn" id="entPrint" type="button">Imprimir em PDF</button>
+        <button class="btn" id="entPrev" type="button">Ver prévia</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="entDocWrap" hidden style="margin-top:18px"><div class="toolbar" style="justify-content:space-between"><b>Prévia</b><button class="btn" id="entClose" type="button">Fechar prévia</button></div><div id="entDoc" class="reportdoc" style="margin-top:12px"></div></div>
+</div></section>
+
 <section class="view" id="v-apresentacao"><div class="inner">
-  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Apresentação dos achados</h2></div><p>Uma apresentação curta sobre o problema, a justificativa e o fato novo, para o compartilhamento das pesquisas (5 minutos por grupo). Os slides vieram preenchidos como ponto de partida: editem, reordenem e apaguem o que não servir.</p></div>
+  <div class="sechead"><div><div class="kicker">Preencher</div><h2>Apresentação do produto</h2></div><p>Slides da defesa do produto no Encontro 6 (03/12): 15 minutos de apresentação, seguidos da banca. A ordem segue os critérios do roteiro: problema, conceitos, solução proposta e referências. Editem, reordenem e apaguem o que não servir.</p></div>
   <div class="split rev">
     <div class="stack" id="apresList"></div>
     <div class="aside">
       <div class="card"><div class="kicker" style="margin-bottom:8px" id="apresPrevN"></div><div class="slide mini" id="apresPrev"></div><p class="muted" id="apresTempo" style="margin-top:8px"></p></div>
       <div class="card stack" style="gap:8px">
-        <label class="f">Tempo da apresentação<select id="apresMin"><option value="5">5 minutos</option><option value="10">10 minutos</option><option value="15">15 minutos</option></select></label>
+        <label class="f">Tempo da apresentação<select id="apresMin"><option value="5">5 minutos</option><option value="10">10 minutos</option><option value="15" selected>15 minutos</option></select></label>
         <button class="btn primary" id="apresGo" type="button">Apresentar</button>
         <button class="btn" id="apresPrint" type="button">Imprimir slides em PDF</button>
         <button class="btn" id="apresCopy" type="button">Copiar roteiro com as falas</button>
@@ -903,7 +947,7 @@ textarea.big{min-height:130px}
 <footer><div class="inner foot">
   <div><div class="brand">Painel do Caso Caatinga Velha</div><p style="margin-top:8px;max-width:44ch">Material de apoio do grupo para a disciplina ADMT0346, PPGDiDeS/UNIVASF. Os dados do caso são fictícios e vêm do material da disciplina.</p></div>
   <div class="col"><span class="kicker">Consultar</span><a href="#historia">História completa</a><a href="#mapa-mental">Mapa mental</a><a href="#fichas">Fichas dos atores</a><a href="#linha-do-tempo">Linha do tempo</a><a href="#dados">Dados do caso</a><a href="#siglas">Siglas e termos</a></div>
-  <div class="col"><span class="kicker">Preencher</span><a href="#mapa">Mapa de atores</a><a href="#banca">Treino de banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#propostas">Propostas</a><a href="#apresentacao">Apresentação</a><a href="#relatorio">Relatório</a></div>
+  <div class="col"><span class="kicker">Preencher</span><a href="#mapa">Mapa de atores</a><a href="#banca">Treino de banca</a><a href="#conceitos">Conceitos</a><a href="#referencias">Referências</a><a href="#propostas">Propostas</a><a href="#apresentacao">Apresentação</a><a href="#entrega">Entrega 02/12</a><a href="#relatorio">Relatório</a></div>
   <div class="col"><span class="kicker">Entregas</span><span>Relatório Parcial · entregue 15/11</span><span>Roteiro · 02/12</span><span>Relatório Final · 07 a 11/12</span></div>
 </div></footer>
 
@@ -923,7 +967,7 @@ textarea.big{min-height:130px}
 <div id="printArea" aria-hidden="true"></div>
 <dialog id="verDlg"><h3 id="verDlgT" style="font-size:19px"></h3><div id="verDlgB" class="verb"></div><div class="toolbar" style="margin-top:12px"><button class="btn" id="verClose" type="button">Fechar</button></div></dialog>
 <div id="pres" class="pres" hidden role="dialog" aria-label="Apresentação">
-  <div class="presbar"><span id="presCount" class="num"></span><span class="timer num" id="presClock">5:00</span><button class="btn" id="presNotesBtn" type="button" aria-pressed="false">Falas</button><button class="btn" id="presTimer" type="button">Iniciar 5 minutos</button><button class="btn" id="presFull" type="button">Tela cheia</button><button class="btn" id="presClose" type="button">Fechar</button></div>
+  <div class="presbar"><span id="presCount" class="num"></span><span class="timer num" id="presClock">5:00</span><button class="btn" id="presNotesBtn" type="button" aria-pressed="false">Falas</button><button class="btn" id="presTimer" type="button">Iniciar 15 minutos</button><button class="btn" id="presFull" type="button">Tela cheia</button><button class="btn" id="presClose" type="button">Fechar</button></div>
   <div class="presstage"><section class="slide" id="presSlide"></section></div>
   <div class="presnotes" id="presNotes" hidden></div>
   <div class="presnav"><button class="btn" id="presPrev" type="button">Anterior</button><button class="btn primary" id="presNext" type="button">Próximo</button></div>
@@ -1465,13 +1509,132 @@ Comunicação: nota pública conjunta depois da mesa de mediação, uma pessoa p
  g7:`A proposta foi pensada para ser executável: começa pelo que custa zero e usa estruturas que já existem (Conselho Local, Comissão de Ética, Ouvidoria, CAPS, NASF-AB), e só depois pede orçamento novo.
 Canal de denúncia, política antiassédio e formação, sozinhos, são reformistas: administram o conflito. A proposta fica transformadora se mudar quem decide: voz e voto para o quilombo e os praticantes, financiamento garantido, Vigilância dialógica e saber tradicional reconhecido como conhecimento.
 Limites: dependência da vontade política do secretário, rotatividade de profissionais, risco de folclorizar o saber e de individualizar a culpa no “médico vilão” em vez de enfrentar o modelo.`};
+
+/* ====================== 28/11: respostas da banca e apresentação do produto ====================== */
+const SEED7_V='s7';
+const BANCA_RESP={
+'heitor-0':`Começamos pelo que custa zero: comissão dentro do Conselho Local, Comissão de Ética, Ouvidoria, CAPS e NASF-AB já existem. O primeiro gasto é pequeno: insumos de auriculoterapia, ventosas adequadas e horas protegidas para formação. Só depois pedimos uma rubrica própria na Programação Anual de Saúde do próximo ano, com valor crescente, sem exigir os R$ 50 mil de uma vez. Fontes complementares: recursos da atenção primária, emendas parlamentares, editais federais de plantas medicinais e Farmácia Viva e parceria com a universidade.`,
+'heitor-1':`A proposta não tira tempo de consulta: os Círculos de Cuidado e a formação usam horários protegidos, e a auriculoterapia entra como atendimento registrado. Ela reforça o vínculo da população com a UBS: hoje 73% usam PICs fora do serviço e parte deixa o tratamento, como Seu João. O financiamento federal da atenção primária valoriza vínculo e acompanhamento do território, e é isso que a proposta melhora.`,
+'heitor-2':`Sim. A PNPIC (Portaria GM/MS nº 971/2006) e a adesão do próprio município (Portaria nº 047/2019) já obrigam a gestão a organizar a oferta. Somam-se a Política Nacional de Plantas Medicinais e Fitoterápicos (Decreto nº 5.813/2006), a Farmácia Viva (Portaria GM/MS nº 886/2010), a integralidade da Lei nº 8.080/1990 e o caráter deliberativo do Conselho (Lei nº 8.142/1990). O município já aderiu: o que falta é cumprir.`,
+'heitor-3':`Fila menor (hoje 6 meses para auriculoterapia), mais vínculo e adesão da comunidade quilombola, menos conflito judicializado e menos afastamento de profissionais (hoje 2 em 12 meses). Também menos risco para a gestão: o caso já envolve MP, sindicato e imprensa. Os indicadores do plano partem desses números do próprio caso.`,
+'ricardo-0':`Concordamos com a preocupação. Por isso a proposta tira a prática da clandestinidade: hoje Dona Margarida atende à noite, escondida, sem nenhum diálogo com a UBS. Com o termo de cooperação, as boas práticas de preparo e conservação são construídas junto com as raizeiras, a Vigilância orienta antes de autuar e a UBS passa a saber o que o paciente usa.`,
+'ricardo-1':`É o ponto mais forte a favor da proposta. Se ninguém pergunta, o paciente não conta, e o risco fica invisível. Propomos registrar no prontuário o uso de plantas e práticas tradicionais, sem termos depreciativos, e incluir interações medicamentosas na formação da equipe. A referência e contrarreferência com as raizeiras permite orientar casos de risco, como pacientes anticoagulados ou gestantes.`,
+'ricardo-2':`Usamos dois tipos de evidência. Os dados do caso mostram que o modelo atual não funciona: 7 denúncias e 2 multas em 2 anos não mudaram a prática, e a notificação só a empurrou para a clandestinidade. Sobre as práticas, a proposta não afirma que toda planta cura: amplia o que já tem base, como a auriculoterapia, e as boas práticas são construídas com as raizeiras, com a UBS sabendo o que o paciente usa. Antes da banca vamos consultar os mapas de evidência da BVS MTCI sobre PICs.`,
+'ricardo-3':`O plano não transforma a raizeira em prescritora dentro da UBS. Cada profissional continua responsável pelo que prescreve, e a prática tradicional segue no território, agora registrada e orientada. Reações adversas suspeitas são notificadas pelo serviço, como qualquer evento adverso. Registrar o uso diminui o risco em vez de aumentar.`,
+'carla-0':`A proposta trata condições de trabalho como prioridade: recompor insumos e agenda, horário protegido para PICs na UBS e no NASF-AB, e proteção contra o assédio. Enquanto Carla estiver afastada, a Dra. Renata, que já tem curso de auriculoterapia, assume algumas horas para a fila não crescer. Quem defende as PICs não pode trabalhar com medo.`,
+'carla-1':`Sim. Educação permanente em PICs, ética e assédio, em horário protegido, com cursos gratuitos do SUS e as raizeiras também como formadoras. Hoje só 2 profissionais são capacitados e não houve nenhuma ação sobre ética e assédio. A meta é um primeiro ciclo em 90 dias.`,
+'carla-2':`Não com confronto pessoal. Partimos do interesse legítimo do corpo clínico, que é a segurança do paciente, e chamamos os médicos para construir o protocolo de registro e de interações. A formação e os Círculos de Cuidado aproximam os saberes. Condutas de assédio vão para a Comissão de Ética, não para a mesa de mediação.`,
+'carla-3':`A enfermagem é a ponte: está mais perto dos ACS e do território, já oferece PICs na UBS e conhece as raizeiras. Na proposta, a enfermagem é referência técnica da comissão de PICs e ajuda a coordenar os Círculos de Cuidado, depois de protegida e com condições de trabalho.`,
+'comunidade-0':`Esperamos ser atendidos com respeito, sem ouvir que o nosso cuidado é atraso ou crime. Queremos que a UBS pergunte e registre o que usamos sem chamar de curandeirismo, venha ao território e trabalhe junto com quem cuida aqui. A proposta leva reuniões e Círculos de Cuidado para a Casa de Rezas e o território.`,
+'comunidade-1':`Pelo caminho que já existe: praticantes e lideranças do quilombo como conselheiros usuários do Conselho Local, que tem metade dos assentos para usuários, e na comissão de PICs, com voz e voto. Consulta prévia em tudo que afeta o território, como prevê a Convenção 169 da OIT.`,
+'comunidade-2':`Dona Margarida é mestra do saber, não infratora. Ela é ouvida primeiro, em sua casa e com pessoas de confiança, participa da mesa de mediação e, se quiser, dos Círculos de Cuidado, do horto e da Farmácia Viva. Nada é decidido sobre ela sem ela.`,
+'comunidade-3':`O registro do saber é feito pela comunidade, com consentimento e sob controle dela; a Lei nº 13.123/2015 protege o conhecimento tradicional associado. O saber entra como conhecimento, com voz e voto na governança, e não como atração cultural. O critério que usamos para avaliar o plano é se ele muda quem decide.`,
+'vera-0':`Sim. A proposta não pede para ignorar a Lei nº 6.437/1977. Pede que a Vigilância use também seu papel educativo, orientando antes de autuar quem não comercializa, e reserve a autuação para risco sanitário concreto. Tudo pactuado num termo de cooperação acompanhado pelo Ministério Público.`,
+'vera-1':`Com boas práticas de preparo e conservação construídas junto com as raizeiras, como prevê o modelo da Farmácia Viva (Portaria GM/MS nº 886/2010), e com a reativação da Farmácia Viva do Riacho do Meio. Hoje, com a prática escondida, não há controle nenhum.`,
+'vera-2':`Sim. A lei continua valendo; muda a ordem: primeiro orientar, depois autuar se houver risco concreto. O que aconteceu mostra o contrário da dialogicidade: a notificação chegou por oficial de justiça e Dona Margarida queimou frascos e passou a atender à noite. Fiscalizar sem diálogo empurrou a prática para onde a Vigilância não alcança.`,
+'vera-3':`A Vigilância continua fiscalizando, com critérios pactuados no termo de cooperação: risco concreto, comercialização e condições de preparo. A comissão do Conselho Local acompanha, e o MP garante que o acordo seja cumprido pelos dois lados.`,
+'mp-0':`A Convenção 169 da OIT (consulta prévia e respeito às práticas dos povos tradicionais), o Estatuto da Igualdade Racial (Lei nº 12.288/2010), a Política Nacional de Saúde Integral da População Negra, a PNPIC e a Política de Plantas Medicinais, a Lei nº 13.123/2015 sobre conhecimento tradicional associado e a Lei nº 8.142/1990 para fazer valer o Conselho.`,
+'mp-1':`Sim. O Baixio das Mulheres é comunidade quilombola reconhecida pela Fundação Cultural Palmares, o que atrai a Convenção 169. O Estatuto da Igualdade Racial protege as práticas e saberes de matriz africana e o direito à saúde da população negra.`,
+'mp-2':`Com três garantias: o MP como garantidor da mesa, um mediador neutro aceito pelas partes e um termo de acordo com prazos, responsáveis e revisão a cada seis meses no Conselho Local. E separando o assédio, que não se media com a vítima: é apurado pela Comissão de Ética.`,
+'mp-3':`Garantidor. Pode recomendar a suspensão do prazo da notificação durante a mediação, como já suspendeu as duas multas anteriores, acompanhar o termo de cooperação, apurar o assédio institucional e ser acionado quando a gestão ignorar deliberações do Conselho.`,
+'zefa-0':`Toda deliberação sai com prazo de resposta da gestão. Se for ignorada, há notificação formal e acionamento do Ministério Público, porque o Conselho é deliberativo por lei (Lei nº 8.142/1990). A moção de parceria com os raizeiros foi ignorada no Mês -6; a proposta cria o caminho para isso não se repetir.`,
+'zefa-1':`Central. A comissão de PICs fica dentro do Conselho Local, com metade dos votos para usuários e comunidade. O Conselho convoca a mesa de mediação, acompanha o termo de cooperação e leva o que for pactuado ao Conselho Municipal para entrar no Plano Municipal de Saúde.`,
+'zefa-2':`Com dinheiro, prazo e acompanhamento: rubrica própria na Programação Anual, indicadores com ponto de partida nos números do caso, reuniões mensais com ata pública e revisão semestral. E com voz e voto para o quilombo, que é o que muda a relação de poder.`,
+'zefa-3':`A própria comissão do Conselho Local, com os indicadores do plano, e o Ministério Público como garantidor. A comunidade acompanha pelas reuniões no território e pelas atas públicas.`,
+'debate-0':`Dona Margarida reúne o que o olhar normativo costuma punir: é mulher, idosa, negra, quilombola e pouco escolarizada. O saber dela é tratado como infração e não como conhecimento, que é o racismo epistêmico, e a idade a torna alvo fácil, que é o etarismo. Muitos moradores leem a denúncia como caça às bruxas.`,
+'debate-1':`Proteger a saúde sem destruir o cuidado que o território já tem. Num SUS integral e equânime, a Vigilância também educa e orienta, e trata de forma diferente quem é diferente: a raizeira que cuida de graça não é uma indústria que vende sem registro.`,
+'debate-2':`Separar o desacordo, que se trata com formação e diálogo, da conduta abusiva, que vai para a Comissão de Ética com apuração e responsabilização. Retirar insumos, desmarcar pacientes e humilhar colegas não é opinião científica: é sabotagem de uma política que o município adotou.`,
+'debate-3':`Não exigir que todos concordem. O mínimo comum é ninguém ser perseguido e cada pessoa escolher o próprio cuidado. Convidar as igrejas e os jovens para a escuta, sem obrigação, e evitar que a mediação vire disputa entre religiões.`,
+'debate-4':`Canal de denúncia, formação e termo de cooperação, sozinhos, são reformistas: administram o conflito. A proposta busca ser transformadora porque muda quem decide: voz e voto para o quilombo, financiamento garantido e saber tradicional reconhecido como conhecimento. Reconhecemos os limites: depende da vontade política e da continuidade da gestão.`,
+'anexo-0':`É as duas coisas. É trabalhista porque atinge as condições de trabalho e a saúde dos servidores. É de saúde coletiva porque interrompe a única oferta de PICs da UBS e atinge a comunidade que depende dela. A gestão separa para tratar como caso pessoal e não mexer no modelo.`,
+'anexo-1':`As vítimas não são aleatórias: uma mulher enfermeira, um homem negro e idoso, ACS e raizeiro, e uma mulher fisioterapeuta. Gênero, raça, idade e posição na hierarquia se somam. A interseccionalidade mostra que o assédio segue o mesmo padrão da perseguição a Dona Margarida: disciplina quem defende saberes fora do modelo biomédico.`,
+'anexo-2':`Comissão de Ética, Ouvidoria, sindicato, Ministério Público do Trabalho e Conselho Local poderiam ter agido; a Convenção 190 da OIT serve como referência, mas ainda não foi ratificada pelo Brasil. Nenhum funcionou a tempo porque não há canal sigiloso, a Ouvidoria recomendou mediação sem proteção e a gestão pediu discrição. A proposta cria canal ligado à Ouvidoria e medidas de proteção imediatas.`,
+'anexo-3':`Mostram que a gestão intermediária, sem respaldo, fica refém da hierarquia: Márcia apoia, mas foi mandada a não se envolver. A discrição total protege a instituição, não as vítimas. Quando a organização tolera ou abafa, a omissão vira assédio institucional. A proposta dá respaldo a Márcia pelo Conselho e pelo MP.`,
+'anexo-4':`Sozinho, é reformista. Fica transformador quando vem junto com a mudança de quem decide e com o reconhecimento do saber tradicional, e quando nomeia também a discriminação contra saberes e o racismo.`,
+'anexo-5':`Tratando o problema como institucional, não como briga entre pessoas. Responsabilizar condutas pela Comissão de Ética sem fazer do Dr. Ricardo o médico vilão que esconde o modelo. A política antiassédio nomeia também o racismo e a discriminação contra saberes tradicionais.`,
+'anexo-6':`Com apoio em saúde mental pelo CAPS, medidas de proteção imediatas, garantia de não retaliação e reorganização do serviço para a oferta não parar. E com uma política e um canal permanentes, para que o próximo caso não dependa da coragem de uma pessoa.`,
+'anexo-7':`O silêncio vem muito do medo, porque não há canal sigiloso nem proteção. Não propomos culpa individual: propomos canal sigiloso também para testemunhas e formação em ética, para que o silêncio deixe de ser a única opção segura.`,
+'sintese-0':`Hoje, em Caatinga Velha, é uma incorporação periférica e controlada: a PNPIC existe no papel, com R$ 0,00, e o saber tradicional é punido. Nossa proposta busca a transformação, mas de forma realista: começa pelo que já existe e custa pouco e muda quem decide, dando voz e voto ao quilombo e às praticantes. Se vai transformar depende de financiamento garantido e de continuidade.`};
+
+const APRES_V3=[
+ {k:'Equipe 03 · Defesa do produto',titulo:'Plano de Mediação e Governança Colaborativa das PICs em Caatinga Velha',texto:'Proteger quem cuida e quem é cuidado, com o que o SUS municipal já tem',fala:'Apresentar a equipe e o roteiro: problema, conceitos, solução, implantação e limites.',capa:true},
+ {k:'O caso',titulo:'Do quintal de Dona Margarida à UBS',texto:'Dona Margarida, 78 anos, raizeira quilombola, notificada pela Vigilância Sanitária\nReação em cadeia: medo, atendimento escondido, MP, Conselho, imprensa\nFato novo: assédio moral contra quem defende as PICs na UBS\nGestão pede “discrição total”; sindicato e MP cobram respostas',fala:'Contar o caso em um minuto, do Mês -12 ao Dia +20.'},
+ {k:'1 · Problema',titulo:'Nossa pergunta',texto:'Como mediar e transformar o conflito em torno das PICs em Caatinga Velha, garantindo direitos sanitários, culturais e epistêmicos, por meio de um arranjo de governança colaborativa viável no SUS municipal?',fala:'Destacar o recorte: viável no SUS municipal.'},
+ {k:'1 · Por que importa',titulo:'A política existe no papel',texto:'73% da população usa PICs; 58% já buscaram benzedeira ou raizeiro\nR$ 0,00 na LOA 2024; proposta de R$ 50 mil arquivada\n2 profissionais capacitados; fila de 6 meses\n7 denúncias contra raizeiros em 2 anos; 2 multas suspensas pelo MP\nNenhum canal de denúncia; 2 afastamentos por adoecimento mental',fala:'Os números do caso e do Anexo A justificam cada parte do plano.'},
+ {k:'2 · Conceitos',titulo:'Como lemos o conflito',texto:'Lide processual x lide sociológica: a notificação é o processo; o conflito é sobre quem pode cuidar\nRacismo epistêmico, justiça epistêmica e Epistemologias do Sul\nMedicalização social\nAssédio moral e institucional; interseccionalidade',fala:'Quatro chaves de leitura. Citar autores: Bacellar, Grosfoguel, Fricker, Santos, Tesser.'},
+ {k:'2 · Conceitos',titulo:'Como desenhamos a solução',texto:'Mediação de conflitos: isonomia entre as partes (Lei 13.140/2015)\nGovernança colaborativa: decisão compartilhada com quem é afetado\nVigilância sanitária dialógica: orientar antes de punir\nEducação permanente em saúde\nInovação no setor público',fala:'Cada conceito vira uma parte do plano.'},
+ {k:'Atores',titulo:'Quem pesa no conflito',texto:'Poder alto e contrários: secretário Heitor, Dra. Vera, Dr. Ricardo\nPressão a favor: MP, Conselho Local, sindicato, imprensa\nMais vulneráveis: Dona Margarida, ACS Raimundo, Enf. Carla, Dra. Renata\nPontes: Márcia Torres, Pe. José, universidade',fala:'O mapa completo está no material complementar.'},
+ {k:'3 · Solução',titulo:'Proteger primeiro, mediar depois, governar junto',texto:'Começa pelo que custa zero e usa o que já existe\nConselho Local, Comissão de Ética, Ouvidoria, CAPS e NASF-AB\nOrçamento novo só na segunda etapa',fala:'Princípio do plano: realista e baseado nos dados do caso.'},
+ {k:'3 · Mediação',titulo:'Trilha 1: proteção imediata, que não se media',texto:'Comissão de Ética apura com prazo e sigilo\nAgendas e escalas reorganizadas: vítimas não dependem do acusado\nApoio em saúde mental pelo CAPS e garantia de não retaliação\nAuriculoterapia continua com a Dra. Renata durante o afastamento',fala:'Por quê: mediação exige isonomia, que não existe entre vítima e acusado.'},
+ {k:'3 · Mediação',titulo:'Trilha 2: mesa de mediação do caso Dona Margarida',texto:'Convocada pelo Conselho Local, com o MP como garantidor\nMediador neutro aceito pelas partes\nPrimeiro pedido: suspender o prazo da notificação durante a mediação\nConversa prévia, sessões conjuntas e termo de acordo',fala:'Precedente: o MP já suspendeu as duas multas anteriores.'},
+ {k:'3 · Mediação',titulo:'Termo de cooperação',texto:'Vigilância orienta antes de autuar quem não comercializa\nUso de plantas registrado no prontuário, sem termos depreciativos\nBoas práticas de preparo construídas com as raizeiras\nReferência e contrarreferência entre UBS e raizeiras\nRevisão a cada seis meses no Conselho Local',fala:'Responde ao Dr. Ricardo e à Dra. Vera: segurança vem de tirar a prática da clandestinidade.'},
+ {k:'3 · Governança',titulo:'Comissão de PICs dentro do Conselho Local',texto:'Conselho já é deliberativo (Lei 8.142/1990): não depende de decreto\nQuilombo e praticantes com voz e voto\nMP garantidor; sindicato e UNIVASF convidados\nDeliberações com prazo de resposta da gestão; se ignoradas, MP',fala:'Por que não um comitê novo: dependeria do secretário, que é contra.'},
+ {k:'3 · Governança',titulo:'Financiamento, formação e comunicação',texto:'Primeiro: insumos e horas protegidas, sem esperar os R$ 50 mil\nDepois: rubrica própria na Programação Anual de Saúde\nEducação permanente em PICs, ética e assédio, com as raizeiras como formadoras\nCanal de denúncia ligado à Ouvidoria e política antiassédio',fala:'Base legal: PNPIC, Decreto 5.813/2006, Farmácia Viva, Convenção 169, Estatuto da Igualdade Racial.'},
+ {k:'3 · Implantação',titulo:'Em que ordem',texto:'Até 30 dias: proteção imediata, pedido ao MP e convocação da mesa\nAté 60 dias: termo de cooperação e canal de denúncia\nAté 90 dias: comissão funcionando e primeiro ciclo de formação\nPróximo ano: rubrica própria e Farmácia Viva reativada',fala:'Mostrar que o plano cabe no calendário da gestão.'},
+ {k:'3 · Monitoramento',titulo:'Indicadores com ponto de partida no caso',texto:'Fila de auriculoterapia: hoje 6 meses\nProfissionais capacitados em PICs: hoje 2\nAutuações sem orientação prévia: meta zero\nAfastamentos por adoecimento mental: hoje 2\nDeliberações do Conselho respondidas no prazo',fala:'A planilha completa vai no material complementar.'},
+ {k:'Reflexão crítica',titulo:'Reformista ou transformador?',texto:'Canal, formação e termo, sozinhos, só administram o conflito\nTransforma quando muda quem decide e reconhece o saber como conhecimento\nLimites: vontade política, rotatividade, risco de folclorizar o saber',fala:'Responder já a pergunta-síntese da banca.'},
+ {k:'4 · Referências',titulo:'Principais referências',texto:'BRASIL. Portaria GM/MS nº 971/2006 (PNPIC); Lei nº 8.080/1990; Lei nº 8.142/1990; Lei nº 13.140/2015\nBACELLAR, R. P. Mediação e arbitragem. 2012\nFRICKER, M. Epistemic injustice. 2007\nGROSFOGUEL, R. A estrutura do conhecimento nas universidades ocidentalizadas. 2016\nSANTOS, B. S.; MENESES, M. P. Epistemologias do Sul. 2009\nTESSER, C. D. Medicalização social. 2006',fala:'A lista completa em ABNT vai no roteiro.'}];
+
+/* ====================== 28/11 (2): correções da banca e entrega de 02/12 ====================== */
+const SEED8_V='s8';
+const BANCA_FIX={
+'comunidade-0':`Uma UBS que respeite e reconheça o cuidado do território. Na proposta, a equipe passa a perguntar e registrar no prontuário o uso de plantas e rezas sem chamar de curandeirismo ou abandono de tratamento; a UBS vai ao território, com reuniões e Círculos de Cuidado na Casa de Rezas; e a referência e contrarreferência com as raizeiras faz a UBS e quem cuida no território trabalharem juntos. Tudo isso foi pensado a partir do que a comunidade já reivindica, como a moção do Conselho Local pela parceria com os raizeiros.`,
+'comunidade-1':`Pelo caminho que já existe e tem força de lei: lideranças do quilombo e praticantes tradicionais como conselheiros usuários do Conselho Local, que tem metade dos assentos para usuários, e na comissão de PICs, com voz e voto. Toda decisão que afeta o território passa por consulta prévia, como prevê a Convenção 169 da OIT, e as reuniões acontecem também no território, não só na sede.`,
+'ricardo-2':`Usamos dois tipos de evidência. Os dados do caso mostram que o modelo atual não funciona: 7 denúncias e 2 multas em 2 anos não mudaram a prática, e a notificação só a empurrou para a clandestinidade. Sobre as práticas, a proposta não afirma que toda planta cura: amplia o que tem base científica, como a auriculoterapia, cujo mapa de evidências da BVS MTCI (OPAS/BIREME e CABSIN) reúne 50 revisões publicadas entre 2005 e 2022, e trata as plantas com boas práticas e registro no prontuário. A mesma rede tem um mapa sobre interculturalidade em saúde, que trata de como incluir medicinas tradicionais nos serviços.`};
+
+const REF_SLIDE_OLD='SANTOS, B. S.; MENESES, M. P. Epistemologias do Sul. 2009';
+const REF_SLIDE_NEW='SANTOS, B. S.; MENESES, M. P. (org.). Epistemologias do Sul. 2010';
+
+/* sínteses dos conceitos para o roteiro (critério “pesquisou detalhadamente os conceitos”) */
+const CONC_SINT={
+ mediacao:`A Lei nº 13.140/2015 define a mediação como atividade técnica de um terceiro imparcial, sem poder decisório, que ajuda as partes a construir soluções consensuais, e lista seus princípios, entre eles imparcialidade, isonomia entre as partes, autonomia da vontade, busca do consenso, confidencialidade e boa-fé. É indicada para relações que continuam depois do conflito, como as da UBS com o território. No plano, a isonomia explica por que o assédio não é mediado com a vítima.`,
+ atores:`Matus (1993) entende a ação de governo como jogo entre atores sociais com projetos, recursos e graus diferentes de governabilidade. Analisar atores é identificar interesses (o que querem de fato), posições (o que declaram), poder e alianças. No plano, sustenta o mapa de atores e a escolha de pontes, como Márcia Torres e o Ministério Público.`,
+ racismo:`Grosfoguel (2016) chama de racismo/sexismo epistêmico a inferiorização dos conhecimentos produzidos por povos não ocidentais e por mulheres, que só valem quando validados pela ciência ocidental. No caso, explica por que o saber de Dona Margarida é tratado como infração e não como conhecimento.`,
+ pnpic:`A PNPIC (Portaria GM/MS nº 971/2006) institucionalizou as práticas integrativas no SUS e foi ampliada em 2017 e 2018, chegando a 29 práticas; dialoga com a Política Nacional de Plantas Medicinais e Fitoterápicos. O município aderiu em 2019, mas não financia: é a contradição central do problema.`,
+ medicalizacao:`Tesser (2006), apoiado em Illich, descreve a medicalização social como a expansão do saber biomédico sobre a vida, que reduz a autonomia das pessoas e desvaloriza outras formas de cuidado. Ajuda a ler a queixa de que no posto “só dão remédio” e a resistência às PICs.`,
+ epistemologias:`Santos e Meneses (2010) propõem as Epistemologias do Sul e a ecologia de saberes: o diálogo entre conhecimentos científicos e não científicos sem hierarquia prévia. Nunes e Louvison (2020) trazem a ideia para a saúde como ecologia de cuidados. É o horizonte do plano.`,
+ justica:`Fricker (2007) chama de injustiça testemunhal a perda de credibilidade de alguém por preconceito contra quem fala, e de injustiça hermenêutica a falta de conceitos para nomear uma experiência. No caso, o testemunho de Dona Margarida e da comunidade não conta. A justiça epistêmica é o critério que usamos para avaliar se o plano é transformador.`,
+ visa:`A vigilância sanitária tem função de proteção da saúde e também educativa (Lucchese, 2008). A Lei nº 6.437/1977 define as infrações, mas não impede que a fiscalização oriente antes de punir. Vigilância dialógica é a que reconhece o contexto cultural e distingue quem cuida no território de quem comercializa sem registro.`,
+ governanca:`Ansell e Gash (2008) definem a governança colaborativa como arranjo em que órgãos públicos envolvem atores não estatais num processo decisório coletivo, formal, deliberativo e orientado ao consenso. Apontam como condições a história de conflito, os desequilíbrios de poder, a liderança facilitadora e o desenho institucional. No plano, a comissão de PICs no Conselho Local é esse desenho.`,
+ eps:`A Política Nacional de Educação Permanente em Saúde (Portaria GM/MS nº 198/2004) propõe aprender no trabalho, a partir dos problemas do cotidiano. Ceccim (2005) descreve o quadrilátero da formação: ensino, gestão, atenção e controle social. No plano, sustenta a formação em PICs, ética e assédio com as raizeiras como formadoras.`,
+ lide:`A lide processual é o que está no processo; a lide sociológica são os interesses e as relações por trás dele (Bacellar, 2012). Watanabe opõe a cultura da sentença à cultura da pacificação. No caso, a notificação sobre frascos sem registro é a lide processual; a disputa sobre quem pode cuidar é a lide sociológica, e é ela que o plano precisa tratar.`,
+ origem:`Moore (1998) mostra que conflitos têm causas diferentes: de relacionamento, de dados, de interesses, estruturais e de valores. Separar o conflito de origem (o modelo biomédico contra o saber tradicional) do conflito processual (a notificação e o assédio) orienta estratégias diferentes para cada um.`,
+ inovacao:`Isidro (2018) trata a inovação no setor público como a capacidade de criar soluções novas com os recursos e as estruturas existentes. No plano, a inovação está em usar o Conselho Local, a Ouvidoria e a Comissão de Ética de outro jeito, sem custo novo.`,
+ legal:`A Convenção 169 da OIT (consolidada no Decreto nº 10.088/2019) garante consulta prévia e respeito às práticas dos povos tradicionais; o Estatuto da Igualdade Racial (Lei nº 12.288/2010) protege as práticas de matriz africana; a Lei nº 13.123/2015 protege o conhecimento tradicional associado. São a base para proteger Dona Margarida e o quilombo.`,
+ assedio:`Hirigoyen descreve o assédio moral como conduta abusiva e repetida que atenta contra a dignidade de quem trabalha. O assédio institucional ocorre quando a organização produz ou tolera a violência, inclusive por omissão. A Lei nº 14.540/2023 criou um programa de prevenção e enfrentamento ao assédio sexual na administração pública; a Convenção 190 da OIT é referência, ainda não ratificada pelo Brasil.`,
+ intersec:`Crenshaw (1989) mostrou que gênero, raça e outras condições se cruzam e produzem opressões que não aparecem quando analisadas separadamente; Akotirene (2019) traz o conceito para o Brasil. No caso, explica o perfil das vítimas: uma enfermeira, um ACS negro e idoso e uma fisioterapeuta.`};
+
+const ROT_INFO={
+ formato:`Ainda a decidir entre um podcast gravado por nós, mestrandos que vivem o território do Semiárido, e um vídeo animado. O produto avaliado é o Plano de Mediação e Governança Colaborativa; o podcast ou o vídeo entra como material complementar e, se o tempo permitir, como apoio à apresentação de 15 minutos.`,
+ solucao:`O produto é o Plano de Mediação e Governança Colaborativa das PICs em Caatinga Velha. O princípio é proteger primeiro, mediar depois e governar junto, começando pelo que custa zero e usa estruturas que já existem: Conselho Local, Comissão de Ética, Ouvidoria, CAPS e NASF-AB.
+Análise do conflito e alianças: o conflito de origem opõe o modelo biomédico ao saber tradicional quilombola; o processual inclui a notificação nº 045/2024-VISA e, com o fato novo, o assédio contra quem defende as PICs. O poder formal está com quem resiste (secretário, Vigilância Sanitária, Dr. Ricardo); a pressão a favor vem do MP, do Conselho Local, do sindicato e da imprensa; as pontes são Márcia Torres, Pe. José e a universidade.
+Estratégias de mediação: preventivas (canal de denúncia sigiloso ligado à Ouvidoria, educação permanente em PICs, ética e assédio, Círculos de Cuidado e orientação antes de autuar); corretivas, em duas trilhas (proteção imediata e apuração do assédio pela Comissão de Ética, que não se media com a vítima; e mesa de mediação do caso Dona Margarida, convocada pelo Conselho Local, com o MP como garantidor e pedido de suspensão do prazo da notificação); e transformativas (praticantes reconhecidas como mestras do saber e com voz e voto na governança).
+Protocolo de convivência: termo de cooperação entre SMS, Vigilância, UBS, Conselho Local e comunidade, com orientação antes de autuação, registro do uso de plantas no prontuário sem termos depreciativos, boas práticas de preparo construídas com as raizeiras, referência e contrarreferência e revisão semestral.
+Governança: comissão permanente de PICs dentro do Conselho Local, deliberativo por lei, com o MP como garantidor; deliberações com prazo de resposta da gestão. Financiamento em duas etapas: insumos e horas protegidas agora, rubrica própria na Programação Anual de Saúde no próximo ano.
+Indicadores com ponto de partida no caso: fila de auriculoterapia (6 meses), profissionais capacitados (2), autuações sem orientação prévia (meta zero), afastamentos por adoecimento mental (2) e deliberações do Conselho respondidas no prazo.
+Comunicação e formação: educação permanente com as raizeiras como formadoras, nota pública conjunta depois da mesa de mediação e informação à comunidade na Casa de Rezas, na feira e nas igrejas.
+Implantação: até 30 dias, proteção imediata e convocação da mesa; até 60 dias, termo de cooperação e canal de denúncia; até 90 dias, comissão funcionando e primeiro ciclo de formação.`,
+ material:`Slides da apresentação (17 slides, aba Apresentação)
+Mapa de atores e matriz poder x interesse (aba Mapa de atores)
+Fluxograma da mediação: duas trilhas, proteção e mesa de mediação
+Planilha de indicadores com ponto de partida e meta
+Podcast ou vídeo animado (a decidir)`};
+
+const ROT_BLOCOS=[
+ {bloco:'Abertura e o caso',tempo:'2',quem:'José Pedro',slides:'1 e 2',conteudo:'Apresentar a equipe e contar o caso em um minuto: Dona Margarida notificada, a reação em cadeia e o fato novo do assédio na UBS.'},
+ {bloco:'Problema e justificativa',tempo:'2',quem:'Katherine',slides:'3 e 4',conteudo:'Ler a pergunta do grupo e mostrar os números que a justificam: 73% usam PICs, R$ 0,00 de verba, fila de 6 meses, 7 denúncias, nenhum canal de denúncia.'},
+ {bloco:'Conceitos',tempo:'3',quem:'Débora',slides:'5 e 6',conteudo:'Como lemos o conflito (lide processual e sociológica, racismo epistêmico, medicalização, assédio e interseccionalidade) e como desenhamos a solução (mediação, governança colaborativa, vigilância dialógica, educação permanente).'},
+ {bloco:'Atores e princípio do plano',tempo:'1,5',quem:'Fernando',slides:'7 e 8',conteudo:'Quem pesa no conflito e o princípio: proteger primeiro, mediar depois, governar junto, começando pelo que custa zero.'},
+ {bloco:'Mediação',tempo:'2,5',quem:'José Pedro',slides:'9 a 11',conteudo:'Trilha 1 (proteção imediata), trilha 2 (mesa de mediação com o MP) e o termo de cooperação.'},
+ {bloco:'Governança, implantação e indicadores',tempo:'3',quem:'Katherine e Fernando',slides:'12 a 15',conteudo:'Comissão de PICs no Conselho Local, financiamento em duas etapas, formação e comunicação, cronograma de 30, 60 e 90 dias e indicadores.'},
+ {bloco:'Reflexão crítica e fechamento',tempo:'1',quem:'José Pedro',slides:'16 e 17',conteudo:'Reformista ou transformador, limites do plano e principais referências. Abrir para a banca.'}];
 /* ---------- estado ---------- */
 const KEY='painel-caatinga-velha-v1';
-let S={mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{}};
+let S={mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{},rot:{}};
 let canStore=true;
 try{const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r));}catch(e){canStore=false}
 if(!CONFIG.dbUrl&&S.seedV!==SEED_V){for(const id in SEED)for(const f in SEED[id]){const t=S.conc[id]||(S.conc[id]={});if(!t[f])t[f]=SEED[id][f]}S.seedV=SEED_V;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','fatos','apres'])if(!S[k]||typeof S[k]!=='object')S[k]={};
+for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','fatos','apres','rot'])if(!S[k]||typeof S[k]!=='object')S[k]={};
 if(!CONFIG.dbUrl&&S.seedRel!==SEED_REL_V){for(const k of ['rel','papeis','crono','entregas'])if(!Object.keys(S[k]).length)S[k]=JSON.parse(JSON.stringify(SEED_REL[k]));S.seedRel=SEED_REL_V;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 if(!CONFIG.dbUrl&&S.rel&&Object.keys(S.rel).length&&!S.rel.sec){S.rel.sec=Object.assign({problema:true,conceitos:true,levantamento:false,cronograma:true,andamento:false,papeis:true},{refs:!!S.rel.inclRefs});S.rel.pontos=true}
 if(Array.isArray(S.extra)){const o={};S.extra.forEach(x=>o[x.id]={nome:x.nome});S.extra=o}
@@ -1528,11 +1691,13 @@ async function pull(){ if(!WEB||document.hidden)return;
     if(firstPull&&(R.meta&&R.meta.seedRel)!==SEED_REL_V){for(const k of ['rel','papeis','crono','entregas'])if(R[k]===undefined){S[k]=JSON.parse(JSON.stringify(SEED_REL[k]));queue.set(k,S[k])}queue.set('meta/seedRel',SEED_REL_V)}
     if(!queue.has('rel'))for(const f in R.rel||{}){if(f==='sec'&&R.rel.sec&&typeof R.rel.sec==='object'){if(queue.has('rel/sec'))continue;const o=Object.assign({},R.rel.sec);for(const k of queue.keys())if(k.startsWith('rel/sec/'))o[k.slice(8)]=(S.rel.sec||{})[k.slice(8)];S.rel.sec=o}else if(!pending('rel/'+f))S.rel[f]=R.rel[f]}
     if(!S.rel.sec){S.rel.sec=defSec();queue.set('rel/sec',S.rel.sec)}if(S.rel.pontos===undefined){S.rel.pontos=true;queue.set('rel/pontos',true)}
-    for(const col of ['papeis','crono','entregas','refs','planos','versoes','apres'])S[col]=mergeCol(col,R[col]);
+    for(const col of ['papeis','crono','entregas','refs','planos','versoes','apres','rot'])S[col]=mergeCol(col,R[col]);
     if(firstPull&&(R.meta&&R.meta.seed2)!==SEED2_V){seed2Web(R);queue.set('meta/seed2',SEED2_V)}
     if(firstPull&&(R.meta&&R.meta.seed4)!==SEED4_V){seed4(true);queue.set('meta/seed4',SEED4_V)}
     if(firstPull&&(R.meta&&R.meta.seed5)!==SEED5_V){seed5(true);queue.set('meta/seed5',SEED5_V)}
     if(firstPull&&(R.meta&&R.meta.seed6)!==SEED6_V){seed6(true);queue.set('meta/seed6',SEED6_V)}
+    if(firstPull&&(R.meta&&R.meta.seed7)!==SEED7_V){seed7(true,R);queue.set('meta/seed7',SEED7_V)}
+    if(firstPull&&(R.meta&&R.meta.seed8)!==SEED8_V){seed8(true,R);queue.set('meta/seed8',SEED8_V)}
     for(const k in R.banca||{}) if(!pending('banca/'+k)) S.banca[k]=R.banca[k];
     const before=Object.keys(S.extra).sort().join(), ex={};
     for(const id in R.extra||{}) ex[id]=pending('extra/'+id)?S.extra[id]:R.extra[id];
@@ -1551,7 +1716,7 @@ function refresh(extraChanged){ const act=document.activeElement;
   drawMatrix(); drawBTable(); concStatus(); refreshNew(); progress(); }
 
 /* ---------- rotas ---------- */
-const VIEWS=['inicio','historia','mapa-mental','fichas','mapa','linha-do-tempo','dados','siglas','banca','conceitos','referencias','propostas','apresentacao','relatorio'];
+const VIEWS=['inicio','historia','mapa-mental','fichas','mapa','linha-do-tempo','dados','siglas','banca','conceitos','referencias','propostas','apresentacao','entrega','relatorio'];
 function route(){const h=location.hash.replace('#','');const v=VIEWS.includes(h)?h:'inicio';
  VIEWS.forEach(x=>$('#v-'+x).classList.toggle('on',x===v));
  document.querySelectorAll('nav.pill a').forEach(a=>{if(a.getAttribute('href')==='#'+v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
@@ -1687,8 +1852,8 @@ $('#dClose').addEventListener('click',()=>dlg.close());
 $('#dCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#dump').value);$('#dMsg').textContent='Dados copiados.'}catch(e){$('#dump').select();$('#dMsg').textContent='Selecione o texto e copie manualmente.'}});
 $('#dLoad').addEventListener('click',()=>{try{const d=JSON.parse($('#dump').value);if(typeof d!=='object'||!d||!d.mapa)throw 0;
   if(Array.isArray(d.extra)){const o={};d.extra.forEach(x=>o[x.id]={nome:x.nome});d.extra=o}
-  S=Object.assign({mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{}},d);saveLocal();
-  if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','apres'])if(Object.keys(S[k]||{}).length)queue.set(k,S[k]);flush()}
+  S=Object.assign({mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{},rot:{}},d);saveLocal();
+  if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','apres','rot'])if(Object.keys(S[k]||{}).length)queue.set(k,S[k]);flush()}
   drawForms();drawMatrix();drawConc();showQ();drawBTable();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();drawPlanos();drawApres();progress();$('#dMsg').textContent='Dados carregados.'}
  catch(e){$('#dMsg').textContent='O texto colado não é um arquivo válido deste painel. Copie novamente o conteúdo completo.';const t=$('#dump');t.classList.remove('shake');void t.offsetWidth;t.classList.add('shake')}});
 if(window.top===window.self){const b=$('#dFile');b.hidden=false;b.addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('#dump').value],{type:'application/json'}));a.download='painel-caatinga-velha.json';a.click()})}
@@ -1723,7 +1888,7 @@ function onBind(e){const t=e.target;if(!t||!t.dataset||!t.dataset.p)return;const
 document.addEventListener('input',onBind);document.addEventListener('change',onBind);
 function syncBound(){const act=document.activeElement;document.querySelectorAll('[data-p]').forEach(e=>{if(e===act)return;const v=getP(e.dataset.p);
  if(e.type==='checkbox')e.checked=!!v;else if(e.tagName==='SELECT'&&(v==null||v==='')){if(e.selectedIndex<0)e.selectedIndex=0;if(e.value!==e.options[0].value)e.selectedIndex=0}else{const s=v==null?'':String(v);if(e.value!==s)e.value=s}})}
-let prevT;function afterEdit(p){if(p.startsWith('planos/'))refreshPF();if(p.startsWith('apres/'))apresEdited(p);if(p.startsWith('crono/')){syncBound();cronoBadges();if(!/\/status$/.test(p))maybeHomeCrono()}if(p==='rel/problema')updateHero();relSummary();clearTimeout(prevT);prevT=setTimeout(renderPreview,250);progress()}
+let prevT;function afterEdit(p){if(p.startsWith('planos/'))refreshPF();if(p.startsWith('apres/'))apresEdited(p);if(p.startsWith('rot/')||p.startsWith('conc/')||p.startsWith('rel/'))entEdited(p);if(p.startsWith('crono/')){syncBound();cronoBadges();if(!/\/status$/.test(p))maybeHomeCrono()}if(p==='rel/problema')updateHero();relSummary();clearTimeout(prevT);prevT=setTimeout(renderPreview,250);progress()}
 
 /* ====================== relatório ====================== */
 let relSig='',viewing=null;
@@ -2196,7 +2361,7 @@ $('#apresCopy').addEventListener('click',()=>{const F='font-family:Arial,sans-se
  copyHTML(h,textOf(h),'Roteiro copiado. Cole no Google Docs.')});
 
 /* modo apresentação */
-let pres={i:0,sl:[],notes:[],tm:null,left:300,showN:false};
+let pres={i:0,sl:[],notes:[],tm:null,left:900,showN:false};
 const presTotal=()=>+(($('#apresMin')||{}).value||5)*60;
 function openPres(start){const xs=apresList();pres.sl=xs.map(([,x],i)=>slideHTML(x,i,xs.length));pres.notes=xs.map(([,x])=>x.fala||'');pres.i=start||0;if(!pres.tm)pres.left=presTotal();presClock();
  $('#pres').hidden=false;document.body.style.overflow='hidden';showSlide();$('#presNext').focus()}
@@ -2288,13 +2453,82 @@ function seed6(web){const bk={quando:new Date().toISOString(),mapa:JSON.parse(JS
  S.apres=apresSeedObj();if(web)queue.set('apres',S.apres);
  if(web){refresh(true);drawApres();syncBound();renderPreview()}}
 
+/* 28/11: respostas da banca e slides da defesa do produto. O conteúdo anterior fica em backup/antes-28-11. */
+function seed7(web,R){const bk={quando:new Date().toISOString(),banca:JSON.parse(JSON.stringify(Object.assign({},(R&&R.banca)||{},S.banca||{}))),apres:JSON.parse(JSON.stringify(S.apres||{}))};
+ if(web)queue.set('backup/antes-28-11',bk);else S.backupAntes2811=bk;
+ for(const k in BANCA_RESP){S.banca[k]=BANCA_RESP[k];if(web)queue.set('banca/'+k,S.banca[k])}
+ const o={};APRES_V3.forEach((x,i)=>o['p'+(i+1)]=Object.assign({ord:i+1},x));S.apres=o;if(web)queue.set('apres',o);
+ apresSel=null;if(web){refresh(true);drawApres();refreshPlanos()}}
+
+/* ====================== entrega de 02/12: roteiro da apresentação e material complementar ====================== */
+const rotBlocos=()=>Object.entries(S.rot||{}).filter(([id,x])=>id!=='info'&&x&&typeof x==='object').sort((a,b)=>(a[1].ord||0)-(b[1].ord||0));
+const rotInfo=()=>(S.rot||{}).info||{};
+let entSig='';
+function drawEntConc(){const box=$('#entConc');if(!box)return;
+ box.innerHTML=allConc().map(k=>`<div class="entc"><b>${esc(k.nome)}</b>
+  <label class="f">O que dizem os autores e como usamos no plano<textarea id="ecs-${k.id}" data-p="conc/${k.id}/sintese" style="min-height:90px"></textarea></label>
+  <div class="mrow"><label class="f w3">Por que é importante<textarea id="ecp-${k.id}" data-p="conc/${k.id}/pq" style="min-height:60px"></textarea></label><label class="f w3">Fontes<textarea id="ecf-${k.id}" data-p="conc/${k.id}/fontes" style="min-height:60px"></textarea></label></div></div>`).join('');syncBound()}
+function drawEntBlocos(){const box=$('#entBlocos');if(!box)return;const xs=rotBlocos();
+ box.innerHTML=xs.length?xs.map(([id,x],i)=>`<div class="entb" data-bid="${id}"><div class="ahead"><span class="anum num">${i+1}</span><b id="ebt-${id}">${esc(x.bloco||'Bloco sem título')}</b><span class="toolbar"><button class="btn icon" type="button" data-bup="${id}" ${i===0?'disabled':''} aria-label="Subir">↑</button><button class="btn icon" type="button" data-bdown="${id}" ${i===xs.length-1?'disabled':''} aria-label="Descer">↓</button><button class="btn icon" type="button" data-bdel="${id}">Remover</button></span></div>
+  <div class="mrow"><label class="f w3">Bloco<input type="text" id="ebb-${id}" data-p="rot/${id}/bloco"></label><label class="f w2">Minutos<input type="text" id="ebm-${id}" data-p="rot/${id}/tempo" inputmode="decimal"></label></div>
+  <div class="mrow"><label class="f w3">Quem fala<input type="text" id="ebq-${id}" data-p="rot/${id}/quem"></label><label class="f w2">Slides<input type="text" id="ebs-${id}" data-p="rot/${id}/slides"></label></div>
+  <label class="f">O que dizer<textarea id="ebc-${id}" data-p="rot/${id}/conteudo" style="min-height:70px"></textarea></label></div>`).join(''):'<p class="muted">Nenhum bloco.</p>';
+ entSig=JSON.stringify(xs.map(x=>x[0]));syncBound();entTempo()}
+const minOf=v=>parseFloat(String(v||'').replace(',','.'))||0;
+function entTempo(){const t=rotBlocos().reduce((s,[,x])=>s+minOf(x.tempo),0);const e=$('#entTempo');if(e){const tt=String(Math.round(t*10)/10).replace('.',',');e.textContent=`Total: ${tt} de 15 minutos`+(t>15?'. Passou do tempo: cortem algum bloco.':t<14?'. Sobra tempo.':'.');e.classList.toggle('warn',t>15)}}
+function entRefsList(){const lib=refsSorted().map(([,x])=>abnt(x));if(lib.length)return lib;return IMPORT_REFS.slice().map(r=>abnt(Object.assign({},r))).sort((a,b)=>norm(plain(a))<norm(plain(b))?-1:1)}
+function drawEntRefs(){const e=$('#entRefs');if(!e)return;const L=entRefsList();e.innerHTML=(refsSorted().length?'':'<p class="muted">A biblioteca ainda não tem as obras importadas; a lista abaixo usa a lista de referências do grupo.</p>')+L.map(r=>`<p style="margin:0 0 8px">${r}</p>`).join('')}
+function entStatus(){const e=$('#entStatus');if(!e)return;const cs=allConc(),ok=cs.filter(k=>((S.conc[k.id]||{}).sintese||'').trim()).length;
+ e.innerHTML=`Problema: ${((S.rel||{}).problema||'').trim()?'preenchido':'<b>vazio</b>'}<br>Conceitos com síntese: ${ok} de ${cs.length}<br>Solução: ${(rotInfo().solucao||'').trim()?'preenchida':'<b>vazia</b>'}<br>Roteiro: ${rotBlocos().length} blocos<br>Referências: ${entRefsList().length}`}
+function entEdited(p){if(p.startsWith('rot/')){const id=p.split('/')[1];if(id!=='info'){const t=document.getElementById('ebt-'+id);if(t)t.textContent=(S.rot[id]||{}).bloco||'Bloco sem título';entTempo()}}entStatus();if(!$('#entDocWrap').hidden)$('#entDoc').innerHTML=entHTML()}
+function entHTML(){const r=S.rel||{},ano=new Date().getFullYear(),P='font-size:12pt;line-height:1.5;margin:0 0 6pt;text-align:justify';
+ const TH='text-align:left;font-weight:bold;vertical-align:bottom;padding:4pt 5pt;border-top:1.5pt solid #000;border-bottom:0.75pt solid #000;border-left:none;border-right:none;background:none';
+ const TD=last=>`text-align:left;vertical-align:top;padding:4pt 5pt;border-left:none;border-right:none;border-top:none;border-bottom:${last?'1.5pt solid #000':'0.5pt solid #BFBFBF'}`;
+ const tbl=(head,rows,w)=>`<table style="border-collapse:collapse;width:100%;table-layout:fixed;font-size:10pt;line-height:1.25" cellspacing="0" cellpadding="0"><colgroup>${w.map(x=>`<col style="width:${x}">`).join('')}</colgroup><thead><tr>${head.map((h,i)=>`<th style="${TH};width:${w[i]}">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map((x,i)=>'<tr style="page-break-inside:avoid">'+x.map(c=>`<td style="${TD(i===rows.length-1)}">${esc(c)}</td>`).join('')+'</tr>').join('')}</tbody></table>`;
+ let q=0,n=0;const quadro=(t,head,rows,w)=>`<p style="font-size:10pt;margin:10pt 0 4pt"><b>Quadro ${++q}</b> – ${esc(t)}</p>${tbl(head,rows,w)}<p style="font-size:10pt;margin:3pt 0 12pt">Fonte: Elaborado pelo grupo (${ano}).</p>`;
+ const H=(t,p)=>`<h2 style="font-size:12pt;font-weight:bold;line-height:1.5;margin:18pt 0 6pt;page-break-after:avoid">${++n} ${esc(t.toUpperCase())}${p?` (${p} ${p===1?'ponto':'pontos'})`:''}</h2>`;
+ const SUB=t=>`<p style="font-size:12pt;font-weight:bold;line-height:1.5;margin:10pt 0 2pt;page-break-after:avoid">${esc(t)}</p>`;
+ const pp=t=>String(t||'').split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>`<p style="${P};text-indent:1.25cm">${esc(x)}</p>`).join('')||`<p style="${P};color:#888">(em branco)</p>`;
+ const lab=(k,v)=>`<p style="${P};text-align:left;margin:0 0 2pt"><b>${k}</b> ${v}</p>`;
+ const ps=sorted('papeis').map(x=>x[1]);
+ let s=`<div style="font-family:Arial,Helvetica,sans-serif;font-size:12pt;line-height:1.5;color:#000"><p style="font-weight:bold;text-align:center;text-transform:uppercase;margin:0 0 18pt">Roteiro da Apresentação e Material Complementar</p>
+ ${lab('Disciplina:',esc(DISC))}${lab('Laboratório de Caso:',esc(CASO))}${lab('Grupo nº:',esc(r.grupo||''))}${lab('Data de entrega:','02/12/2026')}
+ <p style="${P};text-align:left;margin:10pt 0 4pt"><b>Componentes do grupo:</b></p>${tbl(['Nome','Papel'],ps.map(p=>[p.nome||'',p.papel||'']),['66%','34%'])}`;
+ const fm=(rotInfo().formato||'').trim();if(fm)s+=`<p style="${P};margin-top:10pt"><b>Formato:</b> ${esc(fm)}</p>`;
+ s+=H('Problema formulado',4)+SUB('Problema')+pp(r.problema)+SUB('Justificativa')+pp(r.justificativa);
+ s+=H('Conceitos teóricos pesquisados',6);allConc().forEach(k=>{const x=S.conc[k.id]||{};s+=SUB(k.nome)+pp(x.sintese||x.pq)+((x.fontes||'').trim()?`<p style="${P};font-size:11pt"><b>Fontes:</b> ${esc(x.fontes)}</p>`:'')});
+ s+=H('Solução proposta',8)+pp(rotInfo().solucao);
+ const B=rotBlocos();s+=H('Roteiro da apresentação')+`<p style="${P};text-indent:1.25cm">Apresentação de 15 minutos, seguida de 10 minutos de banca simulada.</p>`+quadro('Roteiro da apresentação',['Bloco','Min.','Quem fala','O que dizer','Slides'],B.map(([,x])=>[x.bloco||'',x.tempo||'',x.quem||'',x.conteudo||'',x.slides||'']),['20%','8%','16%','44%','12%']);
+ const M=String(rotInfo().material||'').split(/\n+/).map(x=>x.trim()).filter(Boolean);s+=H('Material complementar')+(M.length?`<ul style="${P};text-align:left;padding-left:1.25cm">${M.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:pp(''));
+ s+=`<p style="font-size:12pt;font-weight:bold;text-align:center;margin:24pt 0 12pt;page-break-after:avoid">REFERÊNCIAS (2 pontos)</p>`+entRefsList().map(x=>`<p style="font-size:12pt;line-height:1;margin:0 0 12pt;text-align:left">${x}</p>`).join('');
+ return s+'</div>'}
+function drawEntrega(){drawEntConc();drawEntBlocos();drawEntRefs();entStatus();syncBound()}
+$('#entBlocos').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const xs=rotBlocos();
+ const mv=(id,d)=>{const i=xs.findIndex(x=>x[0]===id),j=i+d;if(j<0||j>=xs.length)return;const oi=xs[i][1].ord,oj=xs[j][1].ord;setPut('rot/'+xs[i][0]+'/ord',oj===oi?oj+d:oj);setPut('rot/'+xs[j][0]+'/ord',oi);drawEntBlocos()};
+ if(b.dataset.bup)mv(b.dataset.bup,-1);if(b.dataset.bdown)mv(b.dataset.bdown,1);
+ if(b.dataset.bdel)twoStep(b,()=>{delItem('rot',b.dataset.bdel);drawEntBlocos();entStatus()},'Confirmar')});
+$('#entAddB').addEventListener('click',()=>{const xs=rotBlocos();const id='b'+uid();setPut('rot/'+id,{ord:xs.length?xs[xs.length-1][1].ord+1:1,bloco:'',tempo:'',quem:'',slides:'',conteudo:''});drawEntBlocos();const t=document.getElementById('ebb-'+id);if(t){t.scrollIntoView({block:'center'});t.focus()}});
+$('#entPrev').addEventListener('click',()=>{$('#entDoc').innerHTML=entHTML();$('#entDocWrap').hidden=false;$('#entDocWrap').scrollIntoView({block:'start'})});
+$('#entClose').addEventListener('click',()=>{$('#entDocWrap').hidden=true});
+$('#entCopy').addEventListener('click',()=>{const h=entHTML();copyHTML(h,textOf(h),'Documento copiado. Cole no Google Docs.')});
+$('#entPrint').addEventListener('click',()=>{$('#printArea').innerHTML=entHTML();try{window.print()}catch(e){toast('A impressão não abriu. Use o endereço do painel no GitHub.')}});
+function refreshEnt(){const sig=JSON.stringify(rotBlocos().map(x=>x[0]));if(sig!==entSig&&!$('#entBlocos').contains(document.activeElement))drawEntBlocos();else entTempo();entStatus()}
+/* semente: corrige 3 respostas da banca, preenche a entrega e a síntese dos conceitos (só onde está vazio) */
+function seed8(web,R){const q=(p,v)=>{if(web)queue.set(p,v)};
+ for(const k in BANCA_FIX){const old=(S.banca||{})[k];if(!old||old===BANCA_RESP[k]){S.banca[k]=BANCA_FIX[k];q('banca/'+k,BANCA_FIX[k])}}
+ for(const [id,x] of Object.entries(S.apres||{}))if(x&&typeof x.texto==='string'&&x.texto.includes(REF_SLIDE_OLD)){x.texto=x.texto.replace(REF_SLIDE_OLD,REF_SLIDE_NEW);q('apres/'+id+'/texto',x.texto)}
+ for(const id in CONC_SINT){const t=S.conc[id]||(S.conc[id]={});if(!(t.sintese||'').trim()&&!(R&&R.conc&&R.conc[id]&&R.conc[id].sintese)){t.sintese=CONC_SINT[id];q('conc/'+id+'/sintese',t.sintese)}}
+ if(!S.rot)S.rot={};const inf=S.rot.info||(S.rot.info={});for(const f in ROT_INFO)if(!(inf[f]||'').trim()){inf[f]=ROT_INFO[f];q('rot/info/'+f,inf[f])}
+ if(!rotBlocos().length)ROT_BLOCOS.forEach((b,i)=>{const id='b'+(i+1);S.rot[id]=Object.assign({ord:i+1},b);q('rot/'+id,S.rot[id])});
+ if(web){refresh(true);drawEntrega();drawApres();refreshPlanos()}}
+
 /* contagens da página inicial */
 function homeCounts(){const s=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=t};
  s('cFichas',ATORES.length+' fichas');s('cTL',TL.length+' eventos');s('cSig',(SIGLAS.length+TERMOS.length)+' verbetes');}
 
 /* atualizações depois de editar ou de ler o banco */
 let pfT;function refreshPF(){clearTimeout(pfT);pfT=setTimeout(()=>{refreshPlanos();progress()},300)}
-function refreshNew2(){justState();const sig=JSON.stringify(apresList().map(x=>x[0]));if(sig!==apresSig&&!$('#apresList').contains(document.activeElement))drawApres();else{apresList().forEach(([id,x])=>{const t=document.getElementById('ast-'+id);if(t)t.textContent=x.titulo||'Slide sem título'});drawApresPrev()}refreshPlanos()}
+function refreshNew2(){justState();refreshEnt();const sig=JSON.stringify(apresList().map(x=>x[0]));if(sig!==apresSig&&!$('#apresList').contains(document.activeElement))drawApres();else{apresList().forEach(([id,x])=>{const t=document.getElementById('ast-'+id);if(t)t.textContent=x.titulo||'Slide sem título'});drawApresPrev()}refreshPlanos()}
 
 
 /* ---------- movimento ---------- */
@@ -2325,8 +2559,10 @@ if(!CONFIG.dbUrl&&S.seed2!==SEED2_V){seed2Local();S.seed2=SEED2_V;saveLocal()}
 if(!CONFIG.dbUrl&&S.seed4!==SEED4_V){seed4(false);S.seed4=SEED4_V;saveLocal()}
 if(!CONFIG.dbUrl&&S.seed5!==SEED5_V){seed5(false);S.seed5=SEED5_V;saveLocal()}
 if(!CONFIG.dbUrl&&S.seed6!==SEED6_V){seed6(false);S.seed6=SEED6_V;saveLocal()}
+if(!CONFIG.dbUrl&&S.seed7!==SEED7_V){seed7(false);S.seed7=SEED7_V;saveLocal()}
+if(!CONFIG.dbUrl&&S.seed8!==SEED8_V){seed8(false);S.seed8=SEED8_V;saveLocal()}
 drawSecs();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();
-drawPlanos();drawApres();drawTL();drawHist();drawMM();homeCounts();justState();
+drawPlanos();drawApres();drawTL();drawHist();drawMM();homeCounts();justState();drawEntrega();
 drawGroups();drawActors();drawSig();drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();route();
 if(WEB){status('Conectando ao banco do grupo');pull();setInterval(pull,6000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});window.addEventListener('beforeunload',()=>{if(queue.size)flush()})}
 else status(canStore?'Salvo só neste navegador':'Este navegador não permite salvar');
