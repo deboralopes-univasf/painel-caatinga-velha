@@ -543,6 +543,9 @@ textarea.big{min-height:130px}
 .entb{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:8px}
 #entTempo.warn{color:#A3441A;font-weight:600}
 @media (max-width:760px){#entDoc{padding:22px 16px}}
+
+.fluxo{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff}
+.indc{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
 </style>
 </head>
 <body>
@@ -905,7 +908,14 @@ textarea.big{min-height:130px}
         <p class="muted" style="margin:4px 0 10px">Resumo do plano organizado pelos sete itens que o material exige. O detalhamento parte a parte está na aba Propostas.</p>
         <label class="f">Solução proposta<textarea id="en-sol" data-p="rot/info/solucao" style="min-height:420px"></textarea></label></details>
       <details class="card"><summary><span>Material complementar</span></summary>
-        <label class="f">Itens, um por linha<textarea id="en-mat" data-p="rot/info/material" style="min-height:120px"></textarea></label></details>
+        <label class="f">Itens, um por linha<textarea id="en-mat" data-p="rot/info/material" style="min-height:120px"></textarea></label>
+        <div class="kicker" style="margin:16px 0 6px">Fluxograma da mediação</div>
+        <div class="fluxo" id="fluxo"></div>
+        <div class="toolbar" style="margin-top:8px"><button class="btn" id="fluxoPrint" type="button">Imprimir o fluxograma</button></div>
+        <div class="kicker" style="margin:20px 0 6px">Indicadores de acompanhamento</div>
+        <p class="muted" style="margin:0 0 10px">Ponto de partida tirado do caso e do Anexo A. As metas são propostas: discutam e ajustem.</p>
+        <div class="stack" id="indList" style="gap:10px"></div>
+        <div class="toolbar" style="margin-top:8px"><button class="btn" id="indAdd" type="button">Adicionar indicador</button><button class="btn" id="indCopy" type="button">Copiar como tabela</button></div></details>
       <details class="card"><summary><span>4 · Referências (2 pontos)</span></summary>
         <p class="muted" style="margin:4px 0 10px">Vêm da aba Referências, em ABNT. Para incluir ou corrigir, use aquela aba.</p><div id="entRefs" class="hist" style="max-width:none;font-size:14px"></div></details>
     </div>
@@ -1636,13 +1646,55 @@ IMPORT_REFS.push(MENDELOW);
 const ATORES_FONTES_OLD='Template da disciplina; literatura de análise de stakeholders (a localizar).';
 const ATORES_FONTES_NEW='Matus (1993), Política, planejamento e governo; Mendelow (1991), Stakeholder mapping, matriz poder × interesse; material da disciplina (template de mapeamento de atores).';
 const ATORES_FRASE='A matriz poder × interesse de Mendelow (1991) orientou a classificação dos 19 atores do caso; o resultado está no material complementar.';
+
+/* ====================== 28/11 (4): material complementar — indicadores e fluxograma ====================== */
+const SEED10_V='s10';
+const IND_SEED=[
+ {ind:'Tempo de espera para auriculoterapia',base:'6 meses',meta:'Até 2 meses',prazo:'12 meses',fonte:'Lista de espera da UBS',resp:'Coordenação da Atenção Básica'},
+ {ind:'Profissionais capacitados em PICs',base:'2 (Carla e Renata)',meta:'6, com ao menos um da enfermagem, da medicina, do NASF-AB e dos ACS',prazo:'12 meses',fonte:'Registro de formação da SMS',resp:'Coordenação da Atenção Básica'},
+ {ind:'Ações de educação permanente sobre PICs, ética e assédio',base:'0',meta:'1 por trimestre (4 por ano)',prazo:'12 meses',fonte:'Atas e listas de presença',resp:'Coordenação da Atenção Básica'},
+ {ind:'Autuações de praticantes tradicionais sem orientação prévia',base:'É a regra hoje (7 denúncias e 2 multas em 2 anos)',meta:'Zero',prazo:'A partir da assinatura do termo',fonte:'Vigilância Sanitária',resp:'Vigilância Sanitária, com a comissão de PICs'},
+ {ind:'Termo de cooperação assinado',base:'Não existe',meta:'Assinado por SMS, Vigilância, UBS, Conselho Local e comunidade',prazo:'60 dias',fonte:'Termo e ata do Conselho Local',resp:'Conselho Local, com o MP'},
+ {ind:'Canal de denúncia sigiloso',base:'Não existe',meta:'Em funcionamento, ligado à Ouvidoria',prazo:'60 dias',fonte:'Ouvidoria do SUS',resp:'SMS e sindicato'},
+ {ind:'Política municipal antiassédio',base:'Não existe',meta:'Publicada em portaria',prazo:'6 meses',fonte:'Diário Oficial do Município',resp:'SMS'},
+ {ind:'Denúncias de assédio apuradas no prazo',base:'1 denúncia formal e 3 relatos sem formalização',meta:'Todas apuradas no prazo, com retorno às partes',prazo:'Contínuo',fonte:'Comissão de Ética',resp:'Comissão de Ética'},
+ {ind:'Afastamentos por adoecimento mental na UBS',base:'2 em 12 meses',meta:'Nenhum novo afastamento ligado a assédio',prazo:'12 meses',fonte:'SMS (recursos humanos)',resp:'SMS'},
+ {ind:'Deliberações do Conselho Local respondidas pela gestão no prazo',base:'Moção ignorada (Mês -6)',meta:'Todas com resposta formal no prazo',prazo:'Contínuo',fonte:'Atas do Conselho Local',resp:'Conselho Local'},
+ {ind:'Atendimentos com registro do uso de plantas no prontuário',base:'Sem registro',meta:'Campo criado e usado em 80% dos atendimentos de adultos',prazo:'12 meses',fonte:'e-SUS APS (amostra)',resp:'Equipe da UBS'},
+ {ind:'Recurso para PICs no orçamento',base:'R$ 0,00 (LOA 2024)',meta:'Rubrica própria na Programação Anual de Saúde',prazo:'Próximo exercício',fonte:'LOA e Programação Anual de Saúde',resp:'Coordenação da Atenção Básica e Conselho Municipal'},
+ {ind:'Farmácia Viva do Riacho do Meio',base:'Desativada há 2 anos',meta:'Reativada',prazo:'24 meses',fonte:'SMS',resp:'SMS e comunidade do Riacho do Meio'},
+ {ind:'Escuta da comunidade quilombola sobre a UBS',base:'Nunca feita',meta:'Primeira escuta feita e repetida a cada ano',prazo:'12 meses',fonte:'Relatório da escuta no território',resp:'Comissão de PICs do Conselho Local'}];
+
+/* fluxograma das duas trilhas (SVG) */
+const FLUXO_SVG=(()=>{const W=900,H=860,esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+ const wrap=(t,n)=>{const w=t.split(' '),L=[];let c='';w.forEach(x=>{if((c+' '+x).trim().length>n){L.push(c);c=x}else c=(c+' '+x).trim()});if(c)L.push(c);return L};
+ const box=(x,y,w,h,t,cls,sub)=>{const L=wrap(t,Math.floor(w/7.6));const S=sub?wrap(sub,Math.floor(w/7)):[];const tot=L.length*17+(S.length?S.length*15+4:0);let ty=y+h/2-tot/2+13;
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" class="${cls}"/>`+L.map((l,i)=>`<text x="${x+w/2}" y="${ty+i*17}" text-anchor="middle" class="ft">${esc(l)}</text>`).join('')+S.map((l,i)=>`<text x="${x+w/2}" y="${ty+L.length*17+4+i*15}" text-anchor="middle" class="fs">${esc(l)}</text>`).join('')};
+ const arr=(x1,y1,x2,y2)=>`<path d="M${x1},${y1} L${x2},${y2}" class="fa" marker-end="url(#ah)"/>`;
+ let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxograma da mediação em duas trilhas" style="width:100%;height:auto;font-family:Arial,Helvetica,sans-serif">
+ <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5b6660"/></marker>
+ <style>.ft{font-size:14px;font-weight:700;fill:#1d2622}.fs{font-size:12px;fill:#46514b}.fa{stroke:#5b6660;stroke-width:1.8;fill:none}.b0{fill:#1f3329}.b0+text,.w{fill:#fff}.b1{fill:#fbe5d8;stroke:#a3441a;stroke-width:1.5}.b2{fill:#e3efe8;stroke:#2b6a4e;stroke-width:1.5}.b3{fill:#f5f7f5;stroke:#9aa59f;stroke-width:1.2;stroke-dasharray:5 4}.hd{font-size:12px;font-weight:700;letter-spacing:.1em}</style></defs>`;
+ s+=`<rect x="250" y="10" width="400" height="70" rx="12" fill="#1f3329"/><text x="450" y="40" text-anchor="middle" class="ft w" style="fill:#fff">Conflito das PICs em Caatinga Velha</text><text x="450" y="62" text-anchor="middle" class="fs" style="fill:#d9e6de">Notificação de Dona Margarida e assédio na UBS</text>`;
+ s+=`<path d="M450,80 L450,105 L215,105 L215,128" class="fa" marker-end="url(#ah)"/><path d="M450,105 L685,105 L685,128" class="fa" marker-end="url(#ah)"/>`;
+ s+=`<text x="215" y="148" text-anchor="middle" class="hd" style="fill:#a3441a">TRILHA 1 · PROTEÇÃO</text><text x="215" y="166" text-anchor="middle" class="fs">Assédio: não vai para mediação</text>`;
+ s+=`<text x="685" y="148" text-anchor="middle" class="hd" style="fill:#2b6a4e">TRILHA 2 · MEDIAÇÃO</text><text x="685" y="166" text-anchor="middle" class="fs">Caso Dona Margarida</text>`;
+ const L=[['Denúncia pelo canal sigiloso ou pela Ouvidoria','Fora da chefia imediata'],['Ouvidoria encaminha à Comissão de Ética','Com pedido de medida protetiva'],['Medidas protetivas imediatas','Agendas e escalas reorganizadas, não retaliação, apoio do CAPS'],['Comissão de Ética apura','Com sigilo e prazo, sem interferência do secretário'],['Responsabilização e retorno às partes','Oferta de PICs mantida durante afastamentos']];
+ const R=[['Conselho Local convoca a mesa','MP como garantidor'],['Pedido ao MP','Suspender o prazo da notificação durante a mediação'],['Conversa prévia com cada parte','Dona Margarida ouvida em casa, com pessoas de confiança'],['Sessões conjuntas com mediador neutro','Vigilância, SMS, UBS, Dona Margarida e quilombo'],['Termo de cooperação','Orientar antes de autuar, registro no prontuário, boas práticas']];
+ const y0=180,dy=104,bh=78;
+ L.forEach((b,i)=>{const y=y0+i*dy;s+=box(55,y,320,bh,b[0],'b1',b[1]);if(i<L.length-1)s+=arr(215,y+bh,215,y+dy)});
+ R.forEach((b,i)=>{const y=y0+i*dy;s+=box(525,y,320,bh,b[0],'b2',b[1]);if(i<R.length-1)s+=arr(685,y+bh,685,y+dy)});
+ const yl=y0+4*dy+bh,yc=yl+44;
+ s+=`<path d="M215,${yl} L215,${yc-14} L450,${yc-14} L450,${yc}" class="fa" marker-end="url(#ah)"/><path d="M685,${yl} L685,${yc-14} L450,${yc-14}" class="fa"/>`;
+ s+=box(190,yc,520,74,'Comissão de PICs no Conselho Local acompanha','b3','Indicadores, revisão semestral do termo e acionamento do MP se a gestão não responder');
+ s+=`<text x="450" y="${H-14}" text-anchor="middle" class="fs">Prazos: proteção e convocação da mesa em até 30 dias; termo e canal de denúncia em até 60 dias; comissão funcionando em até 90 dias.</text>`;
+ return s+'</svg>'})();
 /* ---------- estado ---------- */
 const KEY='painel-caatinga-velha-v1';
-let S={mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{},rot:{}};
+let S={mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{},rot:{},ind:{}};
 let canStore=true;
 try{const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r));}catch(e){canStore=false}
 if(!CONFIG.dbUrl&&S.seedV!==SEED_V){for(const id in SEED)for(const f in SEED[id]){const t=S.conc[id]||(S.conc[id]={});if(!t[f])t[f]=SEED[id][f]}S.seedV=SEED_V;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','fatos','apres','rot'])if(!S[k]||typeof S[k]!=='object')S[k]={};
+for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','fatos','apres','rot','ind'])if(!S[k]||typeof S[k]!=='object')S[k]={};
 if(!CONFIG.dbUrl&&S.seedRel!==SEED_REL_V){for(const k of ['rel','papeis','crono','entregas'])if(!Object.keys(S[k]).length)S[k]=JSON.parse(JSON.stringify(SEED_REL[k]));S.seedRel=SEED_REL_V;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 if(!CONFIG.dbUrl&&S.rel&&Object.keys(S.rel).length&&!S.rel.sec){S.rel.sec=Object.assign({problema:true,conceitos:true,levantamento:false,cronograma:true,andamento:false,papeis:true},{refs:!!S.rel.inclRefs});S.rel.pontos=true}
 if(Array.isArray(S.extra)){const o={};S.extra.forEach(x=>o[x.id]={nome:x.nome});S.extra=o}
@@ -1699,7 +1751,7 @@ async function pull(){ if(!WEB||document.hidden)return;
     if(firstPull&&(R.meta&&R.meta.seedRel)!==SEED_REL_V){for(const k of ['rel','papeis','crono','entregas'])if(R[k]===undefined){S[k]=JSON.parse(JSON.stringify(SEED_REL[k]));queue.set(k,S[k])}queue.set('meta/seedRel',SEED_REL_V)}
     if(!queue.has('rel'))for(const f in R.rel||{}){if(f==='sec'&&R.rel.sec&&typeof R.rel.sec==='object'){if(queue.has('rel/sec'))continue;const o=Object.assign({},R.rel.sec);for(const k of queue.keys())if(k.startsWith('rel/sec/'))o[k.slice(8)]=(S.rel.sec||{})[k.slice(8)];S.rel.sec=o}else if(!pending('rel/'+f))S.rel[f]=R.rel[f]}
     if(!S.rel.sec){S.rel.sec=defSec();queue.set('rel/sec',S.rel.sec)}if(S.rel.pontos===undefined){S.rel.pontos=true;queue.set('rel/pontos',true)}
-    for(const col of ['papeis','crono','entregas','refs','planos','versoes','apres','rot'])S[col]=mergeCol(col,R[col]);
+    for(const col of ['papeis','crono','entregas','refs','planos','versoes','apres','rot','ind'])S[col]=mergeCol(col,R[col]);
     if(firstPull&&(R.meta&&R.meta.seed2)!==SEED2_V){seed2Web(R);queue.set('meta/seed2',SEED2_V)}
     if(firstPull&&(R.meta&&R.meta.seed4)!==SEED4_V){seed4(true);queue.set('meta/seed4',SEED4_V)}
     if(firstPull&&(R.meta&&R.meta.seed5)!==SEED5_V){seed5(true);queue.set('meta/seed5',SEED5_V)}
@@ -1707,6 +1759,7 @@ async function pull(){ if(!WEB||document.hidden)return;
     if(firstPull&&(R.meta&&R.meta.seed7)!==SEED7_V){seed7(true,R);queue.set('meta/seed7',SEED7_V)}
     if(firstPull&&(R.meta&&R.meta.seed8)!==SEED8_V){seed8(true,R);queue.set('meta/seed8',SEED8_V)}
     if(firstPull&&(R.meta&&R.meta.seed9)!==SEED9_V){seed9(true);queue.set('meta/seed9',SEED9_V)}
+    if(firstPull&&(R.meta&&R.meta.seed10)!==SEED10_V){seed10(true,R);queue.set('meta/seed10',SEED10_V)}
     for(const k in R.banca||{}) if(!pending('banca/'+k)) S.banca[k]=R.banca[k];
     const before=Object.keys(S.extra).sort().join(), ex={};
     for(const id in R.extra||{}) ex[id]=pending('extra/'+id)?S.extra[id]:R.extra[id];
@@ -1861,8 +1914,8 @@ $('#dClose').addEventListener('click',()=>dlg.close());
 $('#dCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#dump').value);$('#dMsg').textContent='Dados copiados.'}catch(e){$('#dump').select();$('#dMsg').textContent='Selecione o texto e copie manualmente.'}});
 $('#dLoad').addEventListener('click',()=>{try{const d=JSON.parse($('#dump').value);if(typeof d!=='object'||!d||!d.mapa)throw 0;
   if(Array.isArray(d.extra)){const o={};d.extra.forEach(x=>o[x.id]={nome:x.nome});d.extra=o}
-  S=Object.assign({mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{},rot:{}},d);saveLocal();
-  if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','apres','rot'])if(Object.keys(S[k]||{}).length)queue.set(k,S[k]);flush()}
+  S=Object.assign({mapa:{},banca:{},conc:{},extra:{},rel:{},papeis:{},crono:{},entregas:{},refs:{},planos:{},versoes:{},fatos:{},apres:{},rot:{},ind:{}},d);saveLocal();
+  if(WEB){for(const id in S.mapa)for(const f in S.mapa[id])queue.set('mapa/'+id+'/'+f,S.mapa[id][f]);for(const id in S.conc)for(const f in S.conc[id])queue.set('conc/'+id+'/'+f,S.conc[id][f]);for(const k in S.banca)queue.set('banca/'+k,S.banca[k]);for(const id in S.extra)queue.set('extra/'+id,S.extra[id]);for(const k of ['rel','papeis','crono','entregas','refs','planos','versoes','apres','rot','ind'])if(Object.keys(S[k]||{}).length)queue.set(k,S[k]);flush()}
   drawForms();drawMatrix();drawConc();showQ();drawBTable();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();drawPlanos();drawApres();progress();$('#dMsg').textContent='Dados carregados.'}
  catch(e){$('#dMsg').textContent='O texto colado não é um arquivo válido deste painel. Copie novamente o conteúdo completo.';const t=$('#dump');t.classList.remove('shake');void t.offsetWidth;t.classList.add('shake')}});
 if(window.top===window.self){const b=$('#dFile');b.hidden=false;b.addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('#dump').value],{type:'application/json'}));a.download='painel-caatinga-velha.json';a.click()})}
@@ -1897,7 +1950,7 @@ function onBind(e){const t=e.target;if(!t||!t.dataset||!t.dataset.p)return;const
 document.addEventListener('input',onBind);document.addEventListener('change',onBind);
 function syncBound(){const act=document.activeElement;document.querySelectorAll('[data-p]').forEach(e=>{if(e===act)return;const v=getP(e.dataset.p);
  if(e.type==='checkbox')e.checked=!!v;else if(e.tagName==='SELECT'&&(v==null||v==='')){if(e.selectedIndex<0)e.selectedIndex=0;if(e.value!==e.options[0].value)e.selectedIndex=0}else{const s=v==null?'':String(v);if(e.value!==s)e.value=s}})}
-let prevT;function afterEdit(p){if(p.startsWith('planos/'))refreshPF();if(p.startsWith('apres/'))apresEdited(p);if(p.startsWith('rot/')||p.startsWith('conc/')||p.startsWith('rel/'))entEdited(p);if(p.startsWith('crono/')){syncBound();cronoBadges();if(!/\/status$/.test(p))maybeHomeCrono()}if(p==='rel/problema')updateHero();relSummary();clearTimeout(prevT);prevT=setTimeout(renderPreview,250);progress()}
+let prevT;function afterEdit(p){if(p.startsWith('planos/'))refreshPF();if(p.startsWith('apres/'))apresEdited(p);if(p.startsWith('rot/')||p.startsWith('conc/')||p.startsWith('rel/')||p.startsWith('ind/'))entEdited(p);if(p.startsWith('ind/'))indEdited(p);if(p.startsWith('crono/')){syncBound();cronoBadges();if(!/\/status$/.test(p))maybeHomeCrono()}if(p==='rel/problema')updateHero();relSummary();clearTimeout(prevT);prevT=setTimeout(renderPreview,250);progress()}
 
 /* ====================== relatório ====================== */
 let relSig='',viewing=null;
@@ -2488,7 +2541,7 @@ function entTempo(){const t=rotBlocos().reduce((s,[,x])=>s+minOf(x.tempo),0);con
 function entRefsList(){const lib=refsSorted().map(([,x])=>abnt(x));if(lib.length)return lib;return IMPORT_REFS.slice().map(r=>abnt(Object.assign({},r))).sort((a,b)=>norm(plain(a))<norm(plain(b))?-1:1)}
 function drawEntRefs(){const e=$('#entRefs');if(!e)return;const L=entRefsList();e.innerHTML=(refsSorted().length?'':'<p class="muted">A biblioteca ainda não tem as obras importadas; a lista abaixo usa a lista de referências do grupo.</p>')+L.map(r=>`<p style="margin:0 0 8px">${r}</p>`).join('')}
 function entStatus(){const e=$('#entStatus');if(!e)return;const cs=allConc(),ok=cs.filter(k=>((S.conc[k.id]||{}).sintese||'').trim()).length;
- e.innerHTML=`Problema: ${((S.rel||{}).problema||'').trim()?'preenchido':'<b>vazio</b>'}<br>Conceitos com síntese: ${ok} de ${cs.length}<br>Solução: ${(rotInfo().solucao||'').trim()?'preenchida':'<b>vazia</b>'}<br>Material complementar: ${String(rotInfo().material||'').split(/\n+/).filter(x=>x.trim()).length} itens<br>Referências: ${entRefsList().length}`}
+ e.innerHTML=`Problema: ${((S.rel||{}).problema||'').trim()?'preenchido':'<b>vazio</b>'}<br>Conceitos com síntese: ${ok} de ${cs.length}<br>Solução: ${(rotInfo().solucao||'').trim()?'preenchida':'<b>vazia</b>'}<br>Material complementar: fluxograma e ${indList().length} indicadores<br>Referências: ${entRefsList().length}`}
 function entEdited(p){if(p.startsWith('rot/')){const id=p.split('/')[1];if(id!=='info'){const t=document.getElementById('ebt-'+id);if(t)t.textContent=(S.rot[id]||{}).bloco||'Bloco sem título';entTempo()}}entStatus();if(!$('#entDocWrap').hidden)$('#entDoc').innerHTML=entHTML()}
 function entHTML(){const r=S.rel||{},ano=new Date().getFullYear(),P='font-size:12pt;line-height:1.5;margin:0 0 6pt;text-align:justify';
  const TH='text-align:left;font-weight:bold;vertical-align:bottom;padding:4pt 5pt;border-top:1.5pt solid #000;border-bottom:0.75pt solid #000;border-left:none;border-right:none;background:none';
@@ -2508,6 +2561,8 @@ function entHTML(){const r=S.rel||{},ano=new Date().getFullYear(),P='font-size:1
  s+=H('Conceitos teóricos pesquisados',6);allConc().forEach(k=>{const x=S.conc[k.id]||{};s+=SUB(k.nome)+pp(x.sintese||x.pq)+((x.fontes||'').trim()?`<p style="${P};font-size:11pt"><b>Fontes:</b> ${esc(x.fontes)}</p>`:'')});
  s+=H('Solução proposta',8)+pp(rotInfo().solucao);
  const M=String(rotInfo().material||'').split(/\n+/).map(x=>x.trim()).filter(Boolean);s+=`<h2 style="font-size:12pt;font-weight:bold;line-height:1.5;margin:18pt 0 6pt;page-break-after:avoid">MATERIAL COMPLEMENTAR</h2>`+(M.length?`<ul style="${P};text-align:left;padding-left:1.25cm">${M.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:pp(''));
+ s+=`<div style="page-break-inside:avoid"><p style="font-size:10pt;margin:12pt 0 4pt"><b>Figura 1</b> – Fluxograma da mediação em duas trilhas</p><div style="max-width:15cm;margin:0 auto">${FLUXO_SVG}</div><p style="font-size:10pt;margin:3pt 0 12pt">Fonte: Elaborado pelo grupo (${ano}).</p></div>`;
+ const IX=indList();if(IX.length)s+=quadro('Indicadores de acompanhamento do plano',['Indicador','Ponto de partida','Meta','Prazo','Fonte do dado','Responsável'],IX.map(([,x])=>[x.ind||'',x.base||'',x.meta||'',x.prazo||'',x.fonte||'',x.resp||'']),['22%','17%','19%','11%','15%','16%']);
  s+=`<p style="font-size:12pt;font-weight:bold;text-align:center;margin:24pt 0 12pt;page-break-after:avoid">REFERÊNCIAS (2 pontos)</p>`+entRefsList().map(x=>`<p style="font-size:12pt;line-height:1;margin:0 0 12pt;text-align:left">${x}</p>`).join('');
  return s+'</div>'}
 function drawEntrega(){drawEntConc();drawEntBlocos();drawEntRefs();entStatus();syncBound()}
@@ -2540,13 +2595,34 @@ function seed9(web){const q=(p,v)=>{if(web)queue.set(p,v)};const t=S.conc.atores
   const id='refs/'+IMPORT_V+'-'+String(IMPORT_REFS.indexOf(MENDELOW)+1).padStart(2,'0');S.refs[id.split('/')[1]]=o;q(id,o)}
  if(web){refresh(true);drawRefs();drawEntrega();updateConcRefs&&updateConcRefs()}}
 
+/* ====================== material complementar: fluxograma e indicadores ====================== */
+const indList=()=>Object.entries(S.ind||{}).filter(([,x])=>x&&typeof x==='object').sort((a,b)=>(a[1].ord||0)-(b[1].ord||0));
+let indSig='';
+function drawInd(){const box=$('#indList');if(!box)return;const xs=indList();
+ box.innerHTML=xs.length?xs.map(([id,x],i)=>`<div class="indc"><div class="ahead"><span class="anum num">${i+1}</span><b id="indt-${id}">${esc(x.ind||'Indicador sem nome')}</b><span class="toolbar"><button class="btn icon" type="button" data-iup="${id}" ${i===0?'disabled':''} aria-label="Subir">↑</button><button class="btn icon" type="button" data-idown="${id}" ${i===xs.length-1?'disabled':''} aria-label="Descer">↓</button><button class="btn icon" type="button" data-idel="${id}">Remover</button></span></div>
+  <label class="f">Indicador<input type="text" id="ii-${id}" data-p="ind/${id}/ind"></label>
+  <div class="mrow"><label class="f w3">Ponto de partida<input type="text" id="ib-${id}" data-p="ind/${id}/base"></label><label class="f w3">Meta<input type="text" id="im-${id}" data-p="ind/${id}/meta"></label></div>
+  <div class="mrow"><label class="f w2">Prazo<input type="text" id="ip-${id}" data-p="ind/${id}/prazo"></label><label class="f w2">Fonte do dado<input type="text" id="if-${id}" data-p="ind/${id}/fonte"></label><label class="f w2">Responsável<input type="text" id="ir-${id}" data-p="ind/${id}/resp"></label></div></div>`).join(''):'<p class="muted">Nenhum indicador.</p>';
+ indSig=JSON.stringify(xs.map(x=>x[0]));syncBound()}
+function indEdited(p){const id=p.split('/')[1];const t=document.getElementById('indt-'+id);if(t)t.textContent=(S.ind[id]||{}).ind||'Indicador sem nome'}
+$('#indList').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const xs=indList();
+ const mv=(id,d)=>{const i=xs.findIndex(x=>x[0]===id),j=i+d;if(j<0||j>=xs.length)return;const oi=xs[i][1].ord,oj=xs[j][1].ord;setPut('ind/'+xs[i][0]+'/ord',oj===oi?oj+d:oj);setPut('ind/'+xs[j][0]+'/ord',oi);drawInd()};
+ if(b.dataset.iup)mv(b.dataset.iup,-1);if(b.dataset.idown)mv(b.dataset.idown,1);
+ if(b.dataset.idel)twoStep(b,()=>{delItem('ind',b.dataset.idel);drawInd()},'Confirmar')});
+$('#indAdd').addEventListener('click',()=>{const xs=indList();const id='i'+uid();setPut('ind/'+id,{ord:xs.length?xs[xs.length-1][1].ord+1:1,ind:'',base:'',meta:'',prazo:'',fonte:'',resp:''});drawInd();const t=document.getElementById('ii-'+id);if(t){t.scrollIntoView({block:'center'});t.focus()}});
+$('#indCopy').addEventListener('click',()=>{const f=v=>String(v||'').replace(/\s+/g,' ');copyTable([['Indicador','Ponto de partida','Meta','Prazo','Fonte do dado','Responsável']].concat(indList().map(([,x])=>[f(x.ind),f(x.base),f(x.meta),f(x.prazo),f(x.fonte),f(x.resp)])),'Indicadores copiados como tabela. Cole no Word ou no Docs.')});
+$('#fluxo').innerHTML=FLUXO_SVG;
+$('#fluxoPrint').addEventListener('click',()=>{$('#printArea').innerHTML=`<div style="font-family:Arial,sans-serif"><p style="font-size:11pt;margin:0 0 6pt"><b>Figura 1</b> – Fluxograma da mediação em duas trilhas</p>${FLUXO_SVG}<p style="font-size:10pt">Fonte: Elaborado pelo grupo (${new Date().getFullYear()}).</p></div>`;try{window.print()}catch(e){toast('A impressão não abriu. Use o endereço do painel no GitHub.')}});
+function seed10(web){if(indList().length)return;const o={};IND_SEED.forEach((x,i)=>o['i'+(i+1)]=Object.assign({ord:i+1},x));S.ind=o;if(web){queue.set('ind',o);drawInd();entStatus()}}
+function refreshInd(){const sig=JSON.stringify(indList().map(x=>x[0]));if(sig!==indSig&&!$('#indList').contains(document.activeElement))drawInd()}
+
 /* contagens da página inicial */
 function homeCounts(){const s=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=t};
  s('cFichas',ATORES.length+' fichas');s('cTL',TL.length+' eventos');s('cSig',(SIGLAS.length+TERMOS.length)+' verbetes');}
 
 /* atualizações depois de editar ou de ler o banco */
 let pfT;function refreshPF(){clearTimeout(pfT);pfT=setTimeout(()=>{refreshPlanos();progress()},300)}
-function refreshNew2(){justState();refreshEnt();const sig=JSON.stringify(apresList().map(x=>x[0]));if(sig!==apresSig&&!$('#apresList').contains(document.activeElement))drawApres();else{apresList().forEach(([id,x])=>{const t=document.getElementById('ast-'+id);if(t)t.textContent=x.titulo||'Slide sem título'});drawApresPrev()}refreshPlanos()}
+function refreshNew2(){justState();refreshEnt();refreshInd();const sig=JSON.stringify(apresList().map(x=>x[0]));if(sig!==apresSig&&!$('#apresList').contains(document.activeElement))drawApres();else{apresList().forEach(([id,x])=>{const t=document.getElementById('ast-'+id);if(t)t.textContent=x.titulo||'Slide sem título'});drawApresPrev()}refreshPlanos()}
 
 
 /* ---------- movimento ---------- */
@@ -2580,8 +2656,9 @@ if(!CONFIG.dbUrl&&S.seed6!==SEED6_V){seed6(false);S.seed6=SEED6_V;saveLocal()}
 if(!CONFIG.dbUrl&&S.seed7!==SEED7_V){seed7(false);S.seed7=SEED7_V;saveLocal()}
 if(!CONFIG.dbUrl&&S.seed8!==SEED8_V){seed8(false);S.seed8=SEED8_V;saveLocal()}
 if(!CONFIG.dbUrl&&S.seed9!==SEED9_V){seed9(false);S.seed9=SEED9_V;saveLocal()}
+if(!CONFIG.dbUrl&&S.seed10!==SEED10_V){seed10(false);S.seed10=SEED10_V;saveLocal()}
 drawSecs();drawRelEdit();drawEntregas();renderPreview();drawRefs();updateHero();
-drawPlanos();drawApres();drawTL();drawHist();drawMM();homeCounts();justState();drawEntrega();
+drawPlanos();drawApres();drawTL();drawHist();drawMM();homeCounts();justState();drawEntrega();drawInd();
 drawGroups();drawActors();drawSig();drawForms();drawMatrix();drawConc();showQ();drawBTable();progress();route();
 if(WEB){status('Conectando ao banco do grupo');pull();setInterval(pull,6000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});window.addEventListener('beforeunload',()=>{if(queue.size)flush()})}
 else status(canStore?'Salvo só neste navegador':'Este navegador não permite salvar');
